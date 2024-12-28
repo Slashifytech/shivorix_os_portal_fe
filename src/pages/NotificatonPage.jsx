@@ -168,7 +168,7 @@ const NotificationPage = () => {
           <RxCross2 />
         </span>
         <p className="text-sidebar font-semibold">
-          {notification.title === "RECEIVED_OFFER_LETTER_AGENT"
+          {notification.title === "RECEIVED_OFFER_LETTER_AGENT" || notification.title === "RECEIVED_OFFER_LETTER_STUDENT"
             ? "RECEIVED DOCUMENT"
             : notification.title === "DEFERMATION_BY_AGENT"
             ? "DEFERMENT"
