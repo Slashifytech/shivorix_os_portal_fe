@@ -273,7 +273,7 @@ const VisaStatusComponent = ({ studentId }) => {
           const notificationData = {
             title: " DEFERMATION_BY_STUDENT",
             message: `${
-              studentInfoData?.data?.studentInformation?.personalInformation
+               studentInfoData?.data?.studentInformation?.personalInformation
                 .firstName +
               " " +
               studentInfoData?.data?.studentInformation?.personalInformation
@@ -283,9 +283,9 @@ const VisaStatusComponent = ({ studentId }) => {
             } requested for deferment ${visaStatus?.applicationId}.`,
             path: "/student/visa-update",
             pathData: {
-              studentId: getStudentDataById?.studentInformation?._id,
+              studentId: studentInfoData?.data?.studentInformation?._id,
             },
-            recieverId: getStudentDataById.studentInformation.studentId,
+            recieverId:studentInfoData?.data?.studentInformation?._id,
           };
           socketServiceInstance.socket.emit(
             "NOTIFICATION_STUDENT_TO_ADMIN",
