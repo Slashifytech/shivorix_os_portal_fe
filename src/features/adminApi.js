@@ -805,7 +805,7 @@ export const getApplicationActivity = async (
         page: page,
         perPage: perPage,
         status: isType,
-        searchData: search,
+        searchQuery: search,
         date: isDate
       },
     });
@@ -838,7 +838,7 @@ export const getApprovalActivity = async (
           page: page,
           perPage: perPage,
           userType: isType,
-          searchData: search,
+          search: search,
           date: isDate
         },
       }
