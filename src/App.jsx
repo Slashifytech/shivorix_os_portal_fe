@@ -17,7 +17,7 @@ import {
 } from "./features/getConnectionDetails";
 import socketServiceInstance from "./services/socket";
 import { io } from "socket.io-client";
-import { adminProfileData } from "./features/adminSlice";
+import { adminProfileData, getMemberProfile } from "./features/adminSlice";
 import { startTokenHeartbeat } from "./services/tokenCheck";
 
 function App() {
@@ -35,15 +35,15 @@ function App() {
     const initializeSocketConnection = async () => {
       try {
         let data;
-
-        if (role === "0") {
+        console.log(role);
+        if (role === "0" || role === "1") {
           data = await getAdminConnectionDetails();
-        } else {
+        } else if (role === "2" || role === "3") {
           data = await getConnectionDetails();
         }
 
         await socketServiceInstance.connectToSocket(
-          "https://sovserver.sovportal.in",
+          "https://sovtest.slashifytech.in",
           data
         );
       } catch (error) {
@@ -77,10 +77,12 @@ function App() {
     if (role === "3") {
       dispatch(studentInfo(studentId));
     }
-    if (role === "0") {
+    if (role === "0" || role === "1") {
       dispatch(adminProfileData());
     }
-
+    if (role === "1") {
+      dispatch(getMemberProfile());
+    }
     // Interval to check every 3 seconds
     const intervalId = setInterval(() => {
       if (countryOption.length === 0) {
@@ -100,7 +102,6 @@ function App() {
     return () => clearInterval(intervalId);
   }, [dispatch, countryOption, prefCountryOption, courses]);
 
- 
   useEffect(() => {
     const stopHeartbeat = startTokenHeartbeat();
 

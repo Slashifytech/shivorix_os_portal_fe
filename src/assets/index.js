@@ -32,6 +32,15 @@ import GroupUser from "./GroupUser.png";
 import urAdmin from './urAdmin.png';
 import reaproval from './reaproval.png';
 import noAccess from './noAccess.png';
+import noImage from './noimage.jpg';
+import deferment from './deferment.png';
+import cardLogo from './cardLogo.png';
+import nodata  from './nodata.png';
+
+
+
+
+
 
 
 
@@ -40,6 +49,10 @@ import noAccess from './noAccess.png';
 
 
 export {
+  nodata,
+  cardLogo,
+  deferment,
+  noImage,
   noAccess,
   reaproval,
   urAdmin,

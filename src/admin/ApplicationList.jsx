@@ -20,6 +20,8 @@ import Loader from "../components/Loader";
 const ApplicationList = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
+  const role = localStorage.getItem("role");
+
   // const { applications } = useSelector((state) => state.admin);
   // const {} = useSelector((state) => state.admin);
   const { getApplicationOverview } = useSelector((state) => state.admin);
@@ -65,7 +67,7 @@ const ApplicationList = () => {
   useEffect(() => {
     // setLoading(true);
     dispatch(adminApplicationOverview({ page, perPage, search, isTypeFilter }));
-  
+
     // setLoading(false);
   }, [page, perPage, search, isTypeFilter]);
 
@@ -94,7 +96,7 @@ const ApplicationList = () => {
   // console.log(getApplicationOverview)
   const downloadAll = async () => {
     try {
-      setDownloading(true)
+      setDownloading(true);
       await new Promise((resolve) => setTimeout(resolve, 2000));
       await downloadFile({
         url: "/admin/total-application-download",
@@ -104,9 +106,8 @@ const ApplicationList = () => {
     } catch (error) {
       console.log(error);
       toast.error(error.message || "Error downloading");
-    }finally{
-      setDownloading(false)
-      
+    } finally {
+      setDownloading(false);
     }
   };
   return (
@@ -133,7 +134,6 @@ const ApplicationList = () => {
       <span className="flex flex-row  justify-between mr-6 items-baseline">
         <span className="flex flex-row items-center mb-3 m-6 mt-6 sm:ml-[24%] md:ml-[2%] lg:ml-[18%]  ">
           {" "}
-         
           <select
             className="ml-3 border px-2 py-1 w-40 h-11 rounded outline-none"
             onChange={handleTypeFilter}
@@ -159,13 +159,14 @@ const ApplicationList = () => {
             </span>
           </span>
         </span>
-        <span
-          onClick={downloadAll}
-          className="bg-primary ml-5  text-white px-4 rounded-md py-2 cursor-pointer"
-        >
-                    {downloading ? "Downloading...." : "Download"}
-
-        </span>
+        {role !== "1" && (
+          <span
+            onClick={downloadAll}
+            className="bg-primary ml-5  text-white px-4 rounded-md py-2 cursor-pointer"
+          >
+            {downloading ? "Downloading...." : "Download"}
+          </span>
+        )}
       </span>
       {loading ? (
         <div
