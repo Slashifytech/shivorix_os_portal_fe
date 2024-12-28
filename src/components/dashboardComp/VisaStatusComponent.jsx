@@ -256,7 +256,7 @@ const VisaStatusComponent = ({ studentId }) => {
             pathData: {
               studentId: studentData?.studentInformation?._id,
             },
-            recieverId: studentData.studentInformation.agentId,
+            recieverId: studentData?.studentInformation?.agentId,
           };
 
           socketServiceInstance.socket.emit(
@@ -281,7 +281,7 @@ const VisaStatusComponent = ({ studentId }) => {
             } ${
               studentInfoData?.data?.studentInformation?.stId
             } requested for deferment ${visaStatus?.applicationId}.`,
-            path: "/student/visa-update",
+            path: "/student-profile",
             pathData: {
               studentId: studentInfoData?.data?.studentInformation?._id,
             },
