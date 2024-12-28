@@ -93,24 +93,20 @@ const InstituteView = () => {
         {/* Conditional Rendering for Loading and No Data */}
      
           <>
-            <ImageComponent
-              src={
-                instituteById?.data?.instituteImg
-                  ? instituteById?.data?.instituteImg
-                  : noImage
-              }
-              className=" md:ml-60 sm:ml-20  h-96 pt-16 w-[85%]  object-cover"
-            />
+        
+            <img
+            src={instituteById?.data.instituteImg || noImage}
+            loading="lazy"
+            className=" md:ml-60 sm:ml-20  h-96 pt-16 w-[85%]  object-cover"
+          />
             <div className="md:ml-[17%] sm:ml-[22%] pt-6 pb-8 bg-white border-b-2 border-[#E8E8E8]">
               <span className="flex items-start gap-6">
-                <ImageComponent
-                  src={
-                    instituteById?.data?.instituteImg
-                      ? instituteById?.data?.instituteImg
-                      : noImage
-                  }
-                  className="w-16 h-16 object-fill ml-8 rounded-md"
-                />
+              <img
+              loading="lazy"
+                src={instituteById?.data?.instituteImg || noImage}
+                className="w-16 h-16 object-fill ml-8 rounded-md"
+              />
+
                 <span>
                   <p className="font-semibold text-[25px]">
                     {instituteById?.data?.instituteName || "NA"}
