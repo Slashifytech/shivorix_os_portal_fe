@@ -331,39 +331,39 @@ const ApplyOfferLater = () => {
 
   const handleFileUpload = (files, uploadType) => {
     if (!files || files.length === 0 || !uploadType) return;
-
+  
     const fileOrUrl = files[0];
-
+  
     if (fileOrUrl instanceof File) {
       // Handle File objects
       const blobUrl = URL.createObjectURL(fileOrUrl);
-
+  
       // Save file locally to be uploaded later
       setNewFiles((prevState) => [
         ...prevState,
         { file: fileOrUrl, uploadType },
       ]);
-
+  
       // Update only educationDetails with the blob URL
       setOfferLater((prevState) => ({
         ...prevState,
         educationDetails: {
           ...prevState.educationDetails,
-          [uploadType]: blobUrl, // Set blob URL temporarily for preview
+          [uploadType]: blobUrl, 
         },
         ...(uploadType === "certificate" && {
           certificate: {
             ...prevState.certificate,
             urls: [
-              ...(Array.isArray(prevState.certificate.urls)
+              ...(Array.isArray(prevState.certificate?.urls)
                 ? prevState.certificate.urls
                 : []),
-              blobUrl, // Append the blob URL only for certificates
+              blobUrl, 
             ],
           },
         }),
       }));
-
+  
       // toast.info(`${fileOrUrl.name} will be uploaded upon saving.`);
     } else if (typeof fileOrUrl === "string") {
       // Handle URL strings
@@ -371,24 +371,25 @@ const ApplyOfferLater = () => {
         ...prevState,
         educationDetails: {
           ...prevState.educationDetails,
-          [uploadType]: fileOrUrl, // Set the URL directly in educationDetails
+          [uploadType]: fileOrUrl, 
         },
         ...(uploadType === "certificate" && {
           certificate: {
             ...prevState.certificate,
             urls: [
-              ...(Array.isArray(prevState.certificate.urls)
+              ...(Array.isArray(prevState.certificate?.urls)
                 ? prevState.certificate.urls
                 : []),
-              fileOrUrl, // Append the URL only for certificates
+              fileOrUrl, 
             ],
           },
         }),
       }));
-
+  
       // toast.info("Document URL has been set.");
     }
   };
+  
 
   const deleteFile = async (fileUrl, uploadType) => {
     if (!fileUrl) return;
@@ -471,38 +472,35 @@ const ApplyOfferLater = () => {
       );
 
       // Upload existing certificates if any
-      if (Array.isArray(offerLater.certificate?.urls)) {
-        await Promise.all(
-          offerLater.certificate.urls.map(async (certUrl) => {
-            try {
-              const response = await fetch(certUrl);
-              const blob = await response.blob();
-              const uniqueFileName = `${uuidv4()}-${certUrl.split("/").pop()}`;
-              const storageRef = ref(
-                storage,
-                `uploads/offerLetter/${uniqueFileName}`
-              );
+       // Handle certificates
+    const uploadedCertificates = [];
+    if (Array.isArray(offerLater.certificate?.urls)) {
+      for (const cert of offerLater.certificate.urls) {
+        if (cert.startsWith("https://")) {
+          // Direct Firebase URL - use as is
+          uploadedCertificates.push(cert);
+        } else {
+          // Assume it's a blob URL and upload
+          try {
+            const response = await fetch(cert);
+            const blob = await response.blob();
+            const uniqueFileName = `${uuidv4()}-${cert.split("/").pop()}`;
+            const storageRef = ref(
+              storage,
+              `uploads/offerLetter/${uniqueFileName}`
+            );
 
-              const snapshot = await uploadBytes(storageRef, blob);
-              const downloadURL = await getDownloadURL(snapshot.ref);
+            const snapshot = await uploadBytes(storageRef, blob);
+            const downloadURL = await getDownloadURL(snapshot.ref);
 
-              // Add to education details certificate URLs
-              if (!updatedEducationDetails.certificate?.url) {
-                updatedEducationDetails.certificate = { url: [] };
-              }
-              updatedEducationDetails.certificate.url.push(downloadURL);
-
-              // Upload document metadata
-
-              // toast.success(`${uniqueFileName} uploaded successfully.`);
-            } catch (error) {
-              // toast.error(`Error uploading certificate. Please try again.`);
-              console.error(error);
-            }
-          })
-        );
+            uploadedCertificates.push(downloadURL);
+          } catch (error) {
+            console.error("Error uploading certificate:", error);
+          }
+        }
       }
-
+    }
+    updatedEducationDetails.certificate = { url: uploadedCertificates };
       // Convert TOEFL, PTE, IELTS scores
       const convertToNumber = (scoreData) =>
         scoreData
