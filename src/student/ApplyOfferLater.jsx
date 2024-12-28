@@ -1041,7 +1041,7 @@ const ApplyOfferLater = () => {
           role === "2"
             ? studentId
             : role === "3"
-            ? studentInfoData?.data?.studentInformation?.studentId
+            ? studentInfoData?.data?.studentInformation?._id
             : null
         }
         onSubmit={() => {
