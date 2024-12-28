@@ -45,7 +45,7 @@ function App() {
         await socketServiceInstance.connectToSocket(
           "https://sovserver.sovportal.in",
           data
-        );
+        )
       } catch (error) {
         console.error("Error initializing socket connection:", error);
       }
