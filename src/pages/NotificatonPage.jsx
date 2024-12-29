@@ -170,7 +170,7 @@ const NotificationPage = () => {
         <p className="text-sidebar font-semibold">
           {notification.title === "RECEIVED_OFFER_LETTER_AGENT" || notification.title === "RECEIVED_OFFER_LETTER_STUDENT"
             ? "RECEIVED DOCUMENT"
-            : notification.title === "DEFERMATION_BY_AGENT"
+            : notification.title === "DEFERMATION_BY_AGENT" || notification.title === "DEFERMATION_BY_STUDENT"
             ? "DEFERMENT"
             : notification.title
                 .replace(/_/g, " ")
