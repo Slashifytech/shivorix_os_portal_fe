@@ -58,19 +58,25 @@ const Dashboard = () => {
 
   const handleInput = (e) => {
     const { value, name } = e.target;
-    setFilterData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-    if (country) {
-      setFilterData((prevState) => ({
-        ...prevState,
-        courses: "",
-      }));
-    }
-    setPage(1);
+  
+    setFilterData((prevData) => {
+      if (name === "country") {
+        return {
+          ...prevData,
+          [name]: value,
+          institutes: "", 
+        };
+      }
+  
+      return {
+        ...prevData,
+        [name]: value,
+      };
+    });
+  
+    setPage(1); 
   };
-
+  
   const handleChange = (value) => {
     setFilterData((prevState) => ({
       ...prevState,

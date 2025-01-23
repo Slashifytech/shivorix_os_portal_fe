@@ -54,16 +54,22 @@ const Institution = () => {
 
   const handleInput = (e) => {
     const { value, name } = e.target;
-    setFilterData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-    if (country) {
-      setFilterData((prevState) => ({
-        ...prevState,
-        courses: "",
-      }));
-    }
+
+    setFilterData((prevData) => {
+      if (name === "country") {
+        return {
+          ...prevData,
+          [name]: value,
+          institutes: "",
+        };
+      }
+
+      return {
+        ...prevData,
+        [name]: value,
+      };
+    });
+
     setPage(1);
   };
 
