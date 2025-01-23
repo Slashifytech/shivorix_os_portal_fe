@@ -21,7 +21,7 @@ import { shortlistAdd } from "../features/agentApi";
 import { Select } from "antd";
 import { removeDuplicates } from "../constant/commonfunction";
 import { intakeOption } from "../constant/data";
-import { fetchInstituteData } from "../features/generalSlice";
+import { emptyData, fetchInstituteData } from "../features/generalSlice";
 import Pagination from "../components/dashboardComp/Pagination";
 
 const Dashboard = () => {
@@ -54,14 +54,7 @@ const Dashboard = () => {
     value: option.courseName,
     label: option.courseName,
   }));
-  const filteredInstituteOptions = filterData?.country
-    ? instituteData?.institutes
-        ?.filter((institute) => institute?.country === filterData?.country)
-        .map((institute) => ({
-          instituteName: institute?.instituteName,
-          instituteName: institute?.instituteName,
-        }))
-    : [];
+
 
   const handleInput = (e) => {
     const { value, name } = e.target;
@@ -103,7 +96,9 @@ const Dashboard = () => {
       filterData.courses ||
       filterData.country ||
       filterData.inTake ||
-      filterData.search
+      filterData.search  ||
+      filterData.institutes
+
     ) {
       dispatch(
         fetchInstituteData({
@@ -113,6 +108,7 @@ const Dashboard = () => {
           country: filterData.country,
           inTake: filterData.inTake,
           search: filterData.search,
+          institute: filterData.institutes
         })
       );
     }
@@ -125,7 +121,20 @@ const Dashboard = () => {
     filterData.inTake,
     filterData.search,
     filterData.courses,
+    filterData.institutes
   ]);
+ useEffect(() => {
+    const isEmpty =
+      !filterData.country &&
+      !filterData.inTake &&
+      !filterData.search &&
+      !filterData.institutes &&
+      !filterData.courses;
+
+    if (isEmpty) {
+      dispatch(emptyData());
+    }
+  }, [filterData, dispatch]);
 
   const shortlistInstitute = async (instituteId) => {
     try {
@@ -138,11 +147,7 @@ const Dashboard = () => {
     }
   };
 
-  const displayedInstitutes = filterData.institutes
-    ? instituteData?.institutes?.filter(
-        (institute) => institute.instituteName === filterData.institutes
-      )
-    : instituteData?.institutes;
+  const displayedInstitutes =  instituteData?.institutes
 
   useEffect(() => {
     const updatedInstitutes = displayedInstitutes?.map((institute) => {
@@ -289,15 +294,26 @@ const Dashboard = () => {
                   </div>
                   {/* Only show institute dropdown if a country is selected */}
                   <div>
-                    <InstituteComponent
-                      imp={false}
-                      name="institutes"
-                      label="University & Institutes"
-                      options={filteredInstituteOptions}
-                      customClass="bg-white"
-                      value={filterData.institutes}
-                      handleChange={handleInput}
-                    />
+                  <div className="flex flex-col mb-4 mt-6 font-poppins">
+      <label className="font-normal text-secondary mb-2 text-[14px]">
+        University & Institutes
+      </label>
+      <select
+        name="institutes"
+        value={filterData.institutes}
+        onChange={handleInput}
+        className={`border border-gray-300 text-secondary rounded-md px-3 py-2 outline-none `}
+      >
+        <option className="text-secondary font-poppins" value="">
+          Select Options
+        </option>
+        {instituteData?.instituteNames?.map((option, index) => (
+          <option className="text-secondary" key={index} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    </div>
                   </div>
                   <div className="sm:ml-9 md:ml-0">
                     <SelectComponent

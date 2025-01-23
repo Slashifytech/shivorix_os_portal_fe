@@ -793,7 +793,8 @@ export const getInstitutesData = async (
   courses,
   country,
   inTake,
-  search
+  search,
+  institute
 ) => {
   try {
     const response = await apiurl.get(`/institute/get-all-institute`, {
@@ -804,6 +805,7 @@ export const getInstitutesData = async (
         popularCourses: courses,
         inTake: inTake,
         country: country,
+        instituteName: institute
       },
     });
     return response.data;

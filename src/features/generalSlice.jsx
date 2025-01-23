@@ -227,9 +227,9 @@ export const withdrawalDataGet = createAsyncThunk(
 );
 export const fetchInstituteData = createAsyncThunk(
   "general/fetchInstituteData",
-  async ({page, perPage, courses, country, inTake , search}, { rejectWithValue }) => {
+  async ({page, perPage, courses, country, inTake , search, institute}, { rejectWithValue }) => {
     try {
-      const res = await getInstitutesData(page, perPage, courses, country, inTake , search);
+      const res = await getInstitutesData(page, perPage, courses, country, inTake , search, institute);
       // console.log(res);
       return res.data;
     } catch (error) {
@@ -455,6 +455,8 @@ const generalSlice = createSlice({
         state.status = "failed";
         state.instituteData = null
         state.error = action.payload || action.error.message;
+        state.instituteData = []
+
       });
   },
 });
