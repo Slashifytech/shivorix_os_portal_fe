@@ -100,7 +100,6 @@ const Dashboard = () => {
   useEffect(() => {
     setIsLoading(true);
     if (
-      page ||
       filterData.courses ||
       filterData.country ||
       filterData.inTake ||
