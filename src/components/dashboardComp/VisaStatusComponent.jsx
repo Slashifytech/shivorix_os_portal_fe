@@ -49,7 +49,6 @@ const VisaStatusComponent = ({ studentId }) => {
   const [isOpenOption, setIsOpenOption] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [showWithdrwalData, setShowWithdrawalData] = useState(false);
-  console.log(showWithdrawForm);
   const closeOption = () => {
     setIsOpenOption(false);
   };
@@ -308,6 +307,16 @@ const VisaStatusComponent = ({ studentId }) => {
           <span className="fixed overflow-y-scroll scrollbar-hide  bg-white">
             <Sidebar />
           </span>
+
+          <div className="ml-[17%] pt-16 pb-5 bg-white border-b-2 border-[#E8E8E8]">
+          <span className="flex  items-center justify-between">
+            <p className="text-[28px] font-bold text-sidebar mt-6 md:ml-9 sm:ml-20">
+             Visa Lodgement Status
+            </p>
+            <span onClick={handleOpenOpt} className="bg-primary cursor-pointer text-white rounded-md px-6 py-2 mr-6 mt-6">Apply Visa Lodgement</span>
+          </span>
+         
+        </div>
         </>
       ) : (
         ""
@@ -326,7 +335,7 @@ const VisaStatusComponent = ({ studentId }) => {
         <div
           className={`bg-white flex flex-col rounded-md justify-center items-center md:mx-52 py-9 font-poppins px-14 mb-20 ${
             location.pathname === "/student/visa-update"
-              ? "md:mx-20 md:ml-[28%] sm:mx-9 sm:ml-[28%]  mt-36 "
+              ? "md:mx-20 md:ml-[28%] sm:mx-9 sm:ml-[28%]  mt-16 "
               : null
           } `}
         >
@@ -353,7 +362,7 @@ const VisaStatusComponent = ({ studentId }) => {
         <div
           className={`bg-white flex flex-col rounded-md justify-center items-center md:mx-52 py-9 font-poppins px-14 mb-20 ${
             location.pathname === "/student/visa-update"
-              ? "md:mx-20 md:ml-[28%] sm:mx-9 sm:ml-[28%]  mt-36 "
+              ? "md:mx-20 md:ml-[28%] sm:mx-9 sm:ml-[28%]  mt-16 "
               : null
           } `}
         >
@@ -406,7 +415,7 @@ const VisaStatusComponent = ({ studentId }) => {
         <div
           className={`bg-white flex flex-col rounded-md justify-center items-center md:mx-60 py-9 font-poppins px-14 mb-20 ${
             location.pathname === "/student/visa-update"
-              ? "md:mx-20 md:ml-[28%] sm:mx-9 sm:ml-[28%]  mt-36 "
+              ? "md:mx-20 md:ml-[28%] sm:mx-9 sm:ml-[28%]  mt-16 "
               : null
           } `}
         >
@@ -442,7 +451,7 @@ const VisaStatusComponent = ({ studentId }) => {
         <div
           className={`bg-white flex flex-col rounded-md justify-center items-center  py-9 font-poppins px-14 mb-20 ${
             location.pathname === "/student/visa-update"
-              ? "md:mx-20 md:ml-[24%] sm:mx-9 sm:ml-[28%]  mt-36 "
+              ? "md:mx-20 md:ml-[24%] sm:mx-9 sm:ml-[28%]  mt-16 "
               : null
           } `}
         >
@@ -477,7 +486,7 @@ const VisaStatusComponent = ({ studentId }) => {
             <div
               className={`bg-white flex flex-col rounded-md justify-center items-center md:mx-52 py-9 font-poppins px-14 mb-20 ${
                 location.pathname === "/student/visa-update"
-                  ? "md:mx-20 md:ml-[28%] sm:mx-9 sm:ml-[28%]  mt-36 "
+                  ? "md:mx-20 md:ml-[28%] sm:mx-9 sm:ml-[28%]  mt-16 "
                   : null
               } `}
             >
@@ -510,7 +519,7 @@ const VisaStatusComponent = ({ studentId }) => {
             <div
               className={`bg-white flex flex-col rounded-md justify-center items-center md:mx-52 py-9 font-poppins px-14 mb-20 ${
                 location.pathname === "/student/visa-update"
-                  ? "md:mx-20 md:ml-[28%] sm:mx-9 sm:ml-[28%]  mt-36 "
+                  ? "md:mx-20 md:ml-[28%] sm:mx-9 sm:ml-[28%]  mt-16 "
                   : null
               } `}
             >
@@ -552,7 +561,7 @@ const VisaStatusComponent = ({ studentId }) => {
           <div
             className={`bg-white flex flex-col rounded-md justify-center items-center md:mx-52 py-9 font-poppins px-14 mb-20 ${
               location.pathname === "/student/visa-update"
-                ? "md:mx-20 md:ml-[28%] sm:mx-9 sm:ml-[28%]  mt-36 "
+                ? "md:mx-20 md:ml-[28%] sm:mx-9 sm:ml-[28%]  mt-16 "
                 : null
             } `}
           >
@@ -609,7 +618,7 @@ const VisaStatusComponent = ({ studentId }) => {
           <div
             className={`bg-white flex flex-col rounded-md justify-center items-center md:mx-52 py-9 font-poppins px-14 mb-20 ${
               location.pathname === "/student/visa-update"
-                ? "md:mx-20 md:ml-[28%] sm:mx-9 sm:ml-[28%]  mt-36 "
+                ? "md:mx-20 md:ml-[28%] sm:mx-9 sm:ml-[28%]  mt-16 "
                 : null
             } `}
           >
@@ -701,7 +710,7 @@ const VisaStatusComponent = ({ studentId }) => {
         <div
           className={`bg-white flex flex-col rounded-md justify-center items-center md:mx-52 py-9 font-poppins px-14 mb-20 ${
             location.pathname === "/student/visa-update"
-              ? "md:mx-20 md:ml-[28%] sm:mx-9 sm:ml-[28%]  mt-36 "
+              ? "md:mx-20 md:ml-[28%] sm:mx-9 sm:ml-[28%]  mt-16 "
               : null
           } `}
         >
@@ -749,7 +758,7 @@ const VisaStatusComponent = ({ studentId }) => {
         <div
           className={`bg-white flex flex-col rounded-md justify-center items-center md:mx-52 py-9 font-poppins px-6 mb-20 ${
             location.pathname === "/student/visa-update"
-              ? "md:mx-20 md:ml-[28%] sm:mx-9 sm:ml-[28%]  mt-36 "
+              ? "md:mx-20 md:ml-[28%] sm:mx-9 sm:ml-[28%]  mt-16 "
               : null
           } `}
         >
@@ -808,7 +817,7 @@ const VisaStatusComponent = ({ studentId }) => {
         <div
           className={`bg-white flex flex-col rounded-md justify-center items-center md:mx-52 py-9 font-poppins px-14 mb-20 ${
             location.pathname === "/student/visa-update"
-              ? "md:mx-20 md:ml-[28%] sm:mx-9 sm:ml-[28%]  mt-36 "
+              ? "md:mx-20 md:ml-[28%] sm:mx-9 sm:ml-[28%]  mt-16 "
               : null
           } `}
         >

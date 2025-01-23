@@ -100,7 +100,7 @@ function App() {
         dispatch(getCourses());
         dispatch(getPopularCourses());
       }
-    }, 3000);
+    }, 2000);
 
     return () => clearInterval(intervalId);
   }, [dispatch, countryOption, prefCountryOption, courses]);

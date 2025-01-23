@@ -90,7 +90,7 @@ const Sidebar = () => {
     {
       pathPage: "/student/visa-update",
       icon: <FaPassport />,
-      label: "Visa Updates",
+      label: "Visa Lodg. Updates",
     },
     {
       pathPage: "/air-ticket/lists",
