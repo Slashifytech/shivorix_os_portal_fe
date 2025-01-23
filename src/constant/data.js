@@ -230,16 +230,21 @@ export const statusTicketOption = [
 export const appType = [
   { id: 0, option: "offerLetter", label: "Offer Letter" },
   { id: 0, option: "courseFeeApplication", label: "Course Fee" },
-  { id: 1, option: "visa", label: "Visa" },
+  { id: 1, option: "visa", label: "Visa Lodgement" },
 ];
 
 export const userType = [
   { id: 0, option: "agent", label: "Agent" },
-  { id: 0, option: "student", label: "Student" },
+  { id: 0, option: "student", label: "Student" 
+  },
 ];
 export const statusOptionData = [
   { id: 0, option: "open", label: "Open" },
   { id: 0, option: "close", label: "Close" },
+];
+export const airTicketOption = [
+  { id: 0, option: "stop", label: "Stop" },
+  { id: 0, option: "non-stop", label: "Non-Stop" },
 ];
 export const intakeOption = [
   { id: 0, option: "Jan 2025", label: "Jan 2025" },

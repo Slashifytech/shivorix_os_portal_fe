@@ -76,6 +76,11 @@ const InstituteView = () => {
     ? "added"
     : "removed";
 
+  const formattedUrl =
+    instituteById?.data?.websiteUrl &&
+    !/^https?:\/\//i.test(instituteById?.data?.websiteUrl)
+      ? `http://${instituteById?.data?.websiteUrl}`
+      : instituteById?.data?.websiteUrl;
   return (
     <>
       <Header customLink="/agent/shortlist" />
@@ -91,254 +96,215 @@ const InstituteView = () => {
         </span>
 
         {/* Conditional Rendering for Loading and No Data */}
-     
-          <>
-        
-            <img
+
+        <>
+          <img
             src={instituteById?.data.instituteImg || noImage}
             loading="lazy"
             className=" md:ml-60 sm:ml-20  h-96 pt-16 w-[85%]  object-cover"
           />
-            <div className="md:ml-[17%] sm:ml-[22%] pt-6 pb-8 bg-white border-b-2 border-[#E8E8E8]">
-              <span className="flex items-start gap-6">
+          <div className="md:ml-[17%] sm:ml-[22%] pt-6 pb-8 bg-white border-b-2 border-[#E8E8E8]">
+            <span className="flex items-start gap-6">
               <img
-              loading="lazy"
+                loading="lazy"
                 src={instituteById?.data?.instituteImg || noImage}
                 className="w-16 h-16 object-fill ml-8 rounded-md"
               />
 
-                <span>
-                  <p className="font-semibold text-[25px]">
-                    {instituteById?.data?.instituteName || "NA"}
-                  </p>
-                  <p className="font-normal text-[16px]">
-                    {instituteById?.data?.country || "NA"}
-                  </p>
-                </span>
+              <span>
+                <p className="font-semibold text-[25px]">
+                  {instituteById?.data?.instituteName || "NA"}
+                </p>
+                <p className="font-normal text-[16px]">
+                  {instituteById?.data?.country || "NA"}
+                </p>
               </span>
-              <div className="mt-3 flex items-center justify-between gap-4 ml-8 md:mr-[65%] sm:mr-[50%]">
-                {(role === "3" || role === "2") && (
+            </span>
+            <div className="mt-3 flex items-center justify-between gap-4 ml-8 md:mr-[65%] sm:mr-[50%]">
+              {(role === "3" || role === "2") && (
+                <span
+                  onClick={() => {
+                    shortlistInstitute(instituteById?.data?._id);
+                  }}
+                  className="bg-white border border-[#464255] gap-2 md:w-1/2 sm:px-6 justify-center py-1.5 text-[14px] cursor-pointer flex items-center"
+                >
+                  <span className="md:text-[19px] sm:text-[14px]">
+                    {status === "added" ? (
+                      <span className="text-[#464255]">
+                        <FaStar />
+                      </span>
+                    ) : (
+                      <CiStar />
+                    )}
+                  </span>{" "}
+                  <span>Shortlist</span>
+                </span>
+              )}
+
+              {role !== "0" &&
+                role !== "1" &&
+                (role === "3" ? (
                   <span
-                    onClick={() => {
-                      shortlistInstitute(instituteById?.data?._id);
-                    }}
-                    className="bg-white border border-[#464255] gap-2 md:w-1/2 sm:px-6 justify-center py-1.5 text-[14px] cursor-pointer flex items-center"
+                    onClick={handleOpenOpt}
+                    className="bg-primary px-6 py-2 cursor-pointer w-[60%] text-center text-white text-[14px]"
                   >
-                    <span className="md:text-[19px] sm:text-[14px]">
-                      {status === "added" ? (
-                        <span className="text-[#464255]">
-                          <FaStar />
-                        </span>
-                      ) : (
-                        <CiStar />
-                      )}
-                    </span>{" "}
-                    <span>Shortlist</span>
+                    Apply Now
                   </span>
-                )}
-
-                {role !== "0" &&
-                  role !== "1" &&
-                  (role === "3" ? (
-                    <span
-                      onClick={handleOpenOpt}
-                      className="bg-primary px-6 py-2 cursor-pointer w-[60%] text-center text-white text-[14px]"
-                    >
-                      Apply Now
-                    </span>
-                  ) : (
-                    <Link
-                      to="/agent/student-lists"
-                      state={{
-                        country: instituteById?.data?.country,
-                        institute: instituteById?.data?.instituteName,
-                      }}
-                      className="bg-primary px-6 py-2 cursor-pointer w-[60%] text-center text-white text-[14px]"
-                    >
-                      Apply Now
-                    </Link>
-                  ))}
-              </div>
-            </div>
-            {!instituteById && !loading ? (
-          <div
-            className={`w-full  mt-12 
-            ml-[53%]`}
-          >
-            <Loader />
-          </div>
-        ) : !instituteById?.data?.aboutCollegeOrInstitute && !instituteById?.data?.popularCourses && !instituteById?.data?.keyHighlights  && !instituteById?.data?.admissionAndFacilities ? (
-          <div className="ml-52 pt-12">
-            <Dnf
-              dnfImg={nodata}
-              customClass={"px-36 -mt-12"}
-              headingText="No Information Available!"
-              bodyText="The information for this section is currently not available, Please check back later or contact the support team for more details."
-            />
-          </div>
-        ) : (
-          <>
-            <div className="md:ml-[19%] sm:ml-[26%] mr-6 mt-6 pl-[2%] rounded-md pt-6 pb-8 bg-white border-b-2 border-[#E8E8E8]">
-              <span className="flex items-center gap-2">
-                <span className="text-[20px]">
-                  <MdInfoOutline />
-                </span>
-                <span className="font-medium ">
-                  About {instituteById?.data?.instituteName || "NA"}
-                </span>
-              </span>
-              <span className="font-normal text-[14px] ml-7">
-                {instituteById?.data?.aboutCollegeOrInstitute ? (
-                  <ul>
-                    {instituteById.data.aboutCollegeOrInstitute
-                      .split("\n")
-                      .flatMap((line, index) => {
-                        if (line.trim().endsWith("&")) {
-                          return line
-                            .trim()
-                            .slice(0, -1)
-                            .split("&")
-                            .map(
-                              (item, subIndex) =>
-                                item.trim() && (
-                                  <li key={`${index}-${subIndex}`}>
-                                    {item.trim()}
-                                  </li>
-                                )
-                            );
-                        }
-                        return (
-                          line.trim() && <li key={index}>{line.trim()}</li>
-                        );
-                      })}
-                  </ul>
                 ) : (
-                  "NA"
-                )}
-              </span>
+                  <Link
+                    to="/agent/student-lists"
+                    state={{
+                      country: instituteById?.data?.country,
+                      institute: instituteById?.data?.instituteName,
+                    }}
+                    className="bg-primary px-6 py-2 cursor-pointer w-[60%] text-center text-white text-[14px]"
+                  >
+                    Apply Now
+                  </Link>
+                ))}
             </div>
-            <div className="md:ml-[19%] sm:ml-[26%] mr-6 mt-6 pl-[2%] rounded-md pt-6 pb-8 bg-white border-b-2 border-[#E8E8E8]">
-              <span className="flex items-center gap-2">
-                <span className="text-[20px]">
-                  <AiOutlineCheckCircle />
+          </div>
+          {!instituteById && !loading ? (
+            <div
+              className={`w-full  mt-12 
+            ml-[53%]`}
+            >
+              <Loader />
+            </div>
+          ) : !instituteById?.data?.aboutCollegeOrInstitute &&
+            !instituteById?.data?.popularCourses &&
+            !instituteById?.data?.keyHighlights &&
+            !instituteById?.data?.admissionAndFacilities ? (
+            <div className="ml-52 pt-12">
+              <Dnf
+                dnfImg={nodata}
+                customClass={"px-36 -mt-12"}
+                headingText="No Information Available!"
+                bodyText="The information for this section is currently not available, Please check back later or contact the support team for more details."
+              />
+            </div>
+          ) : (
+            <>
+              <div className="md:ml-[19%] sm:ml-[26%] mr-6 mt-6 pl-[2%] rounded-md pt-6 pb-8 bg-white border-b-2 border-[#E8E8E8]">
+                <span className="flex items-center gap-2">
+                  <span className="text-[20px]">
+                    <MdInfoOutline />
+                  </span>
+                  <span className="font-medium ">
+                    About {instituteById?.data?.instituteName || "NA"}
+                  </span>
                 </span>
-                <span className="font-medium">Key Highlights</span>
-              </span>
-              <span className="font-normal text-[14px] ml-7">
                 <span className="font-normal text-[14px] ml-7">
-                  {instituteById?.data?.keyHighlights ? (
+                  {instituteById?.data?.aboutCollegeOrInstitute ? (
                     <ul>
-                      {instituteById.data.keyHighlights
-                        .split("\n")
-                        .flatMap((line, index) => {
-                          if (line.trim().endsWith("&")) {
-                            return line
-                              .trim()
-                              .slice(0, -1)
-                              .split("&")
-                              .map(
-                                (item, subIndex) =>
-                                  item.trim() && (
-                                    <li key={`${index}-${subIndex}`}>
-                                      {item.trim()}
-                                    </li>
-                                  )
-                              );
-                          }
-                          return (
-                            line.trim() && <li key={index}>{line.trim()}</li>
-                          );
-                        })}
+                      {instituteById.data.aboutCollegeOrInstitute
+                        .split("&")
+                        .map(
+                          (item, index) =>
+                            item.trim() && <li key={index}>{item.trim()}</li>
+                        )}
                     </ul>
                   ) : (
                     "NA"
                   )}
                 </span>
-              </span>
-            </div>
-            <div className="md:ml-[19%] sm:ml-[26%] mr-6 mt-6 pl-[2%] rounded-md pt-6 pb-8 bg-white border-b-2 border-[#E8E8E8]">
-              <span className="flex items-center gap-2">
-                <span className="text-[20px]">
-                  <BiBookBookmark />
+              </div>
+              <div className="md:ml-[19%] sm:ml-[26%] mr-6 mt-6 pl-[2%] rounded-md pt-6 pb-8 bg-white border-b-2 border-[#E8E8E8]">
+                <span className="flex items-center gap-2">
+                  <span className="text-[20px]">
+                    <MdInfoOutline />
+                  </span>
+                  <p className="font-medium">University / College Website</p>
                 </span>
-                <span className="font-medium">Popular Courses</span>
-              </span>
-              <span className="font-normal text-[14px] ml-7">
+                <a
+                  href={formattedUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-normal underline ml-7 text-blue-500"
+                >
+                  Website Link
+                </a>
+              </div>
+              <div className="md:ml-[19%] sm:ml-[26%] mr-6 mt-6 pl-[2%] rounded-md pt-6 pb-8 bg-white border-b-2 border-[#E8E8E8]">
+                <span className="flex items-center gap-2">
+                  <span className="text-[20px]">
+                    <AiOutlineCheckCircle />
+                  </span>
+                  <span className="font-medium">
+                    Key Highlights/ Requirements
+                  </span>
+                </span>
                 <span className="font-normal text-[14px] ml-7">
-                  {instituteById?.data?.popularCourses ? (
-                    <ul>
-                      {instituteById.data.popularCourses
-                        .split("\n")
-                        .flatMap((line, index) => {
-                          if (line.trim().endsWith("&")) {
-                            return line
-                              .trim()
-                              .slice(0, -1)
-                              .split("&")
-                              .map(
-                                (item, subIndex) =>
-                                  item.trim() && (
-                                    <li key={`${index}-${subIndex}`}>
-                                      {item.trim()}
-                                    </li>
-                                  )
-                              );
-                          }
-                          return (
-                            line.trim() && <li key={index}>{line.trim()}</li>
-                          );
-                        })}
-                    </ul>
-                  ) : (
-                    "NA"
-                  )}
+                  <span className="font-normal text-[14px] ml-7">
+                    {instituteById?.data?.keyHighlights ? (
+                      <ul>
+                        {instituteById.data.keyHighlights
+                          .split("&")
+                          .map(
+                            (item, index) =>
+                              item.trim() && <li key={index}>{item.trim()}</li>
+                          )}
+                      </ul>
+                    ) : (
+                      "NA"
+                    )}
+                  </span>
                 </span>
-              </span>
-            </div>
+              </div>
+              <div className="md:ml-[19%] sm:ml-[26%] mr-6 mt-6 pl-[2%] rounded-md pt-6 pb-8 bg-white border-b-2 border-[#E8E8E8]">
+                <span className="flex items-center gap-2">
+                  <span className="text-[20px]">
+                    <BiBookBookmark />
+                  </span>
+                  <span className="font-medium">Popular Courses/ Programs</span>
+                </span>
+                <span className="font-normal text-[14px] ml-7">
+                  <span className="font-normal text-[14px] ml-7">
+                    {instituteById?.data?.popularCourses ? (
+                      <ul>
+                        {instituteById.data.popularCourses
+                          .split("&")
+                          .map(
+                            (item, index) =>
+                              item.trim() && <li key={index}>{item.trim()}</li>
+                          )}
+                      </ul>
+                    ) : (
+                      "NA"
+                    )}
+                  </span>
+                </span>
+              </div>
 
-            <div className="md:ml-[19%] sm:ml-[26%] mb-20 mr-6 mt-6 pl-[2%] rounded-md pt-6 pb-8 bg-white border-b-2 border-[#E8E8E8]">
-              <span className="flex items-center gap-2">
-                <span className="text-[20px]">
-                  <FaBuildingFlag />
+              <div className="md:ml-[19%] sm:ml-[26%] mb-20 mr-6 mt-6 pl-[2%] rounded-md pt-6 pb-8 bg-white border-b-2 border-[#E8E8E8]">
+                <span className="flex items-center gap-2">
+                  <span className="text-[20px]">
+                    <FaBuildingFlag />
+                  </span>
+                  <span className="font-medium">
+                    Admissions, Facilitities and Charges
+                  </span>
                 </span>
-                <span className="font-medium">
-                  Admissions, Facilitities and Charges
+                <span className="font-normal text-[14px]">
+                  <span className="font-normal text-[14px] ml-7">
+                    {instituteById?.data?.admissionAndFacilities ? (
+                      <ul>
+                        {instituteById.data.admissionAndFacilities
+                          .split("&")
+                          .map(
+                            (item, index) =>
+                              item.trim() && <li key={index}>{item.trim()}</li>
+                          )}
+                      </ul>
+                    ) : (
+                      "NA"
+                    )}
+                  </span>
                 </span>
-              </span>
-              <span className="font-normal text-[14px]">
-                <span className="font-normal text-[14px] ml-7">
-                  {instituteById?.data?.admissionAndFacilities ? (
-                    <ul>
-                      {instituteById.data.admissionAndFacilities
-                        .split("\n")
-                        .flatMap((line, index) => {
-                          if (line.trim().endsWith("&")) {
-                            return line
-                              .trim()
-                              .slice(0, -1)
-                              .split("&")
-                              .map(
-                                (item, subIndex) =>
-                                  item.trim() && (
-                                    <li key={`${index}-${subIndex}`}>
-                                      {item.trim()}
-                                    </li>
-                                  )
-                              );
-                          }
-                          return (
-                            line.trim() && <li key={index}>{line.trim()}</li>
-                          );
-                        })}
-                    </ul>
-                  ) : (
-                    "NA"
-                  )}
-                </span>
-              </span>
-            </div></>)}
-          </>
-        
+              </div>
+            </>
+          )}
+        </>
       </div>
 
       <ApplicationChoosePop

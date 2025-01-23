@@ -806,7 +806,7 @@ export const getApplicationActivity = async (
         perPage: perPage,
         status: isType,
         searchQuery: search,
-        date: isDate
+        date: isDate,
       },
     });
     return response.data;
@@ -839,7 +839,7 @@ export const getApprovalActivity = async (
           perPage: perPage,
           userType: isType,
           search: search,
-          date: isDate
+          date: isDate,
         },
       }
     );
@@ -865,6 +865,47 @@ export const editInstitute = async (id, payload) => {
     if (error.response) {
       throw new Error(
         error.response.data.message || "Error while fetching data"
+      );
+    } else if (error.request) {
+      throw new Error("No response from server. Please try again later.");
+    } else {
+      throw new Error("An unexpected error occurred");
+    }
+  }
+};
+
+export const adminAllAirTicket = async (page, perPage, search) => {
+  try {
+    const response = await apiurl.get("/air-ticket/admin/get-all-air-ticket", {
+      params: {
+        page: page,
+        limit: perPage,
+        searchQuery: search,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    if (error.response) {
+      throw new Error(
+        error.response.data.message || "Error while submitting the form"
+      );
+    } else if (error.request) {
+      throw new Error("No response from server. Please try again later.");
+    } else {
+      throw new Error("An unexpected error occurred");
+    }
+  }
+};
+export const adminAirTicketById = async (id) => {
+  try {
+    const response = await apiurl.get(`/air-ticket/admin/get-air-ticket/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    if (error.response) {
+      throw new Error(
+        error.response.data.message || "Error while submitting the form"
       );
     } else if (error.request) {
       throw new Error("No response from server. Please try again later.");

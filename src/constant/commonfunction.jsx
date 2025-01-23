@@ -52,3 +52,32 @@ export function getYear(dateString) {
   // Return the year
   return year;
 }
+
+export function sortByFirstLetter(data, fieldName) {
+  if (!Array.isArray(data)) {
+    throw new Error('Input data must be an array');
+  }
+
+  // Create a shallow copy to avoid modifying the original array
+  const copyData = [...data];
+
+  return copyData.sort((a, b) => {
+    const firstLetterA = a[fieldName]?.charAt(0).toLowerCase() || '';
+    const firstLetterB = b[fieldName]?.charAt(0).toLowerCase() || '';
+
+    if (firstLetterA < firstLetterB) return -1;
+    if (firstLetterA > firstLetterB) return 1;
+    return 0;
+  });
+
+}
+
+
+export const removeDuplicates = (options) => {
+  const seen = new Set();
+  return options.filter((option) => {
+    const isDuplicate = seen.has(option.courseName);
+    seen.add(option.courseName);
+    return !isDuplicate;
+  });
+};

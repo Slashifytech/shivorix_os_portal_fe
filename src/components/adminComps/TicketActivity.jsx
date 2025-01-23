@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FaRegEye } from "react-icons/fa";
 import { IoSearchOutline } from "react-icons/io5";
 
 import { getTeamTickets } from "../../features/adminSlice";
-import { CustomTableEleven, CustomTableTen } from "../Table";
+import { CustomTableEleven } from "../Table";
 import Dnf from "../Dnf";
 import Pagination from "../dashboardComp/Pagination";
 import { CustomInput } from "../reusable/Input";
-import { priorityOption, statusOption, statusTicketOption } from "../../constant/data";
+import { priorityOption } from "../../constant/data";
 import { formatDate } from "./../../constant/commonfunction";
 import { dnf } from "../../assets";
 

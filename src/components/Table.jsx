@@ -40,6 +40,9 @@ import { FaRegEye } from "react-icons/fa";
 import { studentApplications } from "../features/agentSlice";
 import DocDeletePop from "./DocDeletePop";
 import DeletePop from "./reusable/DeletePop";
+import { formatDate } from "./../constant/commonfunction";
+import { FaPencil } from "react-icons/fa6";
+import AirTicketPopUp from "./dashboardComp/AirTicketPopUp";
 
 export function CustomTable({
   tableHead = [],
@@ -356,7 +359,7 @@ export function CustomTableTwo({
                   {row.type?.offerLetter
                     ? "Offer Letter"
                     : row.type?.visa
-                    ? "Visa"
+                    ? "Visa Lodgement"
                     : row.type?.courseFeeApplication
                     ? "Course Fee"
                     : "NA"}
@@ -436,7 +439,7 @@ export function CustomTableTwo({
                     : row.type?.visa?.status === "withdrawalrequest"
                     ? "Requested for Withdrawal"
                     : row.type?.visa?.status === "withdrawalcomplete"
-                    ? "Withdrawal Completed"
+                    ? "Withdrawal agent"
                     : "NA"}
                 </Typography>
               </td>
@@ -1333,25 +1336,26 @@ export function CustomTableSeven({
                     </a>
                   </Typography>
                 </td>
-                {tableType === "upload" && role === "2" || role === "3"  && (
-                  <td className="">
-                    <Typography
-                      as="a"
-                      variant="small"
-                      color="blue-gray"
-                      className="font-medium"
-                    >
-                      <span
-                        onClick={() => openDeletePopup(row.docId, row.url)}
-                        className="flex flex-row items-center gap-2"
+                {(tableType === "upload" && role === "2") ||
+                  (role === "3" && (
+                    <td className="">
+                      <Typography
+                        as="a"
+                        variant="small"
+                        color="blue-gray"
+                        className="font-medium"
                       >
-                        <span className="font-body border rounded-md border-primary cursor-pointer px-6 py-1">
-                          {actionTwo}
+                        <span
+                          onClick={() => openDeletePopup(row.docId, row.url)}
+                          className="flex flex-row items-center gap-2"
+                        >
+                          <span className="font-body border rounded-md border-primary cursor-pointer px-6 py-1">
+                            {actionTwo}
+                          </span>
                         </span>
-                      </span>
-                    </Typography>
-                  </td>
-                )}
+                      </Typography>
+                    </td>
+                  ))}
               </tr>
             ))}
           </tbody>
@@ -1747,8 +1751,8 @@ export function CustomTableTen({
   };
   const deleteInstituteById = async () => {
     try {
-      const res = await deleteInstitute(isId)
-      dispatch(getInstitutes({}))
+      const res = await deleteInstitute(isId);
+      dispatch(getInstitutes({}));
 
       toast.success(res.message || "Account Deleted Successfully");
     } catch (error) {
@@ -1801,7 +1805,16 @@ export function CustomTableTen({
                     {row.name}
                   </Typography>
                 </td>
-
+                <td className="p-4">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    {row.data?.popularCourses || "__"}
+                  </Typography>
+                </td>
+                {console.log(row?.data?.popularCourses)}
                 <td className="p-4">
                   <Typography
                     variant="small"
@@ -1843,13 +1856,16 @@ export function CustomTableTen({
                         to={"/add-institute"}
                         state={{
                           id: row.data?._id,
-                          edit: "edit"
+                          edit: "edit",
                         }}
                         className="text-primary"
                       >
                         {iconTwo}
                       </Link>
-                      <span onClick={()=> openDeletePopup(row.data?._id)} className="text-primary cursor-pointer">
+                      <span
+                        onClick={() => openDeletePopup(row.data?._id)}
+                        className="text-primary cursor-pointer"
+                      >
                         {iconThree}
                       </span>
                     </span>
@@ -2048,7 +2064,7 @@ export function CustomTableTwelve({ tableHead = [], tableRows = [] }) {
                     {row.type === "offerLetter"
                       ? "Offer Letter"
                       : row.type === "visa"
-                      ? "Visa"
+                      ? "Visa Lodgement"
                       : row.type === "courseFeeApplication"
                       ? "Course Fee"
                       : "NA"}
@@ -2095,10 +2111,11 @@ export function CustomTableTwelve({ tableHead = [], tableRows = [] }) {
                       ? "Withdrawal Complete"
                       : row.status === "withdrawalrequest"
                       ? "Withdrawal Requested"
+                        : row.status === "rejectedbyembassy"
+                      ? "Rejected By Embassy"
                       : row.status}
                   </Typography>
                 </td>
-               
               </tr>
             ))}
           </tbody>
@@ -2206,7 +2223,301 @@ export function CustomTableThirteen({ tableHead = [], tableRows = [] }) {
                       : "NA"}
                   </Typography>
                 </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Card>
+    </>
+  );
+}
+
+export function CustomTableFourteen({ tableHead = [], tableRows = [] }) {
+  const role = localStorage.getItem("role");
+  const [isOpen, setIsOpen] = useState(false);
+  const [isId, setIsId] = useState();
+  const handleOpen = (id) => {
+    setIsOpen(true);
+    setIsId(id);
+  };
+  const closePopUp = () => {
+    setIsOpen(false);
+  };
+  return (
+    <>
+      <Card className="h-full w-full overflow-scroll scrollbar-hide font-poppins">
+        <table className="w-full min-w-max table-auto text-left">
+          <thead>
+            <tr>
+              {tableHead.map((head) => (
+                <th
+                  key={head}
+                  className="border-b border-blue-gray-100 bg-input p-4 "
+                >
+                  <Typography
+                    variant="small"
+                    color="sidebar"
+                    className="font-medium leading-none opacity-70"
+                  >
+                    {head}
+                  </Typography>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {tableRows.map((row, index) => (
+              <tr key={index} className="even:bg-blue-gray-50/50">
+                {/* Render only the values you want to display */}
+                <td className="p-4">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    {row.sno}
+                  </Typography>
+                </td>
+
+                <td className="p-4">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    {row?.data?.airId}
+                  </Typography>
+                </td>
+                {(role === "0" ||
+                  role === "1") && (
+                <td className="p-4">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    {row?.data?.userName}
+                  </Typography>
+                </td>
+              )}
+              {(role === "2" ||
+                role === "3") && (
+                <td className="p-4">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    {row?.data?.personName}
+                  </Typography>
+                </td>
+              )}
+                {(role === "0" ||
+                  role === "1") && (
+                    <td className="p-4">
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {row?.data?.customId}
+                      </Typography>
+                    </td>
+                  )}
+                  {(role === "0" ||
+                  role === "1") && (
+                    <td className="p-4">
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className={`font-normal  rounded-xl text-white text-center px-3 py-1 ${
+                     row?.data?.userType === "agent"
+                        ? "bg-[#0F67A7]"
+                        : row?.data?.userType === "student"
+                        ? "bg-[#640FA7]"
+                        : "bg-primary"
+                    }`}
+                      >
+                        {row?.data?.userType === "agent" ? "Agent" : row?.data?.userType === "student" ? "Student" : null}
+                      </Typography>
+                    </td>
+                  )}
+                <td className="p-4">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    {formatDate(row?.data?.createdAt)}
+                  </Typography>
+                </td>
+                {(role === "2" ||
+                  role === "3") && (
+                <td className="p-4">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    <Link
+                      to="/air-ticket/add"
+                      state={{ id: row?.data?._id }}
+                      className="flex flex-row items-center gap-3 cursor-pointer"
+                    >
+                      <span className="text-primary text-[20px]">
+                        <FaPencil />
+                      </span>
+                      <span>Edit</span>
+                    </Link>
+                  </Typography>
+                </td>
+              )}
+                <td className="p-4">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    <span
+                      onClick={() => handleOpen(row?.data?._id)}
+                      className="flex flex-row items-center gap-3 cursor-pointer"
+                    >
+                      <span className="text-primary text-[20px]">
+                        <FaRegEye />
+                      </span>
+                      <span>View</span>
+                    </span>
+                  </Typography>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Card>
+
+      <AirTicketPopUp isOpen={isOpen} closePopUp={closePopUp} id={isId} />
+    </>
+  );
+}
+
+
+export function CustomTableFifteen({ tableHead = [], tableRows = [], icon, action}) {
+  return (
+    <>
+      <Card className="h-full w-full overflow-scroll scrollbar-hide font-poppins">
+        <table className="w-full min-w-max table-auto text-left">
+          <thead>
+            <tr>
+              {tableHead.map((head) => (
+                <th
+                  key={head}
+                  className="border-b border-blue-gray-100 bg-input p-4 "
+                >
+                  <Typography
+                    variant="small"
+                    color="sidebar"
+                    className="font-medium leading-none opacity-70"
+                  >
+                    {head}
+                  </Typography>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {tableRows.map((row, index) => (
+              <tr key={index} className="even:bg-blue-gray-50/50">
+                {/* Render only the values you want to display */}
+                <td className="p-4">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    {row.sno}
+                  </Typography>
+                </td>
+
+
+                <td className="p-4">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    {row.id}
+                  </Typography>
+                </td>
+                <td className="p-4">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    {row.data?.visa?.country}
+                  </Typography>
+                </td>
                 
+                <td className="p-4">
+                <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className={`font-light px-3 font-poppins text-white text-center capitalize py-1 w-44 rounded-xl ${
+                      row?.data?.visa?.status === "underreview"
+                        ? "bg-[#096D98]"
+                        : [
+                            "approved",
+                            "withdrawalrequest",
+                            "approved by embassy",
+                            "withdrawalcomplete",
+                            "visagranted",
+                          ].includes(row?.data?.visa?.status)
+                        ? "bg-[#09985C]"
+                        : ["rejected", "rejectedbyembassy"].includes(row?.data?.visa?.status)
+                        ? "bg-[#D33131]"
+                        : "bg-primary"
+                    }`}
+                  >
+                    {row.data?.visa?.status === "approved"
+                      ? "Approved"
+                      : row.data?.visa?.status === "rejected"
+                      ? "Rejected"
+                      : row.data?.visa?.status === "approved by embassy"
+                      ? "Approved By Embassy"
+                      : row.data?.visa?.status === "visagranted"
+                      ? "Visa Granted"
+                      : row.data?.visa?.status === "withdrawalcomplete"
+                      ? "Withdrawal Complete"
+                      : row.data?.visa?.status === "withdrawalrequest"
+                      ? "Withdrawal Requested"
+                       : row.data?.visa?.status === "rejectedbyembassy"
+                      ? "Rejected By Embassy"
+                      
+                      : row.data?.visa?.status}
+                  </Typography>
+                </td>
+
+                <td className="p-4">
+                  <Typography
+                    as="a"
+                    variant="small"
+                    color="blue-gray"
+                    className="font-medium"
+                  >
+                  {console.log(row?.data?._id)}
+                    <Link
+                      to="/visa/edit"
+                      state={row?.data?._id}
+                   
+                      className="flex flex-row items-center gap-2"
+                    >
+                      <span className="text-primary">{icon}</span>
+                      <span className="font-body">{action}</span>
+                    </Link>
+                  </Typography>
+                </td>
+              
+               
               </tr>
             ))}
           </tbody>

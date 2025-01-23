@@ -1,7 +1,7 @@
 import React from "react";
 import InstituteCard from "./InstituteCard";
 import Dnf from "../Dnf";
-import { dnf, noInstitute } from "../../assets";
+import { dnf } from "../../assets";
 
 const ShortlistComponent = ({
   bodyText,
@@ -40,15 +40,12 @@ const ShortlistComponent = ({
               institutename={institute?.instituteId?.instituteName}
               country={institute?.instituteId?.country}
               shortlistInstitute={shortlistInstitute}
-              status={institute.status}
-              link="/institute-view"
+              data={institute}
               customState={{
                 id: institute?.instituteId?._id,
                 country: institute?.instituteId?.country,
                 institute: institute?.instituteId?.instituteName,
               }}
-              data={institute?.instituteId}
-
             />
           ))}
         </div>

@@ -5,7 +5,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { IoDocumentTextSharp } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
-import { MdOutlineHistory } from "react-icons/md";
+import { MdFlight, MdOutlineHistory } from "react-icons/md";
 import { AiFillQuestionCircle } from "react-icons/ai";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import LogoutPop from "../login/LogoutPop";
@@ -68,7 +68,7 @@ const Sidebar = () => {
       pathPage: "/student/dashboard",
       icon: <BsPieChartFill />,
       label: "Dashboard",
-      otherPath: "/institute-view"
+      otherPath: "/institute-view",
     },
     {
       pathPage: "/student/document",
@@ -85,13 +85,18 @@ const Sidebar = () => {
       otherPathFive: "/visa-apply",
       otherPathSix: "/visa/edit",
       otherPathSeven: "/course-fee/edit",
-      otherPathEight: "/course-fee"
-
+      otherPathEight: "/course-fee",
     },
     {
       pathPage: "/student/visa-update",
       icon: <FaPassport />,
       label: "Visa Updates",
+    },
+    {
+      pathPage: "/air-ticket/lists",
+      icon: <MdFlight />,
+      label: "Air Ticket",
+      otherPath: "/air-ticket/add",
     },
   ];
   useEffect(() => {
@@ -107,17 +112,15 @@ const Sidebar = () => {
           <div
             key={index}
             className={`cursor-pointer py-4 hover:bg-[#FBD5D5] hover:text-primary hover:border-l-4 hover:font-medium ${
-                path === item.pathPage ||
+              path === item.pathPage ||
               path === item?.otherPath ||
               path === item?.otherPathTwo ||
               path === item?.otherPathThree ||
               path === item?.otherPathFour ||
-             path === item?.otherPathFive ||
-             path === item?.otherPathSix ||
-             path === item?.otherPathSeven ||
-             path === item?.otherPathEight 
-
-
+              path === item?.otherPathFive ||
+              path === item?.otherPathSix ||
+              path === item?.otherPathSeven ||
+              path === item?.otherPathEight
                 ? "bg-[#FBD5D5] text-primary border-l-4 border-primary font-medium"
                 : "text-sidebar"
             }`}
@@ -256,7 +259,6 @@ const Sidebar = () => {
         </p>
       </div>
       <LogoutPop isLogoutOpen={isLogoutOpen} closeLogout={closeLogout} />
-   
     </>
   );
 };

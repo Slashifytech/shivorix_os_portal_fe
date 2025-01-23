@@ -1,15 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
+  airTicketById,
+  allAirTicket,
   countryInstituteOptions,
   countryOptions,
   courseData,
   getAllDocument,
   getAllTicket,
+  getInstitutesData,
+  getPopularCourseData,
   getStudentDataById,
   getVisaStatus,
   getWithdrawalData,
   prefferedCountry,
   recieveDocument,
+
 } from "./generalApi";
 
 export const getCountryOption = createAsyncThunk(
@@ -68,6 +73,22 @@ export const getCourses = createAsyncThunk(
     }
   }
 );
+
+export const getPopularCourses = createAsyncThunk(
+  "general/getPopularCourses",
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await getPopularCourseData();
+      // console.log(res);
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.message || "Failed to fetch country options"
+      );
+    }
+  }
+);
+
 
 export const studentById = createAsyncThunk(
   "general/studentById",
@@ -155,11 +176,60 @@ export const getRecievedDocument = createAsyncThunk(
     }
   }
 );
+export const fetchAllAirTicket = createAsyncThunk(
+  "general/fetchAllAirTicket",
+  async ({page, perPage, search, userId }, { rejectWithValue }) => {
+    try {
+      const res = await allAirTicket(
+        page,
+        perPage,
+        search,
+        userId
+      );
+      // console.log(res);
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.message || "Failed to fetch country options"
+      );
+    }
+  }
+);
+export const fetchAirTicketById = createAsyncThunk(
+  "general/fetchAirTicketById",
+  async (id, { rejectWithValue }) => {
+    try {
+      const res = await airTicketById(
+        id
+      );
+      // console.log(res);
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.message || "Failed to fetch country options"
+      );
+    }
+  }
+);
 export const withdrawalDataGet = createAsyncThunk(
   "general/withdrawalDataGet",
   async (userId, { rejectWithValue }) => {
     try {
       const res = await getWithdrawalData(userId);
+      // console.log(res);
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.message || "Failed to fetch country options"
+      );
+    }
+  }
+);
+export const fetchInstituteData = createAsyncThunk(
+  "general/fetchInstituteData",
+  async ({page, perPage, courses, country, inTake , search}, { rejectWithValue }) => {
+    try {
+      const res = await getInstitutesData(page, perPage, courses, country, inTake , search);
       // console.log(res);
       return res.data;
     } catch (error) {
@@ -176,12 +246,16 @@ const generalSlice = createSlice({
     prefCountryOption: [],
     instituteOption: [],
     courses: [],
+    popularCourse: [],
     studentData: null,
     getAllTicket: [],
     visaStatus: [],
     getAllDocuments: [],
     recieveDocs: [],
     withdrawalData: "",
+    airTickets: null,
+    airTicketById: null,
+    instituteData: null,
     status: "idle",
     error: null,
   },
@@ -191,6 +265,12 @@ const generalSlice = createSlice({
       state.instituteOption = state.instituteOption.filter(
         (institute) => institute.id !== action.pay
       );
+    },
+    emptyAirTicket: (state) => {
+      state.airTicketById = null
+    },
+    emptyData: (state) => {
+      state.instituteData = null
     },
   },
 
@@ -242,6 +322,18 @@ const generalSlice = createSlice({
         state.status = "succeeded";
       })
       .addCase(getCourses.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload || action.error.message;
+      })
+      .addCase(getPopularCourses.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(getPopularCourses.fulfilled, (state, action) => {
+        state.popularCourse = action.payload;
+        state.status = "succeeded";
+      })
+      .addCase(getPopularCourses.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload || action.error.message;
       })
@@ -324,8 +416,47 @@ const generalSlice = createSlice({
         state.status = "failed";
 
         state.error = action.payload || action.error.message;
+      })
+      .addCase(fetchAllAirTicket.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(fetchAllAirTicket.fulfilled, (state, action) => {
+        state.airTickets = action.payload;
+        state.status = "succeeded";
+      })
+      .addCase(fetchAllAirTicket.rejected, (state, action) => {
+        state.status = "failed";
+        state.airTickets = null
+        state.error = action.payload || action.error.message;
+      })
+      .addCase(fetchAirTicketById.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(fetchAirTicketById.fulfilled, (state, action) => {
+        state.airTicketById = action.payload;
+        state.status = "succeeded";
+      })
+      .addCase(fetchAirTicketById.rejected, (state, action) => {
+        state.status = "failed";
+        state.airTicketById = null
+        state.error = action.payload || action.error.message;
+      })
+      .addCase(fetchInstituteData.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(fetchInstituteData.fulfilled, (state, action) => {
+        state.instituteData = action.payload;
+        state.status = "succeeded";
+      })
+      .addCase(fetchInstituteData.rejected, (state, action) => {
+        state.status = "failed";
+        state.instituteData = null
+        state.error = action.payload || action.error.message;
       });
   },
 });
-export const { clearInstituteOption } = generalSlice.actions;
+export const { clearInstituteOption, emptyAirTicket, emptyData } = generalSlice.actions;
 export default generalSlice.reducer;

@@ -67,6 +67,10 @@ import TeamList from "../admin/TeamList";
 import AddMember from "../admin/AddMember";
 import TeamActivity from "../admin/TeamActivity";
 import StrictAdmin from "./StrictAdmin";
+import AirTicketForm from "../pages/AirTicketForm";
+import AirTickets from "../pages/AirTickets";
+import AirTicketLists from "../admin/AirTicketLists";
+import AllVisa from "../agent/AllVisa";
 
 export const router = createBrowserRouter([
   {
@@ -321,7 +325,23 @@ export const router = createBrowserRouter([
       </ProtectedAgent>
     ),
   },
+  {
+    path: "/air-ticket/add",
+    element: (
+      <CommonRoleProtected>
+        <AirTicketForm></AirTicketForm>
+      </CommonRoleProtected>
+    ),
+  },
 
+  {
+    path: "/air-ticket/lists",
+    element: (
+      <CommonRoleProtected>
+        <AirTickets></AirTickets>
+      </CommonRoleProtected>
+    ),
+  },
   {
     path: "/agent/application/lists",
     element: <ApplicationView></ApplicationView>,
@@ -387,6 +407,14 @@ export const router = createBrowserRouter([
     element: (
       <ProtectedAgent>
         <Institution></Institution>
+      </ProtectedAgent>
+    ),
+  },
+  {
+    path: "/agent/visa-lodgement",
+    element: (
+      <ProtectedAgent>
+        <AllVisa></AllVisa>
       </ProtectedAgent>
     ),
   },
@@ -547,6 +575,14 @@ export const router = createBrowserRouter([
       <StrictAdmin>
         <TeamActivity></TeamActivity>{" "}
       </StrictAdmin>
+    ),
+  },
+  {
+    path: "/admin/air-ticket-lists",
+    element: (
+      <ProtectedAdmin>
+        <AirTicketLists></AirTicketLists>{" "}
+      </ProtectedAdmin>
     ),
   },
   {

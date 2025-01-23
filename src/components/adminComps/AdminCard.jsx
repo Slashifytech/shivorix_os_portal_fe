@@ -92,7 +92,7 @@ const AdminCard = ({
                 ? "Offer Letter"
                 : applicationType === "courseFeeApplication"
                 ? "Course Fee " : applicationType === "visa"
-                ? "Visa"
+                ? "Visa Lodgement"
                 : "NA"}
             </span>
           </span>

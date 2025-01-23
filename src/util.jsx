@@ -2,7 +2,7 @@ import axios from "axios";
 import { getToken } from "./utils/getToken";
 
 const apiurl = axios.create({
-  baseURL: import.meta.env.VITE_APP_DEV_BASE_URL,
+baseURL: import.meta.env.VITE_APP_DEV_BASE_URL, 
 });
 
 apiurl.interceptors.request.use(
@@ -14,9 +14,9 @@ apiurl.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
+(error) => {
     return Promise.reject(error);
-  }
+  }   
 );
 
 export default apiurl;

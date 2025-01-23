@@ -107,10 +107,12 @@ const OfferLetterPreferences = ({ appId, updatedData, profileViewPath }) => {
         preferences: {
           course: applicationDataById?.offerLetter?.preferences?.course || "",
           intake: applicationDataById?.offerLetter?.preferences?.intake || "",
-          institution: applicationDataById?.offerLetter?.preferences?.institution || "",
+          institution:
+            applicationDataById?.offerLetter?.preferences?.institution || "",
           country: applicationDataById?.offerLetter?.preferences?.country || "",
           offerLetterPrice:
-            applicationDataById?.offerLetter?.preferences?.offerLetterPrice || "",
+            applicationDataById?.offerLetter?.preferences?.offerLetterPrice ||
+            "",
         },
       });
     }
@@ -146,7 +148,7 @@ const OfferLetterPreferences = ({ appId, updatedData, profileViewPath }) => {
           </span>
           <span className="font-semibold text-[22px]">Preferences</span>
         </span>
-        {profileViewPath 
+        {profileViewPath
           ? ""
           : !isOne && (
               <span
@@ -178,12 +180,18 @@ const OfferLetterPreferences = ({ appId, updatedData, profileViewPath }) => {
           <span className="font-medium">
             {applicationDataById?.offerLetter?.preferences?.institution || "NA"}
           </span>
-          <span className="font-light mt-4">Offer Letter Price</span>
-          <span className="font-medium">
-            {applicationDataById?.offerLetter?.preferences?.offerLetterPrice || "NA"}
-          </span>
+          {applicationDataById?.offerLetter?.preferences?.offerLetterPrice && (
+            <>
+              <span className="font-light mt-4">Offer Letter Price</span>
+              <span className="font-medium">
+                {applicationDataById?.offerLetter?.preferences
+                  ?.offerLetterPrice || "NA"}
+              </span>
+            </>
+          )}
         </span>
       </div>
+      {console.log(applicationDataById?.offerLetter?.preferences?.offerLetterPrice)}
       <div
         className={`transition-all duration-500 ease-in-out transform ${
           isOne
@@ -230,7 +238,7 @@ const OfferLetterPreferences = ({ appId, updatedData, profileViewPath }) => {
               <p className="text-red-500 mt-1 text-sm">{errors.prefCourse}</p>
             )}
 
-            <Register
+            {/* <Register
               imp="*"
               name="preferences.offerLetterPrice"
               type="text"
@@ -239,7 +247,7 @@ const OfferLetterPreferences = ({ appId, updatedData, profileViewPath }) => {
 
               value={offerLater.preferences.offerLetterPrice}
               errors={errors.prefOfferLetter}
-            />
+            /> */}
 
             <SelectComponent
               name="preferences.intake"

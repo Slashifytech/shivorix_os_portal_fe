@@ -4,7 +4,7 @@ import Header from "../components/dashboardComp/Header";
 import { CustomTable } from "../components/Table";
 import { FaRegEye } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { allApplication, applictionOverview } from "../features/agentSlice";
+import { applictionOverview } from "../features/agentSlice";
 import { CustomInput } from "../components/reusable/Input";
 import { IoSearchOutline } from "react-icons/io5";
 import Pagination from "../components/dashboardComp/Pagination";
@@ -13,17 +13,16 @@ import { Typography } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import Dnf from "../components/Dnf";
 import { dnf } from "../assets";
-import ApplicationChoosePop from "../components/dashboardComp/ApplicationChoosePop";
 
 const Applications = () => {
   const { applicationOverviewData } = useSelector((state) => state.agent);
   const dispatch = useDispatch();
-
   const [search, setSearch] = useState("");
   const [perPage, setPerPage] = useState(10);
-  const [page, setPage] = useState(1); // Track the current page
+  const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
-  const totalUsersCount = applicationOverviewData?.pagination?.totalResults || 0;
+  const totalUsersCount =
+    applicationOverviewData?.pagination?.totalResults || 0;
   const currentPage = applicationOverviewData?.pagination?.currentPage;
   const totalPagesCount = applicationOverviewData?.pagination?.totalPages;
 
@@ -36,7 +35,6 @@ const Applications = () => {
       underReview: data?.underReviewCount || 0,
       approved: data?.approvedCount || 0,
       customLinkState: data?.studentInformationId,
-  
     })
   );
 
@@ -52,7 +50,7 @@ const Applications = () => {
   // Handle search input change
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
-    setPage(1); 
+    setPage(1);
   };
 
   const perPageOptions = [];
@@ -104,19 +102,6 @@ const Applications = () => {
         </span>
       </div>
       <span className="flex flex-row items-center justify-start md:ml-[19.5%] sm:ml-[28%] mt-6">
-        {/* <span className="text-body">Show</span>
-        <select
-          className="ml-3 border px-2 py-1 w-10 rounded outline-none"
-          value={perPage}
-          onChange={handlePerPageChange}
-        >
-          {perPageOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-        <span className="px-3 text-body">entries</span> */}
         <span className="flex flex-row items-center  ">
           <CustomInput
             className="h-11 w-80 rounded-md text-body placeholder:px-3 pl-7 border border-[#E8E8E8] outline-none"
@@ -124,7 +109,7 @@ const Applications = () => {
             placeHodler="Search Student name and ID"
             name="search"
             value={search}
-            onChange={handleSearchChange} // Update search on input change
+            onChange={handleSearchChange}
           />
           <span className="absolute pl-2 text-[20px] text-body">
             <IoSearchOutline />
@@ -141,7 +126,7 @@ const Applications = () => {
           <div className="md:ml-[19.5%] sm:ml-[28%] mt-6 z-0 ">
             <CustomTable
               tableHead={TABLE_HEAD}
-              tableRows={TABLE_ROWS} 
+              tableRows={TABLE_ROWS}
               SecondAction="Apply Application"
               customClass="border border-primary  px-2 rounded-xl text-primary font-normal text-[12px] py-1"
               // SecondLink="/offerLetter-apply"
@@ -151,13 +136,13 @@ const Applications = () => {
             />
           </div>
           <div className="mt-16 mb-10">
-          <Pagination
-                currentPage={currentPage}
-                hasNextPage={currentPage * perPage < totalUsersCount}
-                hasPreviousPage={currentPage > 1}
-                onPageChange={handlePageChange}
-                totalPagesCount={totalPagesCount}
-              />
+            <Pagination
+              currentPage={currentPage}
+              hasNextPage={currentPage * perPage < totalUsersCount}
+              hasPreviousPage={currentPage > 1}
+              onPageChange={handlePageChange}
+              totalPagesCount={totalPagesCount}
+            />
           </div>
         </>
       ) : (
@@ -169,7 +154,6 @@ const Applications = () => {
           />
         </div>
       )}
-  
     </>
   );
 };

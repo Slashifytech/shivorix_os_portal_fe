@@ -29,8 +29,8 @@ const AgentDashboard = () => {
   const [completedApplication, setCompletedApplication] = useState();
   const [appOverviewCount, setAppOverviewCount] = useState();
   const [isUserType, setUserType] = useState();
-  const [month, setMonth] = useState("11");
-  const [year, setYear] = useState("2024");
+  const [month, setMonth] = useState(null);
+  const [year, setYear] = useState(null);
   const [appCount, setAppCount] = useState();
   const [studentCount, setStudentCount] = useState();
   const [selectedYearLine, setSelectedYearLine] = useState(
@@ -40,56 +40,54 @@ const AgentDashboard = () => {
     new Date().getFullYear()
   );
 
-  const [selectedDateDoughnut, setSelectedDateDoughnut] = useState(
-    new Date().toISOString().substring(0, 10)
-  ); // Date picker state
+  const [selectedDateDoughnut, setSelectedDateDoughnut] = useState(""); 
+
 
   const baseYear = 2024;
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth();
-  const startDonoughtYear = currentMonth >= 8 ? currentYear : currentYear - 1; // Start from September or earlier year
-  const yearRange = 10;
-  const startYear = Math.max(currentYear, baseYear);
-
+  const startDonoughtYear = currentYear; // Start from September or earlier year
+  
+  // Generate dynamic years range
   const dynamicYears = Array.from(
-    { length: startYear - baseYear + 1 },
-    (_, index) => startYear - index
+    { length: startDonoughtYear - baseYear + 1 },
+    (_, index) => startDonoughtYear - index
   );
-
+  
   const monthShortNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
   ];
-
+  
   const donoughtFilter = [];
-  for (let year = startDonoughtYear; year >= baseYear; year--) {
-    for (let month = 1; month <= 12; month++) {
+  dynamicYears.forEach((year) => {
+    const maxMonth = year === currentYear ? currentMonth + 1 : 12; 
+    for (let month = 1; month <= maxMonth; month++) {
+      const paddedMonth = String(month).padStart(2, "0"); 
       donoughtFilter.push({
-        id: `${month} ${year}`,
-        option: `${month} ${year}`,
+        id: `${paddedMonth} ${year}`,
+        option: `${paddedMonth} ${year}`,
         label: `${monthShortNames[month - 1]} ${year}`,
       });
     }
-  }
-  const handleDonoughtChange = (e) => {
-    const selectedValue = e.target.value;
-    setSelectedDateDoughnut(selectedValue);
+  });
+  
+  
 
+
+const handleDonoughtChange = (e) => {
+  const selectedValue = e.target.value;
+  setSelectedDateDoughnut(selectedValue);
+
+  if (selectedValue) {
     const [selectedMonth, selectedYear] = selectedValue.split(" ");
-
     setMonth(selectedMonth);
     setYear(selectedYear);
-  };
+  } else {
+    setMonth(null);
+    setYear(null);
+  }
+};
 
   const dispatch = useDispatch();
   const handleUserChange = (e) => {
@@ -231,7 +229,7 @@ const AgentDashboard = () => {
   ];
 
   const donoughtData = {
-    labels: ["Offer Letter", "Course Fee Application", "Visa"],
+    labels: ["Offer Letter", "Course Fee Application", "Visa "],
     label: "# of Applications",
     values: [
       appOverviewCount?.data?.offerLetterCount || 0,
@@ -262,14 +260,14 @@ const AgentDashboard = () => {
 
   const filteredLineData = {
     labels: monthNames, // Months as labels
-    label: `Total Number of Students (${selectedYearBar})`,
+    label: `Total Number of Students (${selectedYearLine})`,
     values: monthNames.map((month, index) => {
       const monthNumber = index + 1; // Map index to month number (1-12)
 
       // Ensure appCount exists and is accessed correctly
       const userCount = studentCount?.students || [];
       const matchedAppCount = userCount.find(
-        (app) => app.year === selectedYearBar && app.month === monthNumber
+        (app) => app.year === selectedYearLine && app.month === monthNumber
       );
 
       return matchedAppCount ? matchedAppCount.count : 0; // Return count or 0 if not found

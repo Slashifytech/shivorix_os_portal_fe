@@ -54,7 +54,7 @@ const DonoughtCharts = ({ data, totalApplication }) => {
         <span className="flex items-center gap-2">
         <span className="bg-[#967DDD] w-7 border border-black">.</span> Course Fee</span>
         <span className="flex items-center gap-2">
-        <span className="bg-[#4BD9ED] w-7 border border-black">. </span> Visa</span>
+        <span className="bg-[#4BD9ED] w-7 border border-black">. </span> Visa Lodgement</span>
 
       </div>
   </div>

@@ -461,7 +461,10 @@ const courseFeeApplication = () => {
       }
       setIsSubmitting(false);
     } catch (error) {
+
       toast.error(error.message || "Something went wrong");
+      setIsSubmitting(false);
+
     }finally{
       setIsSubmitting(false);
 

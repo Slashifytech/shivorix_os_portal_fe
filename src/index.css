@@ -198,3 +198,20 @@ input[type="radio"] {
     transform: scaleY(1);
   }
 }
+
+
+
+@keyframes openAnimation {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.app-open-animation {
+  animation: openAnimation 0.3s ease-out;
+}
