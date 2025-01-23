@@ -93,7 +93,7 @@ const RadioInputComponent = ({
   );
 };
 
-const SelectComponent = ({ name, label, options, value, handleChange, notImp }) => {
+const SelectComponent = ({ name, label, options, value, handleChange, notImp, customClass }) => {
   return (
     <div className="flex flex-col mb-4 mt-6 font-poppins">
       <label className="font-normal text-secondary mb-2 text-[14px]">
@@ -103,7 +103,7 @@ const SelectComponent = ({ name, label, options, value, handleChange, notImp }) 
         name={name}
         value={value}
         onChange={handleChange}
-        className="border border-gray-300 rounded-lg text-secondary bg-input px-3 py-2 outline-none "
+        className={`border border-gray-300 rounded-lg text-secondary ${customClass ? customClass : "bg-input"} px-3 py-2 outline-none `}
       >
         <option className="text-secondary font-poppins" value="">
           Select Options

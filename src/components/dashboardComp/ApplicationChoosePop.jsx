@@ -45,7 +45,7 @@ const ApplicationChoosePop = ({ closeOpt, isOpenOpt, state }) => {
             isOpenOpt ? "block" : "hidden"
           }`}
         >
-          <div className="bg-white pb-9 rounded-lg md:w-[44%] w-full relative p-9 flex flex-col items-center justify-center">
+          <div className="bg-white pb-9 rounded-lg md:w-[44%] w-full relative p-9 flex flex-col items-center justify-center  app-open-animation">
           <span onClick={closeOpt} className="absolute top-2 right-3 text-[30px] cursor-pointer text-primary"><RxCross2 /></span>
             <p className="text-sidebar font-semibold text-[20px]">
               Choose What Application to Add?
@@ -85,7 +85,7 @@ const ApplicationChoosePop = ({ closeOpt, isOpenOpt, state }) => {
 
               <div className="border border-rounded-md px-6 py-4 flex justify-between">
                 <label htmlFor="visaApplication" className="text-[16px]">
-                  Visa
+                  Visa Lodgement
                 </label>
                 <input
                   type="radio"

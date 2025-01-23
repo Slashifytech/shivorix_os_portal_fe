@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
+  fetchAgentVisa,
   getAgentData,
   getAllApplication,
   getAllStudentCount,
@@ -126,6 +127,19 @@ export const applicationById = createAsyncThunk(
     }
   }
 );
+export const fetchAllVisaByAgent = createAsyncThunk(
+  "agents/fetchAllVisaByAgent",
+  async ({page, perPage, search}, { rejectWithValue }) => {
+    try {
+      const response = await fetchAgentVisa(page, perPage, search);
+      return response;
+    } catch (error) {
+      return rejectWithValue(
+        error.response ? error.response.data : "Failed to fetch agent data"
+      );
+    }
+  }
+);
 // Create the slice for agent data management
 const agentSlice = createSlice({
   name: "agent",
@@ -138,6 +152,7 @@ const agentSlice = createSlice({
     studentApplicationData: null,
     applications: null,
     studentCount: null,
+    agentVisas: null,
     status: "idle",
     error: null,
   },
@@ -232,6 +247,18 @@ const agentSlice = createSlice({
       .addCase(applicationById.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload || action.error.message;
+      })
+      .addCase(fetchAllVisaByAgent.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchAllVisaByAgent.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.agentVisas = action.payload;
+      })
+      .addCase(fetchAllVisaByAgent.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload || action.error.message;
+        state.agentVisas = null
       });
   },
 });

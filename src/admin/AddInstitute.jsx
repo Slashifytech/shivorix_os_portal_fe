@@ -46,6 +46,7 @@ const AddInstitute = () => {
     facilities: "",
     inTake: [],
     instituteStatus: "",
+    websiteUrl:""
   });
   const [isCustomCountry, setIsCustomCountry] = useState(false);
   const [newFiles, setNewFiles] = useState([]);
@@ -374,6 +375,7 @@ const AddInstitute = () => {
                     // errors={errors.instituteName}
                   />
                 </span>
+              
                 <span className=" w-1/2 ">
                   <SelectComponent
                     notImp={true}
@@ -388,12 +390,23 @@ const AddInstitute = () => {
               <Register
                 // imp="*"
                 name="offerLetterPrice"
-                type="number"
+                type="text"
                 label="Offer Letter Price"
                 handleInput={handleInput}
                 value={instituteData.offerLetterPrice}
                 // errors={errors.offerLetterPrice}
               />
+              <div className="">
+
+                  <Register
+                    // imp="*"
+                    name="websiteUrl"
+                    type="text"
+                    label="Website Link"
+                    handleInput={handleInput}
+                    value={instituteData.websiteUrl}
+                    // errors={errors.instituteName}
+                  /></div>
               <div className="mt-6">
                 <span className="text-[15px]  text-secondary "> Intake </span>
                 <Select

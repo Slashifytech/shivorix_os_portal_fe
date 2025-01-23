@@ -74,7 +74,7 @@ const AdminInstitute = () => {
     // setLoading(false);
   }, [isTypeFilter, search, page, perPage]);
 
-  const TABLE_HEAD = ["S.No.", "Institute Name", "Country", "View", "Action"];
+  const TABLE_HEAD = ["S.No.", "Institute Name", "Course Name", "Country", "View", "Action"];
 
   const TABLE_ROWS = allInstitutes?.data?.institutes?.map((data, index) => ({
     sno: (currentPage - 1) * perPage + index + 1,
@@ -134,7 +134,7 @@ const AdminInstitute = () => {
             <CustomInput
               className="h-11 w-80 mt-4 rounded-md text-body placeholder:px-3 pl-7 border border-[#E8E8E8] outline-none"
               type="text"
-              placeHodler="Search by User Name & User Id "
+              placeHodler="Search by Institute Name "
               name="search"
               value={search}
               onChange={handleSearchChange}

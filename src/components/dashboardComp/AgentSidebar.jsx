@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BsPieChartFill } from "react-icons/bs";
 import { BiSolidInstitution } from "react-icons/bi";
 
-import {  FaUsers } from "react-icons/fa";
+import { FaRegAddressCard, FaUsers } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { IoDocumentTextSharp } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -12,17 +12,16 @@ import { RiLogoutBoxRLine } from "react-icons/ri";
 import LogoutPop from "../login/LogoutPop";
 import ImageComponent from "../reusable/Input";
 import { logo } from "../../assets";
-
+import { MdFlight } from "react-icons/md";
 
 const AgentSidebar = () => {
   const location = useLocation();
-  
+
   const path = location.pathname;
   const [isOpen, setIsOpen] = useState(
     JSON.parse(localStorage.getItem("isOpen")) ?? true
   );
   const [isLogoutOpen, setisLogoutOpen] = useState(false);
-
 
   const openLogoutPopup = () => {
     setisLogoutOpen(true);
@@ -31,7 +30,6 @@ const AgentSidebar = () => {
   const closeLogout = () => {
     setisLogoutOpen(false);
   };
-
 
   const sidebarList = [
     {
@@ -43,7 +41,7 @@ const AgentSidebar = () => {
       pathPage: "/agent/institution",
       icon: <BiSolidInstitution />,
       label: "Institutions",
-      otherPath: "/institute-view"
+      otherPath: "/institute-view",
     },
     {
       pathPage: "/agent/student-lists",
@@ -64,15 +62,28 @@ const AgentSidebar = () => {
       otherPathFour: "/course-fee",
       otherPathFive: "/visa-apply",
       otherPathSix: "/visa/edit",
-      otherPathSeven: "/course-fee/edit"
-
-
-
+      otherPathSeven: "/course-fee/edit",
     },
+    {
+      pathPage: "/agent/visa-lodgement",
+      icon: <FaRegAddressCard />,
+      label: "Visa Lodgement",
+      otherPath: "/agent/visa-lodgement",
+    
+    },
+    {
+      pathPage: "/air-ticket/lists",
+      icon: <MdFlight />,
+      label: "Air Ticket",
+      otherPath: "/air-ticket/add",
+    
+    },
+   
   ];
   useEffect(() => {
     localStorage.setItem("isOpen", JSON.stringify(isOpen));
   }, [isOpen]);
+
   return (
     <>
       <div className="bg-white md:w-[17.5vw] sm:w-[24vw] h-[100vh]  overflow-y-auto scrollbar-hide border-r-2 border-[#E8E8E8]">
@@ -88,10 +99,9 @@ const AgentSidebar = () => {
               path === item?.otherPathTwo ||
               path === item?.otherPathThree ||
               path === item?.otherPathFour ||
-             path === item?.otherPathFive ||
-             path === item?.otherPathSix ||
-             path === item?.otherPathSeven
-
+              path === item?.otherPathFive ||
+              path === item?.otherPathSix ||
+              path === item?.otherPathSeven
                 ? "bg-[#FBD5D5] text-primary border-l-4 border-primary font-medium"
                 : "text-sidebar"
             }`}
@@ -148,12 +158,13 @@ const AgentSidebar = () => {
               </li>
             </Link>
             <Link to="/settings/change-email">
-            <li
-        className={`text-sidebar py-2 mb-2 cursor-pointer md:px-14 sm:pl-14 md:ml-0  hover:bg-[#f5ebeb] hover:text-primary ${
-          (path === "/settings/change-email" || path === "/settings/otp-confirm") &&
-          "bg-[#FBD5D5] border-l-4 border-primary text-primary"
-        }`}
-      >
+              <li
+                className={`text-sidebar py-2 mb-2 cursor-pointer md:px-14 sm:pl-14 md:ml-0  hover:bg-[#f5ebeb] hover:text-primary ${
+                  (path === "/settings/change-email" ||
+                    path === "/settings/otp-confirm") &&
+                  "bg-[#FBD5D5] border-l-4 border-primary text-primary"
+                }`}
+              >
                 Change Email
               </li>
             </Link>
@@ -166,8 +177,8 @@ const AgentSidebar = () => {
               >
                 Delete Account
               </li>
-              </Link>
-        </ul>
+            </Link>
+          </ul>
         </div>
         {/* <div
           className={`cursor-pointer py-4 hover:bg-[#f5ebeb] hover:text-primary hover:border-l-4 hover:font-medium ${

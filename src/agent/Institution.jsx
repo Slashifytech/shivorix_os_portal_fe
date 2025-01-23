@@ -3,24 +3,31 @@ import {
   CountrySelect,
   CustomInput,
   InstituteComponent,
+  SelectComponent,
 } from "../components/reusable/Input";
 import { IoSearchOutline } from "react-icons/io5";
 import InstituteCard from "../components/dashboardComp/InstituteCard";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../components/dashboardComp/Header";
 import AgentSidebar from "../components/dashboardComp/AgentSidebar";
-import { getInstituteOption } from "../features/generalSlice";
+import { fetchInstituteData } from "../features/generalSlice";
 import { shortlistedData } from "../features/agentSlice";
 import Dnf from "../components/Dnf";
 import { noInstitute } from "../assets";
 import { shortlistAdd } from "../features/agentApi";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
+import Pagination from "../components/dashboardComp/Pagination";
+import { removeDuplicates } from "../constant/commonfunction";
+import { Select } from "antd";
+import { intakeOption } from "../constant/data";
 
 const Institution = () => {
-  const { prefCountryOption, instituteOption } = useSelector(
+  const [updatedFilteredData, setUpdatedFilteredData] = useState([]);
+  const { prefCountryOption, popularCourse, instituteData } = useSelector(
     (state) => state.general
   );
+  const courses = popularCourse
   const shortlistedUniversities = useSelector(
     (state) => state.agent.shortlisted?.institutes
   );
@@ -29,11 +36,29 @@ const Institution = () => {
   const [filterData, setFilterData] = useState({
     country: "",
     institutes: "",
-    search: "", 
+    search: "",
+    courses: "",
+    inTake: "",
   });
-  const [filteredInstitutes, setFilteredInstitutes] = useState([]);
-  const [filteredInstituteOptions, setFilteredInstituteOptions] = useState([]); // Filtered institutes for dropdown
   const dispatch = useDispatch();
+  const perPage = 20;
+  const [page, setPage] = useState(1);
+  const totalUsersCount = instituteData?.totalRecords || 0;
+  const currentPage = instituteData?.currentPage;
+  const totalPagesCount = instituteData?.totalPages;
+
+  const options = removeDuplicates(courses).map((option, index) => ({
+    value: option.courseName,
+    label: option.courseName,
+  }));
+  const filteredInstituteOptions = filterData.country
+    ? instituteData?.institutes
+        .filter((institute) => institute.country === filterData.country)
+        .map((institute) => ({
+          instituteName: institute.instituteName,
+          instituteName: institute.instituteName,
+        }))
+    : [];
 
   const handleInput = (e) => {
     const { value, name } = e.target;
@@ -41,59 +66,63 @@ const Institution = () => {
       ...prevData,
       [name]: value,
     }));
+    if (country) {
+      setFilterData((prevState) => ({
+        ...prevState,
+        courses: "",
+      }));
+    }
+    setPage(1);
+  };
+
+  const handleChange = (value) => {
+    setFilterData((prevState) => ({
+      ...prevState,
+      courses: value ,
+      country: "",
+    }));
+    setPage(1);
+  };
+
+  const handlePageChange = (pageNumber) => {
+    setPage(pageNumber);
   };
 
   useEffect(() => {
     setIsLoading(true);
-    dispatch(getInstituteOption());
     dispatch(shortlistedData());
     setIsLoading(false);
   }, [dispatch]);
 
   useEffect(() => {
-    if (filterData.country) {
-      const filteredInstitutesByCountry = instituteOption.filter(
-        (institute) => institute.country === filterData.country
+    setIsLoading(true);
+    if (
+      filterData.courses ||
+      filterData.country ||
+      filterData.inTake ||
+      filterData.search
+    ) {
+      dispatch(
+        fetchInstituteData({
+          page,
+          perPage,
+          courses: filterData.courses,
+          country: filterData.country,
+          inTake: filterData.inTake,
+          search: filterData.search,
+        })
       );
-      setFilteredInstituteOptions(filteredInstitutesByCountry);
-    } else {
-      setFilteredInstituteOptions([]);
     }
-  }, [filterData.country, instituteOption]);
 
-  useEffect(() => {
-    const filtered = instituteOption.filter((data) => {
-      const isCountryMatch = filterData.country
-        ? data.country === filterData.country
-        : true;
-
-      const isInstituteMatch = filterData.institutes
-        ? data.instituteName === filterData.institutes
-        : true;
-
-      // Modified search logic to check both instituteName and country
-      const isSearchMatch = filterData.search
-        ? data.instituteName
-            .toLowerCase()
-            .includes(filterData.search.toLowerCase()) ||
-          data.country.toLowerCase().includes(filterData.search.toLowerCase()) // Search by country as well
-        : true;
-
-      return isCountryMatch && isInstituteMatch && isSearchMatch;
-    });
-
-    const updatedInstitutes = filtered.map((institute) => {
-      const isShortlisted = shortlistedUniversities?.some(
-        (item) => item.instituteId?._id === institute?._id
-      );
-      return {
-        ...institute,
-        status: isShortlisted ? "added" : "removed",
-      };
-    });
-
-    setFilteredInstitutes(updatedInstitutes);
-  }, [filterData, instituteOption, shortlistedUniversities]);
+    setIsLoading(false);
+  }, [
+    page,
+    perPage,
+    filterData.country,
+    filterData.inTake,
+    filterData.search,
+    filterData.courses,
+  ]);
 
   const shortlistInstitute = async (instituteId) => {
     try {
@@ -106,17 +135,33 @@ const Institution = () => {
     }
   };
 
-  const isFilterApplied = !!(
-    filterData.country ||
-    filterData.institutes ||
-    filterData.search
-  );
+  const displayedInstitutes = filterData.institutes
+    ? instituteData?.institutes?.filter(
+        (institute) => institute.instituteName === filterData.institutes
+      )
+    : instituteData?.institutes;
+
+  useEffect(() => {
+    const updatedInstitutes = displayedInstitutes?.map((institute) => {
+      const isShortlisted = shortlistedUniversities?.some(
+        (item) => item.instituteId?._id === institute?._id
+      );
+      return {
+        ...institute,
+        status: isShortlisted ? "added" : "removed",
+      };
+    });
+
+    setUpdatedFilteredData(updatedInstitutes);
+  }, [filterData, instituteData, shortlistedUniversities]);
+
+  console.log(updatedFilteredData);
 
   return (
     <>
       <Header customLink="/agent/shortlist" />
       <div>
-        <span className="fixed overflow-y-scroll scrollbar-hide  bg-white">
+        <span className="fixed overflow-y-scroll scrollbar-hide bg-white">
           <AgentSidebar />
         </span>
       </div>
@@ -132,41 +177,76 @@ const Institution = () => {
               match for your educational journey.
             </p>
           </span>
-          <span className="flex flex-row items-center md:ml-20 sm:mt-6 md:mr-6 sm:mr-3 ">
-            <CustomInput
-              className="h-11 w-80 rounded-md placeholder:px-3  pl-9 border border-[#E8E8E8] outline-none"
-              type="text"
-              placeHodler="Search by Country & Universities"
-              name="search"
-              value={filterData.search}
-              onChange={handleInput}
-            />
-            <span className="absolute pl-2 text-[20px] text-body">
-              <IoSearchOutline />
-            </span>
+        </span>
+        <span className="flex flex-row items-center  sm:mt-6 md:mr-6 sm:mr-3  md:ml-[19%] sm:ml-[27%]">
+          <CustomInput
+            className="h-11 w-96 rounded-md placeholder:px-3 pl-9 border border-[#E8E8E8] outline-none"
+            type="text"
+            placeHodler="Search by Country, Universities & Courses"
+            name="search"
+            value={filterData.search}
+            onChange={handleInput}
+          />
+          <span className="absolute pl-2 text-[20px] text-body">
+            <IoSearchOutline />
           </span>
         </span>
-        <span className="grid grid-cols-2 gap-8 md:mr-[40%] md:ml-[19%] sm:ml-[27%] sm:mr-[20%]">
-          <CountrySelect
-            notImp={true}
-            name="country"
-            label="Country"
-            options={prefCountryOption}
-            customClass="bg-white"
-            value={filterData.country}
-            handleChange={handleInput}
-          />
+        <span className="grid md:grid-cols-4 sm:grid-cols-2 items-center md:gap-8 md:mr-[9%] md:ml-[19%] sm:ml-[27%] sm:mr-[9%]">
+          <div className="mt-1">
+            <p className="mb-2 text-sidebar">Courses</p>
+            <Select
+              showSearch
+              className="md:w-[115%] sm:w-[100%]"
+              style={{
+                height: 42,
+              }}
+              onChange={(e) => handleChange(e)}
+              value={filterData.courses || undefined}
+              placeholder="Courses"
+              optionFilterProp="label"
+              filterSort={(optionA, optionB) =>
+                (optionA?.label ?? "")
+                  .toLowerCase()
+                  .localeCompare((optionB?.label ?? "").toLowerCase())
+              }
+              options={options}
+              allowClear
+            />
+          </div>
+          <div className="ml-9">
+            <CountrySelect
+              notImp={true}
+              name="country"
+              label="Country"
+              options={prefCountryOption}
+              customClass="bg-white"
+              value={filterData.country}
+              handleChange={handleInput}
+            />
+          </div>
           {/* Only show institute dropdown if a country is selected */}
-
-          <InstituteComponent
-            imp={false}
-            name="institutes"
-            label="University & Institutes"
-            options={filterData.country ? filteredInstituteOptions : []}
-            customClass="bg-white"
-            value={filterData.institutes}
-            handleChange={handleInput}
-          />
+          <div>
+            <InstituteComponent
+              imp={false}
+              name="institutes"
+              label="University & Institutes"
+              options={filteredInstituteOptions}
+              customClass="bg-white"
+              value={filterData.institutes}
+              handleChange={handleInput}
+            />
+          </div>
+          <div className="sm:ml-9 md:ml-0">
+            <SelectComponent
+              notImp={true}
+              customClass="bg-white"
+              name="inTake"
+              label="Intake"
+              options={intakeOption}
+              value={filterData.inTake}
+              handleChange={handleInput}
+            />
+          </div>
         </span>
       </div>
 
@@ -175,7 +255,7 @@ const Institution = () => {
         <div className="w-full ml-[53%]">
           <Loader />
         </div>
-      ) : !isFilterApplied ? (
+      ) : !displayedInstitutes ? (
         <p className="mt-8 font-medium text-body ml-[25%] mr-[15%]">
           <Dnf
             dnfImg={noInstitute}
@@ -183,7 +263,7 @@ const Institution = () => {
             bodyText="Apply a filter by country, institution, or search to view universities."
           />
         </p>
-      ) : filteredInstitutes.length === 0 ? (
+      ) : displayedInstitutes.length === 0 ? (
         <p className="mt-8 font-medium text-body ml-[25%] mr-[15%]">
           <Dnf
             dnfImg={noInstitute}
@@ -194,29 +274,39 @@ const Institution = () => {
       ) : (
         <>
           <p className="mt-1 font-medium text-body pr-[20%] md:ml-[19%] sm:ml-[27%]">
-            Showing {filteredInstitutes.length} of {instituteOption.length}{" "}
+            Showing {displayedInstitutes.length} of {totalUsersCount}{" "}
             universities
           </p>
           <p className="text-[24px] font-semibold text-sidebar md:ml-[19%] sm:ml-[27%]">
             All universities and colleges
           </p>
-          <div className="md:ml-[19%] sm:ml-[27%] mt-6 grid md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-2 mx-6 md:gap-6 sm:gap-4">
-            {filteredInstitutes.map((data) => (
+          <div className="md:ml-[19%] sm:ml-[27%] mt-6 grid md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-2 mx-6 md:gap-6 sm:gap-6">
+            {updatedFilteredData?.map((institute) => (
               <InstituteCard
-                key={data._id}
-                instituteId={data._id}
-                institutename={data.instituteName}
-                country={data.country}
-                status={data.status}
-                shortlistInstitute={shortlistInstitute}
+                key={institute._id}
+                institutename={institute?.instituteName}
+                institute={institute}
+                country={institute?.country}
+                state={institute?.status}
+                instituteId={institute?._id}
                 link="/agent/student-lists"
                 customState={{
-                  country: data.country,
-                  institute: data.instituteName,
+                  country: institute.country,
+                  institute: institute.instituteName,
                 }}
-                data={data}
+                shortlistInstitute={shortlistInstitute}
+                data={institute}
               />
             ))}
+          </div>
+          <div className="flex justify-center mt-8 mb-20 ml-9">
+            <Pagination
+              currentPage={currentPage}
+              hasNextPage={currentPage * perPage < totalUsersCount}
+              hasPreviousPage={currentPage > 1}
+              onPageChange={handlePageChange}
+              totalPagesCount={totalPagesCount}
+            />
           </div>
         </>
       )}

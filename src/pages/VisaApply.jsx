@@ -65,12 +65,11 @@ const VisaApply = () => {
   const { agentData } = useSelector((state) => state.agent);
   const studentUserId = useSelector((state) => state.student.studentInfoData);
   const location = useLocation();
-  // console.log(location);
 
   const studentId =
     role === "3"
       ? studentUserId?.data?.studentInformation?._id
-      : location?.state?.id || location?.state?.state;
+      : location?.state?.id || location?.state?.state?.id;
   const { countryOption, studentData } = useSelector((state) => state.general);
   const { studentInfoData } = useSelector((state) => state.student);
   const StudentDataToGet = role === "2" ? studentData : studentInfoData?.data;
@@ -511,6 +510,8 @@ const VisaApply = () => {
       setDeletedFiles([]);
     } catch (error) {
       toast.error(error.message || "Something went wrong.");
+      setIsSubmitting(false);
+
       console.error("Error during submission:", error);
     }
   };
@@ -568,7 +569,7 @@ const VisaApply = () => {
         <div className="ml-[17%] pt-16 pb-8 bg-white border-b-2 border-[#E8E8E8]">
           <span className="flex  items-center">
             <p className="text-[28px] font-bold text-sidebar mt-6 md:ml-9 sm:ml-20">
-              Apply Visa for ({countryName})
+              Apply Visa Lodgement for ({countryName})
             </p>
           </span>
           <p className="text-sidebar ml-9 text-[15px]">

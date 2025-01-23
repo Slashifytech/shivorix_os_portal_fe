@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/dashboardComp/Header";
-import { CustomTableThree, CustomTableTwo } from "../components/Table";
+import { CustomTableFifteen, CustomTableThree, CustomTableTwo } from "../components/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { dnf, profileSkeleton } from "../assets";
@@ -15,21 +15,24 @@ import Dnf from "../components/Dnf";
 import Sidebar from "../components/dashboardComp/Sidebar";
 import { clearApplicationData, getApplications } from "../features/studentSlice";
 import ApplicationChoosePop from "../components/dashboardComp/ApplicationChoosePop";
+import { fetchAllVisaByAgent } from "../features/agentSlice";
+import AgentSidebar from "../components/dashboardComp/AgentSidebar";
+import VisaAddPop from "../components/dashboardComp/VisaAddPop";
 
-const AllApplication = () => {
+const AllVisa = () => {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [isType, setIsType] = useState("");
-  const { studentInfoData, applicationData } = useSelector(
-    (state) => state.student
+  const { agentVisas, agentData } = useSelector(
+    (state) => state.agent
   );
+  const userId = agentData?.agentId
   const [isOpenOpt, setIsOpenOpt] = useState(false);
-  const studentId = studentInfoData?.data?.studentInformation?._id;
   const [isLoading, setIsLoading] = useState(true);
   const [perPage, setPerPage] = useState(10);
-  const totalUsersCount = applicationData?.data?.length || 0;
-  const currentPage = applicationData?.pagination?.currentPage || 1;
-  const totalPagesCount = applicationData?.pagination?.totalPages || 1;
+  const totalUsersCount = agentVisas?.totalDocuments || 0;
+  const currentPage = agentVisas?.currentPage || 1;
+  const totalPagesCount = agentVisas?.totalPages || 1;
   const dispatch = useDispatch();
   const closeOpt = () => {
     setIsOpenOpt(false); 
@@ -56,9 +59,8 @@ const AllApplication = () => {
   };
 
   useEffect(() => {
-    dispatch(studentById(studentId));
-    dispatch(getApplications({ search, isType, studentId, page, perPage }));
-  }, [dispatch, search, studentId, page, perPage, isType]);
+    dispatch(fetchAllVisaByAgent({ page, perPage, search }));
+  }, [page, perPage, search]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -72,12 +74,12 @@ const AllApplication = () => {
     perPageOptions.push(i);
   }
 
-  const TABLE_HEAD = ["S.No.", "Application ID","Country" ,"Type", "Status", "Action"];
+  const TABLE_HEAD = ["S.No.", "Application ID","Country", "Status", "Action"];
   
-  const TABLE_ROWS = applicationData?.data?.map((data, index) => ({
+  const TABLE_ROWS = agentVisas?.data?.map((data, index) => ({
     sno: (currentPage - 1) * perPage + index + 1,
     id: data?.applicationId || "NA",
-    type: data || "NA",
+    data: data || "NA",
     status: data?.status || "NA",
     appId: data?._id,
   }));
@@ -86,7 +88,7 @@ const AllApplication = () => {
     <>
       <Header customLink="/agent/shortlist" />
       <span className="fixed overflow-y-scroll scrollbar-hide  bg-white">
-        <Sidebar />
+        <AgentSidebar />
       </span>
 
       {isLoading ? (
@@ -96,45 +98,11 @@ const AllApplication = () => {
       ) : (
         <>
           <div>
-            <span className="flex items-center pt-20 pb-6 md:pl-[18.5%] sm:pl-[27%] bg-white">
-              <span>
-                <div className="flex items-center gap-4 mt-1 ">
-                  <img
-                    src={
-                      studentInfoData?.data?.studentInformation
-                        ?.personalInformation?.profilePicture || profileSkeleton
-                    }
-                    alt="Profile"
-                    className="rounded-md w-28 h-28"
-                    onError={profileSkeleton}
-                    loading="lazy"
-                  />
-                  <span className="flex flex-col">
-                    <span className="text-primary font-medium text-[13px]">
-                      {totalUsersCount || "NA"} Applications
-                    </span>
-                    <span className="text-sidebar text-[18px] font-medium ">
-                      {studentInfoData?.data?.studentInformation
-                        ?.personalInformation?.firstName +
-                        " " +
-                        studentInfoData?.data?.studentInformation
-                          ?.personalInformation?.lastName || "NA"}
-                    </span>
-                    <span className="text-[14px] pt-[1px] text-body font-normal">
-                      {studentInfoData?.data?.studentInformation
-                        ?.personalInformation?.email || "NA"}
-                    </span>
-                    <span className="text-[14px] text-body font-normal">
-                      {studentInfoData?.data?.studentInformation
-                        ?.personalInformation?.phone?.phone || "NA"}
-                    </span>
-                    <span className="text-[14px] text-body font-normal">
-                      ID:{" "}
-                      {studentInfoData?.data?.studentInformation?.stId || "NA"}
-                    </span>
-                  </span>
-                </div>
-              </span>
+            <span className="flex items-center pt-20 pb-6 md:pl-[16.5%] sm:pl-[18%] sm:mt-6 bg-white">
+            <p className="text-[28px] font-bold text-sidebar  md:ml-9 sm:ml-16">
+
+               Visa Lodgement Directory
+              </p>
             </span>
 
             <div className="md:ml-[19.5%] sm:ml-[26%] mt-6 md:mr-6 sm:mr-2">
@@ -154,7 +122,7 @@ const AllApplication = () => {
                       ))}
                     </select>
                     <span className="md:px-3 sm:px-1 text-body">entries</span> */}
-                    <select
+                    {/* <select
                       className="ml-3 border px-2 py-1 md:w-40 sm:w-24 h-11 rounded outline-none"
                       value={isType}
                       onChange={handleApplicatioTypeChange}
@@ -165,10 +133,10 @@ const AllApplication = () => {
                           {option.label}
                         </option>
                       ))}
-                    </select>
-                    <span className="flex flex-row items-center md:ml-9 sm:ml-3">
+                    </select> */}
+                    <span className="flex flex-row items-center ">
                       <CustomInput
-                        className="h-11 md:w-80 sm:w-44  rounded-md text-body placeholder:px-3 pl-7 border border-[#E8E8E8] outline-none"
+                        className="h-11 md:w-80 sm:w-60  rounded-md text-body placeholder:px-3 pl-7 border border-[#E8E8E8] outline-none"
                         type="text"
                         placeHodler="Search by Application Id"
                         name="search"
@@ -184,7 +152,7 @@ const AllApplication = () => {
                     onClick={handleOpenOpt}
                     className="bg-primary text-white md:px-4 sm:px-2 rounded-md py-2 cursor-pointer"
                   >
-                    + Add Application
+                    + Apply Visa Lodgement
                   </span>
                 </span>
               </span>
@@ -193,14 +161,13 @@ const AllApplication = () => {
             {totalUsersCount > 0 ? (
               <>
                 <div className="md:ml-[19.5%] sm:ml-[27%] mt-6 md:w-[85%]  ">
-                  <CustomTableTwo
+                  <CustomTableFifteen
                     tableHead={TABLE_HEAD}
                     tableRows={TABLE_ROWS}
                     SecondLink="/offerLetter-apply"
                     action={"Edit/View"}
                     icon={<FaRegEye />}
                     // link="/offerLetter/edit"
-                    customLinkState={TABLE_ROWS?.map((data) => data?._id)}
                   />
                 </div>
                 <div className="mt-16 mb-10 ml-20">
@@ -224,10 +191,10 @@ const AllApplication = () => {
             )}
           </div>
           
-      <ApplicationChoosePop
+      <VisaAddPop
         isOpenOpt={isOpenOpt}
         closeOpt={closeOpt}
-        state={studentId}
+        state={userId}
       />
         </>
       )}
@@ -235,4 +202,4 @@ const AllApplication = () => {
   );
 };
 
-export default AllApplication;
+export default AllVisa;

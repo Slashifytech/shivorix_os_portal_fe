@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
+  adminAirTicketById,
+  adminAllAirTicket,
   applicationOverviewData,
   getAdminProfileData,
   getAgentDataByAdmin,
@@ -219,9 +221,14 @@ export const adminUrlData = createAsyncThunk(
 );
 export const getInstitutes = createAsyncThunk(
   "admin/getInstitutes",
-  async ({isTypeFilter, search, page, perPage}, { rejectWithValue }) => {
+  async ({ isTypeFilter, search, page, perPage }, { rejectWithValue }) => {
     try {
-      const response = await getAllInstitutes(isTypeFilter, search, page, perPage);
+      const response = await getAllInstitutes(
+        isTypeFilter,
+        search,
+        page,
+        perPage
+      );
       return response;
     } catch (error) {
       return rejectWithValue(
@@ -234,9 +241,7 @@ export const getSingleInstitute = createAsyncThunk(
   "admin/getSingleInstitute",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await getInstituteById(
-       id
-      );
+      const response = await getInstituteById(id);
       return response;
     } catch (error) {
       return rejectWithValue(
@@ -263,9 +268,7 @@ export const getMemberProfile = createAsyncThunk(
   "admin/getMemberProfile",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await getTeamById(
-       id
-      );
+      const response = await getTeamById(id);
       console.log(response, "test");
       return response;
     } catch (error) {
@@ -277,9 +280,19 @@ export const getMemberProfile = createAsyncThunk(
 );
 export const getTeamTickets = createAsyncThunk(
   "admin/getTeamTickets",
-  async ({id, page, perPage, dateObj,  search, isPriorityType }, { rejectWithValue }) => {
+  async (
+    { id, page, perPage, dateObj, search, isPriorityType },
+    { rejectWithValue }
+  ) => {
     try {
-      const response = await getTicketActivity(id, page, perPage, dateObj,  search, isPriorityType );
+      const response = await getTicketActivity(
+        id,
+        page,
+        perPage,
+        dateObj,
+        search,
+        isPriorityType
+      );
       return response;
     } catch (error) {
       return rejectWithValue(
@@ -290,9 +303,19 @@ export const getTeamTickets = createAsyncThunk(
 );
 export const getTeamApplication = createAsyncThunk(
   "admin/getTeamApplication",
-  async ({id, page, perPage, isType, search, isDate}, { rejectWithValue }) => {
+  async (
+    { id, page, perPage, isType, search, isDate },
+    { rejectWithValue }
+  ) => {
     try {
-      const response = await getApplicationActivity(id, page, perPage, isType, search, isDate );
+      const response = await getApplicationActivity(
+        id,
+        page,
+        perPage,
+        isType,
+        search,
+        isDate
+      );
       return response;
     } catch (error) {
       return rejectWithValue(
@@ -303,13 +326,51 @@ export const getTeamApplication = createAsyncThunk(
 );
 export const getTeamApproval = createAsyncThunk(
   "admin/getTeamApproval",
-  async ({id, page, perPage, isType, search, isDate }, { rejectWithValue }) => {
+  async (
+    { id, page, perPage, isType, search, isDate },
+    { rejectWithValue }
+  ) => {
     try {
-      const response = await getApprovalActivity(id, page, perPage, isType, search, isDate);
+      const response = await getApprovalActivity(
+        id,
+        page,
+        perPage,
+        isType,
+        search,
+        isDate
+      );
       return response;
     } catch (error) {
       return rejectWithValue(
         error.response ? error.response.data : "Failed to fetch agent data"
+      );
+    }
+  }
+);
+export const fetchAllAirTicketAdmin = createAsyncThunk(
+  "general/fetchAllAirTicketAdmin",
+  async ({ page, perPage, search }, { rejectWithValue }) => {
+    try {
+      const res = await adminAllAirTicket(page, perPage, search);
+      // console.log(res);
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.message || "Failed to fetch country options"
+      );
+    }
+  }
+);
+export const fetchAirTicketByIdAdmin = createAsyncThunk(
+  "general/fetchAirTicketByIdAdmin",
+  async (id, { rejectWithValue }) => {
+    try {
+      const res = await adminAirTicketById(id);
+      // console.log(res);
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.message || "Failed to fetch country options"
       );
     }
   }
@@ -335,12 +396,13 @@ const adminSlice = createSlice({
     getUrlData: [],
     allInstitutes: null,
     instituteById: null,
-    getTeams:null,
-    getMember:null,
+    getTeams: null,
+    getMember: null,
     getApplicationActivityData: null,
     getTicketActivityData: null,
-    getApprovalActivityData: null,  
-
+    getApprovalActivityData: null,
+    airTickets: null,
+    getAirTicketById: null,
   },
   reducers: {
     setTabType: (state, action) => {
@@ -547,7 +609,7 @@ const adminSlice = createSlice({
       .addCase(getMemberProfile.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload || action.error.message;
-        state.getMember = null
+        state.getMember = null;
       })
       .addCase(getTeamTickets.pending, (state) => {
         state.status = "loading";
@@ -560,7 +622,7 @@ const adminSlice = createSlice({
       .addCase(getTeamTickets.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload || action.error.message;
-        state.getTicketActivityData =[]
+        state.getTicketActivityData = [];
       })
       .addCase(getTeamApplication.pending, (state) => {
         state.status = "loading";
@@ -573,7 +635,7 @@ const adminSlice = createSlice({
       .addCase(getTeamApplication.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload || action.error.message;
-        state.getApplicationActivityData =[]
+        state.getApplicationActivityData = [];
       })
       .addCase(getTeamApproval.pending, (state) => {
         state.status = "loading";
@@ -586,10 +648,41 @@ const adminSlice = createSlice({
       .addCase(getTeamApproval.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload || action.error.message;
-        state.getApprovalActivityData = []
+        state.getApprovalActivityData = [];
+      })
+      .addCase(fetchAllAirTicketAdmin.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(fetchAllAirTicketAdmin.fulfilled, (state, action) => {
+        state.airTickets = action.payload;
+        state.status = "succeeded";
+      })
+      .addCase(fetchAllAirTicketAdmin.rejected, (state, action) => {
+        state.status = "failed";
+        state.airTickets = null;
+        state.error = action.payload || action.error.message;
+      })
+      .addCase(fetchAirTicketByIdAdmin.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(fetchAirTicketByIdAdmin.fulfilled, (state, action) => {
+        state.getAirTicketById = action.payload;
+        state.status = "succeeded";
+      })
+      .addCase(fetchAirTicketByIdAdmin.rejected, (state, action) => {
+        state.status = "failed";
+        state.getAirTicketById = null;
+        state.error = action.payload || action.error.message;
       });
   },
 });
-export const { setTabType, setUpdateTicket, setNullStudentDirectory, setEmptyInstitute, setEmptyMemberInput } =
-  adminSlice.actions;
+export const {
+  setTabType,
+  setUpdateTicket,
+  setNullStudentDirectory,
+  setEmptyInstitute,
+  setEmptyMemberInput,
+} = adminSlice.actions;
 export default adminSlice.reducer;

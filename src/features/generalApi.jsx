@@ -36,13 +36,22 @@ export const countryInstituteOptions = async (country, instituteName) => {
 };
 export const courseData = async () => {
   try {
-    const res = await apiurl.get(`country/courses`);
+    const res = await apiurl.get(`/country/courses`);
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching country options:", error);
+    throw new Error("Failed to fetch country options.");
+  }
+};export const getPopularCourseData = async () => {
+  try {
+    const res = await apiurl.get(`/country/popular-courses`);
     return res.data;
   } catch (error) {
     console.error("Error fetching country options:", error);
     throw new Error("Failed to fetch country options.");
   }
 };
+
 
 export const getStudentDataById = async (id) => {
   try {
@@ -263,10 +272,13 @@ export const OfferLetterCertificate = async (appId, offerLater, section) => {
 };
 export const updateVisaPersonalInfo = async (id, visa, section) => {
   try {
-    const response = await apiurl.patch(`/institution/visa-personaldetails/${id}`, {
-      ...visa,
-      section,
-    });
+    const response = await apiurl.patch(
+      `/institution/visa-personaldetails/${id}`,
+      {
+        ...visa,
+        section,
+      }
+    );
 
     return response.data?.data;
   } catch (error) {
@@ -324,10 +336,13 @@ export const updateCourseFeeStudentDoc = async (id, payload, section) => {
 };
 export const updateCourseFeeDoc = async (id, payload, section) => {
   try {
-    const response = await apiurl.patch(`/institution/offer-letter-and-passport/${id}`, {
-      ...payload,
-      section,
-    });
+    const response = await apiurl.patch(
+      `/institution/offer-letter-and-passport/${id}`,
+      {
+        ...payload,
+        section,
+      }
+    );
 
     return response.data?.data;
   } catch (error) {
@@ -424,9 +439,8 @@ export const getAllTicket = async (
         priorityStatus: isPriorityType,
         status: isStatusType,
         search: search,
-        date: dateObj
+        date: dateObj,
       },
-
     });
 
     return response.data;
@@ -511,7 +525,7 @@ export const getVisaStatus = async (id) => {
     }
   }
 };
-export const getAllDocument = async (path,search, page, perPage) => {
+export const getAllDocument = async (path, search, page, perPage) => {
   try {
     const response = await apiurl.get(path, {
       params: {
@@ -618,9 +632,12 @@ export const withdrawVisa = async (payload) => {
   }
 };
 
-export const updateDocs = async(id, payload) => {
+export const updateDocs = async (id, payload) => {
   try {
-    const response = await apiurl.post(`/institution/update-visa-document/${id}`, payload);
+    const response = await apiurl.post(
+      `/institution/update-visa-document/${id}`,
+      payload
+    );
 
     return response.data;
   } catch (error) {
@@ -636,7 +653,7 @@ export const updateDocs = async(id, payload) => {
   }
 };
 
-export const getWithdrawalData = async(id) => {
+export const getWithdrawalData = async (id) => {
   try {
     const response = await apiurl.get(`/withdrawal/get-withdrawal/${id}`);
 
@@ -654,7 +671,7 @@ export const getWithdrawalData = async(id) => {
   }
 };
 
-export const reApprovalRequest = async(fetchPath, payload) => {
+export const reApprovalRequest = async (fetchPath, payload) => {
   try {
     const response = await apiurl.put(fetchPath, payload);
     return response.data;
@@ -670,14 +687,128 @@ export const reApprovalRequest = async(fetchPath, payload) => {
     }
   }
 };
-export const deleteDocument = async(fileUrl) => {
+export const deleteDocument = async (fileUrl) => {
   try {
-    const response = await apiurl.patch("/document/delete-document",{
-      fileUrl: fileUrl
+    const response = await apiurl.patch("/document/delete-document", {
+      fileUrl: fileUrl,
     });
     return response.data;
   } catch (error) {
-    console.log(error)
+    console.log(error);
+    if (error.response) {
+      throw new Error(
+        error.response.data.message || "Error while submitting the form"
+      );
+    } else if (error.request) {
+      throw new Error("No response from server. Please try again later.");
+    } else {
+      throw new Error("An unexpected error occurred");
+    }
+  }
+};
+export const addAirTicket = async (payload) => {
+  try {
+    const response = await apiurl.post(
+      "/air-ticket/create-air-ticket",
+      payload
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    if (error.response) {
+      throw new Error(
+        error.response.data.message || "Error while submitting the form"
+      );
+    } else if (error.request) {
+      throw new Error("No response from server. Please try again later.");
+    } else {
+      throw new Error("An unexpected error occurred");
+    }
+  }
+};
+export const updateAirTicket = async (payload, id) => {
+  try {
+    const response = await apiurl.patch(
+      `/air-ticket/update-air-ticket/${id}`,
+      payload
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    if (error.response) {
+      throw new Error(
+        error.response.data.message || "Error while submitting the form"
+      );
+    } else if (error.request) {
+      throw new Error("No response from server. Please try again later.");
+    } else {
+      throw new Error("An unexpected error occurred");
+    }
+  }
+};
+export const allAirTicket = async (page, perPage, search, userId) => {
+  try {
+    const response = await apiurl.get("/air-ticket/get-all-air-ticket", {
+      params: {
+        page: page,
+        limit: perPage,
+        searchQuery: search,
+        userId: userId,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    if (error.response) {
+      throw new Error(
+        error.response.data.message || "Error while submitting the form"
+      );
+    } else if (error.request) {
+      throw new Error("No response from server. Please try again later.");
+    } else {
+      throw new Error("An unexpected error occurred");
+    }
+  }
+};
+export const airTicketById = async (id) => {
+  try {
+    const response = await apiurl.get(`/air-ticket/get-air-ticket/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    if (error.response) {
+      throw new Error(
+        error.response.data.message || "Error while submitting the form"
+      );
+    } else if (error.request) {
+      throw new Error("No response from server. Please try again later.");
+    } else {
+      throw new Error("An unexpected error occurred");
+    }
+  }
+};
+export const getInstitutesData = async (
+  page,
+  perPage,
+  courses,
+  country,
+  inTake,
+  search
+) => {
+  try {
+    const response = await apiurl.get(`/institute/get-all-institute`, {
+      params: {
+        page: page,
+        limit: perPage,
+        searchQuery: search,
+        popularCourses: courses,
+        inTake: inTake,
+        country: country,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
     if (error.response) {
       throw new Error(
         error.response.data.message || "Error while submitting the form"

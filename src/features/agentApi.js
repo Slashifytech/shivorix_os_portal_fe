@@ -439,3 +439,30 @@ export const fetchAgentDashboardData = async (endpoint, type, year) => {
     }
   }
 };
+
+export const fetchAgentVisa = async (page, perPage, search) => {
+  try {
+    
+
+    const response = await apiurl.get('/institution/all-agent-visa',{
+      params:{
+        page: page,
+        limit: perPage,
+        searchQuery: search
+      }
+    
+    });
+
+    return response.data?.data;
+  } catch (error) {
+    if (error.response) {
+      throw new Error(
+        error.response.data.message || "Error while fetching data"
+      );
+    } else if (error.request) {
+      throw new Error("No response from server. Please try again later.");
+    } else {
+      throw new Error("An unexpected error occurred");
+    }
+  }
+};

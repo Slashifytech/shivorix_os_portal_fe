@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import {
   getCountryOption,
   getCourses,
+  getPopularCourses,
   getPrefCountryOption,
 } from "./features/generalSlice";
 import { useEffect } from "react";
@@ -69,6 +70,7 @@ function App() {
     }
     if ((!courses || courses.length === 0) && (role === "2" || role === "3")) {
       dispatch(getCourses());
+      dispatch(getPopularCourses());
     }
 
     if (role === "2") {
@@ -96,6 +98,7 @@ function App() {
         (role === "2" || role === "3" || role === "0")
       ) {
         dispatch(getCourses());
+        dispatch(getPopularCourses());
       }
     }, 3000);
 

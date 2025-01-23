@@ -53,7 +53,7 @@ const [userDataType, setUserDataType]  = useState('');
   const baseYear = 2024; 
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth(); 
-  const startDonoughtYear = currentMonth >= 8 ? currentYear : currentYear - 1; // Start from September or earlier year
+  const startDonoughtYear = currentYear ; // Start from September or earlier year
   const yearRange = 10;  
   const startYear = Math.max(currentYear, baseYear); 
 
@@ -75,15 +75,18 @@ const monthShortNames = [
   ];
 
   const donoughtFilter = [];
-  for (let year = startDonoughtYear; year >= baseYear; year--) {
-    for (let month = 1; month <= 12; month++) {
+  dynamicYears.forEach((year) => {
+    const maxMonth = year === currentYear ? currentMonth + 1 : 12; 
+    for (let month = 1; month <= maxMonth; month++) {
+      const paddedMonth = String(month).padStart(2, "0"); 
+
       donoughtFilter.push({
-        id: `${month} ${year}`, 
-        option: `${month} ${year}`,
-        label: `${monthShortNames[month - 1]} ${year}`, 
+        id: `${paddedMonth} ${year}`,
+        option: `${paddedMonth} ${year}`,
+        label: `${monthShortNames[month - 1]} ${year}`,
       });
     }
-  }
+  });
   const agentLineData = userCount?.data?.agents ?? [];
   const studentData = userCount?.data?.students ?? [];
 

@@ -21,7 +21,7 @@ const VisaEdit = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const profileView = role === "0";
-  const appId = location.state.id || location.state;
+  const appId = location?.state?.id || location?.state;
   const [isUpdated, setIsUpdated] = useState(false);
   useEffect(() => {
     dispatch(applicationById(appId));
@@ -112,7 +112,7 @@ const VisaEdit = () => {
           <span className="flex items-center justify-between pr-7 md:pt-20 sm:pt-24 md:ml-[16.5%] sm:ml-[20%] ">
             <span>
               <p className="text-[28px] font-bold text-sidebar md:mt-6 md:ml-9 sm:ml-16">
-                Visa lodgement form  ({applicationDataById?.visa?.country || "NA"})
+                Visa Lodgement form  ({applicationDataById?.visa?.country || "NA"})
               </p>
               <p className="mt-1 font-normal text-body mb-5 md:ml-9 sm:ml-16">
                 Check your details and make sure everything looks good. It's no
@@ -169,3 +169,4 @@ const VisaEdit = () => {
 };
 
 export default VisaEdit;
+

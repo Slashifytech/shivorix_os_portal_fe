@@ -10,7 +10,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { IoDocumentTextSharp } from "react-icons/io5";
 import { Link, useLocation } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
-import { MdDocumentScanner, MdOutlineHistory } from "react-icons/md";
+import { MdDocumentScanner, MdFlight, MdOutlineHistory } from "react-icons/md";
 import { AiFillQuestionCircle } from "react-icons/ai";
 import { RiLogoutBoxRLine, RiTeamFill } from "react-icons/ri";
 import LogoutPop from "../login/LogoutPop";
@@ -23,7 +23,7 @@ import { useDispatch } from "react-redux";
 const AdminSidebar = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const role = localStorage.getItem('role');
+  const role = localStorage.getItem("role");
   const path = location.pathname;
   const [isOpen, setIsOpen] = useState(
     JSON.parse(localStorage.getItem("isOpen")) ?? true
@@ -49,15 +49,13 @@ const AdminSidebar = () => {
       label: "Team Members",
       otherPath: "/admin/add-member",
       otherPathTwo: "/admin/team-activity",
-
     },
     {
       pathPage: "/admin/institute",
       icon: <BsFillBuildingsFill />,
       label: "Institutions",
       otherPath: "/add-institute",
-      otherPathTwo: "/institute-view"
-
+      otherPathTwo: "/institute-view",
     },
     {
       pathPage: "/admin/student-directory",
@@ -72,7 +70,7 @@ const AdminSidebar = () => {
       otherPath: "/admin/agent-student",
       otherPathTwo: "/agent-profile",
     },
-   
+
     {
       pathPage: "/admin/application-list",
       icon: <IoDocumentTextSharp />,
@@ -91,12 +89,15 @@ const AdminSidebar = () => {
       otherPath: "/coursefee-view",
       otherPathTwo: "/application-view",
       otherPathThree: "/visa-view",
-    
-
+    },
+    {
+      pathPage: "/admin/air-ticket-lists",
+      icon: <MdFlight />,
+      label: "Air Ticket",
     },
   ];
   const filteredSidebarList = sidebarList.filter(
-    (item) => !(role ==="1"  && item.label === "Team Members")
+    (item) => !(role === "1"  && item.label === "Team Members")
   );
 
   const handleDispatch = () => {
@@ -122,7 +123,7 @@ const AdminSidebar = () => {
               path === item.pathPage ||
               path === item?.otherPath ||
               path === item?.otherPathTwo ||
-              path === item?.otherPathThree 
+              path === item?.otherPathThree
                 ? "bg-[#FBD5D5] text-primary border-l-4 border-primary font-medium"
                 : "text-sidebar"
             }`}
@@ -130,7 +131,7 @@ const AdminSidebar = () => {
             <Link
               to={item.pathPage}
               onClick={item.label === "Applications" ? handleDispatch() : null}
-           className="flex items-center gap-3 md:pl-6 lg:px-6 sm:pl-6 "
+              className="flex items-center gap-3 md:pl-6 lg:px-6 sm:pl-6 "
             >
               <span className="text-[20px]"> {item.icon}</span>{" "}
               <span>{item.label}</span>
@@ -144,7 +145,10 @@ const AdminSidebar = () => {
               : "text-sidebar"
           }`}
         >
-          <Link to="/admin/ticket"  className="flex items-center gap-3 md:pl-6 lg:px-6 sm:pl-6 ">
+          <Link
+            to="/admin/ticket"
+            className="flex items-center gap-3 md:pl-6 lg:px-6 sm:pl-6 "
+          >
             <span className="text-[20px]">
               {" "}
               <BsFillTicketPerforatedFill />
@@ -153,63 +157,63 @@ const AdminSidebar = () => {
           </Link>
         </div>
 
-        {role === "0" && 
-        <>
-        <div
-          onClick={() => setIsOpen((prev) => !prev)}
-          className="flex items-center mt-2 bg-transparent py-2 relative hover:text-primary hover:bg-[#FBD5D5] px-5 text-sidebar cursor-pointer"
-        >
-          <span className="text-[23px]">
-            <CgProfile />
-          </span>
-          <span className="flex items-center pl-[12px]">
-            My Account
-            {isOpen ? (
-              <IoIosArrowUp className="text-[18px] absolute right-6" />
-            ) : (
-              <IoIosArrowDown className="absolute right-6" />
-            )}
-          </span>
-        </div>
+        {role === "0" && (
+          <>
+            <div
+              onClick={() => setIsOpen((prev) => !prev)}
+              className="flex items-center mt-2 bg-transparent py-2 relative hover:text-primary hover:bg-[#FBD5D5] px-5 text-sidebar cursor-pointer"
+            >
+              <span className="text-[23px]">
+                <CgProfile />
+              </span>
+              <span className="flex items-center pl-[12px]">
+                My Account
+                {isOpen ? (
+                  <IoIosArrowUp className="text-[18px] absolute right-6" />
+                ) : (
+                  <IoIosArrowDown className="absolute right-6" />
+                )}
+              </span>
+            </div>
 
-        {/* Dropdown menu */}
-        <div
-          className={`transition-all duration-500 ease-in-out overflow-hidden  ${
-            isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-          }`}
-        >
-          <ul className="sm:mt-2 list-none text-[16px]">
-            <Link to="/admin/profile">
-              <li
-                className={`text-sidebar py-2 mb-2 cursor-pointer md:pl-14 lg:px-14 sm:pl-14 md:ml-0 hover:bg-[#f5ebeb] hover:text-primary ${
-                  path === "/admin/profile" &&
-                  "bg-[#FBD5D5] border-l-4 border-primary text-primary"
-                }`}
-              >
-                Edit Profile
-              </li>
-            </Link>
-            <Link to="/admin/change-password">
-              <li
-                className={`text-sidebar py-2 mb-2 cursor-pointer md:pl-[52px] sm:pl-14 md:ml-1  hover:bg-[#f5ebeb] hover:text-primary ${
-                  path === "/admin/change-password" &&
-                  "bg-[#FBD5D5] border-l-4 border-primary text-primary"
-                }`}
-              >
-                Change Password
-              </li>
-            </Link>
-            <Link to="/admin/change-email">
-              <li
-                className={`text-sidebar py-2 mb-2 cursor-pointer md:pl-14 sm:pl-14 md:ml-0  hover:bg-[#f5ebeb] hover:text-primary ${
-                  path === "/admin/change-email" &&
-                  "bg-[#FBD5D5] border-l-4 border-primary text-primary"
-                }`}
-              >
-                Change Email
-              </li>
-            </Link>
-            {/*   <Link to="/settings/delete-account">
+            {/* Dropdown menu */}
+            <div
+              className={`transition-all duration-500 ease-in-out overflow-hidden  ${
+                isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+              }`}
+            >
+              <ul className="sm:mt-2 list-none text-[16px]">
+                <Link to="/admin/profile">
+                  <li
+                    className={`text-sidebar py-2 mb-2 cursor-pointer md:pl-14 lg:px-14 sm:pl-14 md:ml-0 hover:bg-[#f5ebeb] hover:text-primary ${
+                      path === "/admin/profile" &&
+                      "bg-[#FBD5D5] border-l-4 border-primary text-primary"
+                    }`}
+                  >
+                    Edit Profile
+                  </li>
+                </Link>
+                <Link to="/admin/change-password">
+                  <li
+                    className={`text-sidebar py-2 mb-2 cursor-pointer md:pl-[52px] sm:pl-14 md:ml-1  hover:bg-[#f5ebeb] hover:text-primary ${
+                      path === "/admin/change-password" &&
+                      "bg-[#FBD5D5] border-l-4 border-primary text-primary"
+                    }`}
+                  >
+                    Change Password
+                  </li>
+                </Link>
+                <Link to="/admin/change-email">
+                  <li
+                    className={`text-sidebar py-2 mb-2 cursor-pointer md:pl-14 sm:pl-14 md:ml-0  hover:bg-[#f5ebeb] hover:text-primary ${
+                      path === "/admin/change-email" &&
+                      "bg-[#FBD5D5] border-l-4 border-primary text-primary"
+                    }`}
+                  >
+                    Change Email
+                  </li>
+                </Link>
+                {/*   <Link to="/settings/delete-account">
               <li
                 className={`text-sidebar py-2 mb-2 cursor-pointer md:px-14 sm:pl-14 md:ml-0  hover:bg-[#f5ebeb] hover:text-primary ${
                   path === "/settings/delete-account" &&
@@ -219,8 +223,10 @@ const AdminSidebar = () => {
                 Delete Account
               </li>
             </Link> */}
-          </ul>
-        </div></>}
+              </ul>
+            </div>
+          </>
+        )}
         {/* <div
           className={`cursor-pointer py-4 hover:bg-[#f5ebeb] hover:text-primary hover:border-l-4 hover:font-medium ${
             path === "/student/payment-details"

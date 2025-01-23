@@ -29,8 +29,7 @@ const Form3 = ({
   const role = localStorage.getItem("role");
   const location = useLocation();
   const { getStudentDataById } = useSelector((state) => state.admin);
-  const { prefCountryOption } = useSelector((state) => state.general);
-  const { courses } = useSelector((state) => state.general);
+  const { prefCountryOption, courses } = useSelector((state) => state.general);
   const IdToAddStudent = location?.state?.id?.id;
   const { instituteOption } = useSelector((state) => state.general);
   const studentInfoData = useSelector((state) => state.student.studentInfoData);
