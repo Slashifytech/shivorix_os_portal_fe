@@ -18,10 +18,11 @@ import { shortlistedData } from "../features/agentSlice";
 import { toast } from "react-toastify";
 import { noInstitute } from "../assets";
 import { shortlistAdd } from "../features/agentApi";
-import { Pagination, Select } from "antd";
+import { Select } from "antd";
 import { removeDuplicates } from "../constant/commonfunction";
 import { intakeOption } from "../constant/data";
 import { fetchInstituteData } from "../features/generalSlice";
+import Pagination from "../components/dashboardComp/Pagination";
 
 const Dashboard = () => {
   const [updatedFilteredData, setUpdatedFilteredData] = useState([]);
@@ -54,7 +55,8 @@ const Dashboard = () => {
     label: option.courseName,
   }));
   const filteredInstituteOptions = filterData?.country
-    ? instituteData?.institutes?.filter((institute) => institute?.country === filterData?.country)
+    ? instituteData?.institutes
+        ?.filter((institute) => institute?.country === filterData?.country)
         .map((institute) => ({
           instituteName: institute?.instituteName,
           instituteName: institute?.instituteName,
@@ -98,6 +100,7 @@ const Dashboard = () => {
   useEffect(() => {
     setIsLoading(true);
     if (
+      page ||
       filterData.courses ||
       filterData.country ||
       filterData.inTake ||
@@ -330,7 +333,7 @@ const Dashboard = () => {
               ) : (
                 <>
                   <p className="mt-1 font-medium text-body pr-[20%] md:ml-[3%] sm:ml-[27%]">
-                  Showing {displayedInstitutes.length} of {totalUsersCount}{" "}
+                    Showing {displayedInstitutes.length} of {totalUsersCount}{" "}
                     universities
                   </p>
                   <p className="text-[24px] font-semibold text-sidebar md:ml-[3%] sm:ml-[27%]">
@@ -354,21 +357,21 @@ const Dashboard = () => {
                       />
                     ))}
                   </div>
-
-                  <div className="flex justify-center mt-8 mb-20 ml-9">
-                    <Pagination
-                      currentPage={currentPage}
-                      hasNextPage={currentPage * perPage < totalUsersCount}
-                      hasPreviousPage={currentPage > 1}
-                      onPageChange={handlePageChange}
-                      totalPagesCount={totalPagesCount}
-                    />
-                  </div>
                 </>
               )}
             </>
           )}
         </div>
+      </div>
+
+      <div className="flex justify-center mt-8 mb-20 ml-9">
+        <Pagination
+          currentPage={currentPage}
+          hasNextPage={currentPage * perPage < totalUsersCount}
+          hasPreviousPage={currentPage > 1}
+          onPageChange={handlePageChange}
+          totalPagesCount={totalPagesCount}
+        />
       </div>
     </>
   );
