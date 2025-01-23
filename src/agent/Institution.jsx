@@ -10,7 +10,7 @@ import InstituteCard from "../components/dashboardComp/InstituteCard";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../components/dashboardComp/Header";
 import AgentSidebar from "../components/dashboardComp/AgentSidebar";
-import { fetchInstituteData } from "../features/generalSlice";
+import { emptyData, fetchInstituteData } from "../features/generalSlice";
 import { shortlistedData } from "../features/agentSlice";
 import Dnf from "../components/Dnf";
 import { noInstitute } from "../assets";
@@ -27,7 +27,7 @@ const Institution = () => {
   const { prefCountryOption, popularCourse, instituteData } = useSelector(
     (state) => state.general
   );
-  const courses = popularCourse
+  const courses = popularCourse;
   const shortlistedUniversities = useSelector(
     (state) => state.agent.shortlisted?.institutes
   );
@@ -51,14 +51,6 @@ const Institution = () => {
     value: option.courseName,
     label: option.courseName,
   }));
-  const filteredInstituteOptions = filterData.country
-    ? instituteData?.institutes
-        .filter((institute) => institute.country === filterData.country)
-        .map((institute) => ({
-          instituteName: institute.instituteName,
-          instituteName: institute.instituteName,
-        }))
-    : [];
 
   const handleInput = (e) => {
     const { value, name } = e.target;
@@ -78,7 +70,7 @@ const Institution = () => {
   const handleChange = (value) => {
     setFilterData((prevState) => ({
       ...prevState,
-      courses: value ,
+      courses: value,
       country: "",
     }));
     setPage(1);
@@ -100,7 +92,8 @@ const Institution = () => {
       filterData.courses ||
       filterData.country ||
       filterData.inTake ||
-      filterData.search
+      filterData.search ||
+      filterData.institutes
     ) {
       dispatch(
         fetchInstituteData({
@@ -110,6 +103,7 @@ const Institution = () => {
           country: filterData.country,
           inTake: filterData.inTake,
           search: filterData.search,
+          institute: filterData.institutes,
         })
       );
     }
@@ -122,8 +116,21 @@ const Institution = () => {
     filterData.inTake,
     filterData.search,
     filterData.courses,
+    filterData.institutes,
   ]);
 
+  useEffect(() => {
+    const isEmpty =
+      !filterData.country &&
+      !filterData.inTake &&
+      !filterData.search &&
+      !filterData.institutes &&
+      !filterData.courses;
+
+    if (isEmpty) {
+      dispatch(emptyData());
+    }
+  }, [filterData, dispatch]);
   const shortlistInstitute = async (instituteId) => {
     try {
       const res = await shortlistAdd(instituteId);
@@ -135,11 +142,7 @@ const Institution = () => {
     }
   };
 
-  const displayedInstitutes = filterData.institutes
-    ? instituteData?.institutes?.filter(
-        (institute) => institute.instituteName === filterData.institutes
-      )
-    : instituteData?.institutes;
+  const displayedInstitutes = instituteData?.institutes;
 
   useEffect(() => {
     const updatedInstitutes = displayedInstitutes?.map((institute) => {
@@ -154,8 +157,6 @@ const Institution = () => {
 
     setUpdatedFilteredData(updatedInstitutes);
   }, [filterData, instituteData, shortlistedUniversities]);
-
-  console.log(updatedFilteredData);
 
   return (
     <>
@@ -224,17 +225,25 @@ const Institution = () => {
               handleChange={handleInput}
             />
           </div>
-          {/* Only show institute dropdown if a country is selected */}
-          <div>
-            <InstituteComponent
-              imp={false}
+          <div className="flex flex-col mb-4 mt-6 font-poppins">
+            <label className="font-normal text-secondary mb-2 text-[14px]">
+              University & Institutes
+            </label>
+            <select
               name="institutes"
-              label="University & Institutes"
-              options={filteredInstituteOptions}
-              customClass="bg-white"
               value={filterData.institutes}
-              handleChange={handleInput}
-            />
+              onChange={handleInput}
+              className={`border border-gray-300 text-secondary rounded-md px-3 py-2 outline-none `}
+            >
+              <option className="text-secondary font-poppins" value="">
+                Select Options
+              </option>
+              {instituteData?.instituteNames?.map((option, index) => (
+                <option className="text-secondary" key={index} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="sm:ml-9 md:ml-0">
             <SelectComponent
