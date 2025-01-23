@@ -70,14 +70,14 @@ const InstituteCard = ({
             </span>
             <span
               className={`px-3 py-[1px] rounded-xl text-[13px]  ${
-                data?.instituteStatus === "open"
+                data?.instituteStatus === "open" || "Open"
                   ? "text-[#459F49] bg-[#BDFFCB] border border-[#459F49]"
                   : "text-primary bg-[#FFBEBB] border border-primary"
               }`}
             >
-              {data?.instituteStatus === "open"
+              {data?.instituteStatus === "open" || "Open"
                 ? "Open"
-                : data?.instituteStatus === "close"
+                : data?.instituteStatus === "close" || "Close"
                 ? "Close"
                 : data?.instituteStatus || "NA"}
             </span>
