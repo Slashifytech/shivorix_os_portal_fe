@@ -130,7 +130,7 @@ const InstituteCard = ({
           </div>
 
           <p className="text-[#6E7170] pl-4 text-[16px] pt-2">
-            Next Three Intakes
+          Intakes
           </p>
           <span className="flex flex-row items-center px-4 pt-2 gap-3">
             {Array.isArray(data?.inTake) && data?.inTake.length > 0
