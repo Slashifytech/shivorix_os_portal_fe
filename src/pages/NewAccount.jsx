@@ -5,6 +5,7 @@ import { FaBookOpenReader } from "react-icons/fa6";
 import { logo } from "../assets";
 import Footer from "../components/Footer";
 import ImageComponent from "../components/reusable/Input";
+import Mobile from "../components/Mobile";
 const NewAccount = () => {
   const [selectedRole, setSelectedRole] = useState(null);
   const navigate = useNavigate();
@@ -18,6 +19,9 @@ const NewAccount = () => {
   };
 
   return (
+    <>
+    <Mobile/>
+    <div className="sm:block md:block hidden">
     <div className="flex flex-col min-h-screen">
       <header>
         <span className="flex flex-row justify-between items-center mx-6">
@@ -91,6 +95,8 @@ const NewAccount = () => {
         <Footer />
       </footer>
     </div>
+    </div>
+    </>
   );
 };
 
