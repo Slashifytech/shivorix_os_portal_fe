@@ -29,7 +29,6 @@ function App() {
   const { prefCountryOption, courses, countryOption } = useSelector(
     (state) => state.general
   );
-
   useEffect(() => {
     let socket;
 
@@ -44,7 +43,7 @@ function App() {
         }
 
         await socketServiceInstance.connectToSocket(
-          "https://sovserver.sovportal.in",
+          "https://sovtest.slashifytech.in/",
           data
         );
       } catch (error) {
@@ -60,19 +59,39 @@ function App() {
       }
     };
   }, [role, socketServiceInstance]);
-
   useEffect(() => {
-    if (!countryOption || countryOption.length === 0) {
-      dispatch(getCountryOption());
+    let countryInterval, prefCountryInterval, coursesInterval;
+  
+    if (countryOption.length === 0) {
+      countryInterval = setInterval(() => {
+        dispatch(getCountryOption());
+      }, 2000);
     }
-    if (!prefCountryOption || prefCountryOption.length === 0) {
-      dispatch(getPrefCountryOption());
+  
+    if (prefCountryOption.length === 0) {
+      prefCountryInterval = setInterval(() => {
+        dispatch(getPrefCountryOption());
+      }, 2000);
     }
-    if ((!courses || courses.length === 0) && (role === "2" || role === "3")) {
-      dispatch(getCourses());
-      dispatch(getPopularCourses());
+  
+    if (
+      Array.isArray(courses) &&
+      courses.length === 0 
+    ) {
+      coursesInterval = setInterval(() => {
+        dispatch(getCourses());
+        dispatch(getPopularCourses());
+      }, 2000);
     }
-
+  
+    return () => {
+      if (countryInterval) clearInterval(countryInterval);
+      if (prefCountryInterval) clearInterval(prefCountryInterval);
+      if (coursesInterval) clearInterval(coursesInterval);
+    };
+  }, [dispatch, countryOption, prefCountryOption, courses, role]);
+  
+  useEffect(() => {
     if (role === "2") {
       dispatch(agentInformation());
     }
@@ -85,25 +104,7 @@ function App() {
     if (role === "1") {
       dispatch(getMemberProfile());
     }
-    // Interval to check every 3 seconds
-    const intervalId = setInterval(() => {
-      if (countryOption.length === 0) {
-        dispatch(getCountryOption());
-      }
-      if (prefCountryOption.length === 0) {
-        dispatch(getPrefCountryOption());
-      }
-      if (
-        courses.length === 0 &&
-        (role === "2" || role === "3" || role === "0")
-      ) {
-        dispatch(getCourses());
-        dispatch(getPopularCourses());
-      }
-    }, 2000);
-
-    return () => clearInterval(intervalId);
-  }, [dispatch, countryOption, prefCountryOption, courses]);
+  }, [dispatch]);
 
   useEffect(() => {
     const stopHeartbeat = startTokenHeartbeat();
