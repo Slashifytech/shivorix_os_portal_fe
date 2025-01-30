@@ -97,7 +97,7 @@ const AdminSidebar = () => {
     },
   ];
   const filteredSidebarList = sidebarList.filter(
-    (item) => !(role === "1"  && item.label === "Team Members")
+    (item) => !(role === "1" && item.label === "Team Members")
   );
 
   const handleDispatch = () => {
@@ -109,13 +109,13 @@ const AdminSidebar = () => {
   return (
     <>
       <div className="bg-white md:w-[17.5vw] sm:w-[24vw] h-[100vh]  pb-6  overflow-y-auto scrollbar-hide border-r-2 border-[#E8E8E8]">
-        <span>
+        <a href="https://sovportal.in">
           <ImageComponent
             src={logo}
             alt="logo"
             className="md:w-44 sm:w-32 md:h-24 sm:h-16 ml-2 "
           />
-        </span>
+        </a>
         {filteredSidebarList.map((item, index) => (
           <div
             key={index}

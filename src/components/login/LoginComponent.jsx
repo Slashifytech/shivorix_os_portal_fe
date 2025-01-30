@@ -84,11 +84,11 @@ const LoginComponent = () => {
             return;
           });
           dispatch(agentInformation());
-      
+
           let redirectPath = "";
-          if(agentInfo.pageStatus?.status === "requestedForReapproval") {
+          if (agentInfo.pageStatus?.status === "requestedForReapproval") {
             redirectPath = `/agent/account-deleted`;
-          } else if(agentInfo.deleted === true) {
+          } else if (agentInfo.deleted === true) {
             redirectPath = `/agent/account-deleted`;
           } else if (
             agentInfo.pageCount === 6 &&
@@ -98,9 +98,7 @@ const LoginComponent = () => {
           } else if (
             (agentInfo.pageCount === 6 &&
               agentInfo.pageStatus.status === "notapproved") ||
-            (agentInfo.pageCount === 6 &&
-           
-              agentInfo.deleted === true) ||
+            (agentInfo.pageCount === 6 && agentInfo.deleted === true) ||
             agentInfo.pageStatus.status === "notapproved"
           ) {
             redirectPath = `/waiting`;
@@ -116,8 +114,7 @@ const LoginComponent = () => {
             agentInfo.pageStatus.status === "requestedForReapproval"
           ) {
             redirectPath = "/agent/account-deleted";
-          } 
-          else if (
+          } else if (
             agentInfo.pageCount !== 6 &&
             agentInfo.pageStatus?.status === "registering"
           ) {
@@ -133,7 +130,6 @@ const LoginComponent = () => {
           dispatch(getStudentData(res.user._id));
           dispatch(studentInfo(res.user._id));
 
-
           const studentInfoData = await getPersonalInfo(res.user._id).catch(
             (error) => {
               console.log(error);
@@ -143,15 +139,21 @@ const LoginComponent = () => {
           );
           // console.log(studentInfoData);
 
-          if (!studentInfoData.data || Object.keys(studentInfoData.data).length === 0) {
+          if (
+            !studentInfoData.data ||
+            Object.keys(studentInfoData.data).length === 0
+          ) {
             navigate("student-form/1", { state: "passPage" });
             return;
           }
           let redirectPath = "";
 
-          if(studentInfoData.data.studentInformation.pageStatus?.status === "requestedForReapproval") {
+          if (
+            studentInfoData.data.studentInformation.pageStatus?.status ===
+            "requestedForReapproval"
+          ) {
             redirectPath = `/student/account-deleted`;
-          } else if(studentInfoData.data.studentInformation.deleted === true) {
+          } else if (studentInfoData.data.studentInformation.deleted === true) {
             redirectPath = `/student/account-deleted`;
           } else if (
             studentInfoData?.data?.studentInformation?.pageCount === 3 &&
@@ -209,96 +211,105 @@ const LoginComponent = () => {
   };
   return (
     <div onKeyDown={handleKeyDown} className="login-container">
-    <span className="font-poppins">
-      <div className="flex justify-center space-x-6 my-4">
-        <button
-          onClick={() => handleTabChange("3")}
-          className={`px-4 py-2 rounded-md w-36 ${
-            activeTab === "3"
-              ? "bg-primary text-white"
-              : "bg-gray-200 text-secondary"
-          }`}
-        >
-          Student
-        </button>
-        <button
-          onClick={() => handleTabChange("2")}
-          className={`px-4 py-2 rounded-md w-36 ${
-            activeTab === "2"
-              ? "bg-primary text-white"
-              : "bg-gray-200 text-secondary"
-          }`}
-        >
-          Agent
-        </button>
-      </div>
-
-      <div>
-        <div className="mt-6 text-secondary">Email Id</div>
-        <CustomInput
-          type="text"
-          value={loginData.email}
-          onChange={handleChange}
-          name="email"
-          placeHodler="Email"
-          className="w-full bg-[#F2F5F7] outline-none mt-2 h-11 px-3 rounded-md"
-        />
-        {errors.email && (
-          <div className="text-red-500 text-sm mt-1">{errors.email}</div>
-        )}
-
-        <div className="mt-6 text-secondary relative">
-          Password
-          <CustomInput
-            type={showPassword ? "text" : "password"}
-            value={loginData.password}
-            onChange={handleChange}
-            name="password"
-            className="w-full bg-[#F2F5F7] outline-none mt-2 h-11 px-3 "
-            placeHodler="Password"
-          />
-          {errors.password && (
-            <div className="text-red-500 text-sm mt-1">{errors.password}</div>
-          )}
+      <span className="font-poppins">
+        <div className="flex justify-center space-x-6 my-4">
           <button
-            type="button"
-            onClick={togglePasswordVisibility}
-            className="absolute inset-y-0 right-3 top-9 text-[20px] flex items-center"
+            onClick={() => handleTabChange("3")}
+            className={`px-4 py-2 rounded-md w-36 ${
+              activeTab === "3"
+                ? "bg-primary text-white"
+                : "bg-gray-200 text-secondary"
+            }`}
           >
-            {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+            Student
+          </button>
+          <button
+            onClick={() => handleTabChange("2")}
+            className={`px-4 py-2 rounded-md w-36 ${
+              activeTab === "2"
+                ? "bg-primary text-white"
+                : "bg-gray-200 text-secondary"
+            }`}
+          >
+            Agent
           </button>
         </div>
-        <Link
-          state={{
-            role: loginData.role,
-            email: loginData.email,
-            passPage: "passPage",
-          }}
-          to="/forgot-password"
-          className="text-primary flex justify-end mt-2 text-[14px] cursor-pointer"
-        >
-          Forgot Password
-        </Link>
-        {/* Display "Logging in..." if loading */}
-        {loading ? (
-          <div className="text-center mt-4 text-primary">Logging in...</div>
-        ) : (
-          <div
-            className="bg-primary px-6 py-2 cursor-pointer text-white text-center rounded-md mt-6"
-            onClick={handleLogin}
-          >
-            Log in
-          </div>
-        )}
 
-        <p className="text-secondary text-sm pt-4">
-          Don't have an account?{" "}
-          <Link to="/new-account" className="text-primary font-semibold">
-            Register
+        <div>
+          <div className="mt-6 text-secondary">Email Id</div>
+          <CustomInput
+            type="text"
+            value={loginData.email}
+            onChange={handleChange}
+            name="email"
+            placeHodler="Email"
+            className="w-full bg-[#F2F5F7] outline-none mt-2 h-11 px-3 rounded-md"
+          />
+          {errors.email && (
+            <div className="text-red-500 text-sm mt-1">{errors.email}</div>
+          )}
+
+          <div className="mt-6 text-secondary relative">
+            Password
+            <CustomInput
+              type={showPassword ? "text" : "password"}
+              value={loginData.password}
+              onChange={handleChange}
+              name="password"
+              className="w-full bg-[#F2F5F7] outline-none mt-2 h-11 px-3 "
+              placeHodler="Password"
+            />
+            {errors.password && (
+              <div className="text-red-500 text-sm mt-1">{errors.password}</div>
+            )}
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute inset-y-0 right-3 top-9 text-[20px] flex items-center"
+            >
+              {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+            </button>
+          </div>
+          <Link
+            state={{
+              role: loginData.role,
+              email: loginData.email,
+              passPage: "passPage",
+            }}
+            to="/forgot-password"
+            className="text-primary flex justify-end mt-2 text-[14px] cursor-pointer"
+          >
+            Forgot Password
           </Link>
-        </p>
-      </div>
-    </span></div>
+          {/* Display "Logging in..." if loading */}
+          {loading ? (
+            <div className="text-center mt-4 text-primary">Logging in...</div>
+          ) : (
+            <div
+              className="bg-primary px-6 py-2 cursor-pointer text-white text-center rounded-md mt-6"
+              onClick={handleLogin}
+            >
+              Log in
+            </div>
+          )}
+
+          <p className="text-secondary text-sm pt-4">
+            Don't have an account?{" "}
+            <Link to="/new-account" className="text-primary font-semibold">
+              Register
+            </Link>
+          </p>
+          <div className="mt-3 flex justify-center">
+            <a
+              href="https://sovportal.in"
+              className="hover:bg-primary border border-greyish px-6 py-2 cursor-pointer text-primary hover:text-white text-center rounded-md mt-3 text-[14px]"
+            >
+              Back to website
+            </a>
+          </div>
+        </div>
+      </span>
+    </div>
   );
 };
 
