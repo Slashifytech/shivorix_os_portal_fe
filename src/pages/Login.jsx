@@ -4,6 +4,7 @@ import { loginBanner, logo } from "../assets";
 import ImageComponent from "../components/reusable/Input";
 import LoginComponent from "../components/login/LoginComponent";
 import Mobile from "../components/Mobile";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -12,15 +13,17 @@ const Login = () => {
       <div className="sm:block md:block hidden">
         <div className="flex flex-col min-h-screen font-poppins">
           <div className="flex flex-row-reverse justify-between mx-6 sm:gap-9 flex-grow">
-            <span>
               <ImageComponent
                 src={loginBanner}
                 className="md:w-[78vh] md:h-[85vh] lg:h-[90vh] sm:h-[60vh] rounded-xl md:mt-6 mb-5 mr-16 object-cover sm:mt-36"
               />
-            </span>
+          
             <span>
               <header>
+            <a href="https://sovportal.in" className="cursor-pointer">
+
                 <ImageComponent src={logo} alt="logo" className="w-40 h-24" />
+                </a>
               </header>
 
               <p className="text-heading font-semibold text-[27px] md:ml-20 md:mt-3 xl:mt-20 sm:mt-28 ">

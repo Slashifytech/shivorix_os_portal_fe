@@ -90,7 +90,7 @@ const Sidebar = () => {
     {
       pathPage: "/student/visa-update",
       icon: <FaPassport />,
-      label: "Visa Lodg. Updates",
+      label: "Visa Lodg. Status",
     },
     {
       pathPage: "/air-ticket/lists",
@@ -105,9 +105,10 @@ const Sidebar = () => {
   return (
     <>
       <div className="bg-white md:w-[17.5vw] sm:w-[24vw] h-[100vh]  overflow-y-auto scrollbar-hide border-r-2 border-[#E8E8E8]">
-        <span>
+      <a href="https://sovportal.in" className="cursor-pointer">
+
           <ImageComponent src={logo} alt="logo" className="w-44 h-24 ml-2 " />
-        </span>
+        </a>
         {sidebarList.map((item, index) => (
           <div
             key={index}

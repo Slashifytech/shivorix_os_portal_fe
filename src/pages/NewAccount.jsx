@@ -25,7 +25,10 @@ const NewAccount = () => {
     <div className="flex flex-col min-h-screen">
       <header>
         <span className="flex flex-row justify-between items-center mx-6">
+        <a href="https://sovportal.in" className="cursor-pointer">
           <ImageComponent src={logo} alt="logo" className="w-40 h-24" />
+        </a>
+
           <button
             onClick={() => navigate("/login")}
             className="px-6 py-2 rounded-md bg-primary text-white"
