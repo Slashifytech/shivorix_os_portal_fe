@@ -43,7 +43,7 @@ function App() {
         }
 
         await socketServiceInstance.connectToSocket(
-          "https://sovserver.sovportal.in/api/",
+          "https://server.sovportal.in/api/",
           data
         );
       } catch (error) {
