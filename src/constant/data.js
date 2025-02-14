@@ -121,6 +121,12 @@ export const yearOpton = [
   { id: 32, option: "2022", label: "2022" },
   { id: 33, option: "2023", label: "2023" },
   { id: 34, option: "2024", label: "2024" },
+  { id: 35, option: "2025", label: "2025" },
+  { id: 36, option: "2026", label: "2026" },
+  { id: 37, option: "2027", label: "2027" },
+  { id: 38, option: "2028", label: "2028" },
+  { id: 39, option: "2029", label: "2029" },
+  { id: 40, option: "2030", label: "2030" },
 ];
 export const licenceOption = [
   { id: 0, value: "Yes", label: "Yes" },
