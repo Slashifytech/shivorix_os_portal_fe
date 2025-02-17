@@ -24,11 +24,16 @@ const ProtectedAdmin = ({ children }) => {
     );
   }
 
-  const isAuthorizedRole = roleType === "0" || roleType === "1";
+  const isAuthorizedRole = roleType === "0" || roleType === "1" || roleType === "4" || roleType === "5" ;
 
   if (!isAuthorizedRole || !authToken) {
-    return <Navigate to="/admin/role/auth/login" replace={true} />;
+    if(role === "0" || role === "1") {
+      return <Navigate to="/admin/role/auth/login" replace={true} />;
+    }
+   else if(role === "4" || role === "5") {
+    return <Navigate to="/province/login" replace={true} />;
   }
+}
 
   return children;
 };

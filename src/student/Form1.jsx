@@ -58,13 +58,13 @@ const Form1 = ({
     localStorage.getItem("form") ||
     studentInformation?.data?.studentInformation?._id;
   const personalInfo =
-    role === "0" || role === "1"
+  role === "0" || role === "1" || role ==="4" || role === "5" 
       ? getStudentDataById?.studentInformation?.personalInformation
       : studentInformation?.data?.studentInformation?.personalInformation;
 
   const dispatch = useDispatch();
   const passportInfo =
-    role === "0" || role === "1"
+  role === "0" || role === "1" || role ==="4" || role === "5" 
       ? getStudentDataById?.studentInformation?.passportDetails
       : studentInformation?.data?.studentInformation?.passportDetails;
   const editForm = hide === true ? "edit" : null;
@@ -145,7 +145,7 @@ const Form1 = ({
   useEffect(() => {
     if (hide === true) {
       dispatch(studentInfo(studentFormId));
-      if (role === "0" || role === "1") {
+      if (role === "0" || role === "1" || role ==="4" || role === "5" ) {
       dispatch(getStudentById(studentFormId));
       }
     }
@@ -404,7 +404,7 @@ const Form1 = ({
 
       // Step 4: Submit the data
       const res =
-        role === "0" || role === "1"
+      role === "0" || role === "1" || role ==="4" || role === "5" 
           ? await editStudentAdmin(
               `/studentInformation/personal-information-admin/${studentId}`,
               payload
@@ -417,7 +417,7 @@ const Form1 = ({
               "registering"
           ? await StudentPersnalInfoEdit(payload, studentId)
           : await StudentPersnalInfo(payload);
-      if (role === "0" || role === "1") {
+      if (role === "0" || role === "1" || role ==="4" || role === "5" ) {
         dispatch(getStudentById(studentId));
       }
       if (res?.statusCode === 201 || res?.statusCode === 200) {

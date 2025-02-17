@@ -12,18 +12,17 @@ import AdminSidebar from "../components/dashboardComp/AdminSidebar";
 
 const ProfileEdit = () => {
   const { agentData } = useSelector((state) => state.agent);
-  const { agentProfile } = useSelector((state) => state.admin);
+  const { agentProfile, getAdminProfile} = useSelector((state) => state.admin);
   const role = localStorage.getItem("role");
-  const agentProfileData = role === "0" || role === "1" ? agentProfile : agentData;
+  const agentProfileData = role === "0" || role === "1" || role ==="4" || role === "5"  ? agentProfile : agentData;
   const location = useLocation();
   const id = location?.state?.id;
-  console.log(location);
   const profileData = agentData.length <= 0 ? id : agentData;
   const dispatch = useDispatch();
   const profileView = location?.state?.isprofileView;
   const [profileUpdated, setProfileUpdated] = useState(false);
   const [loading, setLoading] = useState(true);
-  console.log(agentData);
+
   useEffect(() => {
     if (role !== "0") {
       dispatch(agentInformation());
@@ -31,7 +30,10 @@ const ProfileEdit = () => {
   }, [dispatch, profileUpdated]);
 
   useEffect(() => {
-    if (role === "0" || role === "1") {
+    if ( getAdminProfile?.data?.role === "0" ||
+      getAdminProfile?.data?.role === "1" ||
+      getAdminProfile?.data?.role === "4" ||
+      getAdminProfile?.data?.role === "5") {
       dispatch(agentDataProfile(id));
     }
   }, [dispatch]);
@@ -68,7 +70,7 @@ const ProfileEdit = () => {
       {loading ? ( // Display loading indicator
         <div
           className={`w-full ml-[50%] mt-52 ${
-            role === "0" || role === "1" ? "ml-[50%]" : "ml-[55%]"
+          role === "0" || role === "1" || role ==="4" || role === "5" ? "ml-[50%]" : "ml-[55%]"
           }`}
         >
           <Loader />

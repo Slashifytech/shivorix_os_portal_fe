@@ -39,7 +39,7 @@ const AgentForm4 = ({ hide, handleCancel, updateData, adminId, agentId }) => {
   const { countryOption } = useSelector((state) => state.general);
   const { agentData } = useSelector((state) => state.agent);
   const { agentProfile } = useSelector((state) => state.admin);
-  const getData = role === "0" || role === "1" ? agentProfile?.companyOverview :agentData?.companyOverview;
+  const getData = role === "0" || role === "1" || role ==="4" || role === "5" ? agentProfile?.companyOverview :agentData?.companyOverview;
 
   const navigate = useNavigate();
 
@@ -142,18 +142,18 @@ const AgentForm4 = ({ hide, handleCancel, updateData, adminId, agentId }) => {
     }
     if (!overviewData.businessRegistrationDocument) {
       formErrors.businessRegistrationDocument =
-        "Please upload required document.";
+        "Please upload business registration document.";
     }
     if (!overviewData.businessProfileDocument) {
-      formErrors.businessProfileDocument = "Please upload required document.";
+      formErrors.businessProfileDocument = "Please upload business profile document.";
     }
     if (!overviewData.businessRegistrationNumber) {
       formErrors.businessRegistrationNumber =
         "Please enter the business registration number.";
     }
     if (!overviewData.companyPan && !overviewData.companyGST) {
-      formErrors.companyPan = "Please upload Company PAN or Company GST.";
-      formErrors.companyGST = "Please upload Company PAN or Company GST.";
+      formErrors.companyPan = "Please upload Company PAN .";
+      formErrors.companyGST = "Please upload Company GST.";
     }
   
  
@@ -264,20 +264,19 @@ const AgentForm4 = ({ hide, handleCancel, updateData, adminId, agentId }) => {
   const handleSubmit = async () => {
     if (validateFields()) {
       try {
-        console.log("Submitting data:", overviewData);
         const payload = {
           ...overviewData,
-          ...(role === "0" || role === "1" && { companyId: adminId }),
+          ...(role === "0" || role === "1" || role ==="4" || role === "5"  && { companyId: adminId }),
         };
         
         let res;
 
-        if (role === "0" || role === "1") {
+        if (role === "0" || role === "1" || role ==="4" || role === "5" ) {
           await editAgentAdmin("/company/register-companyOverview-admin", payload, editForm);
         } else {
           res = await formFourSubmit(payload, editForm);
         }
-        if(role === "0" || role === "1"){
+        if(role === "0" || role === "1" || role ==="4" || role === "5" ){
           dispatch(agentDataProfile(agentId));
         }
       
@@ -417,6 +416,7 @@ const AgentForm4 = ({ hide, handleCancel, updateData, adminId, agentId }) => {
           <div className="flex   items-baseline justify-between gap-6 w-full">
             <span className="w-[50%] ">
               <FileUpload
+              imp={true}
                 label="Company GST"
                 onFileSelect={(file) =>
                   handleFileSelect("companyGST", file)
@@ -437,6 +437,7 @@ const AgentForm4 = ({ hide, handleCancel, updateData, adminId, agentId }) => {
               )}
               <div className="mt-4">
                 <FileUpload
+                  imp={true}
                   label="Company Pan Card"
                   onFileSelect={(file) =>
                     handleFileSelect("companyPan", file)

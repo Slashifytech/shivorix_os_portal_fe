@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import RejectedPopUp from "./RejectedPopUp";
 import { FaRegEye } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const AdminCard = ({
   apId,
@@ -24,11 +25,13 @@ const AdminCard = ({
   pageType,
   instituteData,
   mgdbId,
-  agentId
-
+  agentId,
+  refferedBy
 }) => {
-  const [isOpen, setIsOpen]
-   = useState(false);
+  const { getAdminProfile } = useSelector((state) => state.admin);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const role = getAdminProfile?.data?.role;
   const closePopUp = () => setIsOpen(false);
   const openPopUp = () => setIsOpen(true);
 
@@ -38,7 +41,8 @@ const AdminCard = ({
         <span className="w-70 flex flex-col items-start ">
           {isApproval ? null : (
             <span className="font-normal text-body sm:text-[13px] md:text-[15px]">
-              {apId}
+              {apId},{" "} {refferedBy !=="Direct" ? `Referred By: (${refferedBy})` : "Direct"}
+
             </span>
           )}
 
@@ -54,7 +58,7 @@ const AdminCard = ({
           </span>
           <span className="flex flex-row items-center gap-1 text-primary mt-2">
             <FaRegEye />
- 
+
             <Link
               to={
                 userType === ("Agent" || "gic" || "visa")
@@ -91,7 +95,8 @@ const AdminCard = ({
               {applicationType === "offerLetter"
                 ? "Offer Letter"
                 : applicationType === "courseFeeApplication"
-                ? "Course Fee " : applicationType === "visa"
+                ? "Course Fee "
+                : applicationType === "visa"
                 ? "Visa Lodgement"
                 : "NA"}
             </span>
@@ -120,10 +125,21 @@ const AdminCard = ({
               {currentStatus === "approved" ? "Approved" : "Rejected"}
             </span>
           </span>
+        ) :  role === "5" ? (
+          <></>
         ) : (
           <span className="flex flex-col items-center w-32  md:text-[14px] sm:text-[12px]">
             <span
-              onClick={() => updateStatus(id, newStatus, sectionData, "", instituteData, mgdbId)}
+              onClick={() =>
+                updateStatus(
+                  id,
+                  newStatus,
+                  sectionData,
+                  "",
+                  instituteData,
+                  mgdbId
+                )
+              }
               className="bg-primary px-4 py-1 text-white rounded-md cursor-pointer"
             >
               Accept

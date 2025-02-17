@@ -23,24 +23,29 @@ const Form2 = ({
   studentFormId,
   updateData,
 }) => {
+  const navigate = useNavigate();
   const role = localStorage.getItem("role");
   const dispatch = useDispatch();
-    const location = useLocation();
+  const location = useLocation();
   const IdToAddStudent = location?.state?.id?.id;
   const { getStudentDataById } = useSelector((state) => state.admin);
-  const { countryOption } = useSelector((state) => state.general);
+  const { countryOption, countryState } = useSelector((state) => state.general);
   const studentInfoData = useSelector((state) => state.student.studentInfoData);
   const studentData = useSelector((state) => state.student.studentInformation);
   const studentInformation = hide ? studentInfoData : studentData;
   const residenceAddress =
-    role === "0" || role === "1"
+    role === "0" || role === "1" || role === "4" || role === "5"
       ? getStudentDataById?.studentInformation?.residenceAddress
       : studentInformation?.data?.studentInformation?.residenceAddress;
   const mailingAddress =
-    role === "0" || role === "1"
+    role === "0" || role === "1" || role === "4" || role === "5"
       ? getStudentDataById?.studentInformation?.mailingAddress
       : studentInformation?.data?.studentInformation?.mailingAddress;
-  const studentId = studentFormId || IdToAddStudent || localStorage.getItem("form") || localStorage.getItem('student')
+  const studentId =
+    studentFormId ||
+    IdToAddStudent ||
+    localStorage.getItem("form") ||
+    localStorage.getItem("student");
 
   const formId = studentInformation?.data?.studentInformation?._id;
   const submitId = hide ? formId : studentId;
@@ -59,7 +64,8 @@ const Form2 = ({
     city: "",
     zipcode: "",
   });
-  const navigate = useNavigate();
+  const [residenceFilteredStates, setResidenceFilteredStates] = useState([]);
+  const [mailingFilteredStates, setMailingFilteredStates] = useState([]);
   const [isSameAsResidence, setIsSameAsResidence] = useState(false);
   const editForm = hide === true ? "edit" : null;
 
@@ -157,23 +163,26 @@ const Form2 = ({
 
     try {
       let res;
-      
 
-      if (role === "0" || role === "1") {
-        await editStudentAdmin(`/studentInformation/residence-address-admin/${studentId}`, payload, editForm);
+      if (role === "0" || role === "1" || role === "4" || role === "5") {
+        await editStudentAdmin(
+          `/studentInformation/residence-address-admin/${studentId}`,
+          payload,
+          editForm
+        );
       } else {
         res = await studentAddress(payload, studentId, editForm);
       }
-      if(role === "0" || role === "1"){
+      if (role === "0" || role === "1" || role === "4" || role === "5") {
         dispatch(getStudentById(studentId));
       }
       toast.success(res?.message || "Data submitted successfully");
-    
+
       // if (res?.statusCode === 200) {
-        {
-          hide === true
-            ? updateData()
-            : navigate(`/student-form/3`, { state: "passPage" });
+      {
+        hide === true
+          ? updateData()
+          : navigate(`/student-form/3`, { state: "passPage" });
         // }
 
         window.scrollTo(0, 0);
@@ -186,6 +195,31 @@ const Form2 = ({
       );
     }
   };
+
+  const handleCountryChange = (e, type) => {
+    const country = e;
+
+    const selectedCountryData = countryState.find(
+      (item) => item.country === country
+    );
+    const states = selectedCountryData ? selectedCountryData.states : [];
+
+    if (type === "residence") {
+      setResidenceData((prev) => ({ ...prev, country}));
+      setResidenceFilteredStates(states);
+    } else if (type === "mailing") {
+      setMailAddressData((prev) => ({ ...prev, country }));
+      setMailingFilteredStates(states);
+    }
+  };
+  useEffect(() => {
+    if (residenceData?.country) {
+      handleCountryChange(residenceData.country, "residence");
+    }
+    if (mailingAddress?.country) {
+      handleCountryChange(mailingAddress.country, "mailing");
+    }
+  }, [residenceData?.country, mailingAddress?.country]);
 
   return (
     <div className="min-h-screen">
@@ -218,28 +252,47 @@ const Form2 = ({
           {errors.address && (
             <p className="text-red-500 mt-1 text-sm">{errors.address}</p>
           )}
-          <div className="-mt-4">
-            <CountrySelect
+          <div className="mt-4">
+            <p className="font-normal text-secondary mb-2 text-[14px]">
+              Country <span className="text-primary">*</span>
+            </p>
+            <select
               name="country"
-              label="Country"
-              customClass="bg-input"
-              options={countryOption}
               value={residenceData.country}
-              handleChange={(e) => handleInput(e, setResidenceData)}
-            />
+              onChange={(e) => handleCountryChange(e.target.value, "residence")}
+              className={`border border-gray-300 rounded-lg text-secondary px-3 py-2 outline-none w-full bg-input`}
+            >
+              <option value="">Select a country</option>
+              {countryState.map((item, index) => (
+                <option key={index} value={item.country}>
+                  {item.country}
+                </option>
+              ))}
+            </select>
             {errors.country && (
               <p className="text-red-500 mt-1 text-sm">{errors.country}</p>
             )}
           </div>
-          <Register
-            imp="*"
-            name="state"
-            type="text"
-            label="Province/State"
-            handleInput={(e) => handleInput(e, setResidenceData)}
-            value={residenceData.state}
-            errors={errors.state}
-          />
+
+          <div className="mt-4">
+            <p className="font-normal text-secondary mb-2 text-[14px]">
+              Province/State <span className="text-primary">*</span>
+            </p>
+            <select
+              name="state"
+              onChange={(e) => handleInput(e, setResidenceData)}
+              value={residenceData.state}
+              disabled={!residenceData.country}
+              className={`border border-gray-300 rounded-lg text-secondary px-3 py-2 outline-none w-full bg-input`}
+            >
+              <option value="" hidden>{residenceData?.state ? residenceData?.state : "Select a state"}</option>
+              {residenceFilteredStates.map((state, index) => (
+                <option key={index} value={state}>
+                  {state}
+                </option>
+              ))}
+            </select>
+          </div>
           <Register
             imp="*"
             name="city"
@@ -291,28 +344,45 @@ const Form2 = ({
           {errors.address && (
             <p className="text-red-500 mt-1 text-sm">{errors.address}</p>
           )}
-          <div className="-mt-4">
-            <CountrySelect
+          <div className="mt-4">
+            <p className="font-normal text-secondary mb-2 text-[14px]">
+              Country <span className="text-primary">*</span>
+            </p>
+            <select
               name="country"
-              label="Country"
-              options={countryOption}
-              customClass="bg-input"
               value={mailAddressData.country}
-              handleChange={(e) => handleInput(e, setMailAddressData)}
-            />
+              onChange={(e) => handleCountryChange(e.target.value, "mailing")}
+              className={`border border-gray-300 rounded-lg text-secondary px-3 py-2 outline-none w-full bg-input`}
+            >
+              <option value="" >Select a country</option>
+              {countryState.map((item, index) => (
+                <option key={index} value={item.country}>
+                  {item.country}
+                </option>
+              ))}
+            </select>
             {errors.country && (
               <p className="text-red-500 mt-1 text-sm">{errors.country}</p>
             )}
           </div>
-          <Register
-            imp="*"
-            name="state"
-            type="text"
-            label="Province/State"
-            handleInput={(e) => handleInput(e, setMailAddressData)}
-            value={mailAddressData.state}
-            errors={errors.state}
-          />
+          <div className="mt-4">
+            <p className="font-normal text-secondary mb-2 text-[14px]">
+              Province/State <span className="text-primary">*</span>
+            </p>
+            <select
+              name="state"
+              value={mailAddressData.state}
+              onChange={(e) => handleInput(e, setMailAddressData)}
+              className={`border border-gray-300 rounded-lg text-secondary px-3 py-2 outline-none w-full bg-input`}
+            >
+              <option value="" hidden>{mailAddressData?.state ? mailAddressData?.state : "Select a state"}</option>
+              {residenceFilteredStates.map((state, index) => (
+                <option key={index} value={state}>
+                  {state}
+                </option>
+              ))}
+            </select>
+          </div>
           <Register
             imp="*"
             name="city"

@@ -2,6 +2,7 @@ import { RouterProvider, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
+  fetchCountryState,
   getCountryOption,
   getCourses,
   getPopularCourses,
@@ -17,7 +18,6 @@ import {
   getConnectionDetails,
 } from "./features/getConnectionDetails";
 import socketServiceInstance from "./services/socket";
-import { io } from "socket.io-client";
 import { adminProfileData, getMemberProfile } from "./features/adminSlice";
 import { startTokenHeartbeat } from "./services/tokenCheck";
 
@@ -26,24 +26,39 @@ function App() {
   const studentId = localStorage.getItem("student");
   const dispatch = useDispatch();
 
-  const { prefCountryOption, courses, countryOption } = useSelector(
-    (state) => state.general
-  );
+  const { prefCountryOption, courses, countryOption, countryState } =
+    useSelector((state) => state.general);
+  const { agentData } = useSelector((state) => state.agent);
+  const { studentInfoData } = useSelector((state) => state.student);
+
+  const { getAdminProfile } = useSelector((state) => state.admin);
+  const adminRole = getAdminProfile?.data?.role;
+  const userRole = agentData?.companyDetails
+    ? "2"
+    : studentInfoData?.data?.studentInformation
+    ? "3"
+    : null;
+    console.log(userRole)
   useEffect(() => {
+    if (!socketServiceInstance) {
+      return;
+    }
+
     let socket;
 
     const initializeSocketConnection = async () => {
       try {
         let data;
-        console.log(role);
-        if (role === "0" || role === "1") {
+        if (["0", "1", "4", "5"].includes(adminRole)) {
           data = await getAdminConnectionDetails();
-        } else if (role === "2" || role === "3") {
+        } else if (["2", "3"].includes(userRole)) {
           data = await getConnectionDetails();
         }
 
-        await socketServiceInstance.connectToSocket(
-          "https://server.sovportal.in/api/",
+        if (!data) return;
+
+        socket = await socketServiceInstance.connectToSocket(
+     "https://sovtest.slashifytech.in/",
           data
         );
       } catch (error) {
@@ -58,39 +73,45 @@ function App() {
         socket.disconnect();
       }
     };
-  }, [role, socketServiceInstance]);
+  }, [adminRole, userRole, socketServiceInstance]);
+
   useEffect(() => {
-    let countryInterval, prefCountryInterval, coursesInterval;
-  
+    let countryInterval,
+      prefCountryInterval,
+      coursesInterval,
+      countryStateInterval;
+
     if (countryOption.length === 0) {
       countryInterval = setInterval(() => {
         dispatch(getCountryOption());
       }, 2000);
     }
-  
+    if (Array.isArray(countryState) && countryState.length === 0) {
+      countryStateInterval = setInterval(() => {
+        dispatch(fetchCountryState());
+      }, 2000);
+    }
     if (prefCountryOption.length === 0) {
       prefCountryInterval = setInterval(() => {
         dispatch(getPrefCountryOption());
       }, 2000);
     }
-  
-    if (
-      Array.isArray(courses) &&
-      courses.length === 0 
-    ) {
+
+    if (Array.isArray(courses) && courses.length === 0) {
       coursesInterval = setInterval(() => {
         dispatch(getCourses());
         dispatch(getPopularCourses());
       }, 2000);
     }
-  
+
     return () => {
       if (countryInterval) clearInterval(countryInterval);
       if (prefCountryInterval) clearInterval(prefCountryInterval);
       if (coursesInterval) clearInterval(coursesInterval);
+      if (countryStateInterval) clearInterval(countryStateInterval);
     };
-  }, [dispatch, countryOption, prefCountryOption, courses, role]);
-  
+  }, [dispatch, countryOption, prefCountryOption, courses, role, countryState]);
+
   useEffect(() => {
     if (role === "2") {
       dispatch(agentInformation());
@@ -98,7 +119,7 @@ function App() {
     if (role === "3") {
       dispatch(studentInfo(studentId));
     }
-    if (role === "0" || role === "1") {
+    if (role === "0" || role === "1" || role === "4" || role === "5") {
       dispatch(adminProfileData());
     }
     if (role === "1") {
@@ -108,7 +129,6 @@ function App() {
 
   useEffect(() => {
     const stopHeartbeat = startTokenHeartbeat();
-
     return () => {
       stopHeartbeat();
     };

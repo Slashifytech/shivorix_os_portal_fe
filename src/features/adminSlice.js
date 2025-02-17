@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   adminAirTicketById,
   adminAllAirTicket,
+  AlladminPartner,
   applicationOverviewData,
   getAdminProfileData,
   getAgentDataByAdmin,
@@ -20,7 +21,10 @@ import {
   getTickets,
   getTicketsDataById,
   getUrlData,
+  profileById,
 } from "./adminApi";
+import { resetStore } from "./action";
+
 
 // Async thunk to fetch agent data
 export const applicationForApproval = createAsyncThunk(
@@ -108,7 +112,6 @@ export const getAllTickets = createAsyncThunk(
     },
     { rejectWithValue }
   ) => {
-    console.log(updateTicketTab);
     try {
       const response = await getTickets(
         page,
@@ -375,35 +378,66 @@ export const fetchAirTicketByIdAdmin = createAsyncThunk(
     }
   }
 );
+export const fetchAdminPartnerData = createAsyncThunk(
+  "general/fetchAdminPartnerData",
+  async ({ page, perPage, search,endpoint, userId }, { rejectWithValue }) => {
+    try {
+      const res = await AlladminPartner(page, perPage, search, endpoint, userId);
+      // console.log(res);
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.message || "Failed to fetch country options"
+      );
+    }
+  }
+);
+export const fetchAdminProfileById = createAsyncThunk(
+  "general/fetchAdminProfileById",
+  async ({ userId }, { rejectWithValue }) => {
+    try {
+      const res = await profileById(userId);
+      // console.log(res);
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.message || "Failed to fetch country options"
+      );
+    }
+  }
+);
+const initialState = {
+  approvals: [],
+  applications: [],
+  tabType: "",
+  status: "idle",
+  error: null,
+  updateState: false,
+  updateTicketTab: "underreview",
+  agentProfile: "",
+  ticketAll: [],
+  ticketById: "",
+  getAllAgentData: [],
+  getAllStudentData: [],
+  getStudentDataById: null,
+  getAdminProfile: null,
+  getApplicationOverview: null,
+  getUrlData: [],
+  allInstitutes: null,
+  instituteById: null,
+  getTeams: null,
+  getMember: null,
+  getApplicationActivityData: null,
+  getTicketActivityData: null,
+  getApprovalActivityData: null,
+  airTickets: null,
+  getAirTicketById: null,
+  PartnersData: null,
+  profileById: null
+}
 const adminSlice = createSlice({
   name: "admin",
-  initialState: {
-    approvals: [],
-    applications: [],
-    tabType: "",
-    status: "idle",
-    error: null,
-    updateState: false,
-    updateTicketTab: "underreview",
-    agentProfile: "",
-    ticketAll: [],
-    ticketById: "",
-    getAllAgentData: [],
-    getAllStudentData: [],
-    getStudentDataById: null,
-    getAdminProfile: null,
-    getApplicationOverview: null,
-    getUrlData: [],
-    allInstitutes: null,
-    instituteById: null,
-    getTeams: null,
-    getMember: null,
-    getApplicationActivityData: null,
-    getTicketActivityData: null,
-    getApprovalActivityData: null,
-    airTickets: null,
-    getAirTicketById: null,
-  },
+  initialState,
   reducers: {
     setTabType: (state, action) => {
       state.updateState = !state.updateState;
@@ -553,7 +587,6 @@ const adminSlice = createSlice({
       })
       .addCase(adminUrlData.fulfilled, (state, action) => {
         state.status = "succeeded";
-        console.log(action);
 
         state.getUrlData = action.payload;
       })
@@ -597,6 +630,7 @@ const adminSlice = createSlice({
       .addCase(getAllTeamData.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload || action.error.message;
+        state.getTeams = []
       })
       .addCase(getMemberProfile.pending, (state) => {
         state.status = "loading";
@@ -675,7 +709,33 @@ const adminSlice = createSlice({
         state.status = "failed";
         state.getAirTicketById = null;
         state.error = action.payload || action.error.message;
-      });
+      })
+      .addCase(fetchAdminPartnerData.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchAdminPartnerData.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.PartnersData = action.payload;
+      })
+      .addCase(fetchAdminPartnerData.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload || action.error.message;
+        state.PartnersData = action.payload
+      })
+      .addCase(fetchAdminProfileById.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchAdminProfileById.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.profileById = action.payload;
+      })
+      .addCase(fetchAdminProfileById.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload || action.error.message;
+        state.profileById = []
+      })
+      .addCase(resetStore, () => initialState); 
+      
   },
 });
 export const {

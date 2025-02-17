@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, Link } from "react-router-dom";
 import Pagination from "../components/dashboardComp/Pagination";
-import { CustomTableEight, CustomTableTwo } from "../components/Table";
+import { CustomTableEight } from "../components/Table";
 import { getAllStudentList } from "../features/adminSlice";
 import AdminSidebar from "../components/dashboardComp/AdminSidebar";
 import Header from "../components/dashboardComp/Header";
@@ -17,20 +17,18 @@ import Loader from "../components/Loader";
 const StudentDirectory = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const role = localStorage.getItem('role');
-
+  const { getAdminProfile } = useSelector((state) => state.admin);
+  const role = getAdminProfile?.data?.role;
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [downloading, setDownloading] = useState(false);
-  const [perPage, setPerPage] = useState(10);
+  const perPage = 10;
   const agentId = location?.state?.id;
   const path =
     location.pathname === "/admin/agent-student"
       ? `/studentInformation/agent-student-admin`
       : "/admin/student-directory";
-  // Select data from Redux
-  // console.log(location);
   const { getAllStudentData } = useSelector((state) => state.admin);
   const totalUsersCount =
     getAllStudentData?.data?.pagination?.totalDocuments ||
@@ -39,10 +37,10 @@ const StudentDirectory = () => {
   const currentPage = getAllStudentData?.data?.pagination?.currentPage || 1;
   const totalPagesCount = getAllStudentData?.data?.pagination?.totalPages || 1;
 
-  const perPageOptions = Array.from(
-    { length: Math.min(totalUsersCount, 100) / 10 },
-    (_, i) => (i + 1) * 10
-  );
+  // const perPageOptions = Array.from(
+  //   { length: Math.min(totalUsersCount, 100) / 10 },
+  //   (_, i) => (i + 1) * 10
+  // );
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
@@ -50,10 +48,10 @@ const StudentDirectory = () => {
 
     return () => clearTimeout(timer);
   }, []);
-  const handlePerPageChange = (e) => {
-    setPerPage(parseInt(e.target.value));
-    setPage(1);
-  };
+  // const handlePerPageChange = (e) => {
+  //   setPerPage(parseInt(e.target.value));
+  //   setPage(1);
+  // };
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
@@ -66,7 +64,7 @@ const StudentDirectory = () => {
     // setLoading(true);
     dispatch(getAllStudentList({ path, page, perPage, search, agentId }));
     // setLoading(false);
-  }, [dispatch, page, perPage, search]);
+  }, [dispatch, page, perPage, search, path]);
 
   const TABLE_HEAD = [
     "S.No.",
@@ -78,7 +76,7 @@ const StudentDirectory = () => {
     "Action",
   ];
 
-  const isAgentStudentPage = location.pathname === "/admin/agent-student";
+  // const isAgentStudentPage = location.pathname === "/admin/agent-student";
 
   const TABLE_ROWS =
     getAllStudentData?.data?.data?.map((data, index) => {
@@ -150,14 +148,14 @@ const StudentDirectory = () => {
             </span>
             <span>
               <Link
-                to="/login"
+                to={"/login"}
                 className="bg-primary text-white px-4 rounded-md py-2 cursor-pointer"
               >
                 + Add Student
               </Link>
             </span>
           </span>
-          {role !== "1" && (
+          {(role !== "1" && role !== "4" && role !== "5") && (
             <span
               onClick={downloadAll}
               className="bg-primary ml-5 text-white px-4 rounded-md py-2 cursor-pointer"

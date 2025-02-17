@@ -90,7 +90,7 @@ const InstituteView = () => {
             <Sidebar />
           ) : role === "2" ? (
             <AgentSidebar />
-          ) : role === "0" || role === "1" ? (
+          ) : role === "0" || role === "1" || role ==="4" || role === "5" ? (
             <AdminSidebar />
           ) : null}
         </span>
@@ -209,22 +209,27 @@ const InstituteView = () => {
                   )}
                 </span>
               </div>
+              {instituteById?.data?.websiteUrl && (
               <div className="md:ml-[19%] sm:ml-[26%] mr-6 mt-6 pl-[2%] rounded-md pt-6 pb-8 bg-white border-b-2 border-[#E8E8E8]">
                 <span className="flex items-center gap-2">
                   <span className="text-[20px]">
                     <MdInfoOutline />
                   </span>
+                  
                   <p className="font-medium">University / College Website</p>
                 </span>
-                <a
-                  href={formattedUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-normal underline ml-7 text-blue-500"
-                >
-                  Website Link
-                </a>
+               
+                  <a
+                    href={formattedUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-normal text-[14px] text-blue-500 cursor-pointer underline"
+                  >
+                    Website Link
+                  </a>
               </div>
+            )}
+
               <div className="md:ml-[19%] sm:ml-[26%] mr-6 mt-6 pl-[2%] rounded-md pt-6 pb-8 bg-white border-b-2 border-[#E8E8E8]">
                 <span className="flex items-center gap-2">
                   <span className="text-[20px]">

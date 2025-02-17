@@ -13,7 +13,7 @@ import socketServiceInstance from "../../services/socket";
 import Loader from "../Loader";
 
 const Pending = ({ data }) => {
-  const role = localStorage.getItem("role")
+  const role = localStorage.getItem("role");
   const location = useLocation();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
@@ -36,10 +36,8 @@ const Pending = ({ data }) => {
 
   const updateStatus = async (id, status, type, message) => {
     try {
-      const path =
-      
-         "/admin/change-page-status"
-     
+      const path = "/admin/change-page-status";
+
       const res = await changeApprovalStatus(path, id, status, type, message);
       handleApprovalUpdate();
 
@@ -53,11 +51,10 @@ const Pending = ({ data }) => {
     status,
     type,
     message,
-    applicationData,
+    applicationData
   ) => {
     try {
-     
-      const res = await chngeApplicationStatus( id, status, type, message);
+      const res = await chngeApplicationStatus(id, status, type, message);
       handleApplicationUpdate();
 
       if (applicationData.customUserId.startsWith("AG")) {
@@ -256,6 +253,7 @@ const Pending = ({ data }) => {
                 instituteData={application}
                 sectionData={application?.type}
                 pageType="application"
+                refferedBy={application?.referredBy}
               />
             </div>
           ))

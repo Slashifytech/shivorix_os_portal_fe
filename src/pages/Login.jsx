@@ -4,7 +4,6 @@ import { loginBanner, logo } from "../assets";
 import ImageComponent from "../components/reusable/Input";
 import LoginComponent from "../components/login/LoginComponent";
 import Mobile from "../components/Mobile";
-import { Link } from "react-router-dom";
 
 const Login = () => {
   return (

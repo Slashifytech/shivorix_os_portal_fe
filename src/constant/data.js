@@ -215,11 +215,11 @@ export const applicationTypeOption = [
   { id: 1, option: "coursefeeApplication", label: "Course Fee Application" },
   { id: 2, option: "visa", label: "Visa" },
 ];
-export const  statusOpt = [
+export const statusOpt = [
   { id: 1, option: "approved", label: "Approved" },
   { id: 2, option: "rejected", label: "Rejected" },
 ];
-export const  statusOption = [
+export const statusOption = [
   { id: 0, option: "underreview", label: "Under Review" },
   { id: 1, option: "approved", label: "Approved" },
   { id: 2, option: "rejected", label: "Rejected" },
@@ -241,8 +241,7 @@ export const appType = [
 
 export const userType = [
   { id: 0, option: "agent", label: "Agent" },
-  { id: 0, option: "student", label: "Student" 
-  },
+  { id: 0, option: "student", label: "Student" },
 ];
 export const statusOptionData = [
   { id: 0, option: "open", label: "Open" },
@@ -268,12 +267,24 @@ export const intakeOption = [
   { id: 12, option: "Aug 2026", label: "Aug 2026" },
   { id: 13, option: "Sep 2026", label: "Sep 2026" },
   { id: 14, option: "Oct 2026", label: "Oct 2026" },
-  { id: 15, option: "Dec 2026", label: "Dec 2026" }
+  { id: 15, option: "Dec 2026", label: "Dec 2026" },
 ];
 
 export const donoughtFilter = [
-  { id: 0, option: "11 2024", label: "Nov 2024", year: 2024, month: "November" },
-  { id: 1, option: "12 2024", label: "Dec 2024", year: 2024, month: "December" },
+  {
+    id: 0,
+    option: "11 2024",
+    label: "Nov 2024",
+    year: 2024,
+    month: "November",
+  },
+  {
+    id: 1,
+    option: "12 2024",
+    label: "Dec 2024",
+    year: 2024,
+    month: "December",
+  },
   { id: 2, option: "1 2025", label: "Jan 2025", year: 2025, month: "January" },
   { id: 3, option: "2 2025", label: "Feb 2025", year: 2025, month: "February" },
   { id: 4, option: "3 2025", label: "Mar 2025", year: 2025, month: "March" },

@@ -58,18 +58,18 @@ const initialStudentDocument = {
 };
 
 const VisaApply = () => {
+  const location = useLocation();
   const role = localStorage.getItem("role");
   const [newFiles, setNewFiles] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [deletedFiles, setDeletedFiles] = useState([]);
   const { agentData } = useSelector((state) => state.agent);
   const studentUserId = useSelector((state) => state.student.studentInfoData);
-  const location = useLocation();
 
   const studentId =
     role === "3"
       ? studentUserId?.data?.studentInformation?._id
-      : location?.state?.id || location?.state?.state?.id;
+      : location?.state?.id || location?.state?.state?.id || location?.state?.state
   const { countryOption, studentData } = useSelector((state) => state.general);
   const { studentInfoData } = useSelector((state) => state.student);
   const StudentDataToGet = role === "2" ? studentData : studentInfoData?.data;
@@ -343,6 +343,9 @@ const VisaApply = () => {
       const updatedStudentDocument = {
         country: countryName,
         studentInformationId: studentId,
+        ...(role === "3" && { 
+          refferedLocation: studentUserId?.data?.studentInformation?.residenceAddress?.state
+        }),
         personalDetails: {
           ...visaLetter.personalDetails,
         },
@@ -427,6 +430,9 @@ const VisaApply = () => {
             path: "/admin/applications-review",
 
             recieverId: "",
+            country: agentData?.agentCountry,
+            state: agentData?.agentState,
+            sendTo: "partner"
           };
           socketServiceInstance.socket.emit(
             "NOTIFICATION_AGENT_TO_ADMIN",
@@ -492,6 +498,9 @@ const VisaApply = () => {
             path: "/admin/applications-review",
 
             recieverId: agentData?._id,
+            country: studentInfoData?.data?.studentInformation?.residenceAddress?.country,
+            state: studentInfoData?.data?.studentInformation?.residenceAddress?.state,
+            sendTo: "partner"
           };
 
           socketServiceInstance.socket.emit(

@@ -14,7 +14,6 @@ import OtpVerification from "../pages/OtpVerification";
 import ChangePassword from "../pages/ChangePassword";
 import SuccessPage from "../pages/SuccessPage";
 import Dashboard from "../student/Dashboard";
-import Shortlist from "../student/Shortlist";
 import ApplyOfferLater from "../student/ApplyOfferLater";
 import WaitingPage from "../pages/WaitingPage";
 import AgentDashboard from "../agent/AgentDashboard";
@@ -31,14 +30,11 @@ import Approval from "../admin/Approval";
 import ApplicationReview from "../admin/ApplicationReview";
 import AdminLogin from "../admin/AdminLogin";
 import ProtectedAdmin from "./ProtectedAdmin";
-import HelpSupport from "../components/HelpSupport";
 import AllApplication from "../student/AllApplication";
-import StudentAgentInternal from "./StudentAgentInternal";
 import CommonRoleProtected from "./CommonRoleProtected";
 import AgentRoleProtected from "./AgentRoleProtected";
 import HelpNSupport from "../pages/HelpNSupport";
 import CourseFeeApplication from "../pages/CourseFeeApplication";
-// import ChangedashboardEmail from '../pages/ChangedashboardEmail';
 import ChangeDashboardPassword from "../pages/ChangeDashboardPassword";
 import ChangeDashboardEmail from "../components/dashboardComp/ChangedashboardEmail";
 import DashboardEmailOtp from "../components/dashboardComp/DashboardEmailOtp";
@@ -71,6 +67,11 @@ import AirTicketForm from "../pages/AirTicketForm";
 import AirTickets from "../pages/AirTickets";
 import AirTicketLists from "../admin/AirTicketLists";
 import AllVisa from "../agent/AllVisa";
+import PartnerList from "../admin/PartnerLists";
+import PartnerLogin from "../partner/PartnerLogin";
+import StrictPartner from "./StrictPartner";
+import PartnerEmployee from "../admin/PartnerEmployee";
+import PartnerEmployeeDetail from "../admin/PartnerEmployeeDetail";
 
 export const router = createBrowserRouter([
   {
@@ -80,6 +81,10 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login></Login>,
+  },
+  {
+    path: "/province/login",
+    element: <PartnerLogin></PartnerLogin>,
   },
   {
     path: "/change-Pass",
@@ -120,9 +125,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/notifications",
-    element:
-    <CommonRoleProtected>
-    <NotificatonPage></NotificatonPage></CommonRoleProtected>
+    element: (
+      <CommonRoleProtected>
+        <NotificatonPage></NotificatonPage>
+      </CommonRoleProtected>
+    ),
   },
   {
     path: "/removed-user",
@@ -157,15 +164,15 @@ export const router = createBrowserRouter([
     path: "/course-fee",
     element: (
       <CommonRoleProtected>
-      <CourseFeeApplication></CourseFeeApplication>
-       </CommonRoleProtected>
+        <CourseFeeApplication></CourseFeeApplication>
+      </CommonRoleProtected>
     ),
   },
   {
     path: "/settings/change-password",
     element: (
       <StudentAgentProtected>
-      <ChangeDashboardPassword></ChangeDashboardPassword>
+        <ChangeDashboardPassword></ChangeDashboardPassword>
       </StudentAgentProtected>
     ),
   },
@@ -173,8 +180,8 @@ export const router = createBrowserRouter([
     path: "/settings/change-email",
     element: (
       <StudentAgentProtected>
-      <ChangeDashboardEmail></ChangeDashboardEmail>
-       </StudentAgentProtected>
+        <ChangeDashboardEmail></ChangeDashboardEmail>
+      </StudentAgentProtected>
     ),
   },
   {
@@ -450,9 +457,9 @@ export const router = createBrowserRouter([
   {
     path: "/admin/dashboard",
     element: (
-      <ProtectedAdmin>
+      <CommonRoleProtected>
         <AdminDashboard></AdminDashboard>
-      </ProtectedAdmin>
+      </CommonRoleProtected>
     ),
   },
   {
@@ -467,17 +474,17 @@ export const router = createBrowserRouter([
     path: "/admin/application-list",
 
     element: (
-      <ProtectedAdmin>
+      <CommonRoleProtected>
         <ApplicationList></ApplicationList>{" "}
-      </ProtectedAdmin>
+      </CommonRoleProtected>
     ),
   },
   {
     path: "/admin/student-applications",
     element: (
-      <ProtectedAdmin>
+      <CommonRoleProtected>
         <StudentApplicationView></StudentApplicationView>{" "}
-      </ProtectedAdmin>
+      </CommonRoleProtected>
     ),
   },
   {
@@ -507,18 +514,18 @@ export const router = createBrowserRouter([
   {
     path: "/admin/agent-directory",
     element: (
-      <ProtectedAdmin>
+      <CommonRoleProtected>
         {" "}
         <AgentDirectory></AgentDirectory>{" "}
-      </ProtectedAdmin>
+      </CommonRoleProtected>
     ),
   },
   {
     path: "/admin/agent-student",
     element: (
-      <ProtectedAdmin>
+      <CommonRoleProtected>
         <StudentDirectory></StudentDirectory>{" "}
-      </ProtectedAdmin>
+      </CommonRoleProtected>
     ),
   },
   {
@@ -548,9 +555,9 @@ export const router = createBrowserRouter([
   {
     path: "/admin/student-directory",
     element: (
-      <ProtectedAdmin>
+      <CommonRoleProtected>
         <StudentDirectory></StudentDirectory>{" "}
-      </ProtectedAdmin>
+      </CommonRoleProtected>
     ),
   },
   {
@@ -562,11 +569,27 @@ export const router = createBrowserRouter([
     ),
   },
   {
+    path: "/admin/province/employee-lists",
+    element: (
+      <StrictPartner>
+        <TeamList></TeamList>{" "}
+      </StrictPartner>
+    ),
+  },
+  {
     path: "/admin/add-member",
     element: (
       <StrictAdmin>
         <AddMember></AddMember>{" "}
       </StrictAdmin>
+    ),
+  },
+  {
+    path: "/admin/province/add-employee",
+    element: (
+      <StrictPartner>
+        <AddMember></AddMember>{" "}
+      </StrictPartner>
     ),
   },
   {
@@ -583,6 +606,46 @@ export const router = createBrowserRouter([
       <ProtectedAdmin>
         <AirTicketLists></AirTicketLists>{" "}
       </ProtectedAdmin>
+    ),
+  },
+  {
+    path: "/admin/add-partner",
+    element: (
+      <StrictAdmin>
+        <AddMember></AddMember>{" "}
+      </StrictAdmin>
+    ),
+  },
+  {
+    path: "/admin/edit-employee",
+    element: (
+      <StrictPartner>
+        <AddMember></AddMember>{" "}
+      </StrictPartner>
+    ),
+  },
+  {
+    path: "/admin/partner-directory",
+    element: (
+      <StrictAdmin>
+        <PartnerList></PartnerList>{" "}
+      </StrictAdmin>
+    ),
+  },
+  {
+    path: "/admin/partner-employee",
+    element: (
+      <StrictAdmin>
+        <PartnerEmployee></PartnerEmployee>{" "}
+      </StrictAdmin>
+    ),
+  },
+  {
+    path: "/admin/partner-employee-details",
+    element: (
+      <StrictAdmin>
+        <PartnerEmployeeDetail></PartnerEmployeeDetail>{" "}
+      </StrictAdmin>
     ),
   },
   {

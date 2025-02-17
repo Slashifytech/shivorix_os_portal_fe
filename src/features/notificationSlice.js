@@ -1,26 +1,27 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
+import { resetStore } from "./action";
 
+const   initialState = {
+  notifications: [],
+  notificationCount: 0,
+  currentPage: 0,
+  nextPage: 0,
+  totalPage: 0,
+  totalNotification: 0,
+  status: "idle",
+  error: null,
+}
 const notificationsSlice = createSlice({
-  name: 'notifications',
-  initialState: {
-    notifications: [],
-    notificationCount: 0,
-    currentPage: 0,
-    nextPage: 0,
-    totalPage:0,
-    totalNotification:0,
-    status: 'idle',
-    error: null,
-  },
+  name: "notifications",
+   initialState,
   reducers: {
-    
     removeNotification: (state, action) => {
       state.notifications = state.notifications.filter(
         (n) => n._id !== action.payload
       );
     },
     removeAllNotification: (state) => {
-      state.notifications = []
+      state.notifications = [];
     },
     markNotificationAsRead: (state, action) => {
       const id = action.payload;
@@ -29,22 +30,29 @@ const notificationsSlice = createSlice({
       );
     },
     addAllNotifications: (state, action) => {
-      const {notifications, currentPage, nextPage, totalPages, totalNotifications} = action.payload;
+      const {
+        notifications,
+        currentPage,
+        nextPage,
+        totalPages,
+        totalNotifications,
+      } = action.payload;
       const uniqueNotifications = notifications.filter(
-        (newNotification) => !state.notifications.some(
-          (existingNotification) => existingNotification._id === newNotification._id
-        )
+        (newNotification) =>
+          !state.notifications.some(
+            (existingNotification) =>
+              existingNotification._id === newNotification._id
+          )
       );
-      state.currentPage = currentPage|| 1;
+      state.currentPage = currentPage || 1;
       state.nextPage = nextPage || 1;
       state.totalPage = totalPages || 1;
       state.totalNotification = totalNotifications || 1;
 
-    
       state.notifications = [...state.notifications, ...uniqueNotifications];
     },
     updateNotificationCount: (state, action) => {
-      state.notificationCount = action.payload;
+      state.notificationCount = action.payload.unreadCount;
     },
     addOneCountToNotification: (state) => {
       state.notificationCount += 1;
@@ -52,7 +60,9 @@ const notificationsSlice = createSlice({
     clearNotificationCount: (state) => {
       state.notificationCount = 0;
     },
-    addNewNotification: (state, action) =>{
+    addNewNotification: (state, action) => {
+      
+
       const notification = action.payload;
 
       const isDuplicate = state.notifications.some(
@@ -61,7 +71,6 @@ const notificationsSlice = createSlice({
       if (!isDuplicate) {
         state.notifications = [notification, ...state.notifications];
       }
-      
     },
     markAllAsSeen: (state) => {
       state.notifications = state.notifications.map((n) => ({
@@ -70,8 +79,21 @@ const notificationsSlice = createSlice({
       }));
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(resetStore, () => initialState); 
+  }
 });
 
-export const { markNotificationAsRead, addAllNotifications, updateNotificationCount, addOneCountToNotification, clearNotificationCount, addNewNotification, removeNotification, markAllAsSeen, removeAllNotification } = notificationsSlice.actions;
+export const {
+  markNotificationAsRead,
+  addAllNotifications,
+  updateNotificationCount,
+  addOneCountToNotification,
+  clearNotificationCount,
+  addNewNotification,
+  removeNotification,
+  markAllAsSeen,
+  removeAllNotification,
+} = notificationsSlice.actions;
 
 export default notificationsSlice.reducer;

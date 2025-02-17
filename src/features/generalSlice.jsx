@@ -7,6 +7,7 @@ import {
   courseData,
   getAllDocument,
   getAllTicket,
+  getCountryStateData,
   getInstitutesData,
   getPopularCourseData,
   getStudentDataById,
@@ -14,8 +15,9 @@ import {
   getWithdrawalData,
   prefferedCountry,
   recieveDocument,
-
 } from "./generalApi";
+import { resetStore } from "./action";
+
 
 export const getCountryOption = createAsyncThunk(
   "general/getCountryOption",
@@ -88,7 +90,6 @@ export const getPopularCourses = createAsyncThunk(
     }
   }
 );
-
 
 export const studentById = createAsyncThunk(
   "general/studentById",
@@ -178,14 +179,9 @@ export const getRecievedDocument = createAsyncThunk(
 );
 export const fetchAllAirTicket = createAsyncThunk(
   "general/fetchAllAirTicket",
-  async ({page, perPage, search, userId }, { rejectWithValue }) => {
+  async ({ page, perPage, search, userId }, { rejectWithValue }) => {
     try {
-      const res = await allAirTicket(
-        page,
-        perPage,
-        search,
-        userId
-      );
+      const res = await allAirTicket(page, perPage, search, userId);
       // console.log(res);
       return res.data;
     } catch (error) {
@@ -199,9 +195,7 @@ export const fetchAirTicketById = createAsyncThunk(
   "general/fetchAirTicketById",
   async (id, { rejectWithValue }) => {
     try {
-      const res = await airTicketById(
-        id
-      );
+      const res = await airTicketById(id);
       // console.log(res);
       return res.data;
     } catch (error) {
@@ -227,9 +221,20 @@ export const withdrawalDataGet = createAsyncThunk(
 );
 export const fetchInstituteData = createAsyncThunk(
   "general/fetchInstituteData",
-  async ({page, perPage, courses, country, inTake , search, institute}, { rejectWithValue }) => {
+  async (
+    { page, perPage, courses, country, inTake, search, institute },
+    { rejectWithValue }
+  ) => {
     try {
-      const res = await getInstitutesData(page, perPage, courses, country, inTake , search, institute);
+      const res = await getInstitutesData(
+        page,
+        perPage,
+        courses,
+        country,
+        inTake,
+        search,
+        institute
+      );
       // console.log(res);
       return res.data;
     } catch (error) {
@@ -239,26 +244,42 @@ export const fetchInstituteData = createAsyncThunk(
     }
   }
 );
+export const fetchCountryState = createAsyncThunk(
+  "general/fetchCountryState",
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await getCountryStateData();
+      // console.log(res);
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.message || "Failed to fetch country state"
+      );
+    }
+  }
+);
+const initialState = {
+  countryOption: [],
+  prefCountryOption: [],
+  instituteOption: [],
+  courses: [],
+  popularCourse: [],
+  studentData: null,
+  getAllTicket: [],
+  visaStatus: [],
+  getAllDocuments: [],
+  recieveDocs: [],
+  withdrawalData: "",
+  airTickets: null,
+  airTicketById: null,
+  instituteData: null,
+  countryState: [],
+  status: "idle",
+  error: null,
+}
 const generalSlice = createSlice({
   name: "general",
-  initialState: {
-    countryOption: [],
-    prefCountryOption: [],
-    instituteOption: [],
-    courses: [],
-    popularCourse: [],
-    studentData: null,
-    getAllTicket: [],
-    visaStatus: [],
-    getAllDocuments: [],
-    recieveDocs: [],
-    withdrawalData: "",
-    airTickets: null,
-    airTicketById: null,
-    instituteData: null,
-    status: "idle",
-    error: null,
-  },
+  initialState,
   reducers: {
     // Add a reducer to remove a university optimistically (immediate UI update)
     removeShortlistedUniversity: (state, action) => {
@@ -267,10 +288,10 @@ const generalSlice = createSlice({
       );
     },
     emptyAirTicket: (state) => {
-      state.airTicketById = null
+      state.airTicketById = null;
     },
     emptyData: (state) => {
-      state.instituteData = null
+      state.instituteData = null;
     },
   },
 
@@ -427,7 +448,7 @@ const generalSlice = createSlice({
       })
       .addCase(fetchAllAirTicket.rejected, (state, action) => {
         state.status = "failed";
-        state.airTickets = null
+        state.airTickets = null;
         state.error = action.payload || action.error.message;
       })
       .addCase(fetchAirTicketById.pending, (state) => {
@@ -440,7 +461,7 @@ const generalSlice = createSlice({
       })
       .addCase(fetchAirTicketById.rejected, (state, action) => {
         state.status = "failed";
-        state.airTicketById = null
+        state.airTicketById = null;
         state.error = action.payload || action.error.message;
       })
       .addCase(fetchInstituteData.pending, (state) => {
@@ -453,12 +474,25 @@ const generalSlice = createSlice({
       })
       .addCase(fetchInstituteData.rejected, (state, action) => {
         state.status = "failed";
-        state.instituteData = null
         state.error = action.payload || action.error.message;
-        state.instituteData = []
-
-      });
+        state.instituteData = [];
+      })
+      .addCase(fetchCountryState.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(fetchCountryState.fulfilled, (state, action) => {
+        state.countryState = action.payload;
+        state.status = "succeeded";
+      })
+      .addCase(fetchCountryState.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload || action.error.message;
+        state.countryState = [];
+      })
+      .addCase(resetStore, () => initialState); 
   },
 });
-export const { clearInstituteOption, emptyAirTicket, emptyData } = generalSlice.actions;
+export const { clearInstituteOption, emptyAirTicket, emptyData } =
+  generalSlice.actions;
 export default generalSlice.reducer;

@@ -16,8 +16,8 @@ import { CustomInput } from "../reusable/Input";
 import { IoSearchOutline } from "react-icons/io5";
 
 const StudentUploadDocument = ({ adminPath, studentId }) => {
-console.log(studentId)
-  const role = localStorage.getItem('role');
+  const { getAdminProfile } = useSelector((state) => state.admin);
+  const role = localStorage.getItem("role");
   const { getAllDocuments } = useSelector((state) => state.general);
   const dispatch = useDispatch();
   const [isUpload, setIsUpload] = useState({
@@ -30,7 +30,10 @@ console.log(studentId)
   const [isLoading, setIsLoading] = useState(true);
   const [perPage, setPerPage] = useState(10);
   const path =
-    role === "0" || role === "1"
+    getAdminProfile?.data?.role === "0" ||
+    getAdminProfile?.data?.role === "1" ||
+    getAdminProfile?.data?.role === "4" ||
+    getAdminProfile?.data?.role === "5"
       ? `/document/all-admin/${studentId}`
       : role === "2" || role === "3"
       ? `/document/all/${studentId}`
@@ -56,7 +59,7 @@ console.log(studentId)
   const handlePageChange = (pageNumber) => setPage(pageNumber);
 
   useEffect(() => {
-    dispatch(getDocumentAll({path, search, page, perPage }));
+    dispatch(getDocumentAll({ path, search, page, perPage }));
 
     // setIsLoading(false);
   }, [dispatch, search, page, perPage]);
@@ -109,11 +112,10 @@ console.log(studentId)
         const uploadData = {
           viewUrl: downloadURL,
           documentName: file.name,
-          userId: studentId
+          userId: studentId,
         };
         setIsUpload(uploadData);
         await handleUpload(uploadData);
-
       } catch (error) {
         console.error("Error uploading file:", error);
         toast.error(`Error uploading ${file.name}. Please try again.`);
@@ -127,7 +129,7 @@ console.log(studentId)
   const handleUpload = async (uploadData) => {
     try {
       const res = await uploadDocument(uploadData);
-      await dispatch(getDocumentAll({path})).unwrap();
+      await dispatch(getDocumentAll({ path })).unwrap();
 
       toast.success(res.message || "Document Uploaded Successfully");
     } catch (error) {
@@ -148,7 +150,6 @@ console.log(studentId)
         <span className="flex flex-row items-center mb-3">
           <span className="flex flex-row justify-between w-full items-center">
             <span className="flex flex-row items-center">
-             
               <span className="flex flex-row items-center  md:ml-9 ">
                 <CustomInput
                   className="h-11 w-80 rounded-md text-body placeholder:px-3 pl-7 border border-[#E8E8E8] outline-none"
@@ -201,31 +202,29 @@ console.log(studentId)
           </div>
         ) : (
           <>
-          <CustomTableSeven
-            tableHead={TABLE_HEAD}
-            tableRows={TABLE_ROWS}
-            action="View"
-            actionTwo={"Remove"}
-            icon={<FaRegEye />}
-            tableType="upload"
-            customLinkState={TABLE_ROWS?.map((data) => data.appId)}
-            studentId={studentId}
-          />
-     
+            <CustomTableSeven
+              tableHead={TABLE_HEAD}
+              tableRows={TABLE_ROWS}
+              action="View"
+              actionTwo={"Remove"}
+              icon={<FaRegEye />}
+              tableType="upload"
+              customLinkState={TABLE_ROWS?.map((data) => data.appId)}
+              studentId={studentId}
+            />
 
-      <div className="mt-16 mb-10 ">
-        <Pagination
-          currentPage={currentPage}
-          hasNextPage={currentPage * perPage < totalUsersCount}
-          hasPreviousPage={currentPage > 1}
-          onPageChange={handlePageChange}
-          totalPagesCount={totalPagesCount}
-        />
+            <div className="mt-16 mb-10 ">
+              <Pagination
+                currentPage={currentPage}
+                hasNextPage={currentPage * perPage < totalUsersCount}
+                hasPreviousPage={currentPage > 1}
+                onPageChange={handlePageChange}
+                totalPagesCount={totalPagesCount}
+              />
+            </div>
+          </>
+        )}
       </div>
-      </>
-    )}
-    
-    </div>
     </>
   );
 };

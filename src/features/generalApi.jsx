@@ -822,3 +822,22 @@ export const getInstitutesData = async (
     }
   }
 };
+export const getCountryStateData = async (
+
+) => {
+  try {
+    const response = await apiurl.get(`/country/country-state-data`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    if (error.response) {
+      throw new Error(
+        error.response.data.message || "Error while submitting the form"
+      );
+    } else if (error.request) {
+      throw new Error("No response from server. Please try again later.");
+    } else {
+      throw new Error("An unexpected error occurred");
+    }
+  }
+};

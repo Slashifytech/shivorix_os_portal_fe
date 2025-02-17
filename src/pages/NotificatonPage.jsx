@@ -22,9 +22,8 @@ const NotificationPage = () => {
   const { agentData } = useSelector((state) => state.agent);
   const { studentInfoData } = useSelector((state) => state.student);
   const { getAdminProfile } = useSelector((state) => state.admin);
-  console.log(agentData?._id);
-  console.log(studentInfoData?.data?.studentInformation?._id);
-
+  const province = getAdminProfile?.data?.residenceAddress?.state;
+  const country = getAdminProfile?.data?.residenceAddress?.country;
   const [deletingNotification, setDeletingNotification] = useState(null);
   const studentId = studentInfoData?.data?.studentInformation?.studentId;
   const agentId = agentData?.agentId;
@@ -34,7 +33,7 @@ const NotificationPage = () => {
       ? studentId
       : role === "2"
       ? agentId
-      : role === "0" || role === "1"
+      : role === "0" || role === "1" || role === "4" || role === "5"
       ? adminId
       : null;
   const type = role == "3" || role == "2" ? "emitForUser" : "";
@@ -42,7 +41,6 @@ const NotificationPage = () => {
   // const [deletingAllNotification, setDeletingAllNotification] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [noMoreNotifications, setNoMoreNotifications] = useState(false);
-  console.log(clearAllId);
 
   const { notifications, currentPage, nextPage, totalNotification, totalPage } =
     useSelector((state) => state.notifications);
@@ -50,7 +48,7 @@ const NotificationPage = () => {
   const handleNotificationClick = (notification) => {
     if (!notification?.isRead) {
       let byAdmin = false;
-      if (role === "0" || role === "1") {
+      if (role === "0" || role === "1" || role === "4" || role === "5") {
         byAdmin = true;
       }
       socketServiceInstance.socket?.emit("NOTIFICATION_IS_READ", {
@@ -71,7 +69,6 @@ const NotificationPage = () => {
       });
     }
   };
-
   const handleDeleteAllNotification = (recieverId) => {
     if (socketServiceInstance.socket) {
       socketServiceInstance.socket?.emit(
@@ -92,18 +89,22 @@ const NotificationPage = () => {
   };
 
   const fetchNotifications = useCallback(() => {
-    if (isLoading || !nextPage || noMoreNotifications) return;
-
+    if (isLoading || noMoreNotifications) {
+      console.log("returning");
+    }
     setIsLoading(true);
     const eventName =
       role === "0" || role === "1"
         ? "GET_NOTIFICATIONS_FOR_ADMIN"
+        : role === "4" || role === "5"
+        ? "GET_NOTIFICATIONS_FOR_PARTNER"
         : "GET_NOTIFICATIONS_FOR_USER";
 
     socketServiceInstance.socket?.emit(eventName, {
       page: nextPage,
       limit: 10,
     });
+
     socketServiceInstance.socket?.on(eventName, (data) => {
       if (data.notifications.length === 0) {
         setNoMoreNotifications(true);
@@ -116,6 +117,10 @@ const NotificationPage = () => {
       setIsLoading(false);
     });
   }, [dispatch, isLoading, nextPage, noMoreNotifications, role]);
+  useEffect(() => {
+ 
+    fetchNotifications();
+  }, []);
 
   const handleScroll = useCallback(() => {
     const bottom =
@@ -130,6 +135,8 @@ const NotificationPage = () => {
   useEffect(() => {
     if (role === "0" || role === "1") {
       socketServiceInstance.socket?.emit("NOTIFICATION_SEEN_BY_ADMIN", {});
+    } else if (role === "4" || role === "5") {
+      socketServiceInstance.socket?.emit("NOTIFICATION_SEEN_BY_PARTNER", {});
     } else {
       socketServiceInstance.socket?.emit("NOTIFICATION_SEEN_BY_USER", {});
     }
@@ -144,6 +151,11 @@ const NotificationPage = () => {
   const handleMarkAllAsSeen = () => {
     if (role === "0" || role === "1") {
       socketServiceInstance.socket?.emit("NOTIFICATION_ALL_READ_BY_ADMIN", {});
+    } else if (role === "4" || role === "5") {
+      socketServiceInstance.socket?.emit(
+        "NOTIFICATION_ALL_READ_BY_PARTNER",
+        {}
+      );
     } else {
       socketServiceInstance.socket?.emit("NOTIFICATION_ALL_READ_BY_USER", {});
     }
@@ -161,16 +173,20 @@ const NotificationPage = () => {
           deletingNotification === notification._id ? "slide-out-right" : ""
         }`}
       >
-        <span
-          onClick={() => handleDeleteNotification(notification._id)}
-          className="absolute right-5 text-[22px] text-body cursor-pointer top-3"
-        >
-          <RxCross2 />
-        </span>
+        {role !== "4" && role !== "5" && (
+          <span
+            onClick={() => handleDeleteNotification(notification._id)}
+            className="absolute right-5 text-[22px] text-body cursor-pointer top-3"
+          >
+            <RxCross2 />
+          </span>
+        )}
         <p className="text-sidebar font-semibold">
-          {notification.title === "RECEIVED_OFFER_LETTER_AGENT" || notification.title === "RECEIVED_OFFER_LETTER_STUDENT"
+          {notification.title === "RECEIVED_OFFER_LETTER_AGENT" ||
+          notification.title === "RECEIVED_OFFER_LETTER_STUDENT"
             ? "RECEIVED DOCUMENT"
-            : notification.title === "DEFERMATION_BY_AGENT" || notification.title === "DEFERMATION_BY_STUDENT"
+            : notification.title === "DEFERMATION_BY_AGENT" ||
+              notification.title === "DEFERMATION_BY_STUDENT"
             ? "DEFERMENT"
             : notification.title
                 .replace(/_/g, " ")
@@ -196,22 +212,22 @@ const NotificationPage = () => {
           >
             Click to view{" "}
             {notification.title === "RECEIVED_OFFER_LETTER_AGENT" ||
-            notification.title === "RECEIVED_OFFER_LETTER_STUDENT" 
-          
+            notification.title === "RECEIVED_OFFER_LETTER_STUDENT"
               ? "> Go to Received document"
-              :   notification.title === "VISA_REJECTED_BY_EMBASSY_AGENT" ||
-            notification.title === "VISA_REJECTED_BY_EMBASSY_STUDENT" ||
+              : notification.title === "VISA_REJECTED_BY_EMBASSY_AGENT" ||
+                notification.title === "VISA_REJECTED_BY_EMBASSY_STUDENT" ||
                 notification.title === "VISA_APPROVED_BY_EMBASSY_AGENT" ||
                 notification.title === "VISA_APPROVED_BY_EMBASSY_STUDENT" ||
                 notification.title === "STUDENT_REQUESTED_AMOUNT_WITHDRAWAL" ||
                 notification.title === "AGENT_REQUESTED_AMOUNT_WITHDRAWAL" ||
                 notification.title === "AGENT_WITHDRAWAL_COMPLETE" ||
                 notification.title === "STUDENT_WITHDRAWAL_COMPLETE" ||
-
                 notification.title === "AGENT_STUDENT_VISA_STAMP" ||
                 notification.title === "STUDENT_STUDENT_VISA_STAMP" ||
                 notification.title === "DEFERMATION_BY_AGENT" ||
-                notification.title === "DEFERMATION_BY_STUDENT" ? "> Go to Visa Status" : null}
+                notification.title === "DEFERMATION_BY_STUDENT"
+              ? "> Go to Visa Status"
+              : null}
           </Link>
         ) : (
           <a
@@ -239,7 +255,7 @@ const NotificationPage = () => {
             <Sidebar />
           ) : role === "2" ? (
             <AgentSidebar />
-          ) : role === "0" || role === "1" ? (
+          ) : role === "0" || role === "1" || role === "4" || role === "5" ? (
             <AdminSidebar />
           ) : null}
         </span>
@@ -262,12 +278,14 @@ const NotificationPage = () => {
             >
               Mark All as Seen
             </span>
-            <span
-              onClick={() => handleDeleteAllNotification(clearAllId)}
-              className="text-body bg-[#F2F5F7] px-6 py-2 rounded-md cursor-pointer"
-            >
-              Clear All
-            </span>
+            {role !== "4" && role !== "5" && (
+              <span
+                onClick={() => handleDeleteAllNotification(clearAllId)}
+                className="text-body bg-[#F2F5F7] px-6 py-2 rounded-md cursor-pointer"
+              >
+                Clear All
+              </span>
+            )}
           </span>
           {notifications.length > 0 ? (
             renderNotifications(notifications)

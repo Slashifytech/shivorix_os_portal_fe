@@ -52,7 +52,11 @@ export const chngeApplicationStatus = async (id, status, section, message) => {
   const role = localStorage.getItem("role");
   try {
     const path =
-      role === "0" || role === "2" || role === "3"
+      role === "0" ||
+      role === "2" ||
+      role === "3" ||
+      role === "4" ||
+      role === "5"
         ? "/admin/change-application-status"
         : role === "1"
         ? "/admin/change-application-status-subadmin"
@@ -366,7 +370,7 @@ export const fetchAdminDashboardData = async (
   userType
 ) => {
   try {
-    const params = { year }; // Always include year
+    const params = { year };
     if (type && type !== null) {
       params.applicationType = type;
     }
@@ -686,11 +690,16 @@ export const addTeam = async (payload) => {
     }
   }
 };
-export const editTeam = async (payload, id) => {
+export const editTeam = async (payload, id, userType) => {
   try {
     const response = await apiurl.put(
       `/auth/admin/edit-team-member/${id}`,
-      payload
+      payload,
+      {
+        params: {
+          userType: userType,
+        },
+      }
     );
     return response.data;
   } catch (error) {
@@ -705,9 +714,13 @@ export const editTeam = async (payload, id) => {
     }
   }
 };
-export const deleteTeam = async (id) => {
+export const deleteTeam = async (id, userType) => {
   try {
-    const response = await apiurl.patch(`/auth/admin/delete-team-member/${id}`);
+    const response = await apiurl.patch(`/auth/admin/delete-team-member/${id}`,{}, {
+      params:{
+        userType: userType
+      }
+    });
     return response.data;
   } catch (error) {
     if (error.response) {
@@ -900,6 +913,57 @@ export const adminAllAirTicket = async (page, perPage, search) => {
 export const adminAirTicketById = async (id) => {
   try {
     const response = await apiurl.get(`/air-ticket/admin/get-air-ticket/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    if (error.response) {
+      throw new Error(
+        error.response.data.message || "Error while submitting the form"
+      );
+    } else if (error.request) {
+      throw new Error("No response from server. Please try again later.");
+    } else {
+      throw new Error("An unexpected error occurred");
+    }
+  }
+};
+export const AlladminPartner = async (
+  page,
+  perPage,
+  search,
+  endpoint,
+  userId
+) => {
+  try {
+    const response = await apiurl.get(endpoint, {
+      params: {
+        page: page,
+        limit: perPage,
+        searchQuery: search,
+        userId: userId,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    if (error.response) {
+      throw new Error(
+        error.response.data.message || "Error while submitting the form"
+      );
+    } else if (error.request) {
+      throw new Error("No response from server. Please try again later.");
+    } else {
+      throw new Error("An unexpected error occurred");
+    }
+  }
+};
+export const profileById = async (userId) => {
+  console.log(userId);
+
+  try {
+    const response = await apiurl.get("/auth/admin/get-one-profile", {
+      params: { id: userId },
+    });
     return response.data;
   } catch (error) {
     console.log(error);

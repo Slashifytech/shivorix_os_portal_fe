@@ -33,7 +33,7 @@ const AgentForm6 = ({hide, handleCancel, updateData, adminId, agentId}) => {
   const role = localStorage.getItem('role')
   const { agentProfile } = useSelector((state) => state.admin);
 
-  const getData = role === "0" || role === "1" ?agentProfile?.references :  agentData?.references || [];
+  const getData =role === "0" || role === "1" || role ==="4" || role === "5"  ?agentProfile?.references :  agentData?.references || [];
   const [isPopUp, setIsPopUp] = useState(false);
   const [referenceData, setReferenceData] = useState(
     getData.length > 0
@@ -136,19 +136,19 @@ const AgentForm6 = ({hide, handleCancel, updateData, adminId, agentId}) => {
       try {
         const payload = {
           references: referenceData, // Ensures it's an array
-          ...(role === "0" || role === "1" && { companyId: adminId }),
+          ...(role === "0" || role === "1" || role ==="4" || role === "5"  && { companyId: adminId }),
   
         };
         
         let res;
 
-        if (role === "0" || role === "1") {
+        if (role === "0" || role === "1" || role ==="4" || role === "5" ) {
           await editAgentAdmin("/company/register-references-admin", payload, editForm);
         } else {
           res = await formSixSubmit(payload, editForm);
         }
       
-        if(role === "0" || role === "1"){
+        if(role === "0" || role === "1" || role ==="4" || role === "5" ){
           dispatch(agentDataProfile(agentId));
         }
   
@@ -160,15 +160,21 @@ const AgentForm6 = ({hide, handleCancel, updateData, adminId, agentId}) => {
           const notificationData = {
             title: " AGENT_REGISTERED_FOR_APPROVAL",
             message: `${agentData?.companyDetails?.businessName} ${agentData?.agId} Agent registered for approval.
-`,
+`,           
             path:"/admin/approvals",
             recieverId: "",
+            country: agentData?.agentCountry,
+            state: agentData?.agentState,
+            sendTo: "partner"
+
           };
   
           socketServiceInstance.socket.emit(
             "NOTIFICATION_AGENT_TO_ADMIN",
-            notificationData
+            notificationData,
+            
           );
+     
         } else {
           console.error("Socket connection failed, cannot emit notification.");
         }
