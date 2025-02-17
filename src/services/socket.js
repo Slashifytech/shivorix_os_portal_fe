@@ -106,11 +106,12 @@ class SocketService {
       this.socket.emit("GET_UNREAD_COUNT", "emitForPartner");
       const state = store.getState();
       
-      const roleType = state.admin.getAdminProfile.data.role;
+      const roleType = state.admin.getAdminProfile?.data?.role;
       const province =
-        state.admin.getAdminProfile.data?.residenceAddress?.state;
+        state.admin.getAdminProfile?.data?.residenceAddress?.state;
+
       if (
-        data.state !== province?.toLowerCase() &&
+        data?.state !== province?.toLowerCase() &&
         (roleType === "4" || roleType === "5")
       ) {
         return;
