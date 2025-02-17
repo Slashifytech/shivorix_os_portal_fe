@@ -39,6 +39,9 @@ const AddMember = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
+  const { countryState } = useSelector((state) => state.general);
+  const { getMember } = useSelector((state) => state.admin);
+  const { getAdminProfile } = useSelector((state) => state.admin);
   const id = location?.state?.id;
   const [memberData, setMemberData] = useState({
     profilePicture: "",
@@ -57,15 +60,13 @@ const AddMember = () => {
     maritalStatus: "",
     password: "",
   });
-
+  const [addressFilteredStates, setAddressFilteredStates] = useState([]);
   const [newFiles, setNewFiles] = useState([]);
   const [deletedFiles, setDeletedFiles] = useState([]);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [resetProfilePic, setResetProfilePic] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { countryOption } = useSelector((state) => state.general);
-  const { getMember } = useSelector((state) => state.admin);
   const [isEdit, setEdit] = useState(location?.state?.edit);
   const [isEmailEdit, setEmailEdit] = useState(location?.state?.edit);
 
@@ -100,7 +101,7 @@ const AddMember = () => {
     const blobUrls = uniqueFiles.map((file) => URL.createObjectURL(file));
     setMemberData((prevData) => ({
       ...prevData,
-      profilePicture: blobUrls[0], // Replace with the new blob URL
+      profilePicture: blobUrls[0],
     }));
   };
 
@@ -142,7 +143,7 @@ const AddMember = () => {
       // General case for other fields
       setMemberData((prevData) => ({
         ...prevData,
-        [name]: value.trim(),
+        [name]: value,
       }));
     }
 
@@ -191,7 +192,7 @@ const AddMember = () => {
     if (!firstName) validationErrors.firstName = "First Name is required.";
     if (!lastName) validationErrors.lastName = "Last Name is required.";
     if (!dob) validationErrors.dob = "Date of Birth is required.";
-    if (!phone) validationErrors.phone = "Phone number is required.";
+    // if (!phone) validationErrors.phone = "Phone number is required.";
     if (!address) validationErrors.address = "Address is required.";
     if (!country) validationErrors.country = "Country is required.";
     if (!state) validationErrors.state = "State is required.";
@@ -201,8 +202,8 @@ const AddMember = () => {
     if (!gender) validationErrors.gender = "Gender is required.";
     if (!maritalStatus)
       validationErrors.maritalStatus = "Marital Status is required.";
-    if (!profilePicture)
-      validationErrors.profilePicture = "Profile picture is required.";
+    // if (!profilePicture)
+    //   validationErrors.profilePicture = "Profile picture is required.";
 
     // Email validation
 
@@ -284,6 +285,13 @@ const AddMember = () => {
         gender: memberData.gender,
         maritalStatus: memberData.maritalStatus,
         dateOfJoining: memberData.doj,
+        createdBy: getAdminProfile?.data?._id,
+        roleType:
+          location.pathname === "/admin/add-partner"
+            ? "4"
+            : location.pathname === "/admin/province/add-employee" || location.pathname === "/admin/edit-employee"
+            ? "5"
+            : "1",
         residenceAddress: {
           address: memberData.address,
           country: memberData.country,
@@ -291,15 +299,24 @@ const AddMember = () => {
           city: memberData.city,
           zipcode: memberData.zipcode,
         },
-        // Add password only if not in edit mode
+        ...(getAdminProfile?.data?.role === "4" && {
+          location: getAdminProfile?.data?.residenceAddress?.state,
+        }),
         ...(isEdit !== "edit" && { password: memberData.password }),
         ...(isEmailEdit !== "edit" && { email: memberData.email }),
       };
 
-      // Submit the data
       const res =
         location?.state?.edit === "edit"
-          ? await editTeam(payload, id)
+          ? await editTeam(
+              payload,
+              id,
+              location.pathname === "/admin/add-partner"
+                ? "partner"
+                : location.pathname === "/admin/province/add-employee"
+                ? "employee"
+                : "team"
+            )
           : await addTeam(payload);
 
       dispatch(getAllTeamData());
@@ -307,7 +324,14 @@ const AddMember = () => {
       setNewFiles([]);
       setDeletedFiles([]);
       dispatch(setEmptyMemberInput());
-      navigate("/admin/team-members");
+      navigate(
+        location.pathname === "/admin/province/add-employee" ||
+          location.pathname === "/admin/edit-employee"
+          ? "/admin/province/employee-lists"
+          : location.pathname === "/admin/add-partner"
+          ? "/admin/partner-directory"
+          : "/admin/team-members"
+      );
     } catch (error) {
       console.error("Error during submission:", error);
       toast.error(error?.message || "Something went wrong.");
@@ -341,11 +365,7 @@ const AddMember = () => {
     }
   }, [getMember?.data]);
   useEffect(() => {
-    console.log("Checking getMember?.Data:", getMember?.Data);
-
     if (!getMember?.Data || getMember?.Data.length === 0) {
-      console.log("Resetting to add mode as getMember?.Data is empty");
-
       setMemberData({
         profilePicture: "",
         dob: "",
@@ -368,6 +388,22 @@ const AddMember = () => {
     }
   }, [getMember?.Data, dispatch]);
 
+  const handleCountryChange = (e) => {
+    const country = e;
+    const selectedCountryData = countryState.find(
+      (item) => item.country === country
+    );
+    const states = selectedCountryData ? selectedCountryData.states : [];
+    setMemberData((prev) => ({ ...prev, country}));
+    setAddressFilteredStates(states);
+  };
+  useEffect(() => {
+    if (memberData.country) {
+      handleCountryChange(memberData.country);
+    }
+  }, [memberData.country]);
+  
+
   return (
     <>
       <Header />
@@ -381,10 +417,20 @@ const AddMember = () => {
         <span className="flex items-center pt-16 md:ml-[16.5%] bg-white pb-6 sm:ml-[22%]">
           <span>
             <p className="text-[28px] font-bold text-sidebar mt-6 ml-9">
-              Member Form
+              {location?.pathname === "/admin/add-partner"
+                ? "Partner Form"
+                : location.pathname === "/admin/province/add-employee"
+                ? "Employee Form"
+                : "Member Form"}
             </p>
             <p className="mt-1 font-normal text-body ml-9 ">
-              Fill the details of a new member to register them.
+              Fill the details of a{" "}
+              {location?.pathname === "/admin/add-partner"
+                ? "partner"
+                : location.pathname === "/admin/province/add-employee"
+                ? "employee"
+                : "team member"}{" "}
+              to register them.
             </p>
           </span>
         </span>
@@ -431,7 +477,7 @@ const AddMember = () => {
                 <span className="flex flex-col">
                   <span className="text-[14px] text-secondary ">
                     {" "}
-                    First Name *
+                    { location.pathname === "/admin/add-partner" ? "Company Name *"  :   "First Name *"}
                   </span>{" "}
                   <CustomInput
                     name="firstName"
@@ -473,7 +519,7 @@ const AddMember = () => {
                 <span className="flex flex-col">
                   <span className="text-[14px] text-secondary ">
                     {" "}
-                    Last Name *
+                    { location.pathname === "/admin/add-partner" ? "Owner Name *"  :   "Last Name *"}
                   </span>{" "}
                   <CustomInput
                     name="lastName"
@@ -561,28 +607,53 @@ const AddMember = () => {
               value={memberData.address}
               errors={errors.address}
             />
-            <div className="-mt-4">
-              <CountrySelect
+
+            <div className="mt-4">
+              <p className="font-normal text-secondary mb-2 text-[14px]">
+                Country <span className="text-primary">*</span>
+              </p>
+              <select
                 name="country"
-                label="Country"
-                customClass="bg-input placeholder text-[16px]"
-                options={countryOption}
+                onChange={(e) => handleCountryChange(e.target.value)}
                 value={memberData.country}
-                handleChange={handleInput}
-              />
+                className={`border border-gray-300 rounded-lg text-[14px] text-secondary px-3 py-2 outline-none w-full bg-input`}
+              >
+                <option value="">Select a country</option>
+                {countryState.map((item, index) => (
+                  <option key={index} value={item.country}>
+                    {item.country}
+                  </option>
+                ))}
+              </select>
               {errors.country && (
-                <p className="text-red-500 mt-1 text-sm">{errors.country}</p>
+                <p className="text-red-500 text-sm">{errors.country}</p>
               )}
             </div>
-            <Register
-              imp="*"
-              name="state"
-              type="text"
-              label="Province/State"
-              handleInput={handleInput}
-              value={memberData.state}
-              errors={errors.state}
-            />
+
+            <div className="mt-4">
+              <p className="font-normal text-secondary mb-2 text-[14px]">
+                Province/State <span className="text-primary">*</span>
+              </p>
+              <select
+                name="state"
+                value={memberData.state}
+                onChange={handleInput}
+                // disabled={!memberData.country}
+                className={`border border-gray-300 rounded-lg text-[14px] text-secondary px-3 py-2 outline-none w-full bg-input`}
+              >
+                <option value="" hidden>
+                  {memberData?.state ? memberData?.state   : "Select State"}
+                </option>
+                {addressFilteredStates.map((state, index) => (
+                  <option key={index} value={state}>
+                    {state}
+                  </option>
+                ))}
+              </select>
+              {errors.state && (
+                <p className="text-red-500 mt-1 text-sm">{errors.state}</p>
+              )}
+            </div>
             <Register
               imp="*"
               name="city"

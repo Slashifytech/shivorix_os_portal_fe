@@ -117,7 +117,6 @@ import { createSprinklesEffect } from "../components/SprinklesParty";
 const ApplyOfferLater = () => {
   const role = localStorage.getItem("role");
   const studentUserId = useSelector((state) => state.student.studentInfoData);
-  // const { agentData } = useSelector((state) => state.agent);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { agentData } = useSelector((state) => state.agent);
 
@@ -126,13 +125,13 @@ const ApplyOfferLater = () => {
     role === "3"
       ? studentUserId?.data?.studentInformation?._id
       : location?.state?.id || location?.state;
+
   const { courses } = useSelector((state) => state.general);
   const { countryOption, studentData, prefCountryOption } = useSelector(
     (state) => state.general
   );
   const { studentInfoData } = useSelector((state) => state.student);
   const StudentDataToGet = role === "2" ? studentData : studentInfoData?.data;
-  console.log(studentId, "testing");
   const prefCountry =
     role === "3" ? location?.state?.country : location?.state?.prefCountry;
   const prefInstitute =
@@ -301,11 +300,14 @@ const ApplyOfferLater = () => {
     //   errors.testScore =
     //     "At least one test score (TOEFL, IELTS, or PTE) is required.";
     // }
-   // Certificate validation
-   if (!offerLater.certificate.urls || offerLater.certificate.urls.length === 0) {
-    errors.certificate =
-      "Please upload at least one document. If you do not have certificates for TOEFL, PTE, or IELTS, please upload an MOI certificate.";
-  }
+    // Certificate validation
+    if (
+      !offerLater.certificate.urls ||
+      offerLater.certificate.urls.length === 0
+    ) {
+      errors.certificate =
+        "Please upload at least one document. If you do not have certificates for TOEFL, PTE, or IELTS, please upload an MOI certificate.";
+    }
     return errors;
   };
 
@@ -331,25 +333,25 @@ const ApplyOfferLater = () => {
 
   const handleFileUpload = (files, uploadType) => {
     if (!files || files.length === 0 || !uploadType) return;
-  
+
     const fileOrUrl = files[0];
-  
+
     if (fileOrUrl instanceof File) {
       // Handle File objects
       const blobUrl = URL.createObjectURL(fileOrUrl);
-  
+
       // Save file locally to be uploaded later
       setNewFiles((prevState) => [
         ...prevState,
         { file: fileOrUrl, uploadType },
       ]);
-  
+
       // Update only educationDetails with the blob URL
       setOfferLater((prevState) => ({
         ...prevState,
         educationDetails: {
           ...prevState.educationDetails,
-          [uploadType]: blobUrl, 
+          [uploadType]: blobUrl,
         },
         ...(uploadType === "certificate" && {
           certificate: {
@@ -358,12 +360,12 @@ const ApplyOfferLater = () => {
               ...(Array.isArray(prevState.certificate?.urls)
                 ? prevState.certificate.urls
                 : []),
-              blobUrl, 
+              blobUrl,
             ],
           },
         }),
       }));
-  
+
       // toast.info(`${fileOrUrl.name} will be uploaded upon saving.`);
     } else if (typeof fileOrUrl === "string") {
       // Handle URL strings
@@ -371,7 +373,7 @@ const ApplyOfferLater = () => {
         ...prevState,
         educationDetails: {
           ...prevState.educationDetails,
-          [uploadType]: fileOrUrl, 
+          [uploadType]: fileOrUrl,
         },
         ...(uploadType === "certificate" && {
           certificate: {
@@ -380,16 +382,15 @@ const ApplyOfferLater = () => {
               ...(Array.isArray(prevState.certificate?.urls)
                 ? prevState.certificate.urls
                 : []),
-              fileOrUrl, 
+              fileOrUrl,
             ],
           },
         }),
       }));
-  
+
       // toast.info("Document URL has been set.");
     }
   };
-  
 
   const deleteFile = async (fileUrl, uploadType) => {
     if (!fileUrl) return;
@@ -472,35 +473,35 @@ const ApplyOfferLater = () => {
       );
 
       // Upload existing certificates if any
-       // Handle certificates
-    const uploadedCertificates = [];
-    if (Array.isArray(offerLater.certificate?.urls)) {
-      for (const cert of offerLater.certificate.urls) {
-        if (cert.startsWith("https://")) {
-          // Direct Firebase URL - use as is
-          uploadedCertificates.push(cert);
-        } else {
-          // Assume it's a blob URL and upload
-          try {
-            const response = await fetch(cert);
-            const blob = await response.blob();
-            const uniqueFileName = `${uuidv4()}-${cert.split("/").pop()}`;
-            const storageRef = ref(
-              storage,
-              `uploads/offerLetter/${uniqueFileName}`
-            );
+      // Handle certificates
+      const uploadedCertificates = [];
+      if (Array.isArray(offerLater.certificate?.urls)) {
+        for (const cert of offerLater.certificate.urls) {
+          if (cert.startsWith("https://")) {
+            // Direct Firebase URL - use as is
+            uploadedCertificates.push(cert);
+          } else {
+            // Assume it's a blob URL and upload
+            try {
+              const response = await fetch(cert);
+              const blob = await response.blob();
+              const uniqueFileName = `${uuidv4()}-${cert.split("/").pop()}`;
+              const storageRef = ref(
+                storage,
+                `uploads/offerLetter/${uniqueFileName}`
+              );
 
-            const snapshot = await uploadBytes(storageRef, blob);
-            const downloadURL = await getDownloadURL(snapshot.ref);
+              const snapshot = await uploadBytes(storageRef, blob);
+              const downloadURL = await getDownloadURL(snapshot.ref);
 
-            uploadedCertificates.push(downloadURL);
-          } catch (error) {
-            console.error("Error uploading certificate:", error);
+              uploadedCertificates.push(downloadURL);
+            } catch (error) {
+              console.error("Error uploading certificate:", error);
+            }
           }
         }
       }
-    }
-    updatedEducationDetails.certificate = { url: uploadedCertificates };
+      updatedEducationDetails.certificate = { url: uploadedCertificates };
       // Convert TOEFL, PTE, IELTS scores
       const convertToNumber = (scoreData) =>
         scoreData
@@ -520,6 +521,10 @@ const ApplyOfferLater = () => {
           url: updatedEducationDetails.certificate?.url || [],
         },
         studentInformationId: studentId,
+        ...(role === "3" && {
+          refferedLocation:
+            studentUserId?.data?.studentInformation?.residenceAddress?.state,
+        }),
       };
 
       // Add scores if present
@@ -586,6 +591,9 @@ const ApplyOfferLater = () => {
             appId: "",
             ticId: "",
             recieverId: agentData?._id,
+            country: agentData?.agentCountry,
+            state: agentData?.agentState,
+            sendTo: "partner",
           };
 
           socketServiceInstance.socket.emit(
@@ -614,6 +622,13 @@ const ApplyOfferLater = () => {
             }.`,
             path: "/admin/applications-review",
             recieverId: "",
+            country:
+              studentInfoData?.data?.studentInformation?.residenceAddress
+                ?.country,
+            state:
+              studentInfoData?.data?.studentInformation?.residenceAddress
+                ?.state,
+            sendTo: "partner",
           };
 
           socketServiceInstance.socket.emit(
@@ -863,9 +878,6 @@ const ApplyOfferLater = () => {
                 ))}
               </div>
             )}
-
-      
-         
           </div>
           <div className="bg-white rounded-xl px-8 py-4 pb-12 mt-6">
             <span className="font-bold text-[25px] text-secondary ">
@@ -959,7 +971,8 @@ const ApplyOfferLater = () => {
               Upload Documents
             </span>
             <p className="text-[15px] mt-3 text-body">
-              IELTS/PTE/TOEFL/MOI/Certificate <span className="text-primary">*</span>
+              IELTS/PTE/TOEFL/MOI/Certificate{" "}
+              <span className="text-primary">*</span>
             </p>
             <div className="flex flex-col justify-center items-center border-2 border-dashed border-body rounded-md py-9 mt-9 mb-4">
               <button
@@ -1005,16 +1018,13 @@ const ApplyOfferLater = () => {
                   </ul>
                 </div>
               )}
-              {Object.keys(errors).length > 0 && (
-  <div className="mt-6">
-    <p className="text-red-500">
-      {
-        Object.values(errors)[Object.values(errors).length - 1]
-      }
-    </p>
-  </div>
-)}
-
+            {Object.keys(errors).length > 0 && (
+              <div className="mt-6">
+                <p className="text-red-500">
+                  {Object.values(errors)[Object.values(errors).length - 1]}
+                </p>
+              </div>
+            )}
           </div>
           <div className="flex justify-end mb-12 mt-12">
             <span
@@ -1056,9 +1066,6 @@ const ApplyOfferLater = () => {
         heading="Offer Letter Form Submitted"
         text1="Thank you for completing the form. We'll review your information and process your request soon.
 Check your email and portal for updates.."
-        // text3="All good things take time."
-        // text4="Thanks for your patience!"
-        // text="You may start exploring SOV Portal. However, for a proper quality review and writing process, allow us up to 24 to 48 hours to confirm that your application has been successful."
       />
     </>
   );

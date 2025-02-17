@@ -14,38 +14,31 @@ import Loader from "../Loader";
 const Approved = ({ data }) => {
   const location = useLocation();
   const dispatch = useDispatch();
- const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const fetchStatus =
     location.pathname === "/admin/applications-review"
       ? "approved"
       : "completed";
-  console.log(data);
   useEffect(() => {
     dispatch(setTabType(fetchStatus));
   }, [dispatch]);
 
-  console.log(data);
-
   const applications = data?.applications;
 
-    useEffect(() => {
-      const timer = setTimeout(() => {
-        setLoading(false);
-      }, 2000);
-  
-      return () => clearTimeout(timer);
-    }, []);
-    if (loading) {
-      return (
-        <div
-        className={`w-full  mt-12 ${
-       "ml-[42%]"
-        }`}
-      >
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+  if (loading) {
+    return (
+      <div className={`w-full  mt-12 ${"ml-[42%]"}`}>
         <Loader />
       </div>
-      );
-    }
+    );
+  }
   return (
     <div className="mt-4">
       {location.pathname === "/admin/applications-review" ? (
@@ -66,17 +59,41 @@ const Approved = ({ data }) => {
                 applicationType={application?.type}
                 currentStatus="approved"
                 agentId={application?.institutionId}
-
-                linkTwo={application?.type === "offerLetter" ? "/application-view" : application?.type === "visa" ? "/visa-view" : application?.type === "courseFeeApplication" ? "/coursefee-view" : null}
+                linkTwo={
+                  application?.type === "offerLetter"
+                    ? "/application-view"
+                    : application?.type === "visa"
+                    ? "/visa-view"
+                    : application?.type === "courseFeeApplication"
+                    ? "/coursefee-view"
+                    : null
+                }
                 id={application?.institutionId}
                 description={
                   application?.customUserId?.startsWith("AG-")
-                    ? `${application?.agentName} has filed ${application?.type === "courseFeeApplication"? "course fee application": application?.type === "offerLetter" ? "offer letter" : application?.type === "visa" ? "visa" : null } for his/her student ${application?.fullName}`
+                    ? `${application?.agentName} has filed ${
+                        application?.type === "courseFeeApplication"
+                          ? "course fee application"
+                          : application?.type === "offerLetter"
+                          ? "offer letter"
+                          : application?.type === "visa"
+                          ? "visa"
+                          : null
+                      } for his/her student ${application?.fullName}`
                     : application?.customUserId?.startsWith("ST-")
-                    ? `${application?.fullName} has filed ${application?.type === "courseFeeApplication"? "course fee application": application?.type === "offerLetter" ? "offer letter" : application?.type === "visa" ? "visa" : null }`
+                    ? `${application?.fullName} has filed ${
+                        application?.type === "courseFeeApplication"
+                          ? "course fee application"
+                          : application?.type === "offerLetter"
+                          ? "offer letter"
+                          : application?.type === "visa"
+                          ? "visa"
+                          : null
+                      }`
                     : "Unknown type"
                 }
                 pageType="application"
+                refferedBy={application?.referredBy}
               />
             </div>
           ))

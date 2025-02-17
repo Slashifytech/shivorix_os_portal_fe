@@ -385,6 +385,9 @@ const courseFeeApplication = () => {
         Object.entries({
           ...courseFee,
           studentInformationId: studentId,
+          ...(role === "3" && { 
+            refferedLocation: studentUserId?.data?.studentInformation?.residenceAddress?.state
+          }),
         }).filter(([key, value]) => {
           if (key === "parentDocument" || key === "siblingsDocument") {
             return Object.values(value).some((v) => v); // Keep only if there's at least one non-empty value
@@ -416,6 +419,9 @@ const courseFeeApplication = () => {
             } ${studentData?.studentInformation?.stId}`,
             path: "/admin/applications-review",
             recieverId: "",
+            country: agentData?.agentCountry,
+            state: agentData?.agentState,
+            sendTo: "partner"
           };
           socketServiceInstance.socket.emit(
             "NOTIFICATION_AGENT_TO_ADMIN",
@@ -448,6 +454,9 @@ const courseFeeApplication = () => {
             studentName: courseFee.personalDetails.fullName,
             path: "/admin/applications-review",
             recieverId: agentData?._id,
+            country: studentInfoData?.data?.studentInformation?.residenceAddress?.country,
+            state: studentInfoData?.data?.studentInformation?.residenceAddress?.state,
+            sendTo: "partner"
           };
 
           socketServiceInstance.socket.emit(

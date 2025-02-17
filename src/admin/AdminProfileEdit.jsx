@@ -55,7 +55,7 @@ const AdminProfileEdit = () => {
     const blobUrls = uniqueFiles.map((file) => URL.createObjectURL(file));
     setProfileEdit((prevData) => ({
       ...prevData,
-      profilePicture: blobUrls[0], // Replace with the new blob URL
+      profilePicture: blobUrls[0], 
     }));
   };
 
@@ -80,20 +80,20 @@ const AdminProfileEdit = () => {
   const handleInput = (e) => {
     const { name, value } = e.target;
 
-    // Validation for firstName and lastName fields
+   
     if (
       (name === "firstName" || name === "lastName") &&
       !/^[a-zA-Z\s]*$/.test(value)
     ) {
-      return; // Prevent update if input contains invalid characters
+      return; 
     }
 
     setProfileEdit((prevData) => ({
       ...prevData,
-      [name]: value, // Update the field dynamically based on the name
+      [name]: value, 
     }));
 
-    // Clear any existing errors for the field
+    
     setErrors((prevErrors) => {
       const { [name]: removedError, ...restErrors } = prevErrors;
       return restErrors;

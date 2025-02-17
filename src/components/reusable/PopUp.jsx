@@ -28,7 +28,7 @@ const PopUp = ({
         : heading === "Successfully Registered" && role === "2"
         ? navigate("/agent/student-lists")
         : heading === "Institute Added Successfully" &&
-          (role === "0" || role === "1")
+          (role === "0" || role === "1" || role ==="4" || role === "5" )
         ? navigate("/admin/institute")
         : navigate("/login");
     }
@@ -80,7 +80,7 @@ const PopUp = ({
                   : heading === "Successfully Registered" && role === "2"
                   ? "Back to Lists"
                   : heading === "Institute Added Successfully" &&
-                    (role === "0" || role === "1")
+                    (role === "0" || role === "1" || role ==="4" || role === "5" )
                   ? "Back to Institute Lists"
                   : "Back to login"}
               </div>

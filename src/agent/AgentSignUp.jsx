@@ -44,8 +44,9 @@ const AgentSignUp = () => {
     password: "",
   });
   const [isVerifyOpen, setIsVerifyOpen] = useState(false);
-  const { countryOption } = useSelector((state) => state.general);
+  const { countryState } = useSelector((state) => state.general);
   const [isPopUp, setIsPopUp] = useState(false);
+  const [addressFilteredStates, setAddressFilteredStates] = useState([])
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isVerifyingLoading, setIsVerifyingLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -60,7 +61,7 @@ const AgentSignUp = () => {
     postalCode: "",
     email: "",
     phone: "",
-    primaryEmail:"",
+    primaryEmail: "",
     password: "",
   });
 
@@ -190,7 +191,11 @@ const AgentSignUp = () => {
   };
   const handleVerify = async (otp) => {
     try {
-      const res = await verifyAgentEmail(agentRegister.founderOrCeo.email, otp, agentRegister.password);
+      const res = await verifyAgentEmail(
+        agentRegister.founderOrCeo.email,
+        otp,
+        agentRegister.password
+      );
       VerifyPopUpClose();
       // if(res.data.statusCode === 201){
       setTimeout(() => {
@@ -238,7 +243,9 @@ const AgentSignUp = () => {
       } else {
         // Handle validation errors if the `success` flag is false
         if (res.message && Array.isArray(res.message)) {
-          const formattedErrors = res.message.map((error) => error.message).join(", ");
+          const formattedErrors = res.message
+            .map((error) => error.message)
+            .join(", ");
           toast.error(`Validation Errors: ${formattedErrors}`);
         } else {
           toast.error(res.message || "Something went wrong.");
@@ -279,6 +286,25 @@ const AgentSignUp = () => {
       toast.error(error.message || "Something went wrong");
     }
   };
+  const handleCountryChange = (e) => {
+    const country = e.target.value;
+
+    const selectedCountryData = countryState.find(
+      (item) => item.country === country
+    );
+    const states = selectedCountryData ? selectedCountryData.states : [];
+
+    setAgentRegister((prev) => ({
+      ...prev,
+
+      companyDetails: {
+        ...prev.companyDetails,
+        country,
+        province: "",
+      },
+    }));
+    setAddressFilteredStates(states);
+  };
 
   return (
     <>
@@ -308,14 +334,7 @@ const AgentSignUp = () => {
                   value={agentRegister.companyDetails.companyName}
                   errors={errors.companyName}
                 />
-                {/* <Register
-                  name="companyDetails.tradeName"
-                  type="text"
-                  label="Company Alternate Name"
-                  handleInput={handleInput}
-                  value={agentRegister.companyDetails.tradeName}
-                  errors={errors.tradeName}
-                /> */}
+
                 <Register
                   name="primaryContactPerson.name"
                   type="text"
@@ -336,18 +355,27 @@ const AgentSignUp = () => {
                 />
                 <div className="flex flex-row items-center justify-between gap-6">
                   <span className="w-[50%]">
-                    <CountrySelect
-                      name="companyDetails.country"
-                      label="Country"
-                      options={countryOption}
-                      value={agentRegister.companyDetails.country}
-                      handleChange={handleInput}
-                      customClass="bg-input"
-                    />
-                    {errors.country && (
-                      <p className="text-red-500 text-sm">{errors.country}</p>
-                    )}
-
+                    <div className="mt-4">
+                      <p className="font-normal text-secondary mb-2 text-[14px]">
+                        Country <span className="text-primary">*</span>
+                      </p>
+                      <select
+                        name="companyDetails.country"
+                        onChange={(e) => handleCountryChange(e)}
+                        value={agentRegister.companyDetails.country}
+                        className={`border border-gray-300 rounded-lg text-secondary px-3 py-2 outline-none w-full bg-input`}
+                      >
+                        <option value="">Select a country</option>
+                        {countryState.map((item, index) => (
+                          <option key={index} value={item.country}>
+                            {item.country}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.country && (
+                        <p className="text-red-500 text-sm">{errors.country}</p>
+                      )}
+                    </div>
                     <Register
                       name="companyDetails.city"
                       type="text"
@@ -359,15 +387,30 @@ const AgentSignUp = () => {
                     />
                   </span>
                   <span className="w-[50%]">
-                    <Register
-                      name="companyDetails.province"
-                      type="text"
-                      label="Province/State"
-                      handleInput={handleInput}
-                      value={agentRegister.companyDetails.province}
-                      errors={errors.province}
-                      imp="*"
-                    />
+                    <div className="mt-4">
+                      <p className="font-normal text-secondary mb-2 text-[14px]">
+                        Province/State <span className="text-primary">*</span>
+                      </p>
+                      <select
+                        name="companyDetails.province"
+                        value={agentRegister.companyDetails.province}
+                        onChange={handleInput}
+                        disabled={!agentRegister.companyDetails.country}
+                        className={`border border-gray-300 rounded-lg text-secondary px-3 py-2 outline-none w-full bg-input`}
+                      >
+                        <option value="">Select a state</option>
+                        {addressFilteredStates.map((state, index) => (
+                          <option key={index} value={state}>
+                            {state}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.province && (
+                        <p className="text-red-500 mt-1 text-sm">
+                          {errors.province}
+                        </p>
+                      )}
+                    </div>
                     <Register
                       name="companyDetails.postalCode"
                       type="number"
@@ -433,7 +476,7 @@ const AgentSignUp = () => {
                   </span>
                   <div className="w-[50%] mt-5">
                     <PhoneInputComponent
-                    notImp={true}
+                      notImp={true}
                       phoneData={agentRegister.primaryContactPerson.phone}
                       onPhoneChange={(phoneData) =>
                         handlePhoneChange(phoneData, "primaryContactPerson")

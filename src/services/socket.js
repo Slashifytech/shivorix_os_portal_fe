@@ -7,12 +7,12 @@ import {
   markNotificationAsRead,
   updateNotificationCount,
 } from "../features/notificationSlice";
-import { Navigate, useNavigate } from "react-router-dom";
 
 class SocketService {
   constructor() {
     this.socket = null;
   }
+
   async connectToSocket(hostName, encryptData) {
     if (this.socket) {
       console.log("Socket is already connected");
@@ -34,17 +34,26 @@ class SocketService {
     this.socket.on("connect", () => {
       if (role === "0" || role === "1") {
         this.socket.emit("GET_UNREAD_COUNT", "emitForAdmin");
-        this.socket.emit("GET_NOTIFICATIONS_FOR_ADMIN", { page: 1, limit: 10 });
+        this.socket.emit("GET_NOTIFICATIONS_FOR_ADMIN", {
+          page: 1,
+          limit: 10,
+        });
+      } else if (role === "4" || role === "5") {
+        this.socket.emit("GET_UNREAD_COUNT", "emitForPartner");
+        this.socket.emit("GET_NOTIFICATIONS_FOR_PARTNER", {
+          page: 1,
+          limit: 10,
+        });
       } else {
         this.socket.emit("GET_UNREAD_COUNT", "emitForUser");
         this.socket.emit("GET_NOTIFICATIONS_FOR_USER", { page: 1, limit: 10 });
       }
 
-      console.log("Successfully connected to socket:", this.socket.id);
+      // console.log("Successfully connected to socket:", this.socket.id);
     });
 
     this.socket.on("onMessage", (message) => {
-      console.log("Received message from server:", message);
+      // console.log("Received message from server:", message);
     });
 
     this.socket.on("GET_NOTIFICATIONS_FOR_USER", (data) => {
@@ -54,9 +63,14 @@ class SocketService {
 
     this.socket.on("GET_NOTIFICATIONS_FOR_ADMIN", (data) => {
       console.log("GET_NOTIFICATIONS_FOR_ADMIN:", data);
+      this.socket.emit("GET_UNREAD_COUNT", "emitForAdmin");
       store.dispatch(addAllNotifications(data));
     });
-
+    this.socket.on("GET_NOTIFICATIONS_FOR_PARTNER", (data) => {
+      console.log("GET_NOTIFICATIONS_FOR_PARTNER:", data);
+      this.socket.emit("GET_UNREAD_COUNT", "emitForPartner");
+      store.dispatch(addAllNotifications(data));
+    });
     //these three are for getting new notifications and appending them
     this.socket.on("GLOBAL_NOTIFICATION_STUDENT_ALERT", (data) => {
       console.log("GLOBAL_NOTIFICATION_STUDENT_ALERT:", data);
@@ -65,7 +79,7 @@ class SocketService {
     });
 
     this.socket.on("DELETE_AUTH_TOKEN", (data) => {
-      // console.log("mak");
+      console.log("mak");
       const role = localStorage.getItem("role");
 
       localStorage.removeItem("role");
@@ -75,6 +89,8 @@ class SocketService {
 
       if (role === "0" || role === "1") {
         window.location.href = "/admin/role/auth/login";
+      } else if (role === "4" || role === "5") {
+        window.location.href = "/province/login";
       } else {
         window.location.href = "/login";
       }
@@ -85,18 +101,50 @@ class SocketService {
       store.dispatch(addNewNotification(data));
       this.socket.emit("GET_UNREAD_COUNT", "emitForUser");
     });
+    this.socket.on("GLOBAL_NOTIFICATION_PARTNER_ALERT", (data) => {
+      console.log("GLOBAL_NOTIFICATION_PARTNER_ALERT:", data);
+      this.socket.emit("GET_UNREAD_COUNT", "emitForPartner");
+      const state = store.getState();
+      
+      const roleType = state.admin.getAdminProfile.data.role;
+      const province =
+        state.admin.getAdminProfile.data?.residenceAddress?.state;
+      if (
+        data.state !== province?.toLowerCase() &&
+        (roleType === "4" || roleType === "5")
+      ) {
+        return;
+      }else{
+      store.dispatch(addNewNotification(data));
 
+      }
+    });
     this.socket.on("GLOBAL_NOTIFICATION_ADMIN_ALERT", (data) => {
       console.log("GLOBAL_NOTIFICATION_ADMIN_ALERT:", data);
-      store.dispatch(addNewNotification(data));
       this.socket.emit("GET_UNREAD_COUNT", "emitForAdmin");
+      store.dispatch(addNewNotification(data));
     });
 
     //this event is to get the notificationCount
     this.socket.on("GET_UNREAD_COUNT", (data) => {
       console.log("GET_UNREAD_COUN:", data);
-      store.dispatch(updateNotificationCount(data));
+    
+      const state = store.getState();
+      
+      const roleType = state.admin?.getAdminProfile?.data?.role;
+      const province =
+        state.admin?.getAdminProfile?.data?.residenceAddress?.state;
+      if (
+        data?.state !== province?.toLowerCase() &&
+        (roleType === "4" || roleType === "5")
+      ) {
+        return;
+      }else{
+        store.dispatch(updateNotificationCount(data));
+
+      }
     });
+
 
     this.socket.on("NOTIFICATION_READ_STATUS_UPDATE", (data) => {
       console.log("NOTIFICATION_READ_STATUS_UPDATE:", data);
@@ -116,12 +164,10 @@ class SocketService {
   }
 
   disconnectSocket() {
-    if (this.socket) {
-      this.socket.disconnect();
-      this.socket = null;
+      this.socket?.disconnect();
       console.log("Socket disconnected");
-    }
   }
+  
 
   sendMessage = async (eventType, dataObj) => {
     console.log(`for event ${eventType}, data is ${dataObj}`);

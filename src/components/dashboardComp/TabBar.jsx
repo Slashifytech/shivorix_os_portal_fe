@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
 const TabBar = ({ tabs, activeTab, onTabChange  }) => {
   // const [activeTab, setActiveTab] = useState(tabs[0].name); // Initialize with the first tab
-  console.log(tabs, "check")
 
   // const handleTabClick = (tabName) => {
   //   setActiveTab(tabName);
@@ -45,7 +44,6 @@ const TabBar = ({ tabs, activeTab, onTabChange  }) => {
             {activeTab === tab.name ? (
               <tab.component key={tab.name} {...tab.props}   />     
             ) : null}
-            {console.log(tab, "check")}
             {/* console.log(data, "check") */}
 
           </div>

@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import Loader from "../components/Loader";
 
-const StudentAgentInternal = ({ children }) => {
+const StrictPartner = ({ children }) => {
   const roleType = localStorage.getItem("role");
+  const authToken = localStorage.getItem("userAuthToken");
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -22,11 +24,13 @@ const StudentAgentInternal = ({ children }) => {
     );
   }
 
-  if (roleType !== "3" && roleType !== "2") {
-    return <Navigate to="/login" replace={true} />;
+  const isAuthorizedRole = roleType === "4" ;
+
+  if (!isAuthorizedRole || !authToken) {
+    return <Navigate to="/province/login" replace={true} />;
   }
 
   return children;
 };
 
-export default StudentAgentInternal;
+export default StrictPartner;

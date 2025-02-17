@@ -4,30 +4,29 @@ import { useDispatch, useSelector } from "react-redux";
 import Pagination from "../components/dashboardComp/Pagination";
 import { CustomInput } from "../components/reusable/Input";
 import { IoSearchOutline } from "react-icons/io5";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link,  useNavigate } from "react-router-dom";
 import { dnf } from "../assets";
 import Dnf from "../components/Dnf";
 import Loader from "../components/Loader";
 import { toast } from "react-toastify";
 import AdminSidebar from "../components/dashboardComp/AdminSidebar";
 import MemberCard from "../components/dashboardComp/MemberCard";
-import { getAllTeamData, setEmptyMemberInput } from "../features/adminSlice";
+import { fetchAdminPartnerData, getAllTeamData, setEmptyMemberInput } from "../features/adminSlice";
 import { deleteTeam } from "../features/adminApi";
 import socketServiceInstance from "../services/socket";
 
-const TeamList = () => {
-  const { getAdminProfile } = useSelector((state) => state.admin);
+const PartnerList = () => {
   const teamData = useSelector((state) => state.admin.getTeams);
-  const dispatch = useDispatch();
-  const location = useLocation()
-  const [isLoading, setIsLoading] = useState(true);
+  const {PartnersData} = useSelector((state)=> state.admin)
   const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
   const perPage = 10;
-  const totalUsersCount = teamData?.data?.total || 0;
-  const currentPage = teamData?.data?.currentPage;
-  const totalPagesCount = teamData?.data?.totalPages;
-  const role = getAdminProfile?.data?.role;
+  const [page, setPage] = useState(1);
+  const totalUsersCount = PartnersData?.total || 0;
+  const currentPage = PartnersData?.currentPage;
+  const totalPagesCount = PartnersData?.totalPages;
+  const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+
   const handlePageChange = (pageNumber) => {
     setPage(pageNumber);
   };
@@ -39,9 +38,10 @@ const TeamList = () => {
 
   const handleEmptyForm = (e) => {
     dispatch(setEmptyMemberInput());
+
   };
   useEffect(() => {
-    dispatch(getAllTeamData({ perPage, page, search }));
+    dispatch(fetchAdminPartnerData({ perPage, page, search, endpoint: `/auth/admin/get-partner-lists` }));
   }, [perPage, page, search]);
 
   useEffect(() => {
@@ -54,18 +54,17 @@ const TeamList = () => {
   const deleteMember = async (id, userType) => {
     try {
       const res = await deleteTeam(id, userType);
-      dispatch(getAllTeamData({}));
+      dispatch(fetchAdminPartnerData({ perPage, page, search, endpoint: `/auth/admin/get-partner-lists` }))
 
-      toast.success(res.message || "Member Deleted Successfully");
-
+  
       if (socketServiceInstance.isConnected()) {
-        //from agent to admin
-        const data = { userId: id, reason: "team deleted from admin" };
-
+        const data = { userId: id, reason: "partner deleted from admin" };
         socketServiceInstance.socket.emit("DELETE_AUTH_TOKEN", data);
       } else {
         console.error("Socket connection failed, cannot emit notification.");
       }
+      toast.success(res.message || "Member Deleted Successfully");
+
     } catch (error) {
       console.log(error);
       toast.error(error.message || "something went wrong");
@@ -81,13 +80,10 @@ const TeamList = () => {
         </span>
         <div className="md:ml-[17%] sm:ml-[23%] pt-14 font-poppins bg-white pb-6">
           <p className="md:text-[28px] sm:text-[22px] font-bold text-sidebar mt-6 ml-9">
-            {role === "4" ? "Employee Directory" : "Team Members"}(
-            {totalUsersCount})
+            Portal Partner({totalUsersCount})
           </p>
           <p className="font-normal text-body pr-[20%] text-[16px] ml-9">
-            {role === "4"
-              ? `Manage and view Employee details in one place.`
-              : `Manage and view team members details in one place.`}{" "}
+            Manage and view partner details in one place.
           </p>
         </div>
         <div className="flex items-center justify-between  md:mr-7 sm:mr-5 md:ml-[19.5%] sm:ml-[27%] mt-6">
@@ -97,7 +93,7 @@ const TeamList = () => {
               <CustomInput
                 className="h-11 md:w-96 sm:w-80 rounded-md text-body placeholder:px-3 pl-7 border border-[#E8E8E8] outline-none"
                 type="text"
-                placeHodler="Search by Id, Name, Phone Number, & Email"
+                placeHodler="Search by ID, Name, Phone Number, & Email"
                 name="search"
                 value={search}
                 onChange={handleSearchChange}
@@ -107,17 +103,9 @@ const TeamList = () => {
               </span>
             </span>
           </span>
-          <Link
-            onclick={handleEmptyForm}
-            to={  
-           role === "4"
-                ? "/admin/province/add-employee"
-                : "/admin/add-member"
-            }
-            state={"passPage"}
-          >
-            <span className="bg-primary text-white rounded-md px-6 py-2 cursor-pointer text-[13px]">
-              {role === "4" ? "+ Add New Employee" : "+ Add New Member"}
+          <Link onclick={handleEmptyForm} to="/admin/add-partner" state={"passPage"}>
+            <span  className="bg-primary text-white rounded-md px-6 py-2 cursor-pointer text-[13px]">
+              + Add New Partner
             </span>
           </Link>
         </div>
@@ -126,7 +114,7 @@ const TeamList = () => {
           <div className="w-full ml-[53%] mt-12">
             <Loader />
           </div>
-        ) : !teamData?.data?.teamMembers ? (
+        ) : !PartnersData?.teamMembers ? (
           <p className="mt-8 font-medium text-body ml-[25%] mr-[15%]">
             <Dnf
               dnfImg={dnf}
@@ -134,7 +122,7 @@ const TeamList = () => {
               bodyText="No Member Available to Show"
             />
           </p>
-        ) : teamData?.data?.teamMembers.length === 0 ? (
+        ) : PartnersData?.teamMembers.length === 0 ? (
           <p className="mt-8 font-medium text-body ml-[25%] mr-[15%]">
             <Dnf
               dnfImg={dnf}
@@ -145,7 +133,7 @@ const TeamList = () => {
         ) : (
           <>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1 md:ml-[18.5%] sm:ml-[27%] mt-6 mr-6 gap-3 ">
-              {teamData?.data?.teamMembers?.map((data, index) => (
+              {PartnersData?.teamMembers?.map((data, index) => (
                 <MemberCard
                   key={index}
                   name={data?.firstName + " " + data?.lastName}
@@ -155,11 +143,12 @@ const TeamList = () => {
                   defaultId={{
                     id: data._id,
                   }}
-                  stId={data?.teamId}
+                  stId={data?.teamId || data?.partnerId}
                   deleteteamData={deleteMember}
                   page={data?.pageCount}
                   edit={true}
-                  userType={ location.pathname === "/admin/team-members" ? "admin" : "employeeList"}
+                  userType={"partner"}
+                  location={data?.residenceAddress?.state + ", " + data?.residenceAddress?.country}
                 />
               ))}
             </div>
@@ -179,4 +168,4 @@ const TeamList = () => {
   );
 };
 
-export default TeamList;
+export default PartnerList;

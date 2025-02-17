@@ -25,9 +25,13 @@ const StudentProfile = () => {
   const role = localStorage.getItem("role");
   const id = localStorage.getItem("student");
   const { studentInfoData } = useSelector((state) => state.student);
+  const { getAdminProfile } = useSelector((state) => state.admin);
 
   const studentData =
-    role === "0" || role === "1"
+  getAdminProfile?.data?.role === "0" ||
+  getAdminProfile?.data?.role === "1" ||
+  getAdminProfile?.data?.role === "4" ||
+  getAdminProfile?.data?.role === "5"
       ? useSelector((state) => state.admin.getStudentDataById)
       : role === "3"
       ? studentInfoData?.data
@@ -35,7 +39,7 @@ const StudentProfile = () => {
 
   const location = useLocation();
   const dispatch = useDispatch();
-  console.log(location);
+
   const studentId =
     role === "3"
       ? id || location.state.notifyId
@@ -45,7 +49,12 @@ const StudentProfile = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [profileUpdated, setProfileUpdated] = useState(false);
   useEffect(() => {
-    if (role === "0" || role === "1") {
+    if (
+      getAdminProfile?.data?.role === "0" ||
+      getAdminProfile?.data?.role === "1" ||
+      getAdminProfile?.data?.role === "4" ||
+      getAdminProfile?.data?.role === "5"
+    ) {
       dispatch(getStudentById(studentId));
     }
     if (role === "3") {
@@ -137,21 +146,19 @@ const StudentProfile = () => {
   const statusFive =
     studentData?.flags?.visaApproved === "approved" ||
     studentData?.flags?.visaApproved === "approvedbyembassy" ||
-  studentData?.flags?.visaApproved === "withdrawalrequest" ||
-  studentData?.flags?.visaApproved === "withdrawalcomplete" ||
-  studentData?.flags?.visaApproved === "rejectedbyembassy"
-    ? "done"
-    : studentData?.flags?.visaApproved === "reject"
-    ? "pending"
-    : "current";
+    studentData?.flags?.visaApproved === "withdrawalrequest" ||
+    studentData?.flags?.visaApproved === "withdrawalcomplete" ||
+    studentData?.flags?.visaApproved === "rejectedbyembassy"
+      ? "done"
+      : studentData?.flags?.visaApproved === "reject"
+      ? "pending"
+      : "current";
 
   const statusSix =
-  
     studentData?.flags?.visaApproved === "approvedbyembassy" ||
     studentData?.flags?.visaApproved === "visagranted"
       ? "done"
-      : 
-        studentData?.flags?.visaApproved === "rejectedbyembassy" ||
+      : studentData?.flags?.visaApproved === "rejectedbyembassy" ||
         studentData?.flags?.visaApproved === "withdrawalrequest" ||
         studentData?.flags?.visaApproved === "withdrawalcomplete"
       ? "pending"
@@ -170,7 +177,10 @@ const StudentProfile = () => {
                 <Sidebar />
               ) : role === "2" ? (
                 <AgentSidebar />
-              ) : role === "0" || role === "1" ? (
+              ) : getAdminProfile?.data?.role === "0" ||
+                getAdminProfile?.data?.role === "1" ||
+                getAdminProfile?.data?.role === "5" ||
+                getAdminProfile?.data?.role === "4" ? (
                 <AdminSidebar />
               ) : null}
             </span>
@@ -186,7 +196,7 @@ const StudentProfile = () => {
           <div>
             {profileView === "/admin/approvals" ||
             profileView === "/admin/applications-review" ||
-            role === "0" ||  role === "1" ||
+            role === "0" || role === "1" || role ==="4" || role === "5" ||
             location?.state?.adminState ||
             role === "3" ? (
               ""
@@ -200,7 +210,11 @@ const StudentProfile = () => {
                       : "pending"
                   }
                   statusTwo={
-                    studentData?.flags?.offerLetterApproved === "approved" ? "done" :   studentData?.flags?.offerLetterApproved === "rejected" ? "pending"  : "current"
+                    studentData?.flags?.offerLetterApproved === "approved"
+                      ? "done"
+                      : studentData?.flags?.offerLetterApproved === "rejected"
+                      ? "pending"
+                      : "current"
                   }
                   statusFive={statusFive}
                   statusFour={
@@ -225,7 +239,9 @@ const StudentProfile = () => {
                   ? "pt-20  pl-[19.5%] pb-6"
                   : location?.state?.adminState
                   ? " pl-[19.5%] pt-20 pb-6"
-                  : `pl-[19.5%] ${role === "0" || role === "1" ? "pt-[75px] " : "pt-[25px]"} pb-6`
+                  : `pl-[19.5%] ${
+                 role === "0" || role === "1" || role ==="4" || role === "5"  ? "pt-[75px] " : "pt-[25px]"
+                    } pb-6`
               }`}
             >
               <span>
