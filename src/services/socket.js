@@ -105,19 +105,20 @@ class SocketService {
       console.log("GLOBAL_NOTIFICATION_PARTNER_ALERT:", data);
       this.socket.emit("GET_UNREAD_COUNT", "emitForPartner");
       const state = store.getState();
-      
-      const roleType = state.admin.getAdminProfile?.data?.role;
+
+      const roleType = state.admin?.getAdminProfile?.data?.role;
       const province =
-        state.admin.getAdminProfile?.data?.residenceAddress?.state;
+        roleType === "5"
+          ? state.admin.getAdminProfile?.data?.residenceAddress?.regionData
+          : state.admin.getAdminProfile?.data?.residenceAddress?.state;
 
       if (
         data?.state !== province?.toLowerCase() &&
         (roleType === "4" || roleType === "5")
       ) {
         return;
-      }else{
-      store.dispatch(addNewNotification(data));
-
+      } else {
+        store.dispatch(addNewNotification(data));
       }
     });
     this.socket.on("GLOBAL_NOTIFICATION_ADMIN_ALERT", (data) => {
@@ -129,23 +130,24 @@ class SocketService {
     //this event is to get the notificationCount
     this.socket.on("GET_UNREAD_COUNT", (data) => {
       console.log("GET_UNREAD_COUN:", data);
-    
+
       const state = store.getState();
-      
+
       const roleType = state.admin?.getAdminProfile?.data?.role;
       const province =
-        state.admin?.getAdminProfile?.data?.residenceAddress?.state;
+        roleType === "5"
+          ? state.admin.getAdminProfile?.data?.residenceAddress?.regionData
+          : state.admin.getAdminProfile?.data?.residenceAddress?.state;
+
       if (
         data?.state !== province?.toLowerCase() &&
         (roleType === "4" || roleType === "5")
       ) {
         return;
-      }else{
+      } else {
         store.dispatch(updateNotificationCount(data));
-
       }
     });
-
 
     this.socket.on("NOTIFICATION_READ_STATUS_UPDATE", (data) => {
       console.log("NOTIFICATION_READ_STATUS_UPDATE:", data);
@@ -165,10 +167,9 @@ class SocketService {
   }
 
   disconnectSocket() {
-      this.socket?.disconnect();
-      console.log("Socket disconnected");
+    this.socket?.disconnect();
+    console.log("Socket disconnected");
   }
-  
 
   sendMessage = async (eventType, dataObj) => {
     console.log(`for event ${eventType}, data is ${dataObj}`);
