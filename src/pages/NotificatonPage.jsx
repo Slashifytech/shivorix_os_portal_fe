@@ -89,7 +89,7 @@ const NotificationPage = () => {
   };
 
   const fetchNotifications = useCallback(() => {
-    if (isLoading || noMoreNotifications) {
+    if (isLoading ) {
       console.log("returning");
     }
     setIsLoading(true);
