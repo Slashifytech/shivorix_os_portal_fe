@@ -58,7 +58,7 @@ function App() {
         if (!data) return;
 
         socket = await socketServiceInstance.connectToSocket(
-     "https://sovtest.slashifytech.in/",
+     "https://server.sovportal.in/",
           data
         );
       } catch (error) {
