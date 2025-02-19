@@ -22,10 +22,12 @@ export const startTokenHeartbeat = () => {
     const currentPath = window.location.pathname;
 
     const excludedPaths = [
-      "/login",
-      "/signup",
+     "/login",
       "/admin/role/auth/login",
       "/province/login",
+      "/student-signup",
+      "/agent-signup",
+      "/new-account"
     ];
 
     if (!token || isTokenExpired(token)) {
