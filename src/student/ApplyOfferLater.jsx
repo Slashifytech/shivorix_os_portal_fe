@@ -912,7 +912,9 @@ const ApplyOfferLater = () => {
             <SelectComponent
               name="preferences.course"
               label="Course"
-              options={courses}
+             options={courses
+                ?.slice()
+                .sort((a, b) => a.courseName.localeCompare(b.courseName))}
               value={offerLater.preferences.course}
               handleChange={handleInput}
             />
