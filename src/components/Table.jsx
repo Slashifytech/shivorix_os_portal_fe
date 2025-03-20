@@ -1334,8 +1334,9 @@ export function CustomTableSeven({
                     </a>
                   </Typography>
                 </td>
-                {(tableType === "upload" && role === "2") ||
-                  (role === "3" || role === "2"  && (
+                {
+                  (tableType === "upload" && role === "2") ||
+                  (role === "3"  && (
                     <td className="">
                       <Typography
                         as="a"
