@@ -56,7 +56,7 @@ const ScoreInputForm = ({ scoreType, scoreData, handleInput,namePrefix, errors, 
         <Register
           // imp="*"
           name={`${namePrefix}.listening`}
-            type="number"
+            type="text"
           label="Listening"
           handleInput={(e) => handleInput(e, scoreType.toLowerCase())}
           value={scoreData.listening}
