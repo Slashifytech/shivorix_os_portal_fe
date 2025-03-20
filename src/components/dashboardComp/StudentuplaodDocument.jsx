@@ -14,7 +14,7 @@ import { dnf } from "../../assets";
 import Loader from "../Loader";
 import { CustomInput } from "../reusable/Input";
 import { IoSearchOutline } from "react-icons/io5";
-
+import { v4 as uuidv4 } from 'uuid';
 const StudentUploadDocument = ({ adminPath, studentId }) => {
   const { getAdminProfile } = useSelector((state) => state.admin);
   const role = localStorage.getItem("role");
@@ -101,8 +101,8 @@ const StudentUploadDocument = ({ adminPath, studentId }) => {
       }
 
       // console.log(file, "Uploading file");
-
-      const storageRef = ref(storage, `uploads/documents/${file.name}`);
+    const uniqueFileName = `${uuidv4()}-${file.name}`;
+      const storageRef = ref(storage, `uploads/documents/${uniqueFileName}`);
 
       try {
         // Upload each file
