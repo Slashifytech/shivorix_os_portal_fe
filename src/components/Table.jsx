@@ -1334,27 +1334,26 @@ export function CustomTableSeven({
                     </a>
                   </Typography>
                 </td>
-                {
-                  (tableType === "upload" && role === "2") ||
-                  (role === "3"  && (
-                    <td className="">
-                      <Typography
-                        as="a"
-                        variant="small"
-                        color="blue-gray"
-                        className="font-medium"
-                      >
-                        <span
-                          onClick={() => openDeletePopup(row.docId, row.url)}
-                          className="flex flex-row items-center gap-2"
-                        >
-                          <span className="font-body border rounded-md border-primary cursor-pointer px-6 py-1">
-                            {actionTwo}
-                          </span>
-                        </span>
-                      </Typography>
-                    </td>
-                  ))}
+               {(role === "2" && tableType === "upload") || role === "3" ? (
+  <td className="">
+    <Typography
+      as="a"
+      variant="small"
+      color="blue-gray"
+      className="font-medium"
+    >
+      <span
+        onClick={() => openDeletePopup(row.docId, row.url)}
+        className="flex flex-row items-center gap-2"
+      >
+        <span className="font-body border rounded-md border-primary cursor-pointer px-6 py-1">
+          {actionTwo}
+        </span>
+      </span>
+    </Typography>
+  </td>
+) : null}
+
               </tr>
             ))}
           </tbody>
