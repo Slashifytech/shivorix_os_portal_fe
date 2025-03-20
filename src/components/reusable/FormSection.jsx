@@ -25,7 +25,7 @@ const ScoreInputForm = ({ scoreType, scoreData, handleInput,namePrefix, errors, 
         <Register
           // imp="*"
           name={`${namePrefix}.reading`}
-          type="number"
+          type="text"
           label="Reading"
           handleInput={(e) => handleInput(e, scoreType.toLowerCase())}
           value={scoreData.reading}
@@ -34,7 +34,7 @@ const ScoreInputForm = ({ scoreType, scoreData, handleInput,namePrefix, errors, 
         <Register
           // imp="*"
           name={`${namePrefix}.speaking`}
-          type="number"
+          type="text"
           label="Speaking"
           handleInput={(e) => handleInput(e, scoreType.toLowerCase())}
           value={scoreData.speaking}
@@ -47,7 +47,7 @@ const ScoreInputForm = ({ scoreType, scoreData, handleInput,namePrefix, errors, 
         <Register
           // imp="*"
           name={`${namePrefix}.writing`}
-          type="number"
+          type="text"
           label="Writing"
           handleInput={(e) => handleInput(e, scoreType.toLowerCase())}
           value={scoreData?.writing}
@@ -67,7 +67,7 @@ const ScoreInputForm = ({ scoreType, scoreData, handleInput,namePrefix, errors, 
       <Register
         // imp="*"
         name={`${namePrefix}.overallBand`}
-         type="number"
+         type="text"
         label="Overall Bands"
         handleInput={(e) => handleInput(e, scoreType.toLowerCase())}
         value={scoreData.overallBand}
