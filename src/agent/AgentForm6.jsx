@@ -159,7 +159,7 @@ const AgentForm6 = ({hide, handleCancel, updateData, adminId, agentId}) => {
           //from agent to admin
           const notificationData = {
             title: " AGENT_REGISTERED_FOR_APPROVAL",
-            message: `${agentData?.companyDetails?.businessName} ${agentData?.agId} Agent registered for approval.
+            message: `${agentData?.companyDetails?.businessName} ${res?.data?.data?.agId} Agent registered for approval.
 `,           
             path:"/admin/approvals",
             recieverId: "",
