@@ -119,6 +119,7 @@ export const formSixSubmit = async (data, edit) => {
         edit,
       },
     });
+    return response
   } catch (error) {
     if (error.response) {
       throw new Error(
