@@ -126,7 +126,8 @@ const ApplyOfferLater = () => {
       ? studentUserId?.data?.studentInformation?._id
       : location?.state?.id || location?.state;
 
-  const { courses } = useSelector((state) => state.general);
+  const { popularCourse } = useSelector((state) => state.general);
+  const courses = popularCourse;
   const { countryOption, studentData, prefCountryOption } = useSelector(
     (state) => state.general
   );
