@@ -29,7 +29,8 @@ const Form3 = ({
   const role = localStorage.getItem("role");
   const location = useLocation();
   const { getStudentDataById } = useSelector((state) => state.admin);
-  const { prefCountryOption, courses } = useSelector((state) => state.general);
+  const { prefCountryOption, popularCourse } = useSelector((state) => state.general);
+    const courses = popularCourse;
   const IdToAddStudent = location?.state?.id?.id;
   const { instituteOption } = useSelector((state) => state.general);
   const studentInfoData = useSelector((state) => state.student.studentInfoData);
@@ -240,7 +241,9 @@ const Form3 = ({
           <SelectComponent
             name="preferredProgram"
             label="Preferred Program"
-            options={courses}
+               options={courses
+              ?.slice()
+              .sort((a, b) => a.courseName.localeCompare(b.courseName))}
             value={preferenceData.preferredProgram}
             handleChange={handleInput}
           />
