@@ -895,15 +895,27 @@ const ApplyOfferLater = () => {
             {errors.prefCountry && (
               <p className="text-red-500 mt-1 text-sm">{errors.prefCountry}</p>
             )}
-
-            <InstituteComponent
-              name="preferences.institution"
-              label="Institute"
-              customClass="bg-input"
-              options={offerLater.preferences.country ? instituteOption : []}
-              value={offerLater.preferences.institution}
-              handleChange={handleInput}
-            />
+<div className="flex flex-col mb-4 mt-6 font-poppins">
+            <label className="font-normal text-secondary mb-2 text-[14px]">
+            Institute
+            </label>
+            <select
+                      name="preferences.institution"
+                      value={offerLater.preferences.institution}
+                      onChange={handleInput}
+              className={`border border-gray-300 bg-input text-secondary rounded-md px-3 py-2 outline-none `}
+            >
+              <option className="text-secondary font-poppins" value="">
+                Select Options
+              </option>
+            
+  {offerLater.preferences.country && instituteOption?.instituteNames?.map((option, index) => (
+    <option className="text-secondary" key={index} value={option}>
+      {option}
+    </option>
+  ))}
+            </select>
+          </div>
             {errors.prefInstitution && (
               <p className="text-red-500 mt-1 text-sm">
                 {errors.prefInstitution}
@@ -913,9 +925,14 @@ const ApplyOfferLater = () => {
             <SelectComponent
               name="preferences.course"
               label="Course"
-             options={courses
-                ?.slice()
-                .sort((a, b) => a.courseName.localeCompare(b.courseName))}
+            options={[
+                ...new Map(
+                  courses
+                    ?.slice()
+                    .sort((a, b) => a.courseName.localeCompare(b.courseName))
+                    .map((course) => [course.courseName, course]) 
+                ).values(),
+              ]}
               value={offerLater.preferences.course}
               handleChange={handleInput}
             />
