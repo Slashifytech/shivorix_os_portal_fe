@@ -7,8 +7,7 @@ import {
   getAllAgentList,
   setNullStudentDirectory,
 } from "../features/adminSlice";
-import AdminSidebar from "../components/dashboardComp/AdminSidebar";
-import Header from "../components/dashboardComp/Header";
+
 import { FaRegEye } from "react-icons/fa";
 import { CustomInput } from "../components/reusable/Input";
 import { IoSearchOutline } from "react-icons/io5";
@@ -25,7 +24,7 @@ const AgentDirectory = () => {
   const role = localStorage.getItem("role");
 
   const [loading, setLoading] = useState(true);
-  const [perPage, setPerPage] = useState(10);
+  const perPage = 10
 
   // Select data from Redux
 
@@ -110,25 +109,22 @@ const AgentDirectory = () => {
   }, []);
   return (
     <>
-      <Header customLink="/agent/shortlist" />
       <div>
-        <span className="fixed overflow-y-scroll scrollbar-hide  bg-white ">
-          <AdminSidebar />
-        </span>
-        <div className="md:ml-[17%] ml-[22%] pt-14 font-poppins">
-          <p className="md:text-[28px] text-[24px] font-bold text-sidebar mt-6 ml-9">
+    
+        <div className="  font-poppins">
+          <p className="md:text-[28px] text-[24px] font-bold text-sidebar ">
             Agent Directory ({totalUsersCount})
           </p>
-          <p className="text-sidebar text-[15px]  md:ml-9  sm:ml-20">
+          <p className="text-sidebar text-[15px] ">
             Manage and view agent details in one place.
           </p>
         </div>
       </div>
       <div className=" mt-6 mr-6 ">
-        <span className="flex flex-row items-center mb-3 ml-[20%]">
+        <span className="flex flex-row items-center mb-3 ">
           <span className="flex flex-row justify-between w-full items-center">
             <span className="flex flex-row items-center">
-              <span className="flex flex-row items-center  sm:ml-14 md:-ml-2 ">
+              <span className="flex flex-row items-center   ">
                 <CustomInput
                   className="h-11 md:w-80 sm:w-60 rounded-md  text-body placeholder:px-3 pl-7 border border-[#E8E8E8] outline-none"
                   type="text"
@@ -171,7 +167,7 @@ const AgentDirectory = () => {
         </div>
       ) : TABLE_ROWS?.length > 0 ? (
         <>
-          <div className="mt-3 mr-6 md:ml-[19%] sm:ml-[26%]">
+          <div className="mt-3 mr-6 ">
             <CustomTableEight
               tableHead={TABLE_HEAD}
               tableRows={TABLE_ROWS}
