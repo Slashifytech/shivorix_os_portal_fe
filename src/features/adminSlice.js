@@ -21,6 +21,7 @@ import {
   getTickets,
   getTicketsDataById,
   getUrlData,
+  offlineAgentData,
   profileById,
 } from "./adminApi";
 import { resetStore } from "./action";
@@ -406,6 +407,20 @@ export const fetchAdminProfileById = createAsyncThunk(
     }
   }
 );
+export const fetchOfflineAgents = createAsyncThunk(
+  "admin/fetchOfflineAgents",
+  async ({page, perPage, search }, { rejectWithValue }) => {
+    try {
+      const res = await offlineAgentData(page, perPage, search);
+      // console.log(res);
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.message || "Failed to fetch agent data"
+      );
+    }
+  }
+);
 const initialState = {
   approvals: [],
   applications: [],
@@ -433,7 +448,8 @@ const initialState = {
   airTickets: null,
   getAirTicketById: null,
   PartnersData: null,
-  profileById: null
+  profileById: null,
+  offlineAgents: null
 }
 const adminSlice = createSlice({
   name: "admin",
@@ -721,6 +737,18 @@ const adminSlice = createSlice({
         state.status = "failed";
         state.error = action.payload || action.error.message;
         state.PartnersData = action.payload
+      })
+      .addCase(fetchOfflineAgents.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchOfflineAgents.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.offlineAgents = action.payload;
+      })
+      .addCase(fetchOfflineAgents.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload || action.error.message;
+        state.offlineAgents = action.payload
       })
       .addCase(fetchAdminProfileById.pending, (state) => {
         state.status = "loading";
