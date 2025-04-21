@@ -978,3 +978,27 @@ export const profileById = async (userId) => {
     }
   }
 };
+export const offlineAgentData = async (page, perPage, search) => {
+
+  try {
+    const response = await apiurl.get("/auth/admin/get-other-agents", {
+      params: { page: page ,
+        limit: perPage,
+        searchQuery: search
+      },
+
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    if (error.response) {
+      throw new Error(
+        error.response.data.message || "Error while getting agent data."
+      );
+    } else if (error.request) {
+      throw new Error("No response from server. Please try again later.");
+    } else {
+      throw new Error("An unexpected error occurred");
+    }
+  }
+};
