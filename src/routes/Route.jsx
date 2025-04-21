@@ -72,6 +72,7 @@ import PartnerLogin from "../partner/PartnerLogin";
 import StrictPartner from "./StrictPartner";
 import PartnerEmployee from "../admin/PartnerEmployee";
 import PartnerEmployeeDetail from "../admin/PartnerEmployeeDetail";
+import AgentDirectoryTab from "../admin/AgentDirectoryTab";
 
 export const router = createBrowserRouter([
   {
@@ -516,7 +517,7 @@ export const router = createBrowserRouter([
     element: (
       <CommonRoleProtected>
         {" "}
-        <AgentDirectory></AgentDirectory>{" "}
+        <AgentDirectoryTab></AgentDirectoryTab>{" "}
       </CommonRoleProtected>
     ),
   },
