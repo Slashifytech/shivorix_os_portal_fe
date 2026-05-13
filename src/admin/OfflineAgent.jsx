@@ -1,0 +1,165 @@
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {  Link } from "react-router-dom";
+import Pagination from "../components/dashboardComp/Pagination";
+import {  CustomTableSeventeen } from "../components/Table";
+import {
+    fetchOfflineAgents,
+} from "../features/adminSlice";
+import { FaRegEye } from "react-icons/fa";
+import { CustomInput } from "../components/reusable/Input";
+import { IoSearchOutline } from "react-icons/io5";
+import Dnf from "../components/Dnf";
+import { dnf } from "../assets";
+import Loader from "../components/Loader";
+
+const OfflineAgent = () => {
+  const dispatch = useDispatch();
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const role = localStorage.getItem("role");
+
+  const [loading, setLoading] = useState(true);
+  const perPage = 10
+
+
+  const { offlineAgents } = useSelector((state) => state.admin);
+  const totalUsersCount = offlineAgents?.total || 0;
+  const currentPage = offlineAgents?.currentPage || 1;
+  const totalPagesCount = offlineAgents?.totalPages || 1;
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+    setPage(1);
+  };
+
+  const handlePageChange = (pageNumber) => setPage(pageNumber);
+
+  useEffect(() => {
+    // setLoading(true);
+    dispatch(fetchOfflineAgents({ page, perPage, search }));
+
+    // setLoading(false);
+  }, [dispatch, page, perPage, search]);
+
+  const TABLE_HEAD = [
+    "S.No.",
+    "Company Name",
+    "Agent Name",
+    "Email Id",
+    "Phone Number",
+    "city",
+    "State",
+    "Country",
+  ];
+
+  const TABLE_ROWS = offlineAgents?.otherAgentsData?.map((data, index) => ({
+    sno: (currentPage - 1) * perPage + index + 1,
+    name: data?.name || "NA",
+    stId: data?.agId || "_",
+    email: data?.email || "NA",
+    phone: data?.phone,
+    viewList: data || "NA",
+    data: data || "NA",
+  }));
+
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+  return (
+    <>
+      <div>
+    
+        <div className="  font-poppins">
+          <p className="md:text-[28px] text-[24px] font-bold text-sidebar ">
+            Agent Directory ({totalUsersCount})
+          </p>
+          <p className="text-sidebar text-[15px] ">
+          View  offline agent details in one place.
+          </p>
+        </div>
+      </div>
+      <div className=" mt-6 mr-6 ">
+        <span className="flex flex-row items-center mb-3 ">
+          <span className="flex flex-row justify-between w-full items-center">
+            <span className="flex flex-row items-center">
+              <span className="flex flex-row items-center   ">
+                <CustomInput
+                  className="h-11 md:w-80 sm:w-60 rounded-md  text-body placeholder:px-3 pl-7 border border-[#E8E8E8] outline-none"
+                  type="text"
+                  placeHodler="Search by agent name/email/phone"
+                  name="search"
+                  value={search}
+                  onChange={handleSearchChange}
+                />
+                <span className="absolute pl-2 text-[20px] text-body">
+                  <IoSearchOutline />
+                </span>
+              </span>
+            </span>
+          
+          </span>
+         
+        </span>
+      </div>
+      {loading ? (
+        <div
+          className={`w-full  mt-12 ${
+            location.pathname === "/student-profile" ? "ml-[45%]" : "ml-[53%]"
+          }`}
+        >
+          <Loader />
+        </div>
+      ) : TABLE_ROWS?.length > 0 ? (
+        <>
+          <div className="mt-3 mr-6 ">
+            <CustomTableSeventeen
+              tableHead={TABLE_HEAD}
+              tableRows={TABLE_ROWS}
+              action="View"
+              linkOne={"/agent-profile"}
+              linkTwo={"/admin/agent-student"}
+              icon={<FaRegEye />}
+              actionThree="View List"
+              iconTwo={<FaRegEye />}
+              actionTwo={"Delete"}
+            />
+          </div>
+
+          <div className="mt-16 mb-10 ml-20">
+            <Pagination
+              currentPage={currentPage}
+              hasNextPage={currentPage * perPage < totalUsersCount}
+              hasPreviousPage={currentPage > 1}
+              onPageChange={handlePageChange}
+              totalPagesCount={totalPagesCount}
+            />
+          </div>
+        </>
+      ) : (
+        <div className="md:ml-[13%] sm:ml-[19%]">
+          <Dnf
+            dnfImg={dnf}
+            headingText="Start Your Journey!"
+            bodyText="No Agent Data Available"
+          />
+        </div>
+      )}
+    </>
+  );
+};
+
+export default OfflineAgent;
