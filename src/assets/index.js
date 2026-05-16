@@ -22,7 +22,7 @@ import notFound from "./notFound.png";
 import profileSkeleton from "./profileSkeleton.webp"
 import noInstitute from "./noInstitute.png"
 import greenTick from "./greenTick.png"
-import dnf from "./dnf.png";
+import dnf from "./dnf.jpg";
 import mobile from "./mobile.png";
 import logo2 from "./logo2.png";
 import NoVisa from "./NoVisa.png";

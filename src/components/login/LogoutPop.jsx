@@ -42,7 +42,7 @@ const LogoutPop = ({ isLogoutOpen, closeLogout }) => {
         icon: "warning",
         showCancelButton: true,
         cancelButtonColor: "#d33",
-        confirmButtonColor: "#98090B",
+        confirmButtonColor: "#8B754C",
         confirmButtonText: "Yes",
         cancelButtonText: "No",
         backdrop: true,

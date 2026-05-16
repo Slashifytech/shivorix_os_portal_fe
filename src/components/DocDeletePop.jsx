@@ -6,11 +6,11 @@ const DocDeletePop = ({ isOpenPop, closePop, handleFunc, isUrl, isDocId }) => {
     if (isOpenPop) {
       Swal.fire({
         title: "Do you want to remove the document?",
-        html: '<p style="color: #98090B; font-size: 14px;">If you delete this document here, all documents related to it may also be deleted from everywhere, possibly from all applications</P>',
+        html: '<p style="color: #8B754C; font-size: 14px;">If you delete this document here, all documents related to it may also be deleted from everywhere, possibly from all applications</P>',
         icon: "warning",
         showCancelButton: true,
         cancelButtonColor: "#d33",
-        confirmButtonColor: "#98090B",
+        confirmButtonColor: "#8B754C",
         confirmButtonText: "Yes",
         cancelButtonText: "No",
         backdrop: true,

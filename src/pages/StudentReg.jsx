@@ -79,7 +79,7 @@ console.log(location)
           {/* Stepper Navigation */}
           <div
             className={`flex flex-col items-center ${
-              role === "2" ? "bg-[#FBD5D5] pt-20 md:ml-36 md:px-0 md:pl-0 sm:px-6 sm:pl-[27%] " : "bg-primary"
+              role === "2" ? "bg-[#FFF4E0] pt-20 md:ml-36 md:px-0 md:pl-0 sm:px-6 sm:pl-[27%] " : "bg-primary"
             }  w-full`}
           >
             <div className="flex justify-center items-center w-full">

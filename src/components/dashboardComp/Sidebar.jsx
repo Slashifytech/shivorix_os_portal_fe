@@ -107,12 +107,12 @@ const Sidebar = () => {
       <div className="bg-white md:w-[17.5vw] sm:w-[24vw] h-[100vh]  overflow-y-auto scrollbar-hide border-r-2 border-[#E8E8E8]">
       <a href="https://sovportal.in" className="cursor-pointer">
 
-          <ImageComponent src={logo} alt="logo" className="w-44 h-24 ml-2 " />
+          <ImageComponent src={logo} alt="logo" className="w-48 h-20 ml-2 " />
         </a>
         {sidebarList.map((item, index) => (
           <div
             key={index}
-            className={`cursor-pointer py-4 hover:bg-[#FBD5D5] hover:text-primary hover:border-l-4 hover:font-medium ${
+            className={`cursor-pointer py-4 hover:bg-[#FFF4E0] hover:text-primary hover:border-l-4 hover:font-medium ${
               path === item.pathPage ||
               path === item?.otherPath ||
               path === item?.otherPathTwo ||
@@ -122,7 +122,7 @@ const Sidebar = () => {
               path === item?.otherPathSix ||
               path === item?.otherPathSeven ||
               path === item?.otherPathEight
-                ? "bg-[#FBD5D5] text-primary border-l-4 border-primary font-medium"
+                ? "bg-[#FFF4E0] text-primary border-l-4 border-primary font-medium"
                 : "text-sidebar"
             }`}
           >
@@ -135,7 +135,7 @@ const Sidebar = () => {
 
         <div
           onClick={() => setIsOpen((prev) => !prev)}
-          className="flex items-center mt-2 bg-transparent py-2 relative hover:text-primary hover:bg-[#FBD5D5] px-5 text-sidebar cursor-pointer"
+          className="flex items-center mt-2 bg-transparent py-2 relative hover:text-primary hover:bg-[#FFF4E0] px-5 text-sidebar cursor-pointer"
         >
           <span className="text-[23px]">
             <CgProfile />
@@ -161,7 +161,7 @@ const Sidebar = () => {
               <li
                 className={`text-sidebar py-2 mb-2 cursor-pointer md:pl-14 lg:px-14 sm:pl-14 md:ml-0 hover:bg-[#f5ebeb] hover:text-primary ${
                   path === "/account/profile-edit" &&
-                  "bg-[#FBD5D5] border-l-4 border-primary text-primary"
+                  "bg-[#FFF4E0] border-l-4 border-primary text-primary"
                 }`}
               >
                 Edit Profile
@@ -172,7 +172,7 @@ const Sidebar = () => {
               <li
                 className={`text-sidebar py-2 mb-2 cursor-pointer md:pl-14 sm:pl-14 md:ml-0  hover:bg-[#f5ebeb] hover:text-primary ${
                   path === "/settings/change-password" &&
-                  "bg-[#FBD5D5] border-l-4 border-primary text-primary"
+                  "bg-[#FFF4E0] border-l-4 border-primary text-primary"
                 }`}
               >
                 Change Password
@@ -182,7 +182,7 @@ const Sidebar = () => {
               <li
                 className={`text-sidebar py-2 mb-2 cursor-pointer md:px-14 sm:pl-14 md:ml-0  hover:bg-[#f5ebeb] hover:text-primary ${
                   path === "/settings/change-email" &&
-                  "bg-[#FBD5D5] border-l-4 border-primary text-primary"
+                  "bg-[#FFF4E0] border-l-4 border-primary text-primary"
                 }`}
               >
                 Change Email
@@ -192,7 +192,7 @@ const Sidebar = () => {
               <li
                 className={`text-sidebar py-2 mb-2 cursor-pointer md:px-14 sm:pl-14 md:ml-0  hover:bg-[#f5ebeb] hover:text-primary ${
                   path === "/settings/delete-account" &&
-                  "bg-[#FBD5D5] border-l-4 border-primary text-primary"
+                  "bg-[#FFF4E0] border-l-4 border-primary text-primary"
                 }`}
               >
                 Delete Account
@@ -201,9 +201,9 @@ const Sidebar = () => {
           </ul>
         </div>
         {/* <div
-        className={`cursor-pointer py-4 hover:bg-[#FBD5D5] hover:text-primary hover:border-l-4 hover:font-medium ${
+        className={`cursor-pointer py-4 hover:bg-[#FFF4E0] hover:text-primary hover:border-l-4 hover:font-medium ${
           path === "/student/payment-details"
-            ? "bg-[#FBD5D5] text-primary border-l-4 border-primary font-medium"
+            ? "bg-[#FFF4E0] text-primary border-l-4 border-primary font-medium"
             : "text-sidebar"
         }`}
       >
@@ -222,7 +222,7 @@ const Sidebar = () => {
         <div
           className={`cursor-pointer py-4 hover:bg-[#f5ebeb] hover:text-primary hover:border-l-4 hover:font-medium ${
             path === "/help-support"
-              ? "bg-[#FBD5D5] text-primary border-l-4 border-primary font-medium"
+              ? "bg-[#FFF4E0] text-primary border-l-4 border-primary font-medium"
               : "text-sidebar"
           }`}
         >
@@ -239,7 +239,7 @@ const Sidebar = () => {
         </div>
 
         <div
-          className={`cursor-pointer py-4 hover:bg-[#FBD5D5] hover:text-primary hover:border-l-4 hover:font-medium text-secondary`}
+          className={`cursor-pointer py-4 hover:bg-[#FFF4E0] hover:text-primary hover:border-l-4 hover:font-medium text-secondary`}
         >
           <div
             className="flex items-center gap-3 px-6"

@@ -243,7 +243,7 @@ const AdminDashboard = () => {
       active: isAgentData?.data?.activeAgentCount || "0",
       label: "Total Agents",
       customSBg: "#FAEDED",
-      bgImg: "/bgTwo.png",
+      bgImg: "/bgTwo.png", 
     },
   ];
 

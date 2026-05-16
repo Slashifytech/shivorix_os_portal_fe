@@ -9,7 +9,7 @@ const DeletePop = ({ isOpenPop, closePop, handleFunc }) => {
         icon: "question",
         showCancelButton: true,
         cancelButtonColor: "#d33",
-        confirmButtonColor: "#98090B",
+        confirmButtonColor: "#8B754C",
         confirmButtonText: "Yes",
         cancelButtonText: "No",
         backdrop: true,

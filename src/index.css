@@ -15,12 +15,12 @@ input[type="radio"] {
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    border: 1px solid #98090B;
+    border: 1px solid #8B754C;
     outline: none;
   }
   
   input[type="radio"]:checked {
-    background: radial-gradient(circle at center, #98090B 50%, transparent 20.5%);
+    background: radial-gradient(circle at center, #8B754C 50%, transparent 20.5%);
   }
   
   input[type="checkbox"] {
@@ -30,12 +30,12 @@ input[type="radio"] {
     width: 15px;
     height: 15px;
   
-    border: 1px solid #98090B;
+    border: 1px solid #8B754C;
     outline: none;
   }
   
   input[type="checkbox"]:checked {
-    background: radial-gradient(circle at center, #98090B 50%, transparent 20.5%);
+    background: radial-gradient(circle at center, #8B754C 50%, transparent 20.5%);
   }
 
   .popup-backdrop {
@@ -135,7 +135,7 @@ input[type="radio"] {
   font-size: 14px;
   padding: 8px 36px;
   color: #fff;
-  background-color: #98090B;
+  background-color: #8B754C;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -156,7 +156,7 @@ input[type="radio"] {
 
 .swal-subtitle {
   font-size: 14px;
-  color: #98090B;
+  color: #8B754C;
   margin-top: 10px;
 }
 
@@ -173,7 +173,7 @@ input[type="radio"] {
   display: inline-block;
   width: 6px;
   height: 39px;
-  background-color: rgba(216, 24, 24, 0.5);
+  background-color: #FFF4E0;
   border-radius: 10px;
   animation: scale-up4 1s linear infinite;
 }
@@ -190,7 +190,7 @@ input[type="radio"] {
 
 @keyframes scale-up4 {
   20% {
-    background-color: #98090B;
+    background-color: #8B754C;
     transform: scaleY(1.5);
   }
 

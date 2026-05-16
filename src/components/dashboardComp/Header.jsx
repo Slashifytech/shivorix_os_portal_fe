@@ -38,7 +38,7 @@ const Header = ({ icon, customLink, iconTwo }) => {
               ) : (
                 <CiBellOn /> 
               )}
-             {notificationCount > 0 &&  <span className="absolute rounded-full w-5 h-5 text-[13px] -top-1 -right-2 bg-[#FBD5D5] text-primary text-center">
+             {notificationCount > 0 &&  <span className="absolute rounded-full w-5 h-5 text-[13px] -top-1 -right-2 bg-[#FFF4E0] text-primary text-center">
                 {notificationCount}
               </span>}
             </Link>

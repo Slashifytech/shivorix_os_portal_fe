@@ -21,12 +21,12 @@ import { ImUsers } from "react-icons/im";
 
 const SidebarItem = ({ item, path, onClick }) => (
   <div
-    className={`cursor-pointer py-4 hover:bg-[#FBD5D5] hover:text-primary hover:border-l-4 hover:font-medium ${
+    className={`cursor-pointer py-4 hover:bg-[#FFF4E0] hover:text-primary hover:border-l-4 hover:font-medium ${
       path === item.pathPage ||
       path === item?.otherPath ||
       path === item?.otherPathTwo ||
       path === item?.otherPathThree 
-        ? "bg-[#FBD5D5] text-primary border-l-4 border-primary font-medium"
+        ? "bg-[#FFF4E0] text-primary border-l-4 border-primary font-medium"
         : "text-sidebar"
     }`}
   >
@@ -98,14 +98,14 @@ const AdminSidebar = () => {
           <ImageComponent
             src={logo}
             alt="logo"
-            className="md:w-44 sm:w-32 md:h-24 sm:h-16 ml-2"
+            className="md:w-48 sm:w-32 md:h-20 sm:h-16 ml-2"
           />
         </a>
         {filteredSidebarList.map((item, index) => (
           <SidebarItem key={index} item={item} path={path} onClick={handleDispatch} />
         ))}
         {(role === "0" || role === "1") && (
-          <div className={`cursor-pointer py-4 hover:bg-[#FBD5D5] hover:text-primary hover:border-l-4 hover:font-medium ${path === "/admin/ticket" ? "bg-[#FBD5D5] text-primary border-l-4 border-primary font-medium" : "text-sidebar"}`}>
+          <div className={`cursor-pointer py-4 hover:bg-[#FFF4E0] hover:text-primary hover:border-l-4 hover:font-medium ${path === "/admin/ticket" ? "bg-[#FFF4E0] text-primary border-l-4 border-primary font-medium" : "text-sidebar"}`}>
             <Link to="/admin/ticket" className="flex items-center gap-3 md:pl-6 lg:px-6 sm:pl-6">
               <span className="text-[20px]"><BsFillTicketPerforatedFill /></span>
               <span>Ticket Support</span>
@@ -114,7 +114,7 @@ const AdminSidebar = () => {
         )}
         {role === "0" && (
           <>
-            <div onClick={() => setIsOpen((prev) => !prev)} className="flex items-center mt-2 bg-transparent py-2 relative hover:text-primary hover:bg-[#FBD5D5] px-5 text-sidebar cursor-pointer">
+            <div onClick={() => setIsOpen((prev) => !prev)} className="flex items-center mt-2 bg-transparent py-2 relative hover:text-primary hover:bg-[#FFF4E0] px-5 text-sidebar cursor-pointer">
               <span className="text-[23px]"><CgProfile /></span>
               <span className="flex items-center pl-[12px]">
                 My Account
@@ -125,7 +125,7 @@ const AdminSidebar = () => {
               <ul className="sm:mt-2 list-none text-[16px]">
                 {["/admin/profile", "/admin/change-password", "/admin/change-email"].map((link, idx) => (
                   <Link key={idx} to={link}>
-                    <li className={`text-sidebar py-2 mb-2 cursor-pointer md:pl-12 lg:px-12 sm:pl-12 hover:bg-[#f5ebeb] hover:text-primary capitalize ${path === link ? "bg-[#FBD5D5] border-l-4 border-primary text-primary" : ""}`}>
+                    <li className={`text-sidebar py-2 mb-2 cursor-pointer md:pl-12 lg:px-12 sm:pl-12 hover:bg-[#f5ebeb] hover:text-primary capitalize ${path === link ? "bg-[#FFF4E0] border-l-4 border-primary text-primary" : ""}`}>
                       {link.split("/").pop().replace("-", " ").replace("email", "Email").replace("password", "Password").replace("profile", "Profile")}
                     </li>
                   </Link>
@@ -134,7 +134,7 @@ const AdminSidebar = () => {
             </div>
           </>
         )}
-        <div className={`cursor-pointer py-4 hover:bg-[#FBD5D5] hover:text-primary hover:border-l-4 hover:font-medium text-secondary`} onClick={toggleLogoutPopup}>
+        <div className={`cursor-pointer py-4 hover:bg-[#FFF4E0] hover:text-primary hover:border-l-4 hover:font-medium text-secondary`} onClick={toggleLogoutPopup}>
           <div className="flex items-center gap-3 px-6">
             <span className="text-[20px]"><RiLogoutBoxRLine /></span>
             <span>Logout</span>
