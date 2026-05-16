@@ -40,7 +40,7 @@ const HelpSupport = () => {
         <p className=" text-body text-[14px]">
           {" "}
           <span className="font-semibold text-sidebar">Email:- </span>
-          dev@sovportal.in
+          dev
         </p>
       </div>
       <div className="bg-white rounded-md px-6 py-6 md:ml-[20%] sm:ml-[27%] font-poppins mt-10 mr-8 mb-20">

@@ -301,7 +301,7 @@ const LoginComponent = () => {
           </p>
           <div className="mt-3 flex justify-center">
             <a
-              href="https://sovportal.in"
+              href="https://shivorix.com"
               className="hover:bg-primary border border-greyish px-6 py-2 cursor-pointer text-primary hover:text-white text-center rounded-md mt-3 text-[14px]"
             >
               Back to website

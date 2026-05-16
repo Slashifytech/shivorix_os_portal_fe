@@ -110,7 +110,7 @@ const PartnerLogin = () => {
             </span>
             <span>
               <header>
-                <a href="https://sovportal.in" className="cursor-pointer">
+                <a href="https://shivorix.com" className="cursor-pointer">
                   <ImageComponent src={logo} alt="logo" className="w-40 h-24" />
                 </a>
               </header>

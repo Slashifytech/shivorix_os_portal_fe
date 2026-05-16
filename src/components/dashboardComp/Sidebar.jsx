@@ -105,7 +105,7 @@ const Sidebar = () => {
   return (
     <>
       <div className="bg-white md:w-[17.5vw] sm:w-[24vw] h-[100vh]  overflow-y-auto scrollbar-hide border-r-2 border-[#E8E8E8]">
-      <a href="https://sovportal.in" className="cursor-pointer">
+      <a href="https://shivorix.com" className="cursor-pointer">
 
           <ImageComponent src={logo} alt="logo" className="w-48 h-20 ml-2 " />
         </a>

@@ -94,7 +94,7 @@ const AdminSidebar = () => {
   return (
     <>
       <div className="bg-white md:w-[17.5vw] sm:w-[24vw] h-[100vh] pb-6 overflow-y-auto scrollbar-hide border-r-2 border-[#E8E8E8]">
-        <a href="https://sovportal.in">
+        <a href="https://shivorix.com">
           <ImageComponent
             src={logo}
             alt="logo"
