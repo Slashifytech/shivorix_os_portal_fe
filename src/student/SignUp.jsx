@@ -385,7 +385,7 @@ const SignUp = () => {
                   turn your international education dreams into reality. Sign up
                   today and take the first stride towards a successful future.
                 </p>
-                <div className="border border-[#F8AD00] bg-[#CD8730] px-6 py-3 pb-10 mt-6 mb-16 rounded-md">
+                <div className="border border-[#F8AD00] bg-[#BE843D] px-6 py-3 pb-10 mt-6 mb-16 rounded-md">
                   {studentSignUp.map((data, index) => (
                     <div
                       key={index}
