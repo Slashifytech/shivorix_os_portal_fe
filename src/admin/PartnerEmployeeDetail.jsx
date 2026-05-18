@@ -55,7 +55,7 @@ const PartnerEmployeeDetail = () => {
                 loading="lazy"
               />
               <span className="flex flex-col">
-                <span className="text-sidebar text-[18px] font-medium">
+                <span className="text-secondary  text-[18px] font-medium">
                   {profileById?.firstName + " " + profileById?.lastName || "NA"}
                 </span>
                 <span className="text-[14px] text-body font-normal">
@@ -71,7 +71,7 @@ const PartnerEmployeeDetail = () => {
             </div>
 
             <div className="bg-white rounded-md px-6 py-4 font-poppins mt-6">
-              <div className="flex flex-row text-sidebar items-center justify-between border-b border-greyish">
+              <div className="flex flex-row text-secondary  items-center justify-between border-b border-greyish">
                 <span className="flex flex-row gap-4 items-center pb-3">
                   <span className="text-[24px]">
                     <FaRegIdCard />
@@ -132,7 +132,7 @@ const PartnerEmployeeDetail = () => {
             </div>
 
             <div className="bg-white rounded-md px-6 py-4 font-poppins mt-6 mb-20">
-              <div className="flex flex-row text-sidebar items-center justify-between border-b border-greyish">
+              <div className="flex flex-row text-secondary  items-center justify-between border-b border-greyish">
                 <span className="flex flex-row gap-4 items-center pb-3">
                   <span className="text-[24px]">
                     <IoMdHome />

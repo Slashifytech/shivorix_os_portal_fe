@@ -85,11 +85,11 @@ const Documents = () => {
       </span>
       <div className="ml-[17%] pt-16 pb-8 bg-white  font-poppins  ">
         <span className="flex items-center">
-          <p className="text-[28px] font-bold text-sidebar mt-6 md:ml-9  sm:ml-20">
+          <p className="text-[28px] font-bold text-secondary  mt-6 md:ml-9  sm:ml-20">
             Documents
           </p>
         </span>
-        <p className="text-[16px] font-normal text-sidebar  md:ml-9  sm:ml-20">
+        <p className="text-[16px] font-normal text-secondary   md:ml-9  sm:ml-20">
           Here you can view and manage all your uploaded and recieved documents.
         </p>
       </div>

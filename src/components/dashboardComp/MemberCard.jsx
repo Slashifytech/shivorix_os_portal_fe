@@ -43,7 +43,7 @@ const MemberCard = ({
             loading="lazy"
           />
           <span className="flex flex-col">
-            <span className="text-sidebar text-[14px] font-medium ">
+            <span className="text-secondary  text-[14px] font-medium ">
               {name?.slice(0, 28) || "NA"}
             </span>
 

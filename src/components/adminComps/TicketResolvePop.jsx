@@ -51,86 +51,86 @@ const TicketResolvePop = ({ isOpen, closePopUp, isticketId, handleStatus }) => {
                   ? "Under Review"
                   : "NA"}
               </span>
-              <p className=" font-DMsans text-sidebar font-semibold text-[16px] pt-6 ">
+              <p className=" font-DMsans text-secondary  font-semibold text-[16px] pt-6 ">
                 {ticketById?.ticketType}
               </p>
               <p className="text-body text-[13px] pr-28">
                 {ticketById?.description}
               </p>
-              <p className="text-sidebar font-semibold text-[14px] mt-4">Ticket Details</p>
+              <p className="text-secondary  font-semibold text-[14px] mt-4">Ticket Details</p>
               <div className="flex justify-between items-start w-full">
                 <span className="flex flex-col ">
-                  <span className="text-[14px] text-sidebar mt-2 font-medium">
+                  <span className="text-[14px] text-secondary  mt-2 font-medium">
                     Ticket No.
                   </span>
-                  <span className="text-[13px] mt-1 text-sidebar  font-normal">
+                  <span className="text-[13px] mt-1 text-secondary   font-normal">
                     {ticketById?.ticketId}
                   </span>
 
-                  <span className="text-[14px] text-sidebar mt-6 font-medium">
+                  <span className="text-[14px] text-secondary  mt-6 font-medium">
                     Phone No.
                   </span>
-                  <span className="text-[13px] mt-1 text-sidebar  font-normal">
+                  <span className="text-[13px] mt-1 text-secondary   font-normal">
                     {ticketById?.phone}
                   </span>
                 </span>
                 <span className="flex flex-col ">
-                  <span className="text-[14px] text-sidebar mt-2 font-medium">
+                  <span className="text-[14px] text-secondary  mt-2 font-medium">
                   {ticketById?.createdById?.startsWith("AG-") ? "Agent Name" : "Student Name"}  
                   </span>
-                  <span className="text-[13px] mt-1 text-sidebar  font-normal">
+                  <span className="text-[13px] mt-1 text-secondary   font-normal">
                     {ticketById?.name}
                   </span>
 
-                  <span className="text-[14px] text-sidebar mt-6 font-medium">
+                  <span className="text-[14px] text-secondary  mt-6 font-medium">
                     Priority Status
                   </span>
-                  <span className="text-[13px] mt-1 text-sidebar  font-normal">
+                  <span className="text-[13px] mt-1 text-secondary   font-normal">
                     {ticketById?.priorityStatus}
                   </span>
                 </span>
                 <span className="flex flex-col ">
-                  <span className="text-[14px] text-sidebar mt-2 font-medium">
+                  <span className="text-[14px] text-secondary  mt-2 font-medium">
                   {ticketById?.createdById?.startsWith("AG-") ? "Agent Id" : "Student Id"}  
                   </span>
-                  <span className="text-[13px] mt-1 text-sidebar  font-normal">
+                  <span className="text-[13px] mt-1 text-secondary   font-normal">
                     {ticketById?.createdById}
                   </span>
 
-                  <span className="text-[14px] text-sidebar mt-6 font-medium">
+                  <span className="text-[14px] text-secondary  mt-6 font-medium">
                     Date Created
                   </span>
-                  <span className="text-[13px] mt-1 text-sidebar  font-normal">
+                  <span className="text-[13px] mt-1 text-secondary   font-normal">
                     {formatDate(ticketById?.createdAt)}
                   </span>
                 </span>
                 <span className="flex flex-col ">
-                  <span className="text-[14px] text-sidebar mt-2 font-medium">
+                  <span className="text-[14px] text-secondary  mt-2 font-medium">
                     Email
                   </span>
-                  <span className="text-[13px] mt-1 text-sidebar  font-normal">
+                  <span className="text-[13px] mt-1 text-secondary   font-normal">
                     {ticketById?.email}
                   </span>
                 </span>
               </div>
-              <span className="text-[14px] text-sidebar mt-4 font-medium">
+              <span className="text-[14px] text-secondary  mt-4 font-medium">
                 Solution to show the user?
               </span>
               <textarea
                 name="isResolvedText"
                 value={isResolvedText}
-                className="border border-md h-16 mt-2 px-3 py-3 outline-none text-sidebar text-[14px]"
+                className="border border-md h-16 mt-2 px-3 py-3 outline-none text-secondary  text-[14px]"
                 placeholder="Write Here"
                 onChange={handleInput}
                 disabled={ticketById?.status === "resolved"}
               ></textarea>
-              <span className="text-[14px] text-sidebar mt-6 font-medium">
+              <span className="text-[14px] text-secondary  mt-6 font-medium">
                 Describe How You Resolved the Issue?
               </span>
               <textarea
                 name="isSolution"
                 value={isSolution}
-                className="border border-md h-16 mt-2 px-3 py-3 outline-none text-sidebar text-[14px]"
+                className="border border-md h-16 mt-2 px-3 py-3 outline-none text-secondary  text-[14px]"
                 placeholder="Write Here"
                 onChange={handleSolution}
                 disabled={ticketById?.status === "resolved"}

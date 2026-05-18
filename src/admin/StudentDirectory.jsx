@@ -120,10 +120,10 @@ const StudentDirectory = () => {
           <AdminSidebar />
         </span>
         <div className="md:ml-[17%] ml-[22%] pt-14 font-poppins">
-          <p className="md:text-[28px] text-[24px] font-bold text-sidebar mt-6 ml-9">
+          <p className="md:text-[28px] text-[24px] font-bold text-secondary  mt-6 ml-9">
             Student Directory ({totalUsersCount})
           </p>{" "}
-          <p className="text-sidebar text-[15px]  md:ml-9  sm:ml-20">
+          <p className="text-secondary  text-[15px]  md:ml-9  sm:ml-20">
             Manage and view student details in one place.
           </p>
         </div>

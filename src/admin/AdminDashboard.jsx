@@ -372,7 +372,7 @@ const AdminDashboard = () => {
         ) : (
           <>
             <div className="md:ml-[17%] ml-[22%] pt-14 font-poppins">
-              <p className="md:text-[28px] text-[24px] font-bold text-sidebar mt-6 ml-9">
+              <p className="md:text-[28px] text-[24px] font-bold text-secondary  mt-6 ml-9">
                 Dashboard
               </p>
               <span className="flex items-center justify-between mx-9">
@@ -418,14 +418,14 @@ const AdminDashboard = () => {
               <div className="flex md:flex-row flex-col w-full gap-4 px-6 mt-6 mb-9">
                 <div className="px-9 bg-white py-4 rounded-md border border-[#E8E8E8] md:w-[40%] h-auto ">
                   <div className="  flex flex-row items-center justify-between w-full">
-                    <p className="text-sidebar text-[18px] font-semibold mt-3 mb-6">
+                    <p className="text-secondary  text-[18px] font-semibold mt-3 mb-6">
                       Application Overview
                     </p>
 
                     <span className="flex items-center">
                       <label
                         htmlFor="year-line"
-                        className="font-medium text-sidebar w-28"
+                        className="font-medium text-secondary  w-28"
                       >
                         Select Month:{" "}
                       </label>
@@ -456,7 +456,7 @@ const AdminDashboard = () => {
 
                 <div className="px-9 bg-white py-4 rounded-md border border-[#E8E8E8] md:w-[60%] h-auto">
                   <span className="flex flex-row justify-between mx-4">
-                    <p className="text-sidebar text-[18px] font-semibold mt-3 mb-6">
+                    <p className="text-secondary  text-[18px] font-semibold mt-3 mb-6">
                       Total Users
                     </p>
 
@@ -464,7 +464,7 @@ const AdminDashboard = () => {
                       <span>
                         <label
                           htmlFor="year-line"
-                          className="font-medium text-sidebar"
+                          className="font-medium text-secondary "
                         >
                           Select Year:{" "}
                         </label>
@@ -493,14 +493,14 @@ const AdminDashboard = () => {
 
             <div className="md:ml-[19.5%] ml-[26%]  bg-white pt-4 rounded-md border border-[#E8E8E8] mr-10 mb-9 ">
               <span className="flex flex-row justify-between mx-9">
-                <p className="text-sidebar text-[18px] font-bold mt-3 mb-9 ml-9">
+                <p className="text-secondary  text-[18px] font-bold mt-3 mb-9 ml-9">
                   Total Applications
                 </p>
                 <span className="flex flex-row items-center">
                   <div className="mx-2">
                     <label
                       htmlFor="year-bar"
-                      className="font-medium text-sidebar"
+                      className="font-medium text-secondary "
                     >
                       Application Type:{" "}
                     </label>
@@ -520,7 +520,7 @@ const AdminDashboard = () => {
                   <div className="mx-2">
                     <label
                       htmlFor="year-bar"
-                      className="font-medium text-sidebar"
+                      className="font-medium text-secondary "
                     >
                       Select Year:{" "}
                     </label>

@@ -29,7 +29,7 @@ const WithDrawalData = ({ userId, agentData }) => {
               : null
           } Fee amount withdrawal.`}
         </p>
-        <div className="flex flex-row text-sidebar items-center justify-between border-b border-greyish">
+        <div className="flex flex-row text-secondary  items-center justify-between border-b border-greyish">
           <span className="flex flex-row gap-4 items-center pb-3">
             <span className="text-[24px]">
               <RiBankLine />
@@ -96,7 +96,7 @@ const WithDrawalData = ({ userId, agentData }) => {
       </div>
 
       <div className={`bg-white rounded-md py-4 px-6 mt-9  font-poppins ${location.pathname === "/student/visa-update" ? "md:mx-20 md:ml-[22%] sm:mx-9 sm:ml-[28%]   ":null}  `}>
-        <div className="flex flex-row text-sidebar items-center justify-between border-b border-greyish">
+        <div className="flex flex-row text-secondary  items-center justify-between border-b border-greyish">
           <span className="flex flex-row gap-4 items-center pb-3">
             <span className="text-[24px]">
               <IoDocumentText />
@@ -141,7 +141,7 @@ const WithDrawalData = ({ userId, agentData }) => {
       {withdrawalData?.parentBankDetails && (
         <>
         <div className={`bg-white rounded-md py-4 px-6 mt-9  font-poppins ${location.pathname === "/student/visa-update" ? "md:mx-20 md:ml-[22%] sm:mx-9 sm:ml-[28%]  ":null}  `}>
-            <div className="flex flex-row text-sidebar items-center justify-between border-b border-greyish">
+            <div className="flex flex-row text-secondary  items-center justify-between border-b border-greyish">
               <span className="flex flex-row gap-4 items-center pb-3">
                 <span className="text-[24px]">
                   <RiBankLine />
@@ -210,7 +210,7 @@ const WithDrawalData = ({ userId, agentData }) => {
           </div>
 
           <div className={`bg-white rounded-md py-4 px-6 mt-9 md:mb-20 font-poppins ${location.pathname === "/student/visa-update" ? "md:mx-20 md:ml-[22%] sm:mx-9 sm:ml-[28%]   ":null}  `}>
-            <div className="flex flex-row text-sidebar items-center justify-between border-b border-greyish">
+            <div className="flex flex-row text-secondary  items-center justify-between border-b border-greyish">
               <span className="flex flex-row gap-4 items-center pb-3">
                 <span className="text-[24px]">
                   <IoDocumentText />

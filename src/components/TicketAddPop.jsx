@@ -11,7 +11,7 @@ const TicketAddPop = ({ isOpen, closePopUp, value, handleInput, handleFunc }) =>
           }`}
         >
           <div className="bg-white pb-9 rounded-lg md:w-[70%] w-full relative px-4 py-4 ">
-            <p className="px-6 pt-3 text-sidebar text-[19px] font-medium">
+            <p className="px-6 pt-3 text-secondary  text-[19px] font-medium">
               Create Quick Ticket
             </p>
             <p className="px-6 pb-6 text-body text-[13px] font-normal">

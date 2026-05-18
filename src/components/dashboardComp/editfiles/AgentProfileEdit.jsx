@@ -69,7 +69,7 @@ const AgentProfileEdit = ({
   return (
     <>
       <div className="bg-white rounded-md px-6 py-4 font-poppins">
-        <div className="flex flex-row text-sidebar items-center justify-between border-b border-greyish">
+        <div className="flex flex-row text-secondary  items-center justify-between border-b border-greyish">
           <span
             ref={sectionRef1}
             className="flex flex-row gap-4 items-center pb-3"
@@ -199,7 +199,7 @@ const AgentProfileEdit = ({
       </div>
 
       <div className="bg-white rounded-md px-6 py-4 font-poppins mt-6">
-        <div className="flex flex-row text-sidebar items-center justify-between border-b border-greyish">
+        <div className="flex flex-row text-secondary  items-center justify-between border-b border-greyish">
           <span
             ref={sectionRef2}
             className="flex flex-row gap-4 items-center pb-3"
@@ -274,7 +274,7 @@ const AgentProfileEdit = ({
           </span>
         </div>
         {/* comission */}
-        <div className="flex flex-row text-sidebar items-center mt-10 justify-between border-b border-greyish">
+        <div className="flex flex-row text-secondary  items-center mt-10 justify-between border-b border-greyish">
           <span className="flex flex-row gap-4 items-center pb-3">
             <span className="text-[24px]">
               <MdCall />
@@ -308,7 +308,7 @@ const AgentProfileEdit = ({
           </span>
         </div>
 
-        <div className="flex flex-row text-sidebar items-center mt-10 justify-between border-b border-greyish">
+        <div className="flex flex-row text-secondary  items-center mt-10 justify-between border-b border-greyish">
           <span className="flex flex-row gap-4 items-center pb-3">
             <span className="text-[24px]">
               <MdCall />
@@ -366,7 +366,7 @@ const AgentProfileEdit = ({
       </div>
 
       <div className="bg-white rounded-md py-4 px-6  mt-10 font-poppins">
-        <div className="flex flex-row text-sidebar items-center justify-between border-b border-greyish">
+        <div className="flex flex-row text-secondary  items-center justify-between border-b border-greyish">
           <span
             ref={sectionRef3}
             className="flex flex-row gap-4 items-center pb-3"
@@ -472,7 +472,7 @@ const AgentProfileEdit = ({
       </div>
 
       <div className="bg-white rounded-md py-4 px-8 mt-9 font-poppins">
-        <div className="flex flex-row text-sidebar items-center justify-between border-b border-greyish">
+        <div className="flex flex-row text-secondary  items-center justify-between border-b border-greyish">
           <span
             ref={sectionRef4}
             className="flex flex-row gap-4 items-center pb-3"
@@ -694,7 +694,7 @@ const AgentProfileEdit = ({
       </div>
 
       <div className="bg-white rounded-md px-6 py-4 font-poppins mt-9">
-        <div className="flex flex-row text-sidebar items-center justify-between border-b border-greyish">
+        <div className="flex flex-row text-secondary  items-center justify-between border-b border-greyish">
           <span
             ref={sectionRef5}
             className="flex flex-row gap-4 items-center pb-3"
@@ -789,7 +789,7 @@ const AgentProfileEdit = ({
       </div>
 
       <div className="bg-white rounded-md px-6 py-4 font-poppins mb-16 mt-9">
-        <div className="flex flex-row text-sidebar items-center justify-between border-b border-greyish">
+        <div className="flex flex-row text-secondary  items-center justify-between border-b border-greyish">
           <span
             ref={sectionRef6}
             className="flex flex-row gap-4 items-center pb-3"
@@ -884,41 +884,41 @@ const AgentProfileEdit = ({
           >
             <p
               onClick={() => scrollToSection(sectionRef1)}
-              className="text-sidebar hover:text-primary py-1 cursor-pointer font-medium "
+              className="text-secondary  hover:text-primary py-1 cursor-pointer font-medium "
             >
               Company Details
             </p>
 
             <p
               onClick={() => scrollToSection(sectionRef2)}
-              className="text-sidebar hover:text-primary py-1 cursor-pointer font-medium "
+              className="text-secondary  hover:text-primary py-1 cursor-pointer font-medium "
             >
              Primary Contact for Company
             </p>
 
             <p
               onClick={() => scrollToSection(sectionRef3)}
-              className="text-sidebar hover:text-primary py-1 cursor-pointer font-medium "
+              className="text-secondary  hover:text-primary py-1 cursor-pointer font-medium "
             >
               Bank Details
             </p>
 
             <p
               onClick={() => scrollToSection(sectionRef4)}
-              className="text-sidebar hover:text-primary py-1 cursor-pointer font-medium "
+              className="text-secondary  hover:text-primary py-1 cursor-pointer font-medium "
             >
               Company Overview
             </p>
             <p
               onClick={() => scrollToSection(sectionRef5)}
-              className="text-sidebar hover:text-primary py-1 cursor-pointer font-medium "
+              className="text-secondary  hover:text-primary py-1 cursor-pointer font-medium "
             >
               Company Operations
             </p>
 
             <p
               onClick={() => scrollToSection(sectionRef6)}
-              className="text-sidebar hover:text-primary py-1 cursor-pointer font-medium "
+              className="text-secondary  hover:text-primary py-1 cursor-pointer font-medium "
             >
               References
             </p>

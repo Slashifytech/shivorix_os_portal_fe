@@ -14,10 +14,10 @@ const HelpSupport = () => {
         </span>
       </div>
       <div className="bg-white rounded-md px-6 py-6 md:ml-[20%] sm:ml-[27%] font-poppins sm:mt-28 md:mt-22 mr-8 ">
-        <p className="font-semibold text-sidebar text-[22px]">
+        <p className="font-semibold text-secondary  text-[22px]">
           Bugs and Issues Report
         </p>
-        <p className="font-semibod text-sidebar text-[17px]  mt-3 mb-2">Description :-</p>
+        <p className="font-semibod text-secondary  text-[17px]  mt-3 mb-2">Description :-</p>
         <p className="text-body text-[14px] md:pr-28">
           If you experience any issues or bugs while using this portal, please
           reach out to our development team for assistance. <br />
@@ -34,20 +34,20 @@ const HelpSupport = () => {
           <br />
           Thank you for helping us improve your experience with this portal.
         </p>
-        <p className="font-semibod mt-2 text-sidebar text-[17px]">
+        <p className="font-semibod mt-2 text-secondary  text-[17px]">
           Contact Details :-
         </p>
         <p className=" text-body text-[14px]">
           {" "}
-          <span className="font-semibold text-sidebar">Email:- </span>
+          <span className="font-semibold text-secondary ">Email:- </span>
          global@shivorix.com
         </p>
       </div>
       <div className="bg-white rounded-md px-6 py-6 md:ml-[20%] sm:ml-[27%] font-poppins mt-10 mr-8 mb-20">
-        <p className="font-semibold text-sidebar text-[22px]">
+        <p className="font-semibold text-secondary  text-[22px]">
           Help and Support
         </p>
-        <p className="font-semibod text-sidebar text-[17px] mt-3 mb-2">Description :-</p>
+        <p className="font-semibod text-secondary  text-[17px] mt-3 mb-2">Description :-</p>
         <p className="text-body text-[14px] md:pr-28">
           If you encounter any issues related to general information—such as
           college details, courses, or offer letter pricing—please reach out to
@@ -59,12 +59,12 @@ const HelpSupport = () => {
           <br />
           Thank you for helping us serve you better.
         </p>
-        <p className="font-semibod mt-2 text-sidebar text-[17px]">
+        <p className="font-semibod mt-2 text-secondary  text-[17px]">
           Contact Details :-
         </p>
         <p className=" text-body text-[14px]">
           {" "}
-          <span className="font-semibold text-sidebar">Email:- </span>
+          <span className="font-semibold text-secondary ">Email:- </span>
        global@shivorix.com
         </p>
       </div>

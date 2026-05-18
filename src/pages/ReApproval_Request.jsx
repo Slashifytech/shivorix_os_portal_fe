@@ -101,7 +101,7 @@ const ReApproval_Request = () => {
     <>
       <div className="flex flex-col items-center justify-center  font-poppins ">
         <ImageComponent src={reaproval} className="w-80 mt-6" />
-        <p className="text-sidebar text-[26px] font-semibold">
+        <p className="text-secondary  text-[26px] font-semibold">
           Account deleted!
         </p>
         <p className="px-[30%] text-center pt-3 text-body">
@@ -112,7 +112,7 @@ const ReApproval_Request = () => {
           {studentInfoData?.data?.studentInformation?.pageStatus?.status ===
             "requestedForReapproval" ||
           agentData?.pageStatus?.status === "requestedForReapproval" ? (
-            <p className="text-[16px] text-sidebar mt-6">
+            <p className="text-[16px] text-secondary  mt-6">
               You have requested for the re-approval . please wait for the admin
               approval.
             </p>

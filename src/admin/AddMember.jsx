@@ -416,7 +416,7 @@ const AddMember = () => {
       <div className="font-poppins">
         <span className="flex items-center pt-16 md:ml-[16.5%] bg-white pb-6 sm:ml-[22%]">
           <span>
-            <p className="text-[28px] font-bold text-sidebar mt-6 ml-9">
+            <p className="text-[28px] font-bold text-secondary  mt-6 ml-9">
               {location?.pathname === "/admin/add-partner"
                 ? "Partner Form"
                 : location.pathname === "/admin/province/add-employee"

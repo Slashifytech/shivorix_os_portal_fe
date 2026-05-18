@@ -257,7 +257,7 @@ const StudentProfile = () => {
                     loading="lazy"
                   />
                   <span className="flex flex-col">
-                    <span className="text-sidebar text-[18px] font-medium ">
+                    <span className="text-secondary  text-[18px] font-medium ">
                       {studentData?.studentInformation?.personalInformation
                         ?.firstName +
                         " " +

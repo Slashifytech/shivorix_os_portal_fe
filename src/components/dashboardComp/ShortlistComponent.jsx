@@ -17,7 +17,7 @@ const ShortlistComponent = ({
       <div className="md:ml-[17%] sm:ml-[27%] sm:mr-6 pt-16 bg-white border-b-2 border-[#E8E8E8]">
         <span className="flex items-center">
           <span>
-            <p className="md:text-[28px] sm:text-[22px] font-bold text-sidebar md:mt-6 sm:mt-9 ml-9">
+            <p className="md:text-[28px] sm:text-[22px] font-bold text-secondary  md:mt-6 sm:mt-9 ml-9">
               {headingText}
             </p>
             <p className="mt-1 mb-6 font-normal text-body md:pr-[20%] pr-[9%] ml-9">

@@ -68,7 +68,7 @@ const DeleteAccount = () => {
       <div className="font-poppins">
         <span className="flex md:flex-row sm:flex-col items-center bg-white mt-16 md:ml-[16.5%] sm:ml-[22%] pb-6">
           <span>
-            <p className="text-[28px] font-bold text-sidebar mt-6 ml-9">
+            <p className="text-[28px] font-bold text-secondary  mt-6 ml-9">
               Delete Account
             </p>
             <p className="mt-1 md:font-normal sm:font-light text-body md:pr-[8%] sm:pr-[20%] ml-9">
@@ -96,7 +96,7 @@ const DeleteAccount = () => {
             loading="lazy"
           />
 
-          <p className="text-sidebar font-normal text-[15px]">
+          <p className="text-secondary  font-normal text-[15px]">
             {" "}
             {role === "2"
               ? agentData?.companyDetails?.businessName
@@ -108,7 +108,7 @@ const DeleteAccount = () => {
                   ?.lastName
               : null}
           </p>
-          <p className="text-sidebar font-normal text-[15px]">
+          <p className="text-secondary  font-normal text-[15px]">
             {" "}
             {role === "2"
               ? agentData?.agentEmail
@@ -117,11 +117,11 @@ const DeleteAccount = () => {
                   ?.email
               : null}
           </p>
-          <p className="text-sidebar  text-[22px] font-semibold mt-6">
+          <p className="text-secondary   text-[22px] font-semibold mt-6">
             {" "}
             Account Deletion
           </p>
-          <p className="text-sidebar font-light text-center text-[14px]">
+          <p className="text-secondary  font-light text-center text-[14px]">
             {" "}
             This action can be reverse anytime. All your data, including profile
             information and activity history, will be restored.

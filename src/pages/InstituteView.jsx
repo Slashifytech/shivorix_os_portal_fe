@@ -84,7 +84,7 @@ const InstituteView = () => {
   return (
     <>
       <Header customLink="/agent/shortlist" />
-      <div className="font-poppins text-sidebar">
+      <div className="font-poppins text-secondary ">
         <span className="fixed overflow-y-scroll scrollbar-hide bg-white">
           {role === "3" ? (
             <Sidebar />

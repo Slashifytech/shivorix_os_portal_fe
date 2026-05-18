@@ -29,7 +29,7 @@ import { RxCross2 } from "react-icons/rx";
               {" "}
               <RxCross2 />
             </span>
-            <p className="text-sidebar font-semibold text-[20px]">
+            <p className="text-secondary  font-semibold text-[20px]">
               Choose Country to Apply Visa
             </p>
             <CountrySelect

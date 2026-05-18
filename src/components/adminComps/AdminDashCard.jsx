@@ -75,7 +75,7 @@ const AdminDashCardTwo = ({
 
           <span
             style={{ backgroundColor: customSBg }}
-            className="px-8 py-2 rounded-t-md absolute bottom-0 left-14 text-[13px] text-sidebar"
+            className="px-8 py-2 rounded-t-md absolute bottom-0 left-14 text-[13px] text-secondary "
           >
             Active: {active}
           </span>

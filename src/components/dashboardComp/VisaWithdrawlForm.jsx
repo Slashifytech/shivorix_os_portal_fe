@@ -337,7 +337,7 @@ const VisaWithdrawlForm = ({ choosedOption, studId, handleClose }) => {
               : null
           } Fee amount withdrawal.`}
         </p>
-        <div className="text-sidebar text-[22px] font-bold ml-6">
+        <div className="text-secondary  text-[22px] font-bold ml-6">
         Student  Bank Details{" "}
         </div>
 
@@ -548,7 +548,7 @@ const VisaWithdrawlForm = ({ choosedOption, studId, handleClose }) => {
           )}
         </div>
 
-        <div className="text-sidebar text-[22px] font-bold ml-6">
+        <div className="text-secondary  text-[22px] font-bold ml-6">
           Parent Bank Details{" "}
         </div>
 

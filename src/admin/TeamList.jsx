@@ -80,7 +80,7 @@ const TeamList = () => {
           <AdminSidebar />
         </span>
         <div className="md:ml-[17%] sm:ml-[23%] pt-14 font-poppins bg-white pb-6">
-          <p className="md:text-[28px] sm:text-[22px] font-bold text-sidebar mt-6 ml-9">
+          <p className="md:text-[28px] sm:text-[22px] font-bold text-secondary  mt-6 ml-9">
             {role === "4" ? "Employee Directory" : "Team Members"}(
             {totalUsersCount})
           </p>

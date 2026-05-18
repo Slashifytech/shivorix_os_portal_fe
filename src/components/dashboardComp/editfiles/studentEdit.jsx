@@ -45,7 +45,7 @@ const StudentEdit = ({
   return (
     <>
       <div className="bg-white rounded-md px-6 py-4 font-poppins ">
-        <div className="flex flex-row text-sidebar items-center justify-between border-b border-greyish">
+        <div className="flex flex-row text-secondary  items-center justify-between border-b border-greyish">
           <span className="flex flex-row gap-4 items-center pb-3">
             <span className="text-[24px]">
               <FaRegIdCard />
@@ -123,7 +123,7 @@ const StudentEdit = ({
         </div>
 
         <div className="bg-white rounded-md  py-4 font-poppins">
-          <div className="flex flex-row text-sidebar items-center justify-between border-b border-greyish">
+          <div className="flex flex-row text-secondary  items-center justify-between border-b border-greyish">
             <span className="flex flex-row gap-4 items-center pb-3">
               <span className="text-[24px]">
                 <BsFillPassportFill />
@@ -193,7 +193,7 @@ const StudentEdit = ({
       {/* residence address */}
 
       <div className="bg-white rounded-md px-6 py-4 font-poppins mt-6">
-        <div className="flex flex-row text-sidebar items-center justify-between border-b border-greyish">
+        <div className="flex flex-row text-secondary  items-center justify-between border-b border-greyish">
           <span className="flex flex-row gap-4 items-center pb-3">
             <span className="text-[24px]">
               <IoHomeOutline />
@@ -263,7 +263,7 @@ const StudentEdit = ({
       {/* Preferencess */}
 
       <div className="bg-white rounded-md px-6 py-4 font-poppins mt-6">
-        <div className="flex flex-row text-sidebar items-center justify-between border-b border-greyish">
+        <div className="flex flex-row text-secondary  items-center justify-between border-b border-greyish">
           <span className="flex flex-row gap-4 items-center pb-3">
             <span className="text-[24px]">
               <RxSlider />

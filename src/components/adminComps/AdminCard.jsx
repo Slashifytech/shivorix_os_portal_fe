@@ -46,11 +46,11 @@ const AdminCard = ({
             </span>
           )}
 
-          <span className="font-medium text-sidebar sm:text-[13px] md:text-[15px] capitalize">
+          <span className="font-medium text-secondary  sm:text-[13px] md:text-[15px] capitalize">
             {name}
           </span>
           <span
-            className={`font-normal text-sidebar sm:text-[12px] md:text-[14px] ${
+            className={`font-normal text-secondary  sm:text-[12px] md:text-[14px] ${
               isApproval ? "md:w-96 sm:w-64" : "md:w-80 sm:w-36"
             }`}
           >
@@ -75,7 +75,7 @@ const AdminCard = ({
           </span>
         </span>
         <span className="flex flex-col items-start md:w-20 sm:w-24">
-          <span className="font-normal text-sidebar sm:text-[13px] md:text-[15px]">
+          <span className="font-normal text-secondary  sm:text-[13px] md:text-[15px]">
             User Type
           </span>
           <span
@@ -88,10 +88,10 @@ const AdminCard = ({
         </span>
         {!isApproval && (
           <span className="flex flex-col items-start md:w-32 sm:w-28">
-            <span className="font-normal text-sidebar sm:text-[13px] md:text-[15px]">
+            <span className="font-normal text-secondary  sm:text-[13px] md:text-[15px]">
               Application Type
             </span>
-            <span className="font-semibold text-sidebar mt-2  md:text-[14px] sm:text-[12px]">
+            <span className="font-semibold text-secondary  mt-2  md:text-[14px] sm:text-[12px]">
               {applicationType === "offerLetter"
                 ? "Offer Letter"
                 : applicationType === "courseFeeApplication"
@@ -103,16 +103,16 @@ const AdminCard = ({
           </span>
         )}
         <span className="flex flex-col items-start w-28">
-          <span className="font-normal text-sidebar sm:text-[13px] md:text-[15px]">
+          <span className="font-normal text-secondary  sm:text-[13px] md:text-[15px]">
             User Id
           </span>
-          <span className="font-semibold text-sidebar mt-2  md:text-[14px] sm:text-[12px]">
+          <span className="font-semibold text-secondary  mt-2  md:text-[14px] sm:text-[12px]">
             {userId}
           </span>
         </span>
         {currentStatus ? (
           <span className="flex flex-col items-start w-32">
-            <span className="font-normal text-sidebar text-[15px]">Status</span>
+            <span className="font-normal text-secondary  text-[15px]">Status</span>
             <span
               className={`font-normal text-white mt-2  md:text-[14px] sm:text-[12px] px-3 rounded-xl py-1 ${
                 currentStatus === "approved"
@@ -158,11 +158,11 @@ const AdminCard = ({
         <div className="bg-white  font-poppins  w-full px-6  pb-6 ">
           <hr className="border border-greyish" />
           <span className="flex flex-col w-96 mt-4">
-            <span className="font-medium text-sidebar sm:text-[13px] md:text-[15px] ">
+            <span className="font-medium text-secondary  sm:text-[13px] md:text-[15px] ">
               Reason for rejection
             </span>
             <span
-              className={`font-normal text-sidebar   md:text-[14px] sm:text-[12px]`}
+              className={`font-normal text-secondary    md:text-[14px] sm:text-[12px]`}
             >
               {rejectionMessage || "No reason available"}
             </span>

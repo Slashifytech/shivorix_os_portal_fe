@@ -141,7 +141,7 @@ const OfferLetterPreferences = ({ appId, updatedData, profileViewPath }) => {
   };
   return (
     <div className="bg-white rounded-md px-6 py-4 font-poppins">
-      <div className="flex flex-row text-sidebar items-center justify-between border-b border-greyish">
+      <div className="flex flex-row text-secondary  items-center justify-between border-b border-greyish">
         <span className="flex flex-row gap-4 items-center pb-3">
           <span className="text-[24px]">
             <MdCable />

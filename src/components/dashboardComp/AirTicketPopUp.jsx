@@ -48,49 +48,49 @@ const AirTicketPopUp = ({ isOpen, closePopUp, id }) => {
                 <span className="text-[32px]">
                   <BiSolidUserDetail />
                 </span>
-                <p className="text-sidebar text-[16px]  font-semibold">
+                <p className="text-secondary  text-[16px]  font-semibold">
                   User Information
                 </p>
               </span>
               <div className="flex flex-row justify-between    items-start w-full">
                 <span>
                   <span className="flex flex-col ">
-                    <span className="text-[14px] text-sidebar mt-6 font-medium">
+                    <span className="text-[14px] text-secondary  mt-6 font-medium">
                       Full Name
                     </span>
-                    <span className="text-[13px] mt-1 text-sidebar  font-normal">
+                    <span className="text-[13px] mt-1 text-secondary   font-normal">
                       {airTicketData?.personName}
                     </span>
                   </span>
                   <span className="flex flex-col ">
-                    <span className="text-[14px] text-sidebar mt-6 font-medium">
+                    <span className="text-[14px] text-secondary  mt-6 font-medium">
                       Destination Location
                     </span>
-                    <span className="text-[13px] mt-1 text-sidebar  font-normal">
+                    <span className="text-[13px] mt-1 text-secondary   font-normal">
                       {airTicketData?.destinationLocation}
                     </span>
                     <span className=" flex flex-col">
-                      <span className="text-[14px] text-sidebar mt-6 font-medium">
+                      <span className="text-[14px] text-secondary  mt-6 font-medium">
                         Travel Date
                       </span>
-                      <span className="text-[13px] mt-1 text-sidebar  font-normal">
+                      <span className="text-[13px] mt-1 text-secondary   font-normal">
                         {formatDate(airTicketData?.travelDate) || "NA"}
                       </span>
                     </span>
                   </span>
                 </span>
                 <span className=" flex flex-col">
-                  <span className="text-[14px] text-sidebar mt-6 font-medium">
+                  <span className="text-[14px] text-secondary  mt-6 font-medium">
                     Source Location
                   </span>
-                  <span className="text-[13px] mt-1 text-sidebar  font-normal">
+                  <span className="text-[13px] mt-1 text-secondary   font-normal">
                     {airTicketData?.sourceLocation}
                   </span>
                   <span className=" flex flex-col">
-                    <span className="text-[14px] text-sidebar mt-6 font-medium">
+                    <span className="text-[14px] text-secondary  mt-6 font-medium">
                       Flight Preferences
                     </span>
-                    <span className="text-[13px] mt-1 text-sidebar  font-normal capitalize">
+                    <span className="text-[13px] mt-1 text-secondary   font-normal capitalize">
                       {airTicketData?.flightPreference}
                     </span>
                   </span>
@@ -100,7 +100,7 @@ const AirTicketPopUp = ({ isOpen, closePopUp, id }) => {
             </span>
 
             <span className="flex flex-col justify-start mb-9">
-              <span className="flex flex-row items-center gap-3 mt-6 text-sidebar">
+              <span className="flex flex-row items-center gap-3 mt-6 text-secondary ">
                 <span className="text-[28px]">
                   <RiFileUploadLine />
                 </span>
@@ -111,7 +111,7 @@ const AirTicketPopUp = ({ isOpen, closePopUp, id }) => {
               <div className="flex flex-row justify-between    items-start w-full">
                 <span>
                   <span className="flex flex-col ">
-                    <span className="text-[14px] text-sidebar mt-6 font-medium">
+                    <span className="text-[14px] text-secondary  mt-6 font-medium">
                       Passport
                     </span>
 
@@ -135,7 +135,7 @@ const AirTicketPopUp = ({ isOpen, closePopUp, id }) => {
                   </span>
                 </span>
                 <span className=" flex flex-col">
-                  <span className="text-[14px] text-sidebar mt-6 font-medium">
+                  <span className="text-[14px] text-secondary  mt-6 font-medium">
                     PPR/Visa Stamp
                   </span>
                   <span className="font-medium">

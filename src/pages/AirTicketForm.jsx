@@ -245,7 +245,7 @@ const AirTicketForm = () => {
         </span>
         <div className="ml-[17%] pt-16 pb-8 bg-white border-b-2 border-[#E8E8E8]">
           <span className="flex  items-center">
-            <p className="text-[28px] font-bold text-sidebar mt-6 md:ml-9 sm:ml-20">
+            <p className="text-[28px] font-bold text-secondary  mt-6 md:ml-9 sm:ml-20">
               Air - Ticket Form
             </p>
           </span>

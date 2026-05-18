@@ -27,7 +27,7 @@ const SidebarItem = ({ item, path, onClick }) => (
       path === item?.otherPathTwo ||
       path === item?.otherPathThree 
         ? "bg-[#FFF4E0] text-secondary border-l-4 border-primary font-medium"
-        : "text-sidebar"
+        : "text-secondary "
     }`}
   >
     <Link
@@ -105,7 +105,7 @@ const AdminSidebar = () => {
           <SidebarItem key={index} item={item} path={path} onClick={handleDispatch} />
         ))}
         {(role === "0" || role === "1") && (
-          <div className={`cursor-pointer py-4 hover:bg-[#FFF4E0] hover:text-primary hover:border-l-4 hover:font-medium ${path === "/admin/ticket" ? "bg-[#FFF4E0] text-secondary border-l-4 border-primary font-medium" : "text-sidebar"}`}>
+          <div className={`cursor-pointer py-4 hover:bg-[#FFF4E0] hover:text-primary hover:border-l-4 hover:font-medium ${path === "/admin/ticket" ? "bg-[#FFF4E0] text-secondary border-l-4 border-primary font-medium" : "text-secondary "}`}>
             <Link to="/admin/ticket" className="flex items-center gap-3 md:pl-6 lg:px-6 sm:pl-6">
               <span className="text-[20px]"><BsFillTicketPerforatedFill /></span>
               <span>Ticket Support</span>
@@ -114,7 +114,7 @@ const AdminSidebar = () => {
         )}
         {role === "0" && (
           <>
-            <div onClick={() => setIsOpen((prev) => !prev)} className="flex items-center mt-2 bg-transparent py-2 relative hover:text-primary hover:bg-[#FFF4E0] px-5 text-sidebar cursor-pointer">
+            <div onClick={() => setIsOpen((prev) => !prev)} className="flex items-center mt-2 bg-transparent py-2 relative hover:text-primary hover:bg-[#FFF4E0] px-5 text-secondary  cursor-pointer">
               <span className="text-[23px]"><CgProfile /></span>
               <span className="flex items-center pl-[12px]">
                 My Account
@@ -125,7 +125,7 @@ const AdminSidebar = () => {
               <ul className="sm:mt-2 list-none text-[16px]">
                 {["/admin/profile", "/admin/change-password", "/admin/change-email"].map((link, idx) => (
                   <Link key={idx} to={link}>
-                    <li className={`text-sidebar py-2 mb-2 cursor-pointer md:pl-12 lg:px-12 sm:pl-12 hover:bg-[#f5ebeb] hover:text-primary capitalize ${path === link ? "bg-[#FFF4E0] border-l-4 border-primary text-secondary" : ""}`}>
+                    <li className={`text-secondary  py-2 mb-2 cursor-pointer md:pl-12 lg:px-12 sm:pl-12 hover:bg-[#f5ebeb] hover:text-primary capitalize ${path === link ? "bg-[#FFF4E0] border-l-4 border-primary text-secondary" : ""}`}>
                       {link.split("/").pop().replace("-", " ").replace("email", "Email").replace("password", "Password").replace("profile", "Profile")}
                     </li>
                   </Link>

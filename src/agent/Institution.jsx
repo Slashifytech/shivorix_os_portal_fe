@@ -175,7 +175,7 @@ const Institution = () => {
       <div>
         <span className="flex md:flex-row sm:flex-col items-center mt-20 md:ml-[16.5%] sm:ml-[22%]">
           <span>
-            <p className="text-[28px] font-bold text-sidebar mt-6 ml-9">
+            <p className="text-[28px] font-bold text-secondary  mt-6 ml-9">
               Explore: Colleges & Universities
             </p>
             <p className="mt-1 md:font-normal sm:font-light text-body md:pr-[8%] sm:pr-[20%] ml-9">
@@ -200,7 +200,7 @@ const Institution = () => {
         </span>
         <span className="grid md:grid-cols-4 sm:grid-cols-2 items-center md:gap-8 md:mr-[9%] md:ml-[19%] sm:ml-[27%] sm:mr-[9%]">
           <div className="mt-1">
-            <p className="mb-2 text-sidebar">Courses</p>
+            <p className="mb-2 text-secondary ">Courses</p>
             <Select
               showSearch
               className="md:w-[115%] sm:w-[100%]"
@@ -292,7 +292,7 @@ const Institution = () => {
             Showing {displayedInstitutes.length} of {totalUsersCount}{" "}
             universities
           </p>
-          <p className="text-[24px] font-semibold text-sidebar md:ml-[19%] sm:ml-[27%]">
+          <p className="text-[24px] font-semibold text-secondary  md:ml-[19%] sm:ml-[27%]">
             All universities and colleges
           </p>
           <div className="md:ml-[19%] sm:ml-[27%] mt-6 grid md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-2 mx-6 md:gap-6 sm:gap-6">

@@ -82,10 +82,10 @@ const AirTickets = () => {
           <div>
             <span className="flex items-center pt-20 pb-6 md:pl-[18.5%] sm:pl-[27%] bg-white">
               <span className="flex  flex-col items-start">
-                <p className="text-[28px] font-bold text-sidebar mt-6 md:ml-4 sm:ml-20">
+                <p className="text-[28px] font-bold text-secondary  mt-6 md:ml-4 sm:ml-20">
                   Air-Tickets Directory
                 </p>
-                <p className="text-sidebar ml-4 text-[15px]">
+                <p className="text-secondary  ml-4 text-[15px]">
                   Review Your Tickets here.
                 </p>
               </span>

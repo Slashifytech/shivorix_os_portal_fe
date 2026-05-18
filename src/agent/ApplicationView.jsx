@@ -149,7 +149,7 @@ console.log(location)
                     <span className="text-secondary font-medium text-[13px]">
                       {totalUsersCount || "0"} Applications
                     </span>
-                    <span className="text-sidebar text-[18px] font-medium ">
+                    <span className="text-secondary  text-[18px] font-medium ">
                       {studentData?.studentInformation?.personalInformation
                         ?.firstName +
                         " " +

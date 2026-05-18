@@ -83,7 +83,7 @@ const InstituteCard = ({
             </span>
           </span>
           <p
-            className={`font-semibold text-[16px] text-sidebar leading-snug"
+            className={`font-semibold text-[16px] text-secondary  leading-snug"
             }`} // Apply different style when hovered
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}

@@ -123,7 +123,7 @@ const Sidebar = () => {
               path === item?.otherPathSeven ||
               path === item?.otherPathEight
                 ? "bg-[#FFF4E0] text-secondary border-l-4 border-primary font-medium"
-                : "text-sidebar"
+                : "text-secondary "
             }`}
           >
             <Link to={item.pathPage} className="flex items-center gap-3 px-6">
@@ -135,7 +135,7 @@ const Sidebar = () => {
 
         <div
           onClick={() => setIsOpen((prev) => !prev)}
-          className="flex items-center mt-2 bg-transparent py-2 relative hover:text-primary hover:bg-[#FFF4E0] px-5 text-sidebar cursor-pointer"
+          className="flex items-center mt-2 bg-transparent py-2 relative hover:text-primary hover:bg-[#FFF4E0] px-5 text-secondary  cursor-pointer"
         >
           <span className="text-[23px]">
             <CgProfile />
@@ -159,7 +159,7 @@ const Sidebar = () => {
           <ul className="sm:mt-2 list-none text-[16px]">
             <Link to="/account/profile-edit">
               <li
-                className={`text-sidebar py-2 mb-2 cursor-pointer md:pl-14 lg:px-14 sm:pl-14 md:ml-0 hover:bg-[#f5ebeb] hover:text-primary ${
+                className={`text-secondary  py-2 mb-2 cursor-pointer md:pl-14 lg:px-14 sm:pl-14 md:ml-0 hover:bg-[#f5ebeb] hover:text-primary ${
                   path === "/account/profile-edit" &&
                   "bg-[#FFF4E0] border-l-4 border-primary text-secondary"
                 }`}
@@ -170,7 +170,7 @@ const Sidebar = () => {
 
             <Link to="/settings/change-password">
               <li
-                className={`text-sidebar py-2 mb-2 cursor-pointer md:pl-14 sm:pl-14 md:ml-0  hover:bg-[#f5ebeb] hover:text-primary ${
+                className={`text-secondary  py-2 mb-2 cursor-pointer md:pl-14 sm:pl-14 md:ml-0  hover:bg-[#f5ebeb] hover:text-primary ${
                   path === "/settings/change-password" &&
                   "bg-[#FFF4E0] border-l-4 border-primary text-secondary"
                 }`}
@@ -180,7 +180,7 @@ const Sidebar = () => {
             </Link>
             <Link to="/settings/change-email">
               <li
-                className={`text-sidebar py-2 mb-2 cursor-pointer md:px-14 sm:pl-14 md:ml-0  hover:bg-[#f5ebeb] hover:text-primary ${
+                className={`text-secondary  py-2 mb-2 cursor-pointer md:px-14 sm:pl-14 md:ml-0  hover:bg-[#f5ebeb] hover:text-primary ${
                   path === "/settings/change-email" &&
                   "bg-[#FFF4E0] border-l-4 border-primary text-secondary"
                 }`}
@@ -190,7 +190,7 @@ const Sidebar = () => {
             </Link>
             <Link to="/settings/delete-account">
               <li
-                className={`text-sidebar py-2 mb-2 cursor-pointer md:px-14 sm:pl-14 md:ml-0  hover:bg-[#f5ebeb] hover:text-primary ${
+                className={`text-secondary  py-2 mb-2 cursor-pointer md:px-14 sm:pl-14 md:ml-0  hover:bg-[#f5ebeb] hover:text-primary ${
                   path === "/settings/delete-account" &&
                   "bg-[#FFF4E0] border-l-4 border-primary text-secondary"
                 }`}
@@ -204,7 +204,7 @@ const Sidebar = () => {
         className={`cursor-pointer py-4 hover:bg-[#FFF4E0] hover:text-primary hover:border-l-4 hover:font-medium ${
           path === "/student/payment-details"
             ? "bg-[#FFF4E0] text-secondary border-l-4 border-primary font-medium"
-            : "text-sidebar"
+            : "text-secondary "
         }`}
       >
         <Link
@@ -223,7 +223,7 @@ const Sidebar = () => {
           className={`cursor-pointer py-4 hover:bg-[#f5ebeb] hover:text-primary hover:border-l-4 hover:font-medium ${
             path === "/help-support"
               ? "bg-[#FFF4E0] text-secondary border-l-4 border-primary font-medium"
-              : "text-sidebar"
+              : "text-secondary "
           }`}
         >
           <Link
@@ -241,6 +241,7 @@ const Sidebar = () => {
         <div
           className={`cursor-pointer py-4 hover:bg-[#FFF4E0] hover:text-primary hover:border-l-4 hover:font-medium text-secondary`}
         >
+        
           <div
             className="flex items-center gap-3 px-6"
             onClick={openLogoutPopup}

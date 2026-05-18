@@ -40,7 +40,7 @@ const ViewTicketPop = ({ isOpen, closePopUp, isticketId }) => {
                   ? "Under Review"
                   : "NA"}
               </span>
-              <p className=" font-DMsans text-sidebar font-semibold text-[16px] pt-6 ">
+              <p className=" font-DMsans text-secondary  font-semibold text-[16px] pt-6 ">
                 {ticketById?.ticketType}
               </p>
               <p className="text-body text-[13px] pr-28">
@@ -49,44 +49,44 @@ const ViewTicketPop = ({ isOpen, closePopUp, isticketId }) => {
               <p className="text-body text-[14px] mt-6">Ticket Details</p>
               <div className="flex justify-between items-start w-full">
                 <span className="flex flex-col ">
-                  <span className="text-[14px] text-sidebar mt-6 font-medium">
+                  <span className="text-[14px] text-secondary  mt-6 font-medium">
                     Ticket No.
                   </span>
-                  <span className="text-[13px] mt-1 text-sidebar  font-normal">
+                  <span className="text-[13px] mt-1 text-secondary   font-normal">
                     {ticketById?.ticketId}
                   </span>
                 </span>
                 <span className="flex flex-col ">
-                  <span className="text-[14px] text-sidebar mt-6 font-medium">
+                  <span className="text-[14px] text-secondary  mt-6 font-medium">
                     Ticket Type
                   </span>
-                  <span className="text-[13px] mt-1 text-sidebar  font-normal">
+                  <span className="text-[13px] mt-1 text-secondary   font-normal">
                     {ticketById?.ticketType}
                   </span>
                 </span>
                 <span className="flex flex-col ">
-                  <span className="text-[14px] text-sidebar mt-6 font-medium">
+                  <span className="text-[14px] text-secondary  mt-6 font-medium">
                     Priority Status
                   </span>
-                  <span className="text-[13px] mt-1 text-sidebar  font-normal">
+                  <span className="text-[13px] mt-1 text-secondary   font-normal">
                     {ticketById?.priorityStatus}
                   </span>
                 </span>
                 <span className="flex flex-col ">
-                  <span className="text-[14px] text-sidebar mt-6 font-medium">
+                  <span className="text-[14px] text-secondary  mt-6 font-medium">
                     Date Created
                   </span>
-                  <span className="text-[13px] mt-1 text-sidebar  font-normal">
+                  <span className="text-[13px] mt-1 text-secondary   font-normal">
                     {formatDate(ticketById?.createdAt)}
                   </span>
                 </span>
               </div>
             </span>
             <span className="flex flex-col ">
-                  <span className="text-[14px] text-sidebar mt-6 font-medium">
+                  <span className="text-[14px] text-secondary  mt-6 font-medium">
                     Resolved Description
                   </span>
-                  <span className="text-[13px] mt-1 text-sidebar  font-normal">
+                  <span className="text-[13px] mt-1 text-secondary   font-normal">
                     {(ticketById?.resolvedText)}
                   </span>
                 </span>

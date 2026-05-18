@@ -7,7 +7,7 @@ const Dnf = ({headingText, bodyText, dnfImg,isButton, buttonText, customClass}) 
     <>
         <div className="bg-white mx-28  mb-20 pt-12 pb-12 flex flex-col  justify-center items-center rounded-md ">
           <img src={dnfImg} alt="img" className="w-44 h-44" />
-          <p className="text-sidebar font-semibold mt-3 text-[24px]">
+          <p className="text-secondary  font-semibold mt-3 text-[24px]">
        {headingText}
           </p>
           <p className={` text-body font-normal mt-3 md:x-20 text-[15px] text-center ${customClass}`}>

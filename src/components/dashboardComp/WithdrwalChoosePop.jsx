@@ -25,11 +25,11 @@ const WithdrwalChoosePop = ({ isOpenOption, closeOption, handleWithdraw, setSele
             </span>
          
             <div className="withdrawal-choose-pop">
-            <p className="text-sidebar font-semibold text-[20px]">
+            <p className="text-secondary  font-semibold text-[20px]">
             Which application would you like to withdraw?
             </p>
               <div className="radio-options ">
-              <span className="flex  items-center gap-4 mt-3 border border-greyish rounded-md py-3 text-sidebar px-3">
+              <span className="flex  items-center gap-4 mt-3 border border-greyish rounded-md py-3 text-secondary  px-3">
                   <input
                     type="radio"
                     name="withdrawalOption"
@@ -40,7 +40,7 @@ const WithdrwalChoosePop = ({ isOpenOption, closeOption, handleWithdraw, setSele
                   Course Fee
                 </label>
                 </span>
-                <span className="flex  items-center gap-4 mt-3 border border-greyish rounded-md py-3 text-sidebar px-3">
+                <span className="flex  items-center gap-4 mt-3 border border-greyish rounded-md py-3 text-secondary  px-3">
                   <input
                     type="radio"
                     name="withdrawalOption"
@@ -52,7 +52,7 @@ const WithdrwalChoosePop = ({ isOpenOption, closeOption, handleWithdraw, setSele
                   GIC
                 </label></span>
               
-                <span className="flex  items-center gap-4 mt-3 border border-greyish rounded-md py-3 text-sidebar px-3">
+                <span className="flex  items-center gap-4 mt-3 border border-greyish rounded-md py-3 text-secondary  px-3">
                   <input
                     type="radio"
                     name="withdrawalOption"

@@ -354,7 +354,7 @@ const VisaStatusComponent = ({ studentId }) => {
 
           <div className="ml-[17%] pt-16 pb-5 bg-white border-b-2 border-[#E8E8E8]">
             <span className="flex  items-center justify-between">
-              <p className="text-[28px] font-bold text-sidebar mt-6 md:ml-9 sm:ml-20">
+              <p className="text-[28px] font-bold text-secondary  mt-6 md:ml-9 sm:ml-20">
                 Visa Lodgement Status
               </p>
               <span
@@ -396,13 +396,13 @@ const VisaStatusComponent = ({ studentId }) => {
             }}
             loading="lazy"
           />
-          <p className="text-sidebar text-[22px] font-semibold mt-3 text-center">
+          <p className="text-secondary  text-[22px] font-semibold mt-3 text-center">
             {role === "0" || role === "1" || role === "4" || role === "5"
               ? null
               : "Your"}{" "}
             Visa lodgement Application is under review.
           </p>
-          <p className="text-sidebar text-[16px] text-center font-light mt-3">
+          <p className="text-secondary  text-[16px] text-center font-light mt-3">
             {role === "0" || role === "1" || role === "4" || role === "5"
               ? null
               : "We’ll notify you with updates. Please ensure all required documents are submitted and check your email for further requests."}
@@ -427,7 +427,7 @@ const VisaStatusComponent = ({ studentId }) => {
           />
           {role === "0" || role === "1" || role === "4" || role === "5" ? (
             <>
-              <p className="text-sidebar text-[15px] font-normal mt-3 text-center">
+              <p className="text-secondary  text-[15px] font-normal mt-3 text-center">
                 Visa lodegement has been approved from admin side. Review the
                 embassy approval status carefully. If approved, accept the visa
                 application. If not, reject it.
@@ -449,11 +449,11 @@ const VisaStatusComponent = ({ studentId }) => {
             </>
           ) : (
             <>
-              <p className="text-sidebar text-[22px] font-semibold mt-3 text-center">
+              <p className="text-secondary  text-[22px] font-semibold mt-3 text-center">
                 Your Visa lodgement Application has been submitted and it is
                 forwarded for further procedure.
               </p>
-              <p className="text-sidebar text-[16px] text-center font-light mt-3">
+              <p className="text-secondary  text-[16px] text-center font-light mt-3">
                 We’ll notify you with updates. Please ensure all required
                 documents are submitted and check your email for further
                 requests.
@@ -480,18 +480,18 @@ const VisaStatusComponent = ({ studentId }) => {
           />
           {role === "0" || role === "1" || role === "4" || role === "5" ? (
             <>
-              <p className="text-sidebar text-[22px] font-semibold mt-3 text-center">
+              <p className="text-secondary  text-[22px] font-semibold mt-3 text-center">
                 Visa application has been rejected by embassy for this student
                 and student requested for deferment.
               </p>
             </>
           ) : (
             <>
-              <p className="text-sidebar text-[22px] font-semibold mt-3 text-center">
+              <p className="text-secondary  text-[22px] font-semibold mt-3 text-center">
                 Your visa application has been rejected by embassy and You
                 requested for deferment.
               </p>
-              <p className="text-sidebar text-[16px] text-center font-light mt-3">
+              <p className="text-secondary  text-[16px] text-center font-light mt-3">
                 We’ll notify you with updates. check your email for further
                 requests.
               </p>
@@ -508,10 +508,10 @@ const VisaStatusComponent = ({ studentId }) => {
         >
           {role === "2" || role === "3" ? (
             <>
-              <p className="text-sidebar text-[22px] font-semibold mt-3 text-center">
+              <p className="text-secondary  text-[22px] font-semibold mt-3 text-center">
                 Your Visa lodgement Application has been Rejected
               </p>
-              <p className="text-sidebar text-[16px] text-center font-light mt-3">
+              <p className="text-secondary  text-[16px] text-center font-light mt-3">
                 Please review the details provided or contact support for
                 guidance on the next steps.
               </p>
@@ -525,7 +525,7 @@ const VisaStatusComponent = ({ studentId }) => {
             </>
           ) : (
             <>
-              <p className="text-sidebar text-[22px] font-semibold mt-3 text-center">
+              <p className="text-secondary  text-[22px] font-semibold mt-3 text-center">
                 Visa lodgement Application has been Rejected by Admin
               </p>
             </>
@@ -544,10 +544,10 @@ const VisaStatusComponent = ({ studentId }) => {
                     : null
                 } `}
               >
-                <p className="text-sidebar text-[22px] font-semibold mt-3 text-center">
+                <p className="text-secondary  text-[22px] font-semibold mt-3 text-center">
                   Visa lodgement Application Rejected
                 </p>
-                <p className="text-sidebar text-[16px] text-center font-light mt-3">
+                <p className="text-secondary  text-[16px] text-center font-light mt-3">
                   Visa Application has been rejected from embassy for this
                   student. and User requested for withdraw the amount.
                 </p>
@@ -587,15 +587,15 @@ const VisaStatusComponent = ({ studentId }) => {
                   }}
                   loading="lazy"
                 />
-                <p className="text-sidebar text-[22px] font-semibold mt-3 text-center">
+                <p className="text-secondary  text-[22px] font-semibold mt-3 text-center">
                   Your withdrawal request is under process!
                 </p>
-                <p className="text-sidebar text-[16px] text-center font-light mt-3 mx-9">
+                <p className="text-secondary  text-[16px] text-center font-light mt-3 mx-9">
                   Your withdrawal request will be processed within 45-50
                   business days. You will receive a confirmation email once your
                   request has been processed.
                 </p>
-                <p className="text-sidebar text-[16px] text-center font-light mt-3 ">
+                <p className="text-secondary  text-[16px] text-center font-light mt-3 ">
                   All good things take time. <br />
                   Thanks for your patience!
                 </p>
@@ -631,7 +631,7 @@ const VisaStatusComponent = ({ studentId }) => {
                   }}
                   loading="lazy"
                 />
-                <p className="text-sidebar text-[22px] font-normal mt-3">
+                <p className="text-secondary  text-[22px] font-normal mt-3">
                   <span className="font-semibold">Completed!</span> Completed!
                   Withdrawal payment for the GIC and Course Fee has been
                   successfully transferred in the registered account.
@@ -640,10 +640,10 @@ const VisaStatusComponent = ({ studentId }) => {
             </span>
             {/* {role !== "0"  &&
             <>
-            <p className="text-sidebar text-[22px] font-semibold mt-3 text-center">
+            <p className="text-secondary  text-[22px] font-semibold mt-3 text-center">
               Visa lodgement Application Rejected
             </p>
-            <p className="text-sidebar text-[16px] text-center font-light mt-3">
+            <p className="text-secondary  text-[16px] text-center font-light mt-3">
               Visa Application has been rejected from embassy for this student.
               and User requested for withdraw the amount.
             </p> </>} */}
@@ -688,7 +688,7 @@ const VisaStatusComponent = ({ studentId }) => {
                   }}
                   loading="lazy"
                 />
-                <p className="text-sidebar text-[22px] font-normal mt-3">
+                <p className="text-secondary  text-[22px] font-normal mt-3">
                   <span className="font-semibold">Congratulations!</span>{" "}
                   {role === "0" || role === "1" || role === "4" || role === "5"
                     ? "Visa Application has been accepted from embassy for this student."
@@ -696,12 +696,12 @@ const VisaStatusComponent = ({ studentId }) => {
                 </p>
               </span>
               {role === "0" || role === "1" || role === "4" || role === "5" ? (
-                <p className="text-sidebar mt-3 text-[16px] font-light text-center">
+                <p className="text-secondary  mt-3 text-[16px] font-light text-center">
                   Student has uploaded the PPR and Visa Stamp. Review it!{" "}
                 </p>
               ) : (
                 <>
-                  <p className="text-sidebar text-[16px] text-start font-light mt-3">
+                  <p className="text-secondary  text-[16px] text-start font-light mt-3">
                     Thank you for completing the PPR submission and receiving
                     your visa stamp! <br /> With your visa now in hand, you are
                     one step closer to experiencing new opportunities,
@@ -771,10 +771,10 @@ const VisaStatusComponent = ({ studentId }) => {
         >
           {role === "2" || role === "3" ? (
             <>
-              <p className="text-sidebar text-[22px] font-semibold mt-3 text-center">
+              <p className="text-secondary  text-[22px] font-semibold mt-3 text-center">
                 Visa Application Rejected
               </p>
-              <p className="text-sidebar text-[16px] text-center font-light mt-3">
+              <p className="text-secondary  text-[16px] text-center font-light mt-3">
                 Please review the details provided or contact support for
                 guidance on the next steps.
               </p>
@@ -799,10 +799,10 @@ const VisaStatusComponent = ({ studentId }) => {
             </>
           ) : (
             <>
-              <p className="text-sidebar text-[22px] font-semibold mt-3 text-center">
+              <p className="text-secondary  text-[22px] font-semibold mt-3 text-center">
                 Visa Application Rejected
               </p>
-              <p className="text-sidebar text-[17px] font-normal mt-3 text-center">
+              <p className="text-secondary  text-[17px] font-normal mt-3 text-center">
                 Visa Application has been rejected from embassy for
                 this student.
               </p>
@@ -830,12 +830,12 @@ const VisaStatusComponent = ({ studentId }) => {
                     }}
                     loading="lazy"
                   />
-                  <p className="text-sidebar text-[22px] font-normal mt-3">
+                  <p className="text-secondary  text-[22px] font-normal mt-3">
                     <span className="font-semibold">Congratulations!</span> Your
                     Visa Application has been accepted
                   </p>
                 </span>
-                <p className="text-sidebar text-[16px] font-light mt-3">
+                <p className="text-secondary  text-[16px] font-light mt-3">
                   Please allow 8-10 business days to get visa stamp. Once you
                   receive your visa stamp, complete the following steps to
                   finalize your application.
@@ -856,12 +856,12 @@ const VisaStatusComponent = ({ studentId }) => {
                   }}
                   loading="lazy"
                 />
-                <p className="text-sidebar text-[22px] font-normal mt-3">
+                <p className="text-secondary  text-[22px] font-normal mt-3">
                   <span className="font-semibold">Congratulations!</span> Visa
                   Application has been accepted from embassy for this student.
                 </p>
               </span>
-              <p className="text-sidebar text-[16px] font-light mt-3">
+              <p className="text-secondary  text-[16px] font-light mt-3">
                 Please allow 8-10 business days to get visa stamp. Once student
                 receive visa stamp, Student will finalize the application.
               </p>
@@ -885,10 +885,10 @@ const VisaStatusComponent = ({ studentId }) => {
             }}
             loading="lazy"
           />
-          <p className="text-sidebar text-[22px] font-semibold mt-3">
+          <p className="text-secondary  text-[22px] font-semibold mt-3">
             No Visa Application Applied Yet
           </p>
-          <p className="text-sidebar text-[16px] text-center font-light mt-3">
+          <p className="text-secondary  text-[16px] text-center font-light mt-3">
             Start your application now to begin the process and track your
             progress here.
           </p>

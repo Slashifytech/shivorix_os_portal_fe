@@ -11,7 +11,7 @@ const AgentDashCard = ({ icon, label, data, count, link }) => {
           </span>
           <p className="mt-3 text-body text-[15px]">{label}</p>
 
-          <p className="text-sidebar mt-2 font-bold text-[25px]">{count || "0"}</p>
+          <p className="text-secondary  mt-2 font-bold text-[25px]">{count || "0"}</p>
 
           <p className="text-body text-[14px] mt-1 ">
             {" "}

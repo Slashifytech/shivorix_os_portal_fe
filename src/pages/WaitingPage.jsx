@@ -19,7 +19,7 @@ const WaitingPage = () => {
             {" "}
             <img src={waiting} alt="img" className="w-[320px]" />
             <span className="text-start">
-              <p className="font-bold text-[27px] text-sidebar ">
+              <p className="font-bold text-[27px] text-secondary  ">
                 Your Account is Under Review
               </p>
               <p className="text-body font-normal text-[14px] mt-4">

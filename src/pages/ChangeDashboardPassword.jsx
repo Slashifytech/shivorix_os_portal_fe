@@ -93,7 +93,7 @@ const ChangeDashboardPassword = () => {
       <div className="font-poppins">
         <span className="flex md:flex-row sm:flex-col md:items-center bg-white mt-16 md:ml-[16.5%] sm:ml-[22%]  pb-6">
           <span>
-            <p className="text-[28px] font-bold text-sidebar mt-6 ml-9">
+            <p className="text-[28px] font-bold text-secondary  mt-6 ml-9">
               Change Password
             </p>
             <p className="mt-1 md:font-normal sm:font-light text-body md:pr-[8%] sm:pr-[20%] ml-9">

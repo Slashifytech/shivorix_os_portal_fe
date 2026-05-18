@@ -99,7 +99,7 @@ const AllVisa = () => {
         <>
           <div>
             <span className="flex items-center pt-20 pb-6 md:pl-[16.5%] sm:pl-[18%] sm:mt-6 bg-white">
-            <p className="text-[28px] font-bold text-sidebar  md:ml-9 sm:ml-16">
+            <p className="text-[28px] font-bold text-secondary   md:ml-9 sm:ml-16">
 
                Visa Lodgement Directory
               </p>

@@ -126,7 +126,7 @@ const OfferLetterEdit = () => {
         ) : (
           <span className="flex items-center justify-between pr-7 md:pt-20 sm:pt-24 md:ml-[16.5%] sm:ml-[20%] ">
             <span>
-              <p className="text-[28px] font-bold text-sidebar md:mt-6 md:ml-9 sm:ml-16">
+              <p className="text-[28px] font-bold text-secondary  md:mt-6 md:ml-9 sm:ml-16">
                 Offer Letter
               </p>
               <p className="mt-1 font-normal text-body mb-5 md:ml-9 sm:ml-16">

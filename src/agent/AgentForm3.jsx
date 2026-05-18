@@ -291,7 +291,7 @@ const AgentForm3 = ({hide, handleCancel, updateData, adminId, agentId}) => {
                 <Link
                   state={"passPage"}
                   to="/agent-form/2"
-                  className="text-sidebar  text-[16px] cursor-pointer"
+                  className="text-secondary   text-[16px] cursor-pointer"
                 >
                   Back
                 </Link>
@@ -299,7 +299,7 @@ const AgentForm3 = ({hide, handleCancel, updateData, adminId, agentId}) => {
               <Link
                 state={"passPage"}
                 to="/agent-form/4"
-                className="text-sidebar underline text-[16px] cursor-pointer"
+                className="text-secondary  underline text-[16px] cursor-pointer"
               >
                 Skip for now
               </Link>

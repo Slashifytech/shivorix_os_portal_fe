@@ -79,7 +79,7 @@ const TeamActivity = () => {
               />
               <span className="flex flex-col">
               
-                <span className="text-sidebar text-[18px] font-medium ">
+                <span className="text-secondary  text-[18px] font-medium ">
                   {getMember?.data?.firstName +
                     " " +
                     getMember?.data?.lastName || "NA"}

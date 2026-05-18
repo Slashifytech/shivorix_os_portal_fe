@@ -48,7 +48,7 @@ const DonoughtCharts = ({ data, totalApplication }) => {
         <span className="text-[14px] font-light">Total Applications</span>
       </span>
 
-      <div className="flex flex-wrap justify-center  items-center mt-3 gap-3 text-sidebar text-[12px] ">
+      <div className="flex flex-wrap justify-center  items-center mt-3 gap-3 text-secondary  text-[12px] ">
       <span className="flex items-center gap-2">
         <span className="bg-[#0B91BC] w-7 border border-black"> .</span> Offer Letter</span>
         <span className="flex items-center gap-2">

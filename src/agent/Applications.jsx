@@ -91,7 +91,7 @@ const Applications = () => {
       <div className="bg-white">
         <span className="flex items-center pt-16 md:ml-[16.5%] sm:ml-[23%] sm:pb-6">
           <span>
-            <p className="md:text-[28px] text-[22px] font-bold text-sidebar mt-6 ml-9">
+            <p className="md:text-[28px] text-[22px] font-bold text-secondary  mt-6 ml-9">
               Application Overview ({totalUsersCount})
             </p>
             <p className="mt-1 font-normal text-body pr-[20%] ml-9">

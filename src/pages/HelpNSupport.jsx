@@ -215,7 +215,7 @@ const HelpNSupport = () => {
       <div>
         <span className="flex md:flex-row sm:flex-col items-center mt-20 md:ml-[16.5%] sm:ml-[22%]">
           <span>
-            <p className="text-[28px] font-bold text-sidebar mt-2 ml-9">
+            <p className="text-[28px] font-bold text-secondary  mt-2 ml-9">
               Support Requests
             </p>
             <p className="mt-1 md:font-normal sm:font-light text-body md:pr-[8%] sm:pr-[20%] ml-9">

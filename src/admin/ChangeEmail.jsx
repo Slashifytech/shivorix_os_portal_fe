@@ -98,7 +98,7 @@ const ChangeEmail = () => {
       <div className="bg-white ">
         <span className="flex items-center pt-16 md:ml-[16.5%] sm:ml-[22%]">
           <span>
-            <p className="text-[28px] font-bold text-sidebar mt-6 ml-9">
+            <p className="text-[28px] font-bold text-secondary  mt-6 ml-9">
               Change Email Address
             </p>
             <p className="mt-1 font-normal text-body ml-9 pr-[30%]">

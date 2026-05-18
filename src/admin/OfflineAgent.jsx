@@ -84,10 +84,10 @@ const OfflineAgent = () => {
       <div>
     
         <div className="  font-poppins">
-          <p className="md:text-[28px] text-[24px] font-bold text-sidebar ">
+          <p className="md:text-[28px] text-[24px] font-bold text-secondary  ">
             Agent Directory ({totalUsersCount})
           </p>
-          <p className="text-sidebar text-[15px] ">
+          <p className="text-secondary  text-[15px] ">
           View  offline agent details in one place.
           </p>
         </div>

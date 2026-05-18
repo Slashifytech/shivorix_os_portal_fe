@@ -79,7 +79,7 @@ const StudentCards = ({
               {application || 0} Applications
             </span>
            
-            <span className="text-sidebar text-[14px] font-medium ">
+            <span className="text-secondary  text-[14px] font-medium ">
               {name?.slice(0, 24) || "NA"}
             </span>
 
@@ -120,7 +120,7 @@ const StudentCards = ({
                         id: defaultId,
                         hide: edit,
                       }}
-                      className="text-[20px] text-sidebar font-normal  px-1 cursor-pointer"
+                      className="text-[20px] text-secondary  font-normal  px-1 cursor-pointer"
                     >
                       <BiPencil />
                     </Link>

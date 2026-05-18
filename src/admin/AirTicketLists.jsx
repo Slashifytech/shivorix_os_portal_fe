@@ -78,10 +78,10 @@ const AirTicketLists = () => {
           <div>
             <span className="flex items-center pt-20 pb-6 md:pl-[18.5%] sm:pl-[27%] bg-white">
               <span className="flex  flex-col items-start">
-                <p className="text-[28px] font-bold text-sidebar mt-6 md:ml-9 sm:ml-20">
+                <p className="text-[28px] font-bold text-secondary  mt-6 md:ml-9 sm:ml-20">
                   Air-Tickets Directory
                 </p>
-                <p className="text-sidebar ml-9 text-[15px] mr-[36%]">
+                <p className="text-secondary  ml-9 text-[15px] mr-[36%]">
                   Review your agents and students air tickets request here. Stay
                   updated on status and view detailed issues for each air
                   ticket.

@@ -485,7 +485,7 @@ export function CustomTableTwo({
                               "Uploading..."
                             ) : (
                               <>
-                                <span className="font-normal text-sidebar">
+                                <span className="font-normal text-secondary ">
                                   Upload
                                 </span>
                                 <span className="font-body text-secondary text-[22px]">

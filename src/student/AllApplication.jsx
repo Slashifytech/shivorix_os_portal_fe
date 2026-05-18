@@ -113,7 +113,7 @@ const AllApplication = () => {
                     <span className="text-secondary font-medium text-[13px]">
                       {totalUsersCount || "NA"} Applications
                     </span>
-                    <span className="text-sidebar text-[18px] font-medium ">
+                    <span className="text-secondary  text-[18px] font-medium ">
                       {studentInfoData?.data?.studentInformation
                         ?.personalInformation?.firstName +
                         " " +
