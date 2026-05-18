@@ -208,7 +208,7 @@ const NotificationPage = () => {
               notifyId: notification.pathData?.studentId,
               notify: notification?.pathData?.notify,
             }}
-            className="text-primary hover:underline text-sm mt-2"
+            className="text-secondary hover:underline text-sm mt-2"
           >
             Click to view{" "}
             {notification.title === "RECEIVED_OFFER_LETTER_AGENT" ||
@@ -233,7 +233,7 @@ const NotificationPage = () => {
           <a
             onClick={() => handleNotificationClick(notification)}
             href={notification.routePath}
-            className="text-primary hover:underline text-sm mt-2"
+            className="text-secondary hover:underline text-sm mt-2"
           >
             Click to view
           </a>

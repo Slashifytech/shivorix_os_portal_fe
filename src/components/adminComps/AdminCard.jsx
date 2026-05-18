@@ -56,7 +56,7 @@ const AdminCard = ({
           >
             {description}
           </span>
-          <span className="flex flex-row items-center gap-1 text-primary mt-2">
+          <span className="flex flex-row items-center gap-1 text-secondary mt-2">
             <FaRegEye />
 
             <Link

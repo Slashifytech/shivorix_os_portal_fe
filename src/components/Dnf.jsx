@@ -53,7 +53,7 @@ function BackArrow({ className , LinkData})
     <span className={className}>
       <span onClick={goBack}>
       <span className='flex items-center bg-primary md:bg-transparent sm:bg-transparent  text-white py-6 px-6'>
-        <IoArrowBackOutline className="md:text-primary sm:text-primary text-[28px] cursor-pointer" />
+        <IoArrowBackOutline className="md:text-secondary sm:text-secondary text-[28px] cursor-pointer" />
         <span> Back</span>
         </span>
       </span>

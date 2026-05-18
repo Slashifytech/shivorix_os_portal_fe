@@ -109,7 +109,7 @@ const OtpVerificationComp = () => {
         <span
           onClick={resendDisabled ? null : handleResendOtp}
           className={`px-8 py-2 cursor-pointer rounded-lg ${
-            resendDisabled ? "text-gray-400" : "text-primary underline"
+            resendDisabled ? "text-gray-400" : "text-secondary underline"
           }`}
         >
           {resendDisabled ? `Resend OTP (${formatTimer(timer)})` : "Resend OTP"}

@@ -133,7 +133,7 @@ const ReApproval_Request = () => {
             Contact Admin
           </a>
 
-          <Link to="/login" className="  px-11 py-2 text-primary underline rounded-md cursor-pointer ">
+          <Link to="/login" className="  px-11 py-2 text-secondary underline rounded-md cursor-pointer ">
             Back to Login
           </Link>
         </span>

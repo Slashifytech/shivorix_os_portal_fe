@@ -496,7 +496,7 @@ const AgentForm2 = ({ hide, handleCancel, updateData, adminId, agentId }) => {
                   />
                   <span
                     onClick={() => deleteFile(fileUrl)}
-                    className="absolute text-primary top-1 left-[70px] text-[20px] cursor-pointer rounded-md"
+                    className="absolute text-secondary top-1 left-[70px] text-[20px] cursor-pointer rounded-md"
                   >
                     <ImBin />
                   </span>

@@ -495,7 +495,7 @@ const Form1 = ({
                     "profilePicture"
                   )
                 }
-                className="absolute text-primary top-1 left-[70px]  text-[20px] cursor-pointer rounded-md"
+                className="absolute text-secondary top-1 left-[70px]  text-[20px] cursor-pointer rounded-md"
               >
                 <ImBin />
               </span>
@@ -518,7 +518,7 @@ const Form1 = ({
               <span className="flex flex-col">
                 <span className="text-[14px] text-secondary ">
                   {" "}
-                  First Name <span className="text-primary">*</span>
+                  First Name <span className="text-secondary">*</span>
                 </span>{" "}
                 <CustomInput
                   name="personalInformation.firstName"
@@ -534,7 +534,7 @@ const Form1 = ({
             <span className="w-[50%]">
               <div className="relative">
                 <span className="flex text-secondary items-center gap-2">
-                  <span className="text-[14px]">Last Name <span className="text-primary">*</span></span>
+                  <span className="text-[14px]">Last Name <span className="text-secondary">*</span></span>
                   <span className="text-[20px] cursor-pointer relative group">
                     <CiCircleInfo />
                     {/* Tooltip */}
@@ -668,7 +668,7 @@ const Form1 = ({
                         href={url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-primary rounded-sm px-6 py-2 border border-greyishtext-primary"
+                        className="text-secondary rounded-sm px-6 py-2 border border-greyishtext-secondary"
                       >
                         Uploaded Passport
                       </a>

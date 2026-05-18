@@ -46,7 +46,7 @@ const VisaAddPop = ({ closeOpt, isOpenOpt, state }) => {
           }`}
         >
           <div className="bg-white pb-9 rounded-lg md:w-[54%] w-full relative p-9 flex flex-col items-center justify-center  app-open-animation">
-          <span onClick={closeOpt} className="absolute top-2 right-3 text-[25px] cursor-pointer text-primary"><RxCross2 /></span>
+          <span onClick={closeOpt} className="absolute top-2 right-3 text-[25px] cursor-pointer text-secondary"><RxCross2 /></span>
             <p className="text-sidebar font-medium mt-6 md:text-[16px] sm:text-[13px]  text-center">
             Before applying for visa lodgement, choose a student from the student directory for whom you are applying.
             </p>

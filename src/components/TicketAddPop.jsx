@@ -60,7 +60,7 @@ const TicketAddPop = ({ isOpen, closePopUp, value, handleInput, handleFunc }) =>
                       </option>
                     ))}
                   </select>
-               {value.priorityStatus === "Urgent"  &&  <p className="text-primary text-[14px]">You need to pay 12$ for Urgent priority.</p>}
+               {value.priorityStatus === "Urgent"  &&  <p className="text-secondary text-[14px]">You need to pay 12$ for Urgent priority.</p>}
 
                 </div>
               </span>
@@ -83,7 +83,7 @@ const TicketAddPop = ({ isOpen, closePopUp, value, handleInput, handleFunc }) =>
             <div className="flex justify-end items-center font-DMsans gap-5 mt-5">
               <span
                 onClick={closePopUp}
-                className="px-8 py-2 cursor-pointer rounded-lg text-primary border border-primary"
+                className="px-8 py-2 cursor-pointer rounded-lg text-secondary border border-primary"
               >
                 Cancel
               </span>

@@ -74,7 +74,7 @@ const StudentEdit = ({
             <span className="font-light">Profile Picture</span>
             {data?.personalInformation?.profilePicture ? (
               <a
-                className="flex items-center gap-3 text-primary font-medium"
+                className="flex items-center gap-3 text-secondary font-medium"
                 href={data?.personalInformation?.profilePicture}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -140,7 +140,7 @@ const StudentEdit = ({
             <span className="font-light">upload Passport </span>
             {data?.passportDetails?.passportUpload ? (
               <a
-                className="flex items-center gap-3 text-primary font-medium"
+                className="flex items-center gap-3 text-secondary font-medium"
                 href={data.passportDetails.passportUpload}
                 target="_blank"
                 rel="noopener noreferrer"

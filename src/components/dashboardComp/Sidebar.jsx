@@ -122,7 +122,7 @@ const Sidebar = () => {
               path === item?.otherPathSix ||
               path === item?.otherPathSeven ||
               path === item?.otherPathEight
-                ? "bg-[#FFF4E0] text-primary border-l-4 border-primary font-medium"
+                ? "bg-[#FFF4E0] text-secondary border-l-4 border-primary font-medium"
                 : "text-sidebar"
             }`}
           >
@@ -161,7 +161,7 @@ const Sidebar = () => {
               <li
                 className={`text-sidebar py-2 mb-2 cursor-pointer md:pl-14 lg:px-14 sm:pl-14 md:ml-0 hover:bg-[#f5ebeb] hover:text-primary ${
                   path === "/account/profile-edit" &&
-                  "bg-[#FFF4E0] border-l-4 border-primary text-primary"
+                  "bg-[#FFF4E0] border-l-4 border-primary text-secondary"
                 }`}
               >
                 Edit Profile
@@ -172,7 +172,7 @@ const Sidebar = () => {
               <li
                 className={`text-sidebar py-2 mb-2 cursor-pointer md:pl-14 sm:pl-14 md:ml-0  hover:bg-[#f5ebeb] hover:text-primary ${
                   path === "/settings/change-password" &&
-                  "bg-[#FFF4E0] border-l-4 border-primary text-primary"
+                  "bg-[#FFF4E0] border-l-4 border-primary text-secondary"
                 }`}
               >
                 Change Password
@@ -182,7 +182,7 @@ const Sidebar = () => {
               <li
                 className={`text-sidebar py-2 mb-2 cursor-pointer md:px-14 sm:pl-14 md:ml-0  hover:bg-[#f5ebeb] hover:text-primary ${
                   path === "/settings/change-email" &&
-                  "bg-[#FFF4E0] border-l-4 border-primary text-primary"
+                  "bg-[#FFF4E0] border-l-4 border-primary text-secondary"
                 }`}
               >
                 Change Email
@@ -192,7 +192,7 @@ const Sidebar = () => {
               <li
                 className={`text-sidebar py-2 mb-2 cursor-pointer md:px-14 sm:pl-14 md:ml-0  hover:bg-[#f5ebeb] hover:text-primary ${
                   path === "/settings/delete-account" &&
-                  "bg-[#FFF4E0] border-l-4 border-primary text-primary"
+                  "bg-[#FFF4E0] border-l-4 border-primary text-secondary"
                 }`}
               >
                 Delete Account
@@ -203,7 +203,7 @@ const Sidebar = () => {
         {/* <div
         className={`cursor-pointer py-4 hover:bg-[#FFF4E0] hover:text-primary hover:border-l-4 hover:font-medium ${
           path === "/student/payment-details"
-            ? "bg-[#FFF4E0] text-primary border-l-4 border-primary font-medium"
+            ? "bg-[#FFF4E0] text-secondary border-l-4 border-primary font-medium"
             : "text-sidebar"
         }`}
       >
@@ -222,7 +222,7 @@ const Sidebar = () => {
         <div
           className={`cursor-pointer py-4 hover:bg-[#f5ebeb] hover:text-primary hover:border-l-4 hover:font-medium ${
             path === "/help-support"
-              ? "bg-[#FFF4E0] text-primary border-l-4 border-primary font-medium"
+              ? "bg-[#FFF4E0] text-secondary border-l-4 border-primary font-medium"
               : "text-sidebar"
           }`}
         >

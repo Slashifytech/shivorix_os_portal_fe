@@ -110,7 +110,7 @@ const WithDrawalData = ({ userId, agentData }) => {
           <span className="w-1/2">
             <span className="font-light mt-4">Aadhar Card</span>
             <a
-              className="flex items-center gap-3 text-primary font-medium"
+              className="flex items-center gap-3 text-secondary font-medium"
               href={withdrawalData?.documentUpload?.aadharCard}
               target="_blank"
               rel="noopener noreferrer"
@@ -124,7 +124,7 @@ const WithDrawalData = ({ userId, agentData }) => {
           <span className="w-1/2">
             <span className="font-light mt-4">Pan Card</span>
             <a
-              className="flex items-center gap-3 text-primary font-medium"
+              className="flex items-center gap-3 text-secondary font-medium"
               href={withdrawalData?.documentUpload?.panCard}
               target="_blank"
               rel="noopener noreferrer"
@@ -225,7 +225,7 @@ const WithDrawalData = ({ userId, agentData }) => {
                 <span className="font-light mt-4">Aadhar Card</span>
                 {withdrawalData?.documentUpload?.parentAadharCard ? (
                   <a
-                    className="flex items-center gap-3 text-primary font-medium"
+                    className="flex items-center gap-3 text-secondary font-medium"
                     href={withdrawalData?.documentUpload?.parentAadharCard}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -243,7 +243,7 @@ const WithDrawalData = ({ userId, agentData }) => {
                 <span className="font-light mt-4">Pan Card</span>
                 {withdrawalData?.documentUpload?.parentPanCard ? (
                   <a
-                    className="flex items-center gap-3 text-primary font-medium"
+                    className="flex items-center gap-3 text-secondary font-medium"
                     href={withdrawalData?.documentUpload?.parentPanCard}
                     target="_blank"
                     rel="noopener noreferrer"

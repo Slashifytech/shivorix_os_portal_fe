@@ -308,7 +308,7 @@ console.log(applicationDataById)
                 <span className="font-light mt-4">10th Marksheet</span>
 
                 <a
-                  className="flex items-center gap-3 text-primary font-medium"
+                  className="flex items-center gap-3 text-secondary font-medium"
                   href={
                     applicationDataById?.offerLetter?.educationDetails?.markSheet10 || "#"
                   }
@@ -328,7 +328,7 @@ console.log(applicationDataById)
                 <>
                   <span className="font-light mt-4">12th Marksheet</span>
                   <a
-                    className="flex items-center gap-3 text-primary font-medium"
+                    className="flex items-center gap-3 text-secondary font-medium"
                     href={applicationDataById?.offerLetter?.educationDetails?.markSheet12}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -349,7 +349,7 @@ console.log(applicationDataById)
                 <>
                   <span className="font-light mt-4">Under Graduate</span>
                   <a
-                    className="flex items-center gap-3 text-primary font-medium"
+                    className="flex items-center gap-3 text-secondary font-medium"
                     href={
                       applicationDataById?.offerLetter?.educationDetails
                         ?.markSheetUnderGraduate
@@ -372,7 +372,7 @@ console.log(applicationDataById)
                 <>
                   <span className="font-light mt-4">Post Graduate</span>
                   <a
-                    className="flex items-center gap-3 text-primary font-medium"
+                    className="flex items-center gap-3 text-secondary font-medium"
                     href={
                       applicationDataById?.offerLetter?.educationDetails
                         ?.markSheetPostGraduate
@@ -437,7 +437,7 @@ console.log(applicationDataById)
                         className="text-black flex items-center"
                         onClick={() => handleFilePopupOpen(fileType)}
                       >
-                        <FiUpload className="mr-2 text-primary text-[29px]" />
+                        <FiUpload className="mr-2 text-secondary text-[29px]" />
                       </button>
                       <p className="mt-6">
                         {fileType.replace("markSheet", "Marksheet ")}
@@ -450,7 +450,7 @@ console.log(applicationDataById)
                             href={offerLater.educationDetails[fileType]}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-primary rounded-sm px-6 py-2 border border-greyish"
+                            className="text-secondary rounded-sm px-6 py-2 border border-greyish"
                           >
                             View Uploaded Document
                           </a>

@@ -93,7 +93,7 @@ const VerifyPopUp = ({ isVerifyOpen, OtpResend, handleVerify, email }) => {
                 className={`px-8 py-2  rounded-lg ${
                   isResendDisabled
                     ? "text-gray-400 "
-                    : "text-primary underline cursor-pointer"
+                    : "text-secondary underline cursor-pointer"
                 }`}
               >
                 {isResendDisabled ? `Resend OTP (${formatTimer(timer)})` : "Resend OTP"}

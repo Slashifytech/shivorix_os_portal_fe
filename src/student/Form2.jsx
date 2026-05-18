@@ -254,7 +254,7 @@ const Form2 = ({
           )}
           <div className="mt-4">
             <p className="font-normal text-secondary mb-2 text-[14px]">
-              Country <span className="text-primary">*</span>
+              Country <span className="text-secondary">*</span>
             </p>
             <select
               name="country"
@@ -276,7 +276,7 @@ const Form2 = ({
 
           <div className="mt-4">
             <p className="font-normal text-secondary mb-2 text-[14px]">
-              Province/State <span className="text-primary">*</span>
+              Province/State <span className="text-secondary">*</span>
             </p>
             <select
               name="state"
@@ -346,7 +346,7 @@ const Form2 = ({
           )}
           <div className="mt-4">
             <p className="font-normal text-secondary mb-2 text-[14px]">
-              Country <span className="text-primary">*</span>
+              Country <span className="text-secondary">*</span>
             </p>
             <select
               name="country"
@@ -367,7 +367,7 @@ const Form2 = ({
           </div>
           <div className="mt-4">
             <p className="font-normal text-secondary mb-2 text-[14px]">
-              Province/State <span className="text-primary">*</span>
+              Province/State <span className="text-secondary">*</span>
             </p>
             <select
               name="state"

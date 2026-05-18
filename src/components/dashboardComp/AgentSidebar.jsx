@@ -102,7 +102,7 @@ const AgentSidebar = () => {
               path === item?.otherPathFive ||
               path === item?.otherPathSix ||
               path === item?.otherPathSeven
-                ? "bg-[#FFF4E0] text-primary border-l-4 border-primary font-medium"
+                ? "bg-[#FFF4E0] text-secondary border-l-4 border-primary font-medium"
                 : "text-sidebar"
             }`}
           >
@@ -141,7 +141,7 @@ const AgentSidebar = () => {
               <li
                 className={`text-sidebar py-2 mb-2 cursor-pointer md:pl-14 lg:px-14 sm:pl-14 md:ml-0 hover:bg-[#f5ebeb] hover:text-primary ${
                   path === "/account-settings/profile-edit" &&
-                  "bg-[#FFF4E0] border-l-4 border-primary text-primary"
+                  "bg-[#FFF4E0] border-l-4 border-primary text-secondary"
                 }`}
               >
                 Edit Profile
@@ -151,7 +151,7 @@ const AgentSidebar = () => {
               <li
                 className={`text-sidebar py-2 mb-2 cursor-pointer md:pl-14 sm:pl-14 md:ml-0  hover:bg-[#f5ebeb] hover:text-primary ${
                   path === "/settings/change-password" &&
-                  "bg-[#FFF4E0] border-l-4 border-primary text-primary"
+                  "bg-[#FFF4E0] border-l-4 border-primary text-secondary"
                 }`}
               >
                 Change Password
@@ -162,7 +162,7 @@ const AgentSidebar = () => {
                 className={`text-sidebar py-2 mb-2 cursor-pointer md:px-14 sm:pl-14 md:ml-0  hover:bg-[#f5ebeb] hover:text-primary ${
                   (path === "/settings/change-email" ||
                     path === "/settings/otp-confirm") &&
-                  "bg-[#FFF4E0] border-l-4 border-primary text-primary"
+                  "bg-[#FFF4E0] border-l-4 border-primary text-secondary"
                 }`}
               >
                 Change Email
@@ -172,7 +172,7 @@ const AgentSidebar = () => {
               <li
                 className={`text-sidebar py-2 mb-2 cursor-pointer md:px-14 sm:pl-14 md:ml-0  hover:bg-[#f5ebeb] hover:text-primary ${
                   path === "/settings/delete-account" &&
-                  "bg-[#FFF4E0] border-l-4 border-primary text-primary"
+                  "bg-[#FFF4E0] border-l-4 border-primary text-secondary"
                 }`}
               >
                 Delete Account
@@ -183,7 +183,7 @@ const AgentSidebar = () => {
         {/* <div
           className={`cursor-pointer py-4 hover:bg-[#f5ebeb] hover:text-primary hover:border-l-4 hover:font-medium ${
             path === "/student/payment-details"
-              ? "bg-[#FFF4E0] text-primary border-l-4 border-primary font-medium"
+              ? "bg-[#FFF4E0] text-secondary border-l-4 border-primary font-medium"
               : "text-sidebar"
           }`}
         >
@@ -201,7 +201,7 @@ const AgentSidebar = () => {
         <div
           className={`cursor-pointer py-4 hover:bg-[#f5ebeb] hover:text-primary hover:border-l-4 hover:font-medium ${
             path === "/help-support"
-              ? "bg-[#FFF4E0] text-primary border-l-4 border-primary font-medium"
+              ? "bg-[#FFF4E0] text-secondary border-l-4 border-primary font-medium"
               : "text-sidebar"
           }`}
         >

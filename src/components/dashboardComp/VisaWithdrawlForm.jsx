@@ -494,7 +494,7 @@ const VisaWithdrawlForm = ({ choosedOption, studId, handleClose }) => {
                   href={bankData.adharCard}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary rounded-sm px-6 py-2 border border-greyish"
+                  className="text-secondary rounded-sm px-6 py-2 border border-greyish"
                 >
                   Uploaded Aadhar Card
                 </a>
@@ -533,7 +533,7 @@ const VisaWithdrawlForm = ({ choosedOption, studId, handleClose }) => {
                   href={bankData.panCard}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary rounded-sm px-6 py-2 border border-greyish "
+                  className="text-secondary rounded-sm px-6 py-2 border border-greyish "
                 >
                   Uploaded Pan Card
                 </a>
@@ -708,7 +708,7 @@ const VisaWithdrawlForm = ({ choosedOption, studId, handleClose }) => {
                   href={parentData.parentAadharCard}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary rounded-sm px-6 py-2 border border-greyish"
+                  className="text-secondary rounded-sm px-6 py-2 border border-greyish"
                 >
                   Uploaded Aadhar Card
                 </a>
@@ -751,7 +751,7 @@ const VisaWithdrawlForm = ({ choosedOption, studId, handleClose }) => {
                   href={parentData.parentPanCard}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary rounded-sm px-6 py-2 border border-greyish "
+                  className="text-secondary rounded-sm px-6 py-2 border border-greyish "
                 >
                   Uploaded Pan Card
                 </a>

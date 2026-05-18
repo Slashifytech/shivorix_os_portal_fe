@@ -128,7 +128,7 @@ const Applications = () => {
               tableHead={TABLE_HEAD}
               tableRows={TABLE_ROWS}
               SecondAction="Apply Application"
-              customClass="border border-primary  px-2 rounded-xl text-primary font-normal text-[12px] py-1"
+              customClass="border border-primary  px-2 rounded-xl text-secondary font-normal text-[12px] py-1"
               // SecondLink="/offerLetter-apply"
               action={"View List"}
               link={"/agent/application/lists"}
@@ -176,7 +176,7 @@ export const ExtraField = () => {
           className="flex flex-row items-center gap-2"
         >
           {" "}
-          <span className="text-primary">
+          <span className="text-secondary">
             <FaRegEye />
           </span>{" "}
           <span className="font-body">View List</span>

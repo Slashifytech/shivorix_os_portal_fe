@@ -366,7 +366,7 @@ const CourseFeeFamilyDocUpdate = ({
                     {applicationDataById?.courseFeeApplication?.parentDocument
                       ?.fatherAadharCard ? (
                       <a
-                        className="flex items-center gap-3 text-primary font-medium"
+                        className="flex items-center gap-3 text-secondary font-medium"
                         href={
                           applicationDataById?.courseFeeApplication
                             ?.parentDocument?.fatherAadharCard
@@ -393,7 +393,7 @@ const CourseFeeFamilyDocUpdate = ({
                     {applicationDataById?.courseFeeApplication?.parentDocument
                       ?.motherAadharCard ? (
                       <a
-                        className="flex items-center gap-3 text-primary font-medium"
+                        className="flex items-center gap-3 text-secondary font-medium"
                         href={
                           applicationDataById?.courseFeeApplication
                             ?.parentDocument?.motherAadharCard
@@ -424,7 +424,7 @@ const CourseFeeFamilyDocUpdate = ({
                     {applicationDataById?.courseFeeApplication?.parentDocument
                       ?.fatherPanCard ? (
                       <a
-                        className="flex items-center gap-3 text-primary font-medium"
+                        className="flex items-center gap-3 text-secondary font-medium"
                         href={
                           applicationDataById?.courseFeeApplication
                             ?.parentDocument?.fatherPanCard
@@ -451,7 +451,7 @@ const CourseFeeFamilyDocUpdate = ({
                     {applicationDataById?.courseFeeApplication?.parentDocument
                       ?.motherPanCard ? (
                       <a
-                        className="flex items-center gap-3 text-primary font-medium"
+                        className="flex items-center gap-3 text-secondary font-medium"
                         href={
                           applicationDataById?.courseFeeApplication
                             ?.parentDocument?.motherPanCard
@@ -485,7 +485,7 @@ const CourseFeeFamilyDocUpdate = ({
                     {applicationDataById?.courseFeeApplication?.siblingsDocument
                       ?.siblingAadharCard ? (
                       <a
-                        className="flex items-center gap-3 text-primary font-medium"
+                        className="flex items-center gap-3 text-secondary font-medium"
                         href={
                           applicationDataById?.courseFeeApplication
                             ?.siblingsDocument?.siblingAadharCard
@@ -516,7 +516,7 @@ const CourseFeeFamilyDocUpdate = ({
                     {applicationDataById?.courseFeeApplication?.siblingsDocument
                       ?.siblingPanCard ? (
                       <a
-                        className="flex items-center gap-3 text-primary font-medium"
+                        className="flex items-center gap-3 text-secondary font-medium"
                         href={
                           applicationDataById?.courseFeeApplication
                             ?.siblingsDocument?.siblingPanCard
@@ -588,7 +588,7 @@ const CourseFeeFamilyDocUpdate = ({
                           onClick={() => handleFilePopupOpen(docType)}
                           className="text-black flex items-center"
                         >
-                          <FiUpload className="mr-2 text-primary text-[29px]" />
+                          <FiUpload className="mr-2 text-secondary text-[29px]" />
                         </button>
                         <p className="mt-2">
                           {docType
@@ -601,7 +601,7 @@ const CourseFeeFamilyDocUpdate = ({
                               href={courseFee.parentDocument[docType]}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-primary"
+                              className="text-secondary"
                             >
                               View Uploaded Document
                             </a>
@@ -637,7 +637,7 @@ const CourseFeeFamilyDocUpdate = ({
                           onClick={() => handleFilePopupOpen(docType)}
                           className="text-black flex items-center"
                         >
-                          <FiUpload className="mr-2 text-primary text-[29px]" />
+                          <FiUpload className="mr-2 text-secondary text-[29px]" />
                         </button>
                         <p className="mt-2">
                           {docType
@@ -651,7 +651,7 @@ const CourseFeeFamilyDocUpdate = ({
                               href={courseFee.siblingDocument[docType]}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-primary"
+                              className="text-secondary"
                             >
                               View Uploaded Document
                             </a>

@@ -380,7 +380,7 @@ const AgentForm4 = ({ hide, handleCancel, updateData, adminId, agentId }) => {
             </span>
           </div>
           <div className="text-secondary text-[14px] mt-6 ">
-            Is your business licensed by the government of your country? <span className="text-primary">*</span>
+            Is your business licensed by the government of your country? <span className="text-secondary">*</span>
           </div>
           <RadioInputComponent
             name="governmentLicensed"

@@ -116,7 +116,7 @@ export function CustomTable({
                       className="flex flex-row items-center gap-2"
                     >
                       {" "}
-                      <span className="text-primary">{icon}</span>{" "}
+                      <span className="text-secondary">{icon}</span>{" "}
                       <span className="font-body">{action}</span>
                     </Link>
                   </Typography>
@@ -452,7 +452,7 @@ export function CustomTableTwo({
                     row?.type?.documents.length > 0 ? (
                       <>
                         <a
-                          className="flex items-center gap-3 text-primary font-medium"
+                          className="flex items-center gap-3 text-secondary font-medium"
                           href={row?.type?.documents[0]}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -460,7 +460,7 @@ export function CustomTableTwo({
                           View
                         </a>
                         <button
-                          className="px-4 py-1 text-primary text-[20px] rounded-md"
+                          className="px-4 py-1 text-secondary text-[20px] rounded-md"
                           onClick={() =>
                             handleFileDelete(
                               row?.type?.documents[0],
@@ -488,7 +488,7 @@ export function CustomTableTwo({
                                 <span className="font-normal text-sidebar">
                                   Upload
                                 </span>
-                                <span className="font-body text-primary text-[22px]">
+                                <span className="font-body text-secondary text-[22px]">
                                   <MdOutlineUploadFile />
                                 </span>
                               </>
@@ -546,7 +546,7 @@ export function CustomTableTwo({
                     state={row.appId}
                     className="flex flex-row items-center gap-2"
                   >
-                    <span className="text-primary">{icon}</span>
+                    <span className="text-secondary">{icon}</span>
                     <span className="font-body">{action}</span>
                   </Link>
                 </Typography>
@@ -677,7 +677,7 @@ export function CustomTableThree({
                     state={row.appId}
                     className="flex flex-row items-center gap-2"
                   >
-                    <span className="text-primary">{icon}</span>
+                    <span className="text-secondary">{icon}</span>
                     <span className="font-body">{action}</span>
                   </Link>
                 </Typography>
@@ -835,7 +835,7 @@ export function CustomTableFour({
                       onClick={() => handleOpen(row.Id)}
                       className="flex flex-row items-center gap-2"
                     >
-                      <span className="text-primary">{icon}</span>
+                      <span className="text-secondary">{icon}</span>
                       <span className="font-body">{action}</span>
                     </span>
                   </Typography>
@@ -1052,7 +1052,7 @@ export function CustomTableFive({
                       onClick={() => handleOpen(row.Id)}
                       className="flex flex-row items-center gap-2"
                     >
-                      <span className="text-primary">{icon}</span>
+                      <span className="text-secondary">{icon}</span>
                       <span className="font-body">{action}</span>
                     </span>
                   </Typography>
@@ -1188,7 +1188,7 @@ export function CustomTableSix({
                       onClick={() => handleOpen(row.Id)}
                       className="flex flex-row items-center gap-2"
                     >
-                      <span className="text-primary">{icon}</span>
+                      <span className="text-secondary">{icon}</span>
                       <span className="font-body">{action}</span>
                     </span>
                   </Typography>
@@ -1329,7 +1329,7 @@ export function CustomTableSeven({
                       rel="noopener noreferrer"
                       className="flex flex-row items-center gap-2"
                     >
-                      <span className="text-primary">{icon}</span>
+                      <span className="text-secondary">{icon}</span>
                       <span className="font-body">{action}</span>
                     </a>
                   </Typography>
@@ -1521,7 +1521,7 @@ export function CustomTableEight({
                       }}
                       className="flex flex-row items-center gap-2"
                     >
-                      <span className="text-primary">{icon}</span>
+                      <span className="text-secondary">{icon}</span>
                       <span className="font-body">{action}</span>
                     </Link>
                   </Typography>
@@ -1543,7 +1543,7 @@ export function CustomTableEight({
                         }}
                         className="flex flex-row items-center gap-2"
                       >
-                        <span className="text-primary">{iconTwo}</span>
+                        <span className="text-secondary">{iconTwo}</span>
                         <span className="font-body">{actionThree}</span>
                       </Link>
                     </Typography>
@@ -1708,7 +1708,7 @@ export function CustomTableNine({
                       }}
                       className="flex flex-row items-center gap-2"
                     >
-                      <span className="text-primary">{icon}</span>
+                      <span className="text-secondary">{icon}</span>
                       <span className="font-body">{action}</span>
                     </Link>
                   </Typography>
@@ -1832,7 +1832,7 @@ export function CustomTableTen({
                       }}
                       className="flex flex-row items-center gap-2"
                     >
-                      <span className="text-primary">{icon}</span>
+                      <span className="text-secondary">{icon}</span>
                       <span className="font-body">{action}</span>
                     </Link>
                   </Typography>
@@ -1851,13 +1851,13 @@ export function CustomTableTen({
                           id: row.data?._id,
                           edit: "edit",
                         }}
-                        className="text-primary"
+                        className="text-secondary"
                       >
                         {iconTwo}
                       </Link>
                       <span
                         onClick={() => openDeletePopup(row.data?._id)}
-                        className="text-primary cursor-pointer"
+                        className="text-secondary cursor-pointer"
                       >
                         {iconThree}
                       </span>
@@ -2357,7 +2357,7 @@ export function CustomTableFourteen({ tableHead = [], tableRows = [] }) {
                       state={{ id: row?.data?._id }}
                       className="flex flex-row items-center gap-3 cursor-pointer"
                     >
-                      <span className="text-primary text-[20px]">
+                      <span className="text-secondary text-[20px]">
                         <FaPencil />
                       </span>
                       <span>Edit</span>
@@ -2375,7 +2375,7 @@ export function CustomTableFourteen({ tableHead = [], tableRows = [] }) {
                       onClick={() => handleOpen(row?.data?._id)}
                       className="flex flex-row items-center gap-3 cursor-pointer"
                     >
-                      <span className="text-primary text-[20px]">
+                      <span className="text-secondary text-[20px]">
                         <FaRegEye />
                       </span>
                       <span>View</span>
@@ -2503,7 +2503,7 @@ export function CustomTableFifteen({ tableHead = [], tableRows = [], icon, actio
                    
                       className="flex flex-row items-center gap-2"
                     >
-                      <span className="text-primary">{icon}</span>
+                      <span className="text-secondary">{icon}</span>
                       <span className="font-body">{action}</span>
                     </Link>
                   </Typography>
@@ -2606,7 +2606,7 @@ export function CustomTableSixteen({ tableHead = [], tableRows = [], icon, actio
                    
                       className="flex flex-row items-center gap-2"
                     >
-                      <span className="text-primary">{icon}</span>
+                      <span className="text-secondary">{icon}</span>
                       <span className="font-body">{action}</span>
                     </Link>
                   </Typography>

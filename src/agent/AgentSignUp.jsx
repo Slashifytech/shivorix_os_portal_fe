@@ -357,7 +357,7 @@ const AgentSignUp = () => {
                   <span className="w-[50%]">
                     <div className="mt-4">
                       <p className="font-normal text-secondary mb-2 text-[14px]">
-                        Country <span className="text-primary">*</span>
+                        Country <span className="text-secondary">*</span>
                       </p>
                       <select
                         name="companyDetails.country"
@@ -389,7 +389,7 @@ const AgentSignUp = () => {
                   <span className="w-[50%]">
                     <div className="mt-4">
                       <p className="font-normal text-secondary mb-2 text-[14px]">
-                        Province/State <span className="text-primary">*</span>
+                        Province/State <span className="text-secondary">*</span>
                       </p>
                       <select
                         name="companyDetails.province"
@@ -527,7 +527,7 @@ const AgentSignUp = () => {
                 <p className="text-body text-sm pt-3">
                   Already have an account?{" "}
                   <Link to="/login">
-                    <span className="text-primary font-medium">Log in </span>
+                    <span className="text-secondary font-medium">Log in </span>
                   </Link>
                 </p>
               </div>

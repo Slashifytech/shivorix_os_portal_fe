@@ -685,11 +685,11 @@ const VisaApply = () => {
                       .replace(/^./, (str) => str.toUpperCase())}{" "}
                 {/* {countryName === "Germany" &&
                 ["pal", "blockedaccount",].includes(docType) ? (
-                  <span className="text-primary">*</span>
+                  <span className="text-secondary">*</span>
                 ) : !["pal", "sop", "blockedaccount", "lor"].includes(
                     docType
                   ) ? (
-                  <span className="text-primary">*</span>
+                  <span className="text-secondary">*</span>
                 ) : null} */}
               </p>
 
@@ -698,7 +698,7 @@ const VisaApply = () => {
                   className="text-black flex items-center"
                   onClick={() => handleFilePopupOpen(docType)}
                 >
-                  <FiUpload className="mr-2 text-primary text-[29px]" />
+                  <FiUpload className="mr-2 text-secondary text-[29px]" />
                 </button>
                 <p>
                   Upload{" "}
@@ -716,7 +716,7 @@ const VisaApply = () => {
                     href={visaLetter.studentDocument[docType]}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-primary"
+                    className="text-secondary"
                   >
                     View Uploaded Document
                   </a>

@@ -146,7 +146,7 @@ console.log(location)
                     loading="lazy"
                   />
                   <span className="flex flex-col">
-                    <span className="text-primary font-medium text-[13px]">
+                    <span className="text-secondary font-medium text-[13px]">
                       {totalUsersCount || "0"} Applications
                     </span>
                     <span className="text-sidebar text-[18px] font-medium ">

@@ -320,13 +320,13 @@ const AddInstitute = () => {
                 onClick={() =>
                   deleteFile(instituteData.instituteImage, "instituteImage")
                 }
-                className="absolute text-primary top-1 left-[70px]  text-[20px] cursor-pointer rounded-md"
+                className="absolute text-secondary top-1 left-[70px]  text-[20px] cursor-pointer rounded-md"
               >
                 <ImBin />
               </span>
             </div>
           )}
-          <p className="text-primary pt-2 text-[14px]">Upload the college or institute picture in 6000*2300 px size. For better Visiblity</p>
+          <p className="text-secondary pt-2 text-[14px]">Upload the college or institute picture in 6000*2300 px size. For better Visiblity</p>
           <div className=" mt-6  text-[14px] w-full">
             <span className="flex flex-col">
               <span className="text-[15px] text-secondary "> Country </span>{" "}

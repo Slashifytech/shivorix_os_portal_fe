@@ -26,7 +26,7 @@ const Header = ({ icon, customLink, iconTwo }) => {
               className="bg-white rounded-full px-[11px] py-2 text-[27px] cursor-pointer "
             >
               {icon ? (
-                <span className="text-primary text-[26px]">{icon}</span>
+                <span className="text-secondary text-[26px]">{icon}</span>
               ) : (
                 <CiStar />
               )}
@@ -34,11 +34,11 @@ const Header = ({ icon, customLink, iconTwo }) => {
             <Link to="/notifications" className="bg-white rounded-full px-[11px] py-2 text-[27px] cursor-pointer relative">
              
               {iconTwo ? (
-                <span className="text-primary text-[26px]">{iconTwo}</span>
+                <span className="text-secondary text-[26px]">{iconTwo}</span>
               ) : (
                 <CiBellOn /> 
               )}
-             {notificationCount > 0 &&  <span className="absolute rounded-full w-5 h-5 text-[13px] -top-1 -right-2 bg-[#FFF4E0] text-primary text-center">
+             {notificationCount > 0 &&  <span className="absolute rounded-full w-5 h-5 text-[13px] -top-1 -right-2 bg-[#FFF4E0] text-secondary text-center">
                 {notificationCount}
               </span>}
             </Link>

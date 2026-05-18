@@ -317,7 +317,7 @@ const VisaUploadEdit = ({ appId, updatedData, profileViewPath, userId }) => {
             <span className="font-medium">
               {applicationDataById?.visa?.loa ? (
                 <a
-                  className="flex items-center gap-3 text-primary font-medium"
+                  className="flex items-center gap-3 text-secondary font-medium"
                   href={applicationDataById?.visa?.loa}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -335,7 +335,7 @@ const VisaUploadEdit = ({ appId, updatedData, profileViewPath, userId }) => {
             <span className="font-medium">
               {applicationDataById?.visa?.gicLetter ? (
                 <a
-                  className="flex items-center gap-3 text-primary font-medium"
+                  className="flex items-center gap-3 text-secondary font-medium"
                   href={applicationDataById?.visa?.gicLetter}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -353,7 +353,7 @@ const VisaUploadEdit = ({ appId, updatedData, profileViewPath, userId }) => {
             <span className="font-medium">
               {applicationDataById?.visa?.pcc ? (
                 <a
-                  className="flex items-center gap-3 text-primary font-medium"
+                  className="flex items-center gap-3 text-secondary font-medium"
                   href={applicationDataById?.visa?.pcc}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -371,7 +371,7 @@ const VisaUploadEdit = ({ appId, updatedData, profileViewPath, userId }) => {
             <span className="font-medium">
               {applicationDataById?.visa?.loa ? (
                 <a
-                  className="flex items-center gap-3 text-primary font-medium"
+                  className="flex items-center gap-3 text-secondary font-medium"
                   href={applicationDataById?.visa?.certificate}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -389,7 +389,7 @@ const VisaUploadEdit = ({ appId, updatedData, profileViewPath, userId }) => {
             <span className="font-medium">
               {applicationDataById?.visa?.sop ? (
                 <a
-                  className="flex items-center gap-3 text-primary font-medium"
+                  className="flex items-center gap-3 text-secondary font-medium"
                   href={applicationDataById?.visa?.sop}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -407,7 +407,7 @@ const VisaUploadEdit = ({ appId, updatedData, profileViewPath, userId }) => {
             <span className="font-medium">
               {applicationDataById?.visa?.blockedaccount ? (
                 <a
-                  className="flex items-center gap-3 text-primary font-medium"
+                  className="flex items-center gap-3 text-secondary font-medium"
                   href={applicationDataById?.visa?.blockedaccount}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -427,7 +427,7 @@ const VisaUploadEdit = ({ appId, updatedData, profileViewPath, userId }) => {
             <span className="font-medium">
               {applicationDataById?.visa?.offerLetter ? (
                 <a
-                  className="flex items-center gap-3 text-primary font-medium"
+                  className="flex items-center gap-3 text-secondary font-medium"
                   href={applicationDataById?.visa?.offerLetter}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -445,7 +445,7 @@ const VisaUploadEdit = ({ appId, updatedData, profileViewPath, userId }) => {
             <span className="font-medium">
               {applicationDataById?.visa?.medical ? (
                 <a
-                  className="flex items-center gap-3 text-primary font-medium"
+                  className="flex items-center gap-3 text-secondary font-medium"
                   href={applicationDataById?.visa?.medical}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -463,7 +463,7 @@ const VisaUploadEdit = ({ appId, updatedData, profileViewPath, userId }) => {
             <span className="font-medium">
               {applicationDataById?.visa?.pal ? (
                 <a
-                  className="flex items-center gap-3 text-primary font-medium"
+                  className="flex items-center gap-3 text-secondary font-medium"
                   href={applicationDataById?.visa?.pal}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -482,7 +482,7 @@ const VisaUploadEdit = ({ appId, updatedData, profileViewPath, userId }) => {
             <span className="font-medium">
               {applicationDataById?.visa?.lor ? (
                 <a
-                  className="flex items-center gap-3 text-primary font-medium"
+                  className="flex items-center gap-3 text-secondary font-medium"
                   href={applicationDataById?.visa?.lor}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -536,11 +536,11 @@ const VisaUploadEdit = ({ appId, updatedData, profileViewPath, userId }) => {
                     ["pal", "blockedaccount"].includes(
                       docType
                     ) ? (
-                      <span className="text-primary">*</span>
+                      <span className="text-secondary">*</span>
                     ) : !["pal", "sop", "blockedaccount", "lor"].includes(
                         docType
                       ) ? (
-                      <span className="text-primary">*</span>
+                      <span className="text-secondary">*</span>
                     ) : null} */}
                   </p>
 
@@ -549,7 +549,7 @@ const VisaUploadEdit = ({ appId, updatedData, profileViewPath, userId }) => {
                       className="text-black flex items-center"
                       onClick={() => handleFilePopupOpen(docType)}
                     >
-                      <FiUpload className="mr-2 text-primary text-[29px]" />
+                      <FiUpload className="mr-2 text-secondary text-[29px]" />
                     </button>
                     <p>
                       Upload{" "}
@@ -582,7 +582,7 @@ const VisaUploadEdit = ({ appId, updatedData, profileViewPath, userId }) => {
                         href={visaLetter?.studentDocument[docType]}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-primary"
+                        className="text-secondary"
                       >
                         View Uploaded Document
                       </a>

@@ -72,7 +72,7 @@ const InstituteCard = ({
               className={`px-3 py-[1px] rounded-xl text-[13px]  ${
                 data?.instituteStatus === "open" || "Open"
                   ? "text-[#459F49] bg-[#BDFFCB] border border-[#459F49]"
-                  : "text-primary bg-[#FFBEBB] border border-primary"
+                  : "text-secondary bg-[#FFBEBB] border border-primary"
               }`}
             >
               {data?.instituteStatus === "open" || "Open"

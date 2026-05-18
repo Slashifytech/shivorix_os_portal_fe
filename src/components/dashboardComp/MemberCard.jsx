@@ -100,7 +100,7 @@ const MemberCard = ({
             <Link
               to="/admin/partner-employee"
               state={{ id: defaultId.id }}
-              className="text-primary border w-1/2 border-primary text-center text-[14px] rounded-sm cursor-pointer px-6 py-1"
+              className="text-secondary border w-1/2 border-primary text-center text-[14px] rounded-sm cursor-pointer px-6 py-1"
             >
               Employee List
             </Link>
@@ -109,7 +109,7 @@ const MemberCard = ({
               <Link
                 to="/admin/team-activity"
                 state={{ id: defaultId.id }}
-                className="text-primary border w-1/2 border-primary text-center text-[14px] rounded-sm cursor-pointer px-6 py-1"
+                className="text-secondary border w-1/2 border-primary text-center text-[14px] rounded-sm cursor-pointer px-6 py-1"
               >
                 View Activity
               </Link>

@@ -85,7 +85,7 @@ const DocumentDragUpload = ({
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-primary underline"
+                    className="text-secondary underline"
                   >
                     Uploaded Document
                   </a>

@@ -636,7 +636,7 @@ const courseFeeApplication = () => {
                 className="text-black flex items-center"
                 onClick={() => handleFilePopupOpen("aadharCard")}
               >
-                <FiUpload className="mr-2 text-primary text-[29px]" />
+                <FiUpload className="mr-2 text-secondary text-[29px]" />
               </button>
               <p>Upload Aadhar Card</p>
             </div>
@@ -652,7 +652,7 @@ const courseFeeApplication = () => {
                         href={courseFee.studentDocument.aadharCard}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-primary rounded-sm px-6 py-2 border border-greyish"
+                        className="text-secondary rounded-sm px-6 py-2 border border-greyish"
                       >
                         Uploaded Document
                       </a>
@@ -677,7 +677,7 @@ const courseFeeApplication = () => {
                 className="text-black flex items-center"
                 onClick={() => handleFilePopupOpen("panCard")}
               >
-                <FiUpload className="mr-2 text-primary text-[29px]" />
+                <FiUpload className="mr-2 text-secondary text-[29px]" />
               </button>
               <p>Upload Pan Card</p>
             </div>
@@ -694,7 +694,7 @@ const courseFeeApplication = () => {
                         href={courseFee.studentDocument.panCard}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-primary rounded-sm px-6 py-2 border border-greyish"
+                        className="text-secondary rounded-sm px-6 py-2 border border-greyish"
                       >
                         Uploaded Document
                       </a>
@@ -758,7 +758,7 @@ const courseFeeApplication = () => {
                       onClick={() => handleFilePopupOpen(docType)}
                       className="text-black flex items-center"
                     >
-                      <FiUpload className="mr-2 text-primary text-[29px]" />
+                      <FiUpload className="mr-2 text-secondary text-[29px]" />
                     </button>
                     <p className="mt-2">
                       {docType
@@ -772,7 +772,7 @@ const courseFeeApplication = () => {
                           href={courseFee.parentDocument[docType]}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-primary"
+                          className="text-secondary"
                         >
                           View Uploaded Document
                         </a>
@@ -808,7 +808,7 @@ const courseFeeApplication = () => {
                       onClick={() => handleFilePopupOpen(docType)}
                       className="text-black flex items-center"
                     >
-                      <FiUpload className="mr-2 text-primary text-[29px]" />
+                      <FiUpload className="mr-2 text-secondary text-[29px]" />
                     </button>
                     <p className="mt-2">
                       {docType
@@ -822,7 +822,7 @@ const courseFeeApplication = () => {
                           href={courseFee.siblingsDocument[docType]}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-primary"
+                          className="text-secondary"
                         >
                           View Uploaded Document
                         </a>
@@ -855,7 +855,7 @@ const courseFeeApplication = () => {
                 className="text-black flex items-center"
                 onClick={() => handleFilePopupOpen("offerLetter")}
               >
-                <FiUpload className="mr-2 text-primary text-[29px]" />
+                <FiUpload className="mr-2 text-secondary text-[29px]" />
               </button>
               <p>Upload Offer Letter</p>
             </div>
@@ -872,7 +872,7 @@ const courseFeeApplication = () => {
                         href={courseFee.offerLetterAnsPassport.offerLetter}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-primary rounded-sm px-6 py-2 border border-greyish"
+                        className="text-secondary rounded-sm px-6 py-2 border border-greyish"
                       >
                         Uploaded Document
                       </a>
@@ -897,7 +897,7 @@ const courseFeeApplication = () => {
                 className="text-black flex items-center"
                 onClick={() => handleFilePopupOpen("passport")}
               >
-                <FiUpload className="mr-2 text-primary text-[29px]" />
+                <FiUpload className="mr-2 text-secondary text-[29px]" />
               </button>
               <p>Upload Passport</p>
             </div>
@@ -914,7 +914,7 @@ const courseFeeApplication = () => {
                         href={courseFee.offerLetterAnsPassport.passport}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-primary rounded-sm px-6 py-2 border border-greyish"
+                        className="text-secondary rounded-sm px-6 py-2 border border-greyish"
                       >
                         Uploaded Document
                       </a>

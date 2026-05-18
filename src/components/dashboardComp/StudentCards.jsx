@@ -75,7 +75,7 @@ const StudentCards = ({
             loading="lazy"
           />
           <span className="flex flex-col">
-            <span className="text-primary font-medium text-[13px]">
+            <span className="text-secondary font-medium text-[13px]">
               {application || 0} Applications
             </span>
            
@@ -156,7 +156,7 @@ const StudentCards = ({
             </Link>
             <span
               onClick={handleOpenOpt}
-              className="text-primary border w-1/2 border-primary text-center text-[14px] rounded-sm cursor-pointer px-6 py-1"
+              className="text-secondary border w-1/2 border-primary text-center text-[14px] rounded-sm cursor-pointer px-6 py-1"
             >
               Apply Now
             </span>
@@ -171,7 +171,7 @@ const StudentCards = ({
             </Link>
             <Link
               onClick={messagefunc}
-              className="text-primary border w-1/2 border-primary text-center text-[14px] rounded-sm cursor-pointer px-6 py-1"
+              className="text-secondary border w-1/2 border-primary text-center text-[14px] rounded-sm cursor-pointer px-6 py-1"
             >
               Apply Now
             </Link>

@@ -346,7 +346,7 @@ const AirTicketForm = () => {
                     href={airTicketData.passportDetails}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-primary rounded-sm px-6 py-2 border border-greyish "
+                    className="text-secondary rounded-sm px-6 py-2 border border-greyish "
                   >
                     Uploaded Passport
                   </a>
@@ -393,7 +393,7 @@ const AirTicketForm = () => {
                     href={airTicketData.pprOrVisaStamp}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-primary rounded-sm px-6 py-2 border border-greyish"
+                    className="text-secondary rounded-sm px-6 py-2 border border-greyish"
                   >
                     Uploaded PPR or Visa Stamp
                   </a>

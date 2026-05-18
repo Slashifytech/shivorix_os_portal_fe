@@ -34,7 +34,7 @@ const TicketResolvePop = ({ isOpen, closePopUp, isticketId, handleStatus }) => {
           }`}
         >
           <div className="bg-white pb-9  rounded-lg md:w-[90%] w-full  relative p-9  font-poppins">
-          <span onClick={closePopUp} className="absolute top-2 right-3 text-[30px] cursor-pointer text-primary"><RxCross2 /></span>
+          <span onClick={closePopUp} className="absolute top-2 right-3 text-[30px] cursor-pointer text-secondary"><RxCross2 /></span>
             <span className="flex flex-col justify-start">
               <span
                 className={`rounded-2xl px-3 py-1 w-36 text-center text-white text-[16px] ${
@@ -139,7 +139,7 @@ const TicketResolvePop = ({ isOpen, closePopUp, isticketId, handleStatus }) => {
               <div className="flex flex-row items-center justify-end mt-6 gap-4 text-[14px]">
               {ticketById?.status === "underreview" && <><span
                   onClick={closePopUp}
-                  className="border text-primary rounded-md px-6 py-2 cursor-pointer"
+                  className="border text-secondary rounded-md px-6 py-2 cursor-pointer"
                 >
                   Cancel
                 </span>

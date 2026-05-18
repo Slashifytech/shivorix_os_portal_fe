@@ -277,13 +277,13 @@ const LoginComponent = () => {
               passPage: "passPage",
             }}
             to="/forgot-password"
-            className="text-primary flex justify-end mt-2 text-[14px] cursor-pointer"
+            className="text-secondary flex justify-end mt-2 text-[14px] cursor-pointer"
           >
             Forgot Password
           </Link>
           {/* Display "Logging in..." if loading */}
           {loading ? (
-            <div className="text-center mt-4 text-primary">Logging in...</div>
+            <div className="text-center mt-4 text-secondary">Logging in...</div>
           ) : (
             <div
               className="bg-primary px-6 py-2 cursor-pointer text-white text-center rounded-md mt-6"
@@ -295,14 +295,14 @@ const LoginComponent = () => {
 
           <p className="text-secondary text-sm pt-4">
             Don't have an account?{" "}
-            <Link to="/new-account" className="text-primary font-semibold">
+            <Link to="/new-account" className="text-secondary font-semibold">
               Register
             </Link>
           </p>
           <div className="mt-3 flex justify-center">
             <a
               href="https://shivorix.com"
-              className="hover:bg-primary border border-greyish px-6 py-2 cursor-pointer text-primary hover:text-white text-center rounded-md mt-3 text-[14px]"
+              className="hover:bg-primary border border-greyish px-6 py-2 cursor-pointer text-secondary hover:text-white text-center rounded-md mt-3 text-[14px]"
             >
               Back to website
             </a>

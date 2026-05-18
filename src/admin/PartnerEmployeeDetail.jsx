@@ -86,7 +86,7 @@ const PartnerEmployeeDetail = () => {
                   <span className="font-light">Profile Picture</span>
                   {profileById?.profilePicture ? (
                     <a
-                      className="flex items-center gap-3 text-primary font-medium"
+                      className="flex items-center gap-3 text-secondary font-medium"
                       href={profileById?.profilePicture}
                       target="_blank"
                       rel="noopener noreferrer"

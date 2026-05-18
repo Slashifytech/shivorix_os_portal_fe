@@ -14,8 +14,8 @@ const Mobile = () => {
         <p className="text-sidebar font-semibold text-[29px] mt-3">Hey there !</p>
         <p className="text-body text-[14px] text-center mx-6 mt-6">
           Our platform is best experienced on a{" "}
-          <span className="font-medium text-primary">tablet</span> or{" "}
-          <span className="font-medium text-primary">Desktop</span>. Please
+          <span className="font-medium text-secondary">tablet</span> or{" "}
+          <span className="font-medium text-secondary">Desktop</span>. Please
           switch to a larger device for full access to your account and
           services.
         </p>

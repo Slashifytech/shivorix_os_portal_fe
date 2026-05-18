@@ -55,7 +55,7 @@ const ForgotPasswordComponent = () => {
       </span>
       <Link
         to="/login"
-        className="cursor-pointer text-primary underline text-center mt-6"
+        className="cursor-pointer text-secondary underline text-center mt-6"
       >
         Back to Login
       </Link>

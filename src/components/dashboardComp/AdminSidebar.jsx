@@ -26,7 +26,7 @@ const SidebarItem = ({ item, path, onClick }) => (
       path === item?.otherPath ||
       path === item?.otherPathTwo ||
       path === item?.otherPathThree 
-        ? "bg-[#FFF4E0] text-primary border-l-4 border-primary font-medium"
+        ? "bg-[#FFF4E0] text-secondary border-l-4 border-primary font-medium"
         : "text-sidebar"
     }`}
   >
@@ -105,7 +105,7 @@ const AdminSidebar = () => {
           <SidebarItem key={index} item={item} path={path} onClick={handleDispatch} />
         ))}
         {(role === "0" || role === "1") && (
-          <div className={`cursor-pointer py-4 hover:bg-[#FFF4E0] hover:text-primary hover:border-l-4 hover:font-medium ${path === "/admin/ticket" ? "bg-[#FFF4E0] text-primary border-l-4 border-primary font-medium" : "text-sidebar"}`}>
+          <div className={`cursor-pointer py-4 hover:bg-[#FFF4E0] hover:text-primary hover:border-l-4 hover:font-medium ${path === "/admin/ticket" ? "bg-[#FFF4E0] text-secondary border-l-4 border-primary font-medium" : "text-sidebar"}`}>
             <Link to="/admin/ticket" className="flex items-center gap-3 md:pl-6 lg:px-6 sm:pl-6">
               <span className="text-[20px]"><BsFillTicketPerforatedFill /></span>
               <span>Ticket Support</span>
@@ -125,7 +125,7 @@ const AdminSidebar = () => {
               <ul className="sm:mt-2 list-none text-[16px]">
                 {["/admin/profile", "/admin/change-password", "/admin/change-email"].map((link, idx) => (
                   <Link key={idx} to={link}>
-                    <li className={`text-sidebar py-2 mb-2 cursor-pointer md:pl-12 lg:px-12 sm:pl-12 hover:bg-[#f5ebeb] hover:text-primary capitalize ${path === link ? "bg-[#FFF4E0] border-l-4 border-primary text-primary" : ""}`}>
+                    <li className={`text-sidebar py-2 mb-2 cursor-pointer md:pl-12 lg:px-12 sm:pl-12 hover:bg-[#f5ebeb] hover:text-primary capitalize ${path === link ? "bg-[#FFF4E0] border-l-4 border-primary text-secondary" : ""}`}>
                       {link.split("/").pop().replace("-", " ").replace("email", "Email").replace("password", "Password").replace("profile", "Profile")}
                     </li>
                   </Link>

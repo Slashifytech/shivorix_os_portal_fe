@@ -82,12 +82,12 @@ const AgentReg = () => {
                       i < page - 1
                         ? "bg-white"
                         : i === page - 1
-                        ? "bg-white text-primary" 
+                        ? "bg-white text-secondary" 
                         : "border border-white text-white" 
                     } md:h-[46px] h-[32px] sm:h-[50px] rounded-md`}
                   >
                     {i < page - 1 ? (
-                      <span className="text-primary">
+                      <span className="text-secondary">
                         <IoMdCheckmark />
                       </span>
                     ) : (

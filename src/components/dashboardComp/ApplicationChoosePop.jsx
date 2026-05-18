@@ -46,7 +46,7 @@ const ApplicationChoosePop = ({ closeOpt, isOpenOpt, state }) => {
           }`}
         >
           <div className="bg-white pb-9 rounded-lg md:w-[44%] w-full relative p-9 flex flex-col items-center justify-center  app-open-animation">
-          <span onClick={closeOpt} className="absolute top-2 right-3 text-[30px] cursor-pointer text-primary"><RxCross2 /></span>
+          <span onClick={closeOpt} className="absolute top-2 right-3 text-[30px] cursor-pointer text-secondary"><RxCross2 /></span>
             <p className="text-sidebar font-semibold text-[20px]">
               Choose What Application to Add?
             </p>

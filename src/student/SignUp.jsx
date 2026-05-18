@@ -365,7 +365,7 @@ const SignUp = () => {
                 <p className="text-body text-sm pt-3">
                   Already have an account?{" "}
                   <Link to="/login">
-                    <span className="text-primary font-medium">Log in </span>
+                    <span className="text-secondary font-medium">Log in </span>
                   </Link>
                 </p>
               </span>

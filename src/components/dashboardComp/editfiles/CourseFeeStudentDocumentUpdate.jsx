@@ -274,7 +274,7 @@ const CourseFeeStudentDocumentUpdate = ({
               {applicationDataById?.courseFeeApplication?.studentDocument
                 ?.aadharCard ? (
                 <a
-                  className="flex items-center gap-3 text-primary font-medium"
+                  className="flex items-center gap-3 text-secondary font-medium"
                   href={
                     applicationDataById?.courseFeeApplication?.studentDocument
                       ?.aadharCard
@@ -298,7 +298,7 @@ const CourseFeeStudentDocumentUpdate = ({
               {applicationDataById?.courseFeeApplication?.studentDocument
                 ?.panCard ? (
                 <a
-                  className="flex items-center gap-3 text-primary font-medium"
+                  className="flex items-center gap-3 text-secondary font-medium"
                   href={
                     applicationDataById?.courseFeeApplication?.studentDocument
                       ?.panCard
@@ -333,7 +333,7 @@ const CourseFeeStudentDocumentUpdate = ({
                     className="text-black flex items-center"
                     onClick={() => handleFilePopupOpen("aadharCard")}
                   >
-                    <FiUpload className="mr-2 text-primary text-[29px]" />
+                    <FiUpload className="mr-2 text-secondary text-[29px]" />
                   </button>
                   <p>Upload Aadhar Card</p>
                 </div>
@@ -349,7 +349,7 @@ const CourseFeeStudentDocumentUpdate = ({
                             href={courseFee.studentDocument.aadharCard}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-primary rounded-sm px-6 py-2 border border-greyish"
+                            className="text-secondary rounded-sm px-6 py-2 border border-greyish"
                           >
                             Uploaded Document
                           </a>
@@ -375,7 +375,7 @@ const CourseFeeStudentDocumentUpdate = ({
                     className="text-black flex items-center"
                     onClick={() => handleFilePopupOpen("panCard")}
                   >
-                    <FiUpload className="mr-2 text-primary text-[29px]" />
+                    <FiUpload className="mr-2 text-secondary text-[29px]" />
                   </button>
                   <p>Upload Pan Card</p>
                 </div>
@@ -391,7 +391,7 @@ const CourseFeeStudentDocumentUpdate = ({
                             href={courseFee.studentDocument.panCard}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-primary rounded-sm px-6 py-2 border border-greyish"
+                            className="text-secondary rounded-sm px-6 py-2 border border-greyish"
                           >
                             Uploaded Document
                           </a>

@@ -231,7 +231,7 @@ const handleSubmit = async()=>{
                 href={visaComplete.ppr}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary rounded-sm px-6 py-2 border border-greyish"
+                className="text-secondary rounded-sm px-6 py-2 border border-greyish"
               >
                 Uploaded PPR
               </a>
@@ -270,7 +270,7 @@ const handleSubmit = async()=>{
                 href={visaComplete.visaStamp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary rounded-sm px-6 py-2 border border-greyish "
+                className="text-secondary rounded-sm px-6 py-2 border border-greyish "
               >
                 Uploaded Visa Stamp
               </a>

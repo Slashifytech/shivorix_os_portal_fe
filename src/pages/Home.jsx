@@ -19,7 +19,7 @@ const Home = () => {
       <main className="flex-grow">
         <div className="flex flex-col justify-center items-center md:pt-28 sm:pt-56">
           <p className="font-bold text-[48px]">
-            Welcome to <span className="text-primary">Shivorix Portal</span>
+            Welcome to <span className="text-secondary">Shivorix Portal</span>
           </p>
           <p className="text-secondary font-medium text-[17px] md:px-[36%] sm:px-[25%] text-center pt-2">
             Your Gateway to the most transparent admission & visa filling

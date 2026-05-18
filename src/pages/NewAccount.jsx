@@ -41,7 +41,7 @@ const NewAccount = () => {
       <main className="flex-grow">
         <div className="flex flex-col justify-center items-center md:pt-10 sm:pt-36 xl:pt-32">
           <p className="font-bold text-[40px]">
-            Create <span className="text-primary">Your Account</span>
+            Create <span className="text-secondary">Your Account</span>
           </p>
           <p className="text-secondary font-semibold text-[19px] md:px-[36%] sm:px-[25%] text-center pt-2">
             Welcome to Shivorix Portal

@@ -189,7 +189,7 @@ const AdminLogin = () => {
 
                       {/* Display "Logging in..." if loading */}
                       {loading ? (
-                        <div className="text-center mt-4 text-primary">
+                        <div className="text-center mt-4 text-secondary">
                           Logging in...
                         </div>
                       ) : (

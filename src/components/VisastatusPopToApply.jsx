@@ -25,7 +25,7 @@ import { RxCross2 } from "react-icons/rx";
       {isOpenOpt && (
         <div className="fixed inset-0 font-poppins flex items-center justify-center popup-backdrop z-50 sm:px-52 px-6">
           <div className="bg-white pb-9 rounded-lg md:w-[44%] w-full relative p-9 flex flex-col justify-center">
-          <span onClick={closeOpt} className="absolute right-4 text-primary top-3 text-[28px] cursor-pointer">
+          <span onClick={closeOpt} className="absolute right-4 text-secondary top-3 text-[28px] cursor-pointer">
               {" "}
               <RxCross2 />
             </span>

@@ -118,7 +118,7 @@ const AirTicketPopUp = ({ isOpen, closePopUp, id }) => {
                     <span className="font-medium">
                       {airTicketData?.passportDetails ? (
                         <a
-                          className="flex items-center gap-3 text-primary font-medium"
+                          className="flex items-center gap-3 text-secondary font-medium"
                           href={airTicketData?.passportDetails}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -144,7 +144,7 @@ const AirTicketPopUp = ({ isOpen, closePopUp, id }) => {
                       url.startsWith("https")
                     ) ? (
                       <a
-                        className="flex items-center gap-3 text-primary font-medium"
+                        className="flex items-center gap-3 text-secondary font-medium"
                         href={airTicketData?.pprOrVisaStamp.find((url) =>
                           url.startsWith("https")
                         )}

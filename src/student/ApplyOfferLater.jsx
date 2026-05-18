@@ -845,7 +845,7 @@ const ApplyOfferLater = () => {
                       className="text-black flex items-center"
                       onClick={() => handleFilePopupOpen(fileType)}
                     >
-                      <FiUpload className="mr-2 text-primary text-[29px]" />
+                      <FiUpload className="mr-2 text-secondary text-[29px]" />
                     </button>
                     <p className="mt-6">
                       {fileType.replace("markSheet", "Marksheet ")}
@@ -858,7 +858,7 @@ const ApplyOfferLater = () => {
                           href={offerLater.educationDetails[fileType]}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-primary rounded-sm px-6 py-2 border border-greyish"
+                          className="text-secondary rounded-sm px-6 py-2 border border-greyish"
                         >
                           View Uploaded Document
                         </a>
@@ -992,14 +992,14 @@ const ApplyOfferLater = () => {
             </span>
             <p className="text-[15px] mt-3 text-body">
               IELTS/PTE/TOEFL/MOI/Certificate{" "}
-              <span className="text-primary">*</span>
+              <span className="text-secondary">*</span>
             </p>
             <div className="flex flex-col justify-center items-center border-2 border-dashed border-body rounded-md py-9 mt-9 mb-4">
               <button
                 className="text-black flex items-center"
                 onClick={() => handleFilePopupOpen("certificate")}
               >
-                <FiUpload className="mr-2 text-primary text-[29px]" />
+                <FiUpload className="mr-2 text-secondary text-[29px]" />
               </button>
               <p>Upload Certificates</p>
             </div>
@@ -1023,7 +1023,7 @@ const ApplyOfferLater = () => {
                             href={url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-primary rounded-sm px-6 py-2 border border-greyish"
+                            className="text-secondary rounded-sm px-6 py-2 border border-greyish"
                           >
                             Uploaded Document
                           </a>

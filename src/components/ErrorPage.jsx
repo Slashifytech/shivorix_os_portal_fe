@@ -50,7 +50,7 @@ export default ErrorPage;
 //             </p>
 //             <p className="text-start">
 //               Couldn’t find that. Do you want to return to <br />
-//               the<span className="text-primary font-semibold cursor-pointer" onClick={handleNavigate}> previous page?</span>
+//               the<span className="text-secondary font-semibold cursor-pointer" onClick={handleNavigate}> previous page?</span>
 //             </p>
 //           </span>
 //         </div>

@@ -245,7 +245,7 @@ const CertificateEdit = ({ appId, updatedData, profileViewPath, userId }) => {
   applicationDataById.offerLetter.certificate.url.map((url, index) => (
     <a
       key={index} // Always add a key when mapping over an array
-      className="flex items-center gap-3 text-primary font-medium"
+      className="flex items-center gap-3 text-secondary font-medium"
       href={url}
       target="_blank"
       rel="noopener noreferrer"
@@ -276,7 +276,7 @@ const CertificateEdit = ({ appId, updatedData, profileViewPath, userId }) => {
                 className="text-black flex items-center"
                 onClick={() => handleFilePopupOpen("certificate")}
               >
-                <FiUpload className="mr-2 text-primary text-[29px]" />
+                <FiUpload className="mr-2 text-secondary text-[29px]" />
               </button>
               <p>Upload Certificates</p>
             </div>
@@ -295,7 +295,7 @@ const CertificateEdit = ({ appId, updatedData, profileViewPath, userId }) => {
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary rounded-sm px-6 py-2 border border-greyish"
+              className="text-secondary rounded-sm px-6 py-2 border border-greyish"
             >
               Uploaded Document
             </a>

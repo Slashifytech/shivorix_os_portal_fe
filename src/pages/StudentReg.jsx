@@ -95,16 +95,16 @@ console.log(location)
                         : i === page - 1
                         ? role === "2"
                           ? "bg-primary text-white" // Role 2: Current step
-                          : "bg-white text-primary" // Default: Current step
+                          : "bg-white text-secondary" // Default: Current step
                         : role === "2"
-                        ? "border border-primary text-primary" // Role 2: Next steps
+                        ? "border border-primary text-secondary" // Role 2: Next steps
                         : "border border-white text-white" // Default: Next steps
                     } md:h-[46px] h-[32px] sm:h-[50px] rounded-md`}
                   >
                     {i < page - 1 ? (
                       <span
                         className={`${
-                          role === "2" ? "text-white" : "text-primary"
+                          role === "2" ? "text-white" : "text-secondary"
                         }`}
                       >
                         <IoMdCheckmark />
@@ -141,10 +141,10 @@ console.log(location)
                     className={`text-[14px] ${
                       i === parseInt(page) - 1
                         ? role === "2"
-                          ? "text-primary font-poppins" // Role 2: Current step name
+                          ? "text-secondary font-poppins" // Role 2: Current step name
                           : "text-white font-poppins" // Default: Current step name
                         : role === "2"
-                        ? "text-primary" // Role 2: Other steps
+                        ? "text-secondary" // Role 2: Other steps
                         : "text-white" // Default: Other steps
                     }`}
                   >

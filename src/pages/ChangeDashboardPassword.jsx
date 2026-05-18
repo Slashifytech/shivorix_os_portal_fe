@@ -129,7 +129,7 @@ const ChangeDashboardPassword = () => {
               toggleVisibility={toggleConPasswordVisibility}
               error={errors.newPassword}
             />
-            <p className="text-[13px] text-primary pt-[9px] font-poppins">
+            <p className="text-[13px] text-secondary pt-[9px] font-poppins">
               Use 10 or more characters including - alphabets, numbers and
               special characters.
             </p>

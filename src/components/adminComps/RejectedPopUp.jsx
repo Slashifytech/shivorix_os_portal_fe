@@ -40,7 +40,7 @@ const RejectedPopUp = ({
             <div className="flex justify-center items-center font-DMsans gap-5 mt-5">
               <span
                 onClick={closePopUp}
-                className="px-8 py-2 cursor-pointer  rounded-lg text-primary border border-primary"
+                className="px-8 py-2 cursor-pointer  rounded-lg text-secondary border border-primary"
               >
                 No
               </span>

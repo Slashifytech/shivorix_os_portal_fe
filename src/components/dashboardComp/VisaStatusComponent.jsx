@@ -553,7 +553,7 @@ const VisaStatusComponent = ({ studentId }) => {
                 </p>
                 <span
                   onClick={handleWithdrawalData}
-                  className="text-primary flex flex-row items-center font-semibold gap-2 text-[16px] rounded-md px-6 py-2  cursor-pointer mt-4"
+                  className="text-secondary flex flex-row items-center font-semibold gap-2 text-[16px] rounded-md px-6 py-2  cursor-pointer mt-4"
                 >
                   <span>View Withdrawal Form</span>
                   <span>
@@ -601,7 +601,7 @@ const VisaStatusComponent = ({ studentId }) => {
                 </p>
                 <span
                   onClick={handleWithdrawalData}
-                  className="text-primary flex flex-row items-center font-semibold gap-2 text-[16px] rounded-md px-6 py-2  cursor-pointer mt-4"
+                  className="text-secondary flex flex-row items-center font-semibold gap-2 text-[16px] rounded-md px-6 py-2  cursor-pointer mt-4"
                 >
                   <span>View Withdrawal Form</span>
                   <span>
@@ -649,7 +649,7 @@ const VisaStatusComponent = ({ studentId }) => {
             </p> </>} */}
             <span
               onClick={handleWithdrawalData}
-              className="text-primary flex flex-row items-center font-semibold gap-2 text-[16px] rounded-md px-6 py-2  cursor-pointer mt-4"
+              className="text-secondary flex flex-row items-center font-semibold gap-2 text-[16px] rounded-md px-6 py-2  cursor-pointer mt-4"
             >
               <span>View Withdrawal Form</span>
               <span>
@@ -723,7 +723,7 @@ const VisaStatusComponent = ({ studentId }) => {
                 <span className="font-medium">
                   {visaStatus?.visa?.ppr ? (
                     <a
-                      className="flex items-center gap-3 text-primary font-medium"
+                      className="flex items-center gap-3 text-secondary font-medium"
                       href={visaStatus.visa.ppr}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -743,7 +743,7 @@ const VisaStatusComponent = ({ studentId }) => {
                 <span className="font-medium">
                   {visaStatus?.visa?.visaStamp ? (
                     <a
-                      className="flex items-center gap-3 text-primary font-medium"
+                      className="flex items-center gap-3 text-secondary font-medium"
                       href={visaStatus?.visa?.visaStamp}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -792,7 +792,7 @@ const VisaStatusComponent = ({ studentId }) => {
               </span>
               <span
                 onClick={handleOpenOption}
-                className="text-primary border border-primary border-rounded-md px-12 py-2 text-[14px] cursor-pointer mt-4"
+                className="text-secondary border border-primary border-rounded-md px-12 py-2 text-[14px] cursor-pointer mt-4"
               >
                 Withdraw
               </span>{" "}

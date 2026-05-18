@@ -115,7 +115,7 @@ const AgentProfileEdit = ({
             <span className="font-medium ">
               {agentData?.companyDetails?.linkedin ? (
                 <a
-                  className="flex items-center gap-3 text-primary font-medium"
+                  className="flex items-center gap-3 text-secondary font-medium"
                   href={
                     agentData?.companyDetails?.linkedin?.startsWith("http")
                       ? agentData.companyDetails.linkedin
@@ -151,7 +151,7 @@ const AgentProfileEdit = ({
             <span className="font-medium">
               {agentData?.companyDetails?.website ? (
                 <a
-                  className="flex items-center gap-3 text-primary font-medium"
+                  className="flex items-center gap-3 text-secondary font-medium"
                   href={
                     agentData?.companyDetails?.website?.startsWith("http")
                       ? agentData.companyDetails.website
@@ -258,7 +258,7 @@ const AgentProfileEdit = ({
             <span className="font-light mt-4">Profile Picture</span>
             {agentData?.primaryContact?.profilePicture ? (
               <a
-                className="flex items-center gap-3 text-primary font-medium"
+                className="flex items-center gap-3 text-secondary font-medium"
                 href={agentData?.primaryContact?.profilePicture}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -549,7 +549,7 @@ const AgentProfileEdit = ({
               </span>
               {agentData?.companyOverview?.businessRegistrationDocument ? (
                 <a
-                  className="flex items-center gap-3 text-primary font-medium"
+                  className="flex items-center gap-3 text-secondary font-medium"
                   href={
                     agentData?.companyOverview?.businessRegistrationDocument
                   }
@@ -568,7 +568,7 @@ const AgentProfileEdit = ({
               <span className="font-light mt-4">Company GST</span>
               {agentData?.companyOverview?.companyGST ? (
                 <a
-                  className="flex items-center gap-3 text-primary font-medium"
+                  className="flex items-center gap-3 text-secondary font-medium"
                   href={agentData?.companyOverview?.companyGST}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -593,7 +593,7 @@ const AgentProfileEdit = ({
               <span className="font-light mt-4">Company/Business Profile </span>
               {agentData?.companyOverview?.businessProfileDocument ? (
                 <a
-                  className="flex items-center gap-3 text-primary font-medium"
+                  className="flex items-center gap-3 text-secondary font-medium"
                   href={agentData?.companyOverview?.businessProfileDocument}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -609,7 +609,7 @@ const AgentProfileEdit = ({
               <span className="font-light mt-4">Company PAN Card </span>
               {agentData?.companyOverview?.companyPan ? (
                 <a
-                  className="flex items-center gap-3 text-primary font-medium"
+                  className="flex items-center gap-3 text-secondary font-medium"
                   href={agentData?.companyOverview?.companyPan}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -932,7 +932,7 @@ const AgentProfileEdit = ({
             isOpen ? "rotate-90" : ""
           }`}
         >
-          <span className="text-primary text-2xl font-extrabold">
+          <span className="text-secondary text-2xl font-extrabold">
             {isOpen ? <IoClose /> : <RxHamburgerMenu />}
           </span>
         </button>

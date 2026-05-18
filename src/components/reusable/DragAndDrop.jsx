@@ -75,7 +75,7 @@
 //             <div className="p-6 w-20 text-[32px] bg-input rounded-full">
 //               <FiUpload />
 //             </div>
-//             <span className="text-primary mt-4 font-medium ">
+//             <span className="text-secondary mt-4 font-medium ">
 //               {uploading ? "Uploading..." : `${uploadedFile.name} uploaded`}
 //             </span>
 //           </div>
@@ -84,7 +84,7 @@
 //             <div className="p-6 w-20 text-[32px] bg-input rounded-full">
 //               <FiUpload />
 //             </div>
-//             <span className="text-primary mt-4 font-medium ">
+//             <span className="text-secondary mt-4 font-medium ">
 //               Click to Upload
 //             </span>{" "}
 //             or drag and drop
@@ -159,7 +159,7 @@ const FileUpload = ({
   return (
     <div className="file-upload-container w-full mt-3">
       <span className="text-secondary">
-        {label} {imp ?  <span className="text-primary">*</span> : ""}{" "}
+        {label} {imp ?  <span className="text-secondary">*</span> : ""}{" "}
       </span>
       <div
         {...getRootProps()}
@@ -188,7 +188,7 @@ const FileUpload = ({
             <div className="p-6 w-20 text-[32px] bg-input rounded-full">
               <FiUpload />
             </div>
-            <span className="text-primary mt-4 font-medium ">
+            <span className="text-secondary mt-4 font-medium ">
               {uploading ? "Uploading..." : `${uploadedFile.name} uploaded`}
             </span>
           </div>
@@ -197,7 +197,7 @@ const FileUpload = ({
             <div className="p-6 w-20 text-[32px] bg-input rounded-full">
               <FiUpload />
             </div>
-            <span className="text-primary mt-4 font-medium ">
+            <span className="text-secondary mt-4 font-medium ">
               Delete to upload a new image
             </span>
           </div>
@@ -206,7 +206,7 @@ const FileUpload = ({
             <div className="p-6 w-20 text-[32px] bg-input rounded-full">
               <FiUpload />
             </div>
-            <span className="text-primary mt-4 font-medium ">
+            <span className="text-secondary mt-4 font-medium ">
               Delete to upload a new file
             </span>
           </div>
@@ -215,7 +215,7 @@ const FileUpload = ({
             <div className="p-6 w-20 text-[32px] bg-input rounded-full">
               <FiUpload />
             </div>
-            <span className="text-primary mt-4 font-medium ">
+            <span className="text-secondary mt-4 font-medium ">
               Click to Upload or drag and drop
             </span>
           </p>

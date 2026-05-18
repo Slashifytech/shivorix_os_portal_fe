@@ -466,7 +466,7 @@ const AddMember = () => {
                   onClick={() =>
                     deleteFile(memberData.profilePicture, "profilePicture")
                   }
-                  className="absolute text-primary top-1 left-[70px]  text-[20px] cursor-pointer rounded-md"
+                  className="absolute text-secondary top-1 left-[70px]  text-[20px] cursor-pointer rounded-md"
                 >
                   <ImBin />
                 </span>
@@ -548,7 +548,7 @@ const AddMember = () => {
                   {isEmailEdit === "edit" && (
                     <div
                       onClick={handleEmailEdit}
-                      className=" border rounded-md text-primary px-3 mt-14 py-2 text-[14px] cursor-pointer border-primary"
+                      className=" border rounded-md text-secondary px-3 mt-14 py-2 text-[14px] cursor-pointer border-primary"
                     >
                       {" "}
                       Edit Email
@@ -610,7 +610,7 @@ const AddMember = () => {
 
             <div className="mt-4">
               <p className="font-normal text-secondary mb-2 text-[14px]">
-                Country <span className="text-primary">*</span>
+                Country <span className="text-secondary">*</span>
               </p>
               <select
                 name="country"
@@ -632,7 +632,7 @@ const AddMember = () => {
 
             <div className="mt-4">
               <p className="font-normal text-secondary mb-2 text-[14px]">
-                Province/State <span className="text-primary">*</span>
+                Province/State <span className="text-secondary">*</span>
               </p>
               <select
                 name="state"
@@ -682,7 +682,7 @@ const AddMember = () => {
             {isEdit === "edit" && (
               <span
                 onClick={handleEdit}
-                className="-mt-14 border rounded-md text-primary px-3 py-2 text-[14px] cursor-pointer border-primary"
+                className="-mt-14 border rounded-md text-secondary px-3 py-2 text-[14px] cursor-pointer border-primary"
               >
                 {" "}
                 Edit Password

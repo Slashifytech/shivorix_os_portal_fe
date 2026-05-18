@@ -25,7 +25,7 @@ const MissingPage = () => {
               Couldn’t find that. Do you want to return to <br />
               the
               <span
-                className="text-primary font-semibold cursor-pointer"
+                className="text-secondary font-semibold cursor-pointer"
                 onClick={handleNavigate}
               >
                 {" "}
