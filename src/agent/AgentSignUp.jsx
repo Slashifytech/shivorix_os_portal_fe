@@ -547,7 +547,7 @@ const AgentSignUp = () => {
                   students, helping you grow your business while guiding
                   learners worldwide.
                 </p>
-                <div className="border border-[#CC0000] bg-[#A20F11] px-6 py-3 pb-10 mt-6 mb-16 rounded-md">
+                <div className="border border-[#CC0000] bg-primarypx-6 py-3 pb-10 mt-6 mb-16 rounded-md">
                   {agentSignUp.map((data, index) => (
                     <div
                       key={index}
