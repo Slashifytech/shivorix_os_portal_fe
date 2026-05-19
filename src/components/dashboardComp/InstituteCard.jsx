@@ -134,7 +134,7 @@ const InstituteCard = ({
           </p>
          <span className="flex flex-row items-center px-4 pt-2 gap-3">
   {Array.isArray(data?.inTake) && data?.inTake.length > 0
-    ? [...data.inTake]
+    ? [...new Set(data.inTake)]
         .sort((a, b) => {
           const monthOrder = {
             JAN: 1,
@@ -154,13 +154,13 @@ const InstituteCard = ({
           const [monthA, yearA] = a.split(" ");
           const [monthB, yearB] = b.split(" ");
 
-          if (yearB !== yearA) {
-            return Number(yearB) - Number(yearA); // greater year first
-          }
+          const yA = Number(yearA);
+          const yB = Number(yearB);
 
-          return monthOrder[monthB] - monthOrder[monthA];
+          if (yA !== yB) return yA - yB; // smallest year first
+
+          return monthOrder[monthA] - monthOrder[monthB]; // earliest month first
         })
-        .slice(0, 3)
         .map((item, index) => (
           <span
             key={index}
@@ -172,7 +172,7 @@ const InstituteCard = ({
                 : "bg-[#F5ECFF] border-[#5F2F95] text-[#5F2F95]"
             }`}
           >
-            {item || "NA"}
+            {item}
           </span>
         ))
     : "NA"}
