@@ -161,6 +161,7 @@ const InstituteCard = ({
 
           return monthOrder[monthA] - monthOrder[monthB]; // earliest month first
         })
+        .slice(0, 3)
         .map((item, index) => (
           <span
             key={index}
