@@ -132,24 +132,51 @@ const InstituteCard = ({
           <p className="text-[#6E7170] pl-4 text-[16px] pt-2">
           Intakes
           </p>
-          <span className="flex flex-row items-center px-4 pt-2 gap-3">
-            {Array.isArray(data?.inTake) && data?.inTake.length > 0
-              ? data.inTake.slice(0, 3).map((item, index) => (
-                  <span
-                    key={index}
-                    className={`px-3 py-1 rounded-md text-[13px] border ${
-                      index === 0
-                        ? "bg-[#EFFFEC] border-[#389527] text-[#389527]"
-                        : index === 1
-                        ? "bg-[#ECFEFF] border-[#007C83] text-[#007C83]"
-                        : "bg-[#F5ECFF] border-[#5F2F95] text-[#5F2F95]"
-                    }`}
-                  >
-                    {item || "NA"}
-                  </span>
-                ))
-              : "NA"}
+         <span className="flex flex-row items-center px-4 pt-2 gap-3">
+  {Array.isArray(data?.inTake) && data?.inTake.length > 0
+    ? [...data.inTake]
+        .sort((a, b) => {
+          const monthOrder = {
+            JAN: 1,
+            FEB: 2,
+            MAR: 3,
+            APR: 4,
+            MAY: 5,
+            JUN: 6,
+            JUL: 7,
+            AUG: 8,
+            SEP: 9,
+            OCT: 10,
+            NOV: 11,
+            DEC: 12,
+          };
+
+          const [monthA, yearA] = a.split(" ");
+          const [monthB, yearB] = b.split(" ");
+
+          if (yearB !== yearA) {
+            return Number(yearB) - Number(yearA); // greater year first
+          }
+
+          return monthOrder[monthB] - monthOrder[monthA];
+        })
+        .slice(0, 3)
+        .map((item, index) => (
+          <span
+            key={index}
+            className={`px-3 py-1 rounded-md text-[13px] border ${
+              index === 0
+                ? "bg-[#EFFFEC] border-[#389527] text-[#389527]"
+                : index === 1
+                ? "bg-[#ECFEFF] border-[#007C83] text-[#007C83]"
+                : "bg-[#F5ECFF] border-[#5F2F95] text-[#5F2F95]"
+            }`}
+          >
+            {item || "NA"}
           </span>
+        ))
+    : "NA"}
+</span>
 
           <span className="flex items-center text-[#6E7170] gap-3 px-4 pt-3 text-[16px]">
             <AiOutlineBulb />
